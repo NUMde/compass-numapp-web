@@ -1,0 +1,41 @@
+.o-link {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--c-primary);
+}
+
+.o-link--underlined {
+  color: var(--c-primary);
+}
+
+.o-link:hover,
+.o-link:focus {
+  text-decoration: underline;
+}
+
+.o-link--gray {
+  color: var(--color-neutral);
+}
+
+.o-link--bold {
+  font-weight: 600;
+}
+
+.o-error {
+  color: var(--color-feedback-alarm);
+}
+
+.o-error--small {
+  font-size: 0.85rem;
+}
+
+.o-error--animated {
+  transition: transform 200ms ease-in-out, opacity 200ms ease-in;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.o-error--animated-ease-in {
+  opacity: 1;
+  transform: translateY(0);
+}

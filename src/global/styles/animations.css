@@ -1,0 +1,10 @@
+.ease-in-top {
+  transform: translateY(-100px);
+  opacity: 0;
+  transition: transform 200ms ease-in-out, opacity 250ms ease-in;
+}
+
+.ease-in-top--active {
+  transform: translateY(0);
+  opacity: 1;
+}

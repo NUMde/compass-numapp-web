@@ -1,0 +1,18 @@
+:root {
+  --header-height-desktop: 98px;
+  --footer-height-desktop: 153px;
+  --max-width-desktop: 360px;
+  --max-width-desktop-wide: 600px;
+
+  --color-white: #fff;
+
+  --padding-small: var(--space-xs);
+  --padding-normal: var(--space-s);
+  --padding-medium: var(--space-m);
+  --padding-large: var(--space-l);
+
+  /* Min width media queries breakpoints */
+  --tablet: 768px;
+  --desktop: 960px;
+  --widescreen: 1152px;
+}

@@ -1,0 +1,7 @@
+.snack-bar__content svg.icon--white {
+  color: white;
+}
+
+d4l-snack-bar .snack-bar--notification {
+  background-color: white;
+}

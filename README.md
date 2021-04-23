@@ -38,6 +38,9 @@ npm test
 
 # Run the unit tests and watch for file changes during development
 npm run test:watch
+
+# Build the app and then analyze the bundle size, generating a report under /stats.html
+npm run analyze
 ```
 
 ## Code formatting

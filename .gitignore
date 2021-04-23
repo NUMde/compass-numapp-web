@@ -1,0 +1,16 @@
+node_modules
+www
+.env
+
+.stencil
+.idea
+.vscode
+.sass-cache
+.versions
+coverage
+$RECYCLE.BIN
+.eslintcache
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+stats.html
