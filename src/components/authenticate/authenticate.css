@@ -1,0 +1,62 @@
+.authenticate__camera-container,
+.authenticate__camera-stream {
+  display: block;
+  width: 100%;
+}
+
+.authenticate__camera-stream {
+  transform: scaleX(-1);
+}
+
+.authenticate__camera-container {
+  position: relative;
+  margin-top: var(--space-s);
+  border-radius: var(--border-radius-s);
+  overflow: hidden;
+}
+
+.authenticate__camera-crosshair {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  position: absolute;
+  left: 2rem;
+  right: 2rem;
+  mix-blend-mode: difference;
+}
+
+.authenticate__camera-crosshair--top {
+  top: 2rem;
+}
+
+.authenticate__camera-crosshair--bottom {
+  bottom: 2rem;
+}
+
+.authenticate__camera-crosshair::before,
+.authenticate__camera-crosshair::after {
+  display: block;
+  content: '';
+  width: 3rem;
+  height: 3rem;
+  flex: none;
+  border: 2px solid var(--color-white);
+}
+
+.authenticate__camera-crosshair::before {
+  border-right-width: 0;
+}
+
+.authenticate__camera-crosshair::after {
+  border-left-width: 0;
+}
+
+.authenticate__camera-crosshair--top::before,
+.authenticate__camera-crosshair--top::after {
+  border-bottom-width: 0;
+}
+
+.authenticate__camera-crosshair--bottom::before,
+.authenticate__camera-crosshair--bottom::after {
+  border-top-width: 0;
+}

@@ -51,7 +51,7 @@ export class Notification {
             data-test="closeButton"
             data-test-context="snackBar"
             classes="button--text button--uppercase"
-            text={i18n.t('notification_bar.dismiss.button')}
+            text={i18n.t('notification_bar.dismiss_button')}
             handleClick={this.close}
           />
         </div>
