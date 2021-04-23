@@ -1,0 +1,39 @@
+{
+  "name": "compass-numapp-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run build:dev",
+    "start": "npm run build:dev",
+    "build": "stencil build",
+    "build:dev": "npm run build -- --dev --watch --serve --no-open",
+    "analyze": "stencil build",
+    "test": "stencil test --spec",
+    "test:watch": "stencil test --spec --watchAll",
+    "code-format": "prettier --write 'src/**/*.{tsx,scss,ts}'"
+  },
+  "engines": {
+    "npm": ">7.0.0",
+    "node": ">14.0.0"
+  },
+  "dependencies": {
+    "@d4l/web-components-library": "^2.18.2",
+    "@stencil/core": "^2.5.2",
+    "@stencil/eslint-plugin": "^0.3.1",
+    "@stencil/router": "^1.0.1",
+    "@stencil/sass": "^1.4.1",
+    "@stencil/store": "^1.4.1",
+    "@types/fhir": "^3.0.2",
+    "dotenv": "^8.2.0",
+    "i18next": "^20.2.1",
+    "i18next-browser-languagedetector": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.41",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rollup-plugin-visualizer": "^5.4.0"
+  }
+}

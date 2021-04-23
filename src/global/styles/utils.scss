@@ -1,0 +1,109 @@
+.u-display-block {
+  display: block;
+}
+
+.u-list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.u-margin-left--auto {
+  margin-left: auto;
+}
+
+.u-margin-right--auto {
+  margin-right: auto;
+}
+
+@each $method in margin, padding {
+  @each $size in small, normal, medium, large {
+    .u-#{$method}--#{$size} {
+      #{$method}: var(--padding-#{$size});
+    }
+
+    .u-#{$method}-horizontal--#{$size} {
+      #{$method}-left: var(--padding-#{$size});
+      #{$method}-right: var(--padding-#{$size});
+    }
+
+    .u-#{$method}-vertical--#{$size} {
+      #{$method}-bottom: var(--padding-#{$size});
+      #{$method}-top: var(--padding-#{$size});
+    }
+
+    .u-#{$method}--#{$size}-negative {
+      #{$method}: calc(-1 * var(--padding-#{$size}));
+    }
+
+    .u-#{$method}-horizontal--#{$size}-negative {
+      #{$method}-left: calc(-1 * var(--padding-#{$size}));
+      #{$method}-right: calc(-1 * var(--padding-#{$size}));
+    }
+
+    .u-#{$method}-vertical--#{$size}-negative {
+      #{$method}-bottom: calc(-1 * var(--padding-#{$size}));
+      #{$method}-top: calc(-1 * var(--padding-#{$size}));
+    }
+
+    @each $direction in top, right, bottom, left {
+      .u-#{$method}-#{$direction}--#{$size} {
+        #{$method}-#{$direction}: var(--padding-#{$size});
+      }
+
+      .u-#{$method}-#{$direction}--#{$size}-negative {
+        #{$method}-#{$direction}: calc(-1 * var(--padding-#{$size}));
+      }
+    }
+  }
+}
+
+.u-text-align--left {
+  text-align: left;
+}
+
+.u-text-align--center {
+  text-align: center;
+}
+
+.u-line-wrap {
+  white-space: pre-line;
+}
+
+.u-margin-reset {
+  margin: 0;
+}
+
+.u-font-weight-500 {
+  font-weight: 500;
+}
+
+.u-button-reset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+/*
+ * Utility class to hide content visually while keeping it screen reader-accessible.
+ * Source: https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html
+ */
+.u-visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.u-border-bottom--normal {
+  border-bottom: 1px solid var(--color-neutral-lightest);
+}
+
+.u-box-shadow--none {
+  box-shadow: none !important;
+}

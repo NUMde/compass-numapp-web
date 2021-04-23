@@ -1,0 +1,15 @@
+{
+  "name": "NUM Compass Web App",
+  "short_name": "NUM Compass",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "assets/icon/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#faf8f8",
+  "theme_color": "#000080"
+}
