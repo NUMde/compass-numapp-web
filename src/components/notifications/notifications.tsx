@@ -20,7 +20,7 @@ export class Notifications {
     const notification = store.notifications.current;
     const onAction = notification?.actionOptions ? () => this.onAction(notification) : undefined;
 
-    const actionKey = notification?.actionKey || 'notification_bar.retry.button';
+    const actionKey = notification?.actionKey || 'notification_bar.retry_button';
 
     return (
       <div class={`notification-container ease-in-top ${notification ? 'ease-in-top--active' : ''}`}>

@@ -1,6 +1,7 @@
 import { Component, h } from '@stencil/core';
-import store from '../../store';
-import { ROUTES } from '../../global/constants';
+import store from 'store';
+import { ROUTES } from 'global/constants';
+import { Card } from 'components/card/card';
 
 @Component({
   tag: 'num-container-welcome',
@@ -8,47 +9,34 @@ import { ROUTES } from '../../global/constants';
 export class Welcome {
   render() {
     return (
-      <div class="c-card-wrapper">
-        <d4l-card classes="card--text-center card--desktop card--no-padding">
-          <div
-            slot="card-header"
-            class="c-card__header--segmented u-padding-horizontal--medium u-padding-vertical--normal"
-          >
-            <h2>{store.i18n.t('welcome.introduction.headline')}</h2>
-          </div>
+      <Card headline={store.i18n.t('welcome.headline')}>
+        <p class="u-margin-top--normal u-text-align--center">{store.i18n.t('welcome.infotext')}</p>
 
-          <div class="u-padding-horizontal--medium u-padding-bottom--medium" slot="card-content">
-            <p class="u-margin-top--normal u-text-align--center">
-              {store.i18n.t('welcome.introduction.infotext')}
-            </p>
-
-            <ul class="u-list-reset">
-              <li class="u-margin-top--normal">
-                <stencil-route-link url={ROUTES.TERMS}>
-                  <d4l-button
-                    classes="button--tertiary button--block"
-                    text={store.i18n.t('welcome.terms_of_use.link')}
-                    is-route-link
-                  />
-                </stencil-route-link>
-              </li>
-              <li class="u-margin-top--small u-margin-bottom--medium">
-                <stencil-route-link url={ROUTES.PRIVACY_POLICY}>
-                  <d4l-button
-                    classes="button--tertiary button--block"
-                    text={store.i18n.t('welcome.privacy_policy.link')}
-                    is-route-link
-                  />
-                </stencil-route-link>
-              </li>
-            </ul>
-
-            <stencil-route-link url={ROUTES.AUTHENTICATE}>
-              <d4l-button classes="button--block" text={store.i18n.t('welcome.introduction.continue')} />
+        <ul class="u-list-reset">
+          <li class="u-margin-top--normal">
+            <stencil-route-link url={ROUTES.TERMS}>
+              <d4l-button
+                classes="button--tertiary button--block"
+                text={store.i18n.t('welcome.terms_of_use')}
+                is-route-link
+              />
             </stencil-route-link>
-          </div>
-        </d4l-card>
-      </div>
+          </li>
+          <li class="u-margin-top--small u-margin-bottom--medium">
+            <stencil-route-link url={ROUTES.PRIVACY_POLICY}>
+              <d4l-button
+                classes="button--tertiary button--block"
+                text={store.i18n.t('welcome.privacy_policy')}
+                is-route-link
+              />
+            </stencil-route-link>
+          </li>
+        </ul>
+
+        <stencil-route-link url={ROUTES.AUTHENTICATE}>
+          <d4l-button classes="button--block" text={store.i18n.t('welcome.continue')} />
+        </stencil-route-link>
+      </Card>
     );
   }
 }

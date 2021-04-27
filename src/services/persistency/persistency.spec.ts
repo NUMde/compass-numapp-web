@@ -33,21 +33,12 @@ describe('local storage store', () => {
     persistor = new StoragePersistor(storage);
   });
 
-  it('does not put data into storage until it is allowed to do so', () => {
-    persistor.isPersistenceAllowed = false;
-
+  it('puts data into storage', () => {
     persistor.set('foo', 'bar');
-
-    expect(storage.length).toBe(0);
-
-    persistor.isPersistenceAllowed = true;
-
     expect(storage.getItem('foo')).toEqual('bar');
   });
 
   it('updates storage when data changes', () => {
-    persistor.isPersistenceAllowed = true;
-
     persistor.set('foo', 'bar');
     expect(persistor.get('foo')).toEqual('bar');
     expect(storage.getItem('foo')).toEqual('bar');
@@ -58,8 +49,6 @@ describe('local storage store', () => {
   });
 
   it('removes item from storage when the value is set to null', () => {
-    persistor.isPersistenceAllowed = true;
-
     persistor.set('foo', 'bar');
     expect(persistor.get('foo')).toEqual('bar');
     expect(storage.getItem('foo')).toEqual('bar');

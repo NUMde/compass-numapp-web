@@ -1,5 +1,6 @@
 import { Component, Fragment, h, Prop } from '@stencil/core';
-import { injectHistory, LocationSegments, RouterHistory } from '@stencil/router';
+import { injectHistory, RouterHistory } from '@stencil/router';
+import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
 import { ROUTES } from '../../global/constants';
 import store from '../../store';
 import { LANGUAGES } from '../../store/i18n';
@@ -9,7 +10,6 @@ import { LANGUAGES } from '../../store/i18n';
   styleUrl: 'app-root.css',
 })
 export class AppRoot {
-  @Prop() location: LocationSegments;
   @Prop() history: RouterHistory;
 
   get footerLinks() {
@@ -30,7 +30,17 @@ export class AppRoot {
   }
 
   get defaultRoute() {
-    return store.auth.get('isAuthenticated') ? ROUTES.DASHBOARD : ROUTES.ROOT;
+    return store.auth.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
+  }
+
+  componentDidLoad() {
+    let currentState = store.auth.isAuthenticated;
+    store.auth.onStateChange((isAuthenticated: boolean) => {
+      if (currentState !== isAuthenticated) {
+        currentState = isAuthenticated;
+        this.history.push(this.defaultRoute, {});
+      }
+    });
   }
 
   render() {
@@ -54,7 +64,7 @@ export class AppRoot {
             <stencil-route-switch scrollTopOffset={0.1}>
               <stencil-route
                 routeRender={() =>
-                  !store.auth.get('isAuthenticated') ? (
+                  !store.auth.isAuthenticated ? (
                     <num-container-welcome />
                   ) : (
                     <stencil-router-redirect url={ROUTES.DASHBOARD} />
@@ -64,6 +74,7 @@ export class AppRoot {
                 exact
               />
               <stencil-route component="num-container-authenticate" url={ROUTES.AUTHENTICATE} exact />
+              <AuthenticatedRoute component="num-container-dashboard" url={ROUTES.DASHBOARD} />
               <stencil-route routeRender={() => <stencil-router-redirect url={this.defaultRoute} />} />
             </stencil-route-switch>
           </stencil-router>

@@ -6,12 +6,12 @@ interface StateType {
   notifications: Notification[];
 }
 
-const storeBuilder = (services: Services) => {
+const storeBuilder = ({ notifier }: Services) => {
   const store = createStore<StateType>({
     notifications: [],
   });
 
-  services.notifier.observe({
+  notifier.observe({
     onNotification(notification: Notification) {
       if ([...store.get('notifications')].pop()?.messageKey === notification.messageKey) {
         return; // no need to show the same notification twice in a row

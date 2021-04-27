@@ -5,14 +5,15 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { LocationSegments, RouterHistory } from "@stencil/router";
+import { RouterHistory } from "@stencil/router";
 import { NotificationSeverity } from "services/notifications";
 export namespace Components {
     interface AppRoot {
         "history": RouterHistory;
-        "location": LocationSegments;
     }
     interface NumContainerAuthenticate {
+    }
+    interface NumContainerDashboard {
     }
     interface NumContainerWelcome {
     }
@@ -40,6 +41,12 @@ declare global {
         prototype: HTMLNumContainerAuthenticateElement;
         new (): HTMLNumContainerAuthenticateElement;
     };
+    interface HTMLNumContainerDashboardElement extends Components.NumContainerDashboard, HTMLStencilElement {
+    }
+    var HTMLNumContainerDashboardElement: {
+        prototype: HTMLNumContainerDashboardElement;
+        new (): HTMLNumContainerDashboardElement;
+    };
     interface HTMLNumContainerWelcomeElement extends Components.NumContainerWelcome, HTMLStencilElement {
     }
     var HTMLNumContainerWelcomeElement: {
@@ -61,6 +68,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "app-root": HTMLAppRootElement;
         "num-container-authenticate": HTMLNumContainerAuthenticateElement;
+        "num-container-dashboard": HTMLNumContainerDashboardElement;
         "num-container-welcome": HTMLNumContainerWelcomeElement;
         "num-notification": HTMLNumNotificationElement;
         "num-notifications": HTMLNumNotificationsElement;
@@ -69,9 +77,10 @@ declare global {
 declare namespace LocalJSX {
     interface AppRoot {
         "history"?: RouterHistory;
-        "location"?: LocationSegments;
     }
     interface NumContainerAuthenticate {
+    }
+    interface NumContainerDashboard {
     }
     interface NumContainerWelcome {
     }
@@ -88,6 +97,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "app-root": AppRoot;
         "num-container-authenticate": NumContainerAuthenticate;
+        "num-container-dashboard": NumContainerDashboard;
         "num-container-welcome": NumContainerWelcome;
         "num-notification": NumNotification;
         "num-notifications": NumNotifications;
@@ -99,6 +109,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "num-container-authenticate": LocalJSX.NumContainerAuthenticate & JSXBase.HTMLAttributes<HTMLNumContainerAuthenticateElement>;
+            "num-container-dashboard": LocalJSX.NumContainerDashboard & JSXBase.HTMLAttributes<HTMLNumContainerDashboardElement>;
             "num-container-welcome": LocalJSX.NumContainerWelcome & JSXBase.HTMLAttributes<HTMLNumContainerWelcomeElement>;
             "num-notification": LocalJSX.NumNotification & JSXBase.HTMLAttributes<HTMLNumNotificationElement>;
             "num-notifications": LocalJSX.NumNotifications & JSXBase.HTMLAttributes<HTMLNumNotificationsElement>;
