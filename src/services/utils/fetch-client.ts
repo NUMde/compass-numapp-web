@@ -6,10 +6,8 @@ interface FetchClientHeaders {
 }
 
 interface FetchClientArguments {
-  uri: string;
+  url: string;
   authenticated?: boolean;
-  retry?: boolean;
-  wasRetry?: boolean;
   method?: string;
   contentType?: string;
   sendLanguage?: boolean;
@@ -18,29 +16,13 @@ interface FetchClientArguments {
   credentials?: 'omit' | 'same-origin' | 'include';
 }
 
-let refreshSessionPromise;
-const refreshSession = async () => {
-  if (refreshSessionPromise) {
-    return await refreshSessionPromise;
-  }
-  refreshSessionPromise = store.auth.refreshSession();
-
-  try {
-    return await refreshSessionPromise;
-  } finally {
-    refreshSessionPromise = null;
-  }
-};
-
 export const request = async <T = unknown>(args: FetchClientArguments): Promise<[T, Headers]> => {
   const {
-    uri,
+    url,
     method = 'GET',
-    authenticated = true,
+    authenticated = false,
     headers = {},
-    retry = true,
-    wasRetry = false,
-    sendLanguage = true,
+    sendLanguage = false,
     body = null,
     contentType = 'application/json',
     credentials = 'omit',
@@ -49,13 +31,13 @@ export const request = async <T = unknown>(args: FetchClientArguments): Promise<
   let response;
 
   try {
-    response = await fetch(uri, {
+    response = await fetch(url, {
       method: method,
       headers: {
         'Content-Type': contentType,
         ...(authenticated
           ? {
-              Authorization: `Bearer ${store.auth.get('accessToken')}`,
+              Authorization: `Bearer ${store.auth.accessToken}`,
             }
           : {}),
         ...(sendLanguage
@@ -74,20 +56,7 @@ export const request = async <T = unknown>(args: FetchClientArguments): Promise<
     throw new ResponseError(e.message, 0);
   }
 
-  if (response.status === 401 && retry) {
-    try {
-      const isSessionRefreshed = await refreshSession();
-      if (isSessionRefreshed) {
-        return request({ ...args, retry: false, wasRetry: true });
-      } else {
-        await store.auth.expireSession();
-      }
-    } catch (e) {
-      await store.auth.expireSession();
-    }
-  }
-
-  if (response.status === 401 && wasRetry) {
+  if (response.status === 401) {
     await store.auth.expireSession();
   }
 

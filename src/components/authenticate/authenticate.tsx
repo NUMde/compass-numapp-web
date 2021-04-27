@@ -1,9 +1,10 @@
 import { Component, h, State } from '@stencil/core';
 import jsQR from 'jsqr';
 import { Card } from 'components/card/card';
-import { APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID } from 'global/constants';
+import { APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID, SUPPORT_QR_CODE } from 'global/constants';
 import services from 'services';
 import store from 'store';
+import { ResponseError } from 'services/utils/response-error';
 
 @Component({
   tag: 'num-container-authenticate',
@@ -26,19 +27,31 @@ export class Authenticate {
 
   get supportsCamera() {
     try {
-      return !!navigator.mediaDevices.getUserMedia;
+      return SUPPORT_QR_CODE && !!navigator.mediaDevices.getUserMedia;
     } catch (e) {
       return false;
     }
   }
 
   async authenticate() {
+    const userId = this.#userId;
+
     this.isAuthenticating = true;
-    console.log('authenticating with userId', this.#userId);
+
+    this.showCamera = false;
+    this.stopCamera();
 
     try {
-    } finally {
+      const { study_id } = await services.user.fetch(userId);
+      if (study_id !== userId) {
+        throw new ResponseError('authenticate.error_user_id_mismatch', 401);
+      }
+
+      store.auth.login(userId);
+    } catch ({ status = 0 }) {
+      services.notifier.onError(`authenticate.error_code_${status}`);
       this.isAuthenticating = false;
+      status === 401 && this.startCamera();
     }
   }
 
@@ -67,9 +80,6 @@ export class Authenticate {
       if (!appName || !userId) {
         throw new Error('authenticate.error_qr_format');
       }
-
-      this.showCamera = false;
-      this.stopCamera();
 
       if (appName !== APP_NAME) {
         throw new Error('authenticate.error_qr_wrong_app');
@@ -111,6 +121,19 @@ export class Authenticate {
     this.#captureAnimationFrame = requestAnimationFrame(() => this.captureQrCode());
   }
 
+  async startCamera() {
+    if (!this.supportsCamera || !this.#videoEl) {
+      return;
+    }
+
+    try {
+      const stream = await this.getCameraStream();
+      this.#videoEl.srcObject = stream;
+      this.showCamera = true;
+      this.#captureAnimationFrame = requestAnimationFrame(() => this.captureQrCode());
+    } catch (e) {}
+  }
+
   stopCamera() {
     window.cancelAnimationFrame?.(this.#captureAnimationFrame);
     this.#stream?.getTracks().forEach((track) => track.stop());
@@ -123,17 +146,8 @@ export class Authenticate {
     this.stopCamera();
   }
 
-  async componentDidLoad() {
-    if (!this.supportsCamera || !this.#videoEl) {
-      return;
-    }
-
-    try {
-      const stream = await this.getCameraStream();
-      this.#videoEl.srcObject = stream;
-      this.showCamera = true;
-      this.#captureAnimationFrame = requestAnimationFrame(() => this.captureQrCode());
-    } catch (e) {}
+  componentDidLoad() {
+    this.startCamera();
   }
 
   render() {

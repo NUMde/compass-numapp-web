@@ -12,18 +12,12 @@ type AuthenticatedRouteProps = {
 
 export const AuthenticatedRoute = ({ component, ...props }: AuthenticatedRouteProps) => {
   const Component = component;
-  const isLoading = store.auth.get('isAuthenticating');
-  const isRouteAccessible = store.auth.get('isAuthenticated');
 
   return (
     <stencil-route
       {...props}
       routeRender={(props: { [key: string]: any }) => {
-        if (isLoading) {
-          return <d4l-spinner />;
-        }
-
-        if (isRouteAccessible) {
+        if (store.auth.isAuthenticated) {
           return <Component {...props} {...props.componentProps} />;
         }
 

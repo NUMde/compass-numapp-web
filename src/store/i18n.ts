@@ -23,8 +23,7 @@ const getLanguageByCode = (languageCode: Language['code']) => {
   return LANGUAGES.find(({ code }) => code === languageCode);
 };
 
-const storeBuilder = (services: Services) => {
-  const { persistor } = services;
+const storeBuilder = ({ persistor }: Services) => {
   const browserLanguage = navigator.language?.split('-')?.shift();
 
   const store = createPersistedStore<StateType>(persistor, 'i18n', {
@@ -82,10 +81,6 @@ const storeBuilder = (services: Services) => {
 
   const t: TranslateFunction = (key, ...options) => {
     options.languageCode = store.state.language.code;
-
-    // this is a hack to force a UI re-render when new translations are loaded
-    forceUpdateStore.get('forceUpdate');
-
     return i18n.t(key, ...options);
   };
 

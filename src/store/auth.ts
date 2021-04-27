@@ -1,46 +1,42 @@
-import { createStore } from '@stencil/store';
+import createPersistedStore from './utils/persisted-store';
 import { Services } from '../services';
 
 interface StateType {
-  accessToken?: string;
-  isAuthenticated: boolean;
-  isAuthenticating: boolean;
+  accessToken: string;
 }
 
-const storeBuilder = (_services: Services) => {
-  const store = createStore<StateType>({
-    isAuthenticated: false,
-    isAuthenticating: false,
+const storeBuilder = ({ persistor }: Services) => {
+  const store = createPersistedStore<StateType>(persistor, 'auth', {
+    accessToken: null,
   });
 
   class Actions {
-    async login() {
-      store.set('isAuthenticated', true);
+    get accessToken() {
+      return store.get('accessToken');
     }
 
-    async refreshSession() {
-      store.set('isAuthenticated', true);
-      return true;
+    get isAuthenticated() {
+      return !!this.accessToken;
     }
 
-    async logout() {
-      store.set('isAuthenticated', false);
+    login(accessToken: string) {
+      accessToken && store.set('accessToken', accessToken);
     }
 
-    async expireSession() {
-      await this.logout();
+    logout() {
+      store.set('accessToken', null);
+    }
+
+    expireSession() {
+      this.logout();
+    }
+
+    onStateChange(handler: (isAuthenticated: boolean) => void) {
+      store.onChange('accessToken', () => handler(this.isAuthenticated));
     }
   }
 
-  const actions = new Actions();
-
-  return {
-    get: store.get,
-    login: actions.login.bind(actions),
-    logout: actions.logout.bind(actions),
-    refreshSession: actions.refreshSession.bind(actions),
-    expireSession: actions.expireSession.bind(actions),
-  };
+  return new Actions();
 };
 
 export type AuthStore = ReturnType<typeof storeBuilder>;
