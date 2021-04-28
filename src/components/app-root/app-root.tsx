@@ -82,7 +82,7 @@ export class AppRoot {
 
         <d4l-app-footer footerLinks={footerLinks}>
           <span slot="copyright-info" class="u-display-block u-margin-bottom--normal">
-            {store.i18n.t('footer.copyright_note.infotext')}
+            {store.i18n.t('footer.copyright_note', { year: new Date().getFullYear() })}
           </span>
         </d4l-app-footer>
       </Fragment>

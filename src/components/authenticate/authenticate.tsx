@@ -42,14 +42,15 @@ export class Authenticate {
     this.stopCamera();
 
     try {
-      const { study_id } = await services.user.fetch(userId);
-      if (study_id !== userId) {
-        throw new ResponseError('authenticate.error_user_id_mismatch', 401);
+      const userResponse = await services.user.fetch(userId);
+      if (userResponse.study_id !== userId) {
+        throw new ResponseError('authenticate.error.user_id_mismatch', 401);
       }
 
+      store.user.populateFromUserResponse(userResponse);
       store.auth.login(userId);
     } catch ({ status = 0 }) {
-      services.notifier.onError(`authenticate.error_code_${status}`);
+      services.notifier.onError(`authenticate.error.code_${status}`);
       this.isAuthenticating = false;
       status === 401 && this.startCamera();
     }
@@ -57,7 +58,7 @@ export class Authenticate {
 
   async getCameraStream(): Promise<MediaStream> {
     if (!this.supportsCamera) {
-      throw new Error('authenticate.error_camera_not_supported');
+      throw new Error('authenticate.error.camera_not_supported');
     }
 
     try {
@@ -69,7 +70,7 @@ export class Authenticate {
       return this.#stream;
     } catch (e) {
       console.error(e.message);
-      throw new Error('authenticate.error_camera_rejected');
+      throw new Error('authenticate.error.camera_rejected');
     }
   }
 
@@ -78,18 +79,18 @@ export class Authenticate {
       const { [QR_PROP_APP_NAME]: appName, [QR_PROP_USER_ID]: userId } = JSON.parse(data);
 
       if (!appName || !userId) {
-        throw new Error('authenticate.error_qr_format');
+        throw new Error('authenticate.error.qr_format');
       }
 
       if (appName !== APP_NAME) {
-        throw new Error('authenticate.error_qr_wrong_app');
+        throw new Error('authenticate.error.qr_wrong_app');
       }
 
       this.#userId = userId;
       this.authenticate();
     } catch ({ message }) {
       services.notifier.onError(
-        message.indexOf('authenticate.') === 0 ? message : 'authenticate.error_qr_format'
+        message.indexOf('authenticate.') === 0 ? message : 'authenticate.error.qr_format'
       );
     }
   }
@@ -153,7 +154,7 @@ export class Authenticate {
   render() {
     return (
       <Card headline={store.i18n.t('authenticate.headline')}>
-        <p class="u-margin-top--normal u-text-align--center">{store.i18n.t('authenticate.infotext')}</p>
+        <p class="u-infotext">{store.i18n.t('authenticate.infotext')}</p>
 
         {this.supportsCamera && (
           <div class="authenticate__camera-container" style={{ display: this.showCamera ? 'block' : 'none' }}>

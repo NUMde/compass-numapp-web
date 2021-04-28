@@ -5,6 +5,8 @@ export const ROUTES = {
   IMPRINT: '/imprint',
   AUTHENTICATE: '/connect',
   DASHBOARD: '/dashboard',
+  QUESTIONNAIRE: '/questionnaire',
+  REPORT: '/report',
 };
 
 /**
@@ -12,6 +14,7 @@ export const ROUTES = {
  */
 
 export const SUPPORT_QR_CODE = true;
+export const SHOW_LOGOUT = true;
 
 export const APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppName';
