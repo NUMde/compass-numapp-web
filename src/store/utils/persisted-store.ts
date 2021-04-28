@@ -36,6 +36,9 @@ export default function createPersistedStore<T>(
         // Don't persist if it can't be stringified
       }
     },
+    reset() {
+      Object.keys(initialData).forEach((key) => store.set(key as keyof T & string, initialData[key]));
+    },
   });
 
   return store;

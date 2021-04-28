@@ -2,6 +2,7 @@ import { Component, Fragment, h, Prop } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
 import { ROUTES } from '../../global/constants';
+import services from 'services';
 import store from '../../store';
 import { LANGUAGES } from '../../store/i18n';
 
@@ -31,6 +32,10 @@ export class AppRoot {
 
   get defaultRoute() {
     return store.auth.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
+  }
+
+  async componentWillLoad() {
+    await services.user.populateStore();
   }
 
   componentDidLoad() {

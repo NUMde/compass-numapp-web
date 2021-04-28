@@ -14,4 +14,5 @@ const store = {
 
 export type Store = typeof store;
 
+export const user = store.user;
 export default store;

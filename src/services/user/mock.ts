@@ -16,4 +16,6 @@ export default class MockUser implements IUser {
       study_id: id,
     };
   }
+
+  async populateStore() {}
 }

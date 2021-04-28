@@ -15,6 +15,10 @@ const storeBuilder = () => {
   });
 
   class Actions {
+    reset() {
+      store.reset();
+    }
+
     populateFromUserResponse(userResponse: UserResponse) {
       store.set('isFirstTimeUser', userResponse.firstTime);
       store.set('questionnaireId', userResponse.current_questionnaire_id);

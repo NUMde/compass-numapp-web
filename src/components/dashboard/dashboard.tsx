@@ -1,5 +1,4 @@
 import { Component, h } from '@stencil/core';
-import services from 'services';
 import store from 'store';
 import { formatDate } from 'services/utils/format-date';
 import { ROUTES, SHOW_LOGOUT } from 'global/constants';
@@ -9,24 +8,6 @@ import { Card } from 'components/card/card';
   tag: 'num-container-dashboard',
 })
 export class Dashboard {
-  async componentWillLoad() {
-    if (store.user.isPopulated) {
-      return;
-    }
-
-    try {
-      const userId = store.auth.accessToken;
-      const userResponse = await services.user.fetch(userId);
-      if (userResponse.study_id !== userId) {
-        throw new Error();
-      }
-
-      store.user.populateFromUserResponse(userResponse);
-    } catch (e) {
-      store.auth.expireSession();
-    }
-  }
-
   render() {
     const {
       isPopulated,

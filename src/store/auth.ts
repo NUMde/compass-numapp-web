@@ -1,5 +1,6 @@
 import createPersistedStore from './utils/persisted-store';
-import { Services } from '../services';
+import { Services } from 'services';
+import { user } from 'store';
 
 interface StateType {
   accessToken: string;
@@ -16,7 +17,7 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     get isAuthenticated() {
-      return !!this.accessToken;
+      return !!this.accessToken && user.isPopulated;
     }
 
     login(accessToken: string) {
@@ -24,7 +25,8 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     logout() {
-      store.set('accessToken', null);
+      store.reset();
+      user.reset();
     }
 
     expireSession() {
