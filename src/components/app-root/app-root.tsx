@@ -1,4 +1,4 @@
-import { Component, Fragment, h, Prop } from '@stencil/core';
+import { Component, Fragment, h, Listen, Prop } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
 import { ROUTES } from '../../global/constants';
@@ -12,20 +12,28 @@ import { LANGUAGES } from '../../store/i18n';
 })
 export class AppRoot {
   @Prop() history: RouterHistory;
+  @Listen('changeLanguage', {
+    target: 'window',
+  })
+  async changeLanguageHandler(event: CustomEvent) {
+    event.stopImmediatePropagation();
+    const { detail: language } = event;
+    store.i18n.language = language;
+  }
 
   get footerLinks() {
     return [
       {
         url: ROUTES.TERMS,
-        text: store.i18n.t('footer.terms'),
+        text: store.i18n.t('general.terms_of_use'),
       },
       {
         url: ROUTES.PRIVACY_POLICY,
-        text: store.i18n.t('footer.privacy_policy'),
+        text: store.i18n.t('general.privacy_policy'),
       },
       {
         url: ROUTES.IMPRINT,
-        text: store.i18n.t('footer.imprint'),
+        text: store.i18n.t('general.imprint'),
       },
     ];
   }
@@ -57,8 +65,8 @@ export class AppRoot {
 
         <d4l-app-header
           logoUrl={ROUTES.ROOT}
-          logoUrlTitle={store.i18n.t('header.logo')}
-          logoUrlText={store.i18n.t('header.logo')}
+          logoUrlTitle={store.i18n.t('general.header_logo')}
+          logoUrlText={store.i18n.t('general.header_logo')}
           menuFooterLinks={footerLinks}
           supportedLanguages={LANGUAGES}
           selectedLanguage={store.i18n.language}
@@ -87,7 +95,7 @@ export class AppRoot {
 
         <d4l-app-footer footerLinks={footerLinks}>
           <span slot="copyright-info" class="u-display-block u-margin-bottom--normal">
-            {store.i18n.t('footer.copyright_note', { year: new Date().getFullYear() })}
+            {store.i18n.t('general.footer_copyright_note', { year: new Date().getFullYear() })}
           </span>
         </d4l-app-footer>
       </Fragment>

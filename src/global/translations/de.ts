@@ -41,14 +41,12 @@ export const TRANSLATIONS_DE = {
       },
     },
   },
-  header: {
-    logo: 'NUM COMPASS web app',
-  },
-  footer: {
-    copyright_note: '© {{year}} NUM COMPASS',
+  general: {
+    footer_copyright_note: '© {{year}} NUM COMPASS',
+    header_logo: 'NUM COMPASS web app',
     imprint: 'Impressum',
     privacy_policy: 'Datenschutzerklärung',
-    terms: 'Nutzungsbedingungen',
+    terms_of_use: 'Nutzungsbedingungen',
   },
   notification_bar: {
     dismiss_button: 'Schließen',
@@ -57,7 +55,5 @@ export const TRANSLATIONS_DE = {
     continue: 'Weiter',
     headline: 'Willkommen',
     infotext: 'Hier steht ein kurzer und informativer Einführungstext zur App.',
-    privacy_policy: 'Datenschutzerklärung',
-    terms_of_use: 'Nutzungsbedingungen',
   },
 };
