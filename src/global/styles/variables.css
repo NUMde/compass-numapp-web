@@ -1,10 +1,22 @@
 :root {
-  --header-height-desktop: 98px;
+  --header-height-desktop: 118px;
   --footer-height-desktop: 153px;
   --max-width-desktop: 360px;
   --max-width-desktop-wide: 600px;
 
   --color-white: #fff;
+  --color-primary: #1c2732;
+  --color-secondary: #eb576a;
+  --color-secondary-light: #e27b89;
+
+  --color-border-button-primary-hover: var(--color-secondary);
+  --color-background-button-primary-hover: var(--color-secondary);
+  --color-border-button-primary-active: var(--color-secondary-light);
+  --color-background-button-primary-active: var(--color-secondary-light);
+  --color-border-button-secondary-hover: var(--color-secondary);
+  --color-text-button-secondary-hover: var(--color-secondary);
+  --color-border-button-secondary-active: var(--color-secondary-light);
+  --color-text-button-secondary-active: var(--color-secondary-light);
 
   --padding-small: var(--space-xs);
   --padding-normal: var(--space-s);

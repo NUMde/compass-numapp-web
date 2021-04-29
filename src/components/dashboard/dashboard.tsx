@@ -35,7 +35,7 @@ export class Dashboard {
           )}
         </p>
 
-        <strong class="u-display-block u-margin-vertical--normal">
+        <strong class="u-display-block u-margin-vertical--normal u-text-highlight">
           {formatDate(isQuestionnaireAvailable ? questionnaireDueDate : questionnaireStartDate)}
         </strong>
 

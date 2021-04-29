@@ -48,6 +48,12 @@
   unicode-range: U+0000-00FF;
 }
 
+::selection,
+::-moz-selection {
+  background: var(--color-secondary-light);
+  color: var(--color-white);
+}
+
 body {
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-desktop-s);
