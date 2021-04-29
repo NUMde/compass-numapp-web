@@ -4,23 +4,16 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from '../services';
 
-import { TRANSLATIONS_DE } from '../global/translations/de';
-import { TRANSLATIONS_EN } from '../global/translations/en';
-
 import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
 import { createStore } from '@stencil/store';
+import { APP_LANGUAGES, APP_TRANSLATIONS } from 'global/constants';
 
 interface StateType {
   language: Language;
 }
 
-export const LANGUAGES: Language[] = [
-  { code: 'en', label: 'English' },
-  { code: 'de', label: 'Deutsch' },
-];
-
 const getLanguageByCode = (languageCode: Language['code']) => {
-  return LANGUAGES.find(({ code }) => code === languageCode);
+  return APP_LANGUAGES.find(({ code }) => code === languageCode);
 };
 
 const storeBuilder = ({ persistor }: Services) => {
@@ -63,13 +56,13 @@ const storeBuilder = ({ persistor }: Services) => {
       detection,
       initImmediate: false,
       fallbackLng: 'de',
-      whitelist: LANGUAGES.map(({ code }) => code),
+      whitelist: APP_LANGUAGES.map(({ code }) => code),
       ns: ['master'],
       defaultNS: 'master',
-      resources: {
-        en: { master: TRANSLATIONS_EN },
-        de: { master: TRANSLATIONS_DE },
-      },
+      resources: Object.keys(APP_TRANSLATIONS).reduce(
+        (resources, code) => Object.assign(resources, { [code]: { master: APP_TRANSLATIONS[code] } }),
+        {}
+      ),
       nsSeparator: '#', // default is ":", and it doesn't fit well with URLs used as namespaces
       partialBundledLanguages: true,
     })

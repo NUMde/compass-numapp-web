@@ -1,4 +1,4 @@
-export const TRANSLATIONS_EN = {
+export default {
   authenticate: {
     continue: 'Proceed',
     error: {

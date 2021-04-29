@@ -1,10 +1,9 @@
 import { Component, Fragment, h, Listen, Prop } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
-import { ROUTES } from '../../global/constants';
+import { APP_LANGUAGES, ROUTES } from 'global/constants';
 import services from 'services';
-import store from '../../store';
-import { LANGUAGES } from '../../store/i18n';
+import store from 'store';
 
 @Component({
   tag: 'app-root',
@@ -68,7 +67,7 @@ export class AppRoot {
           logoUrlTitle={store.i18n.t('general.header_logo')}
           logoUrlText={store.i18n.t('general.header_logo')}
           menuFooterLinks={footerLinks}
-          supportedLanguages={LANGUAGES}
+          supportedLanguages={APP_LANGUAGES}
           selectedLanguage={store.i18n.language}
         />
 

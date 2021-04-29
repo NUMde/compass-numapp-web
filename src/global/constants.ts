@@ -1,3 +1,8 @@
+import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
+
+import TRANSLATIONS_DE from '../global/translations/de';
+import TRANSLATIONS_EN from '../global/translations/en';
+
 export const ROUTES = {
   ROOT: '/',
   TERMS: '/terms',
@@ -7,6 +12,16 @@ export const ROUTES = {
   DASHBOARD: '/dashboard',
   QUESTIONNAIRE: '/questionnaire',
   REPORT: '/report',
+};
+
+export const APP_LANGUAGES: Language[] = [
+  { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },
+];
+
+export const APP_TRANSLATIONS = {
+  de: TRANSLATIONS_DE,
+  en: TRANSLATIONS_EN,
 };
 
 /**
