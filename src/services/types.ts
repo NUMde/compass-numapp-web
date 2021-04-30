@@ -1,9 +1,11 @@
-import { INotifier } from './notifications';
-import { IPersistor } from './persistency';
-import { IUser } from './user';
+import { INotifierService } from './notifier';
+import { IPersistorService } from './persistor';
+import { IQuestionnaireService } from './questionnaire';
+import { IUserService } from './user';
 
 export interface Services {
-  notifier: INotifier;
-  persistor: IPersistor;
-  user: IUser;
+  notifier: INotifierService;
+  persistor: IPersistorService;
+  user: IUserService;
+  questionnaire: IQuestionnaireService;
 }

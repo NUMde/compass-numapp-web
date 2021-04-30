@@ -1,4 +1,4 @@
-import StoragePersistor from './';
+import PersistorService from './';
 
 let storage: Storage;
 const buildMockStorage: () => Storage = () => {
@@ -26,11 +26,11 @@ const buildMockStorage: () => Storage = () => {
   };
 };
 
-let persistor: StoragePersistor;
+let persistor: PersistorService;
 describe('local storage store', () => {
   beforeEach(() => {
     storage = buildMockStorage();
-    persistor = new StoragePersistor(storage);
+    persistor = new PersistorService(storage);
   });
 
   it('puts data into storage', () => {

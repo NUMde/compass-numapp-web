@@ -19,11 +19,11 @@ const storeBuilder = () => {
       store.reset();
     }
 
-    populateFromUserResponse(userResponse: UserResponse) {
-      store.set('isFirstTimeUser', userResponse.firstTime);
-      store.set('questionnaireId', userResponse.current_questionnaire_id);
-      store.set('questionnaireStartDate', userResponse.start_date ? new Date(userResponse.start_date) : null);
-      store.set('questionnaireDueDate', userResponse.due_date ? new Date(userResponse.due_date) : null);
+    populateFromUserResponse(response: UserResponse) {
+      store.set('isFirstTimeUser', response.firstTime);
+      store.set('questionnaireId', response.current_questionnaire_id);
+      store.set('questionnaireStartDate', response.start_date ? new Date(response.start_date) : null);
+      store.set('questionnaireDueDate', response.due_date ? new Date(response.due_date) : null);
       store.set('isPopulated', true);
     }
 

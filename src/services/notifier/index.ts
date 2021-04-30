@@ -1,6 +1,6 @@
-import { INotifier, NotificationObserver, ActionOptions, NotificationSeverity } from './types';
+import { INotifierService, NotificationObserver, ActionOptions, NotificationSeverity } from './types';
 
-export default class Notifier implements INotifier {
+export default class NotifierService implements INotifierService {
   private observer: NotificationObserver;
 
   private notifyObserver(

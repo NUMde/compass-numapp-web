@@ -1,5 +1,5 @@
 import { Component, h } from '@stencil/core';
-import { Notification } from 'services/notifications';
+import { Notification } from 'services/notifier';
 import store from 'store';
 
 @Component({
