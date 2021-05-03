@@ -119,6 +119,7 @@ declare namespace LocalJSX {
     }
     interface NumQuestionnaireTree {
         "flattenedItems"?: NUMQuestionnaireFlattenedItem[];
+        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
         "questionnaire"?: NUMQuestionnaire;
     }
     interface IntrinsicElements {

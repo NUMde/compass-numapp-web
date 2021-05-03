@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { ROUTES } from 'global/constants';
 import { NUMQuestionnaireFlattenedItem, NUMQuestionnaire } from 'services/questionnaire';
@@ -11,6 +11,11 @@ import store from 'store';
 export class QuestionnaireTree {
   @Prop() questionnaire: NUMQuestionnaire;
   @Prop() flattenedItems: NUMQuestionnaireFlattenedItem[];
+
+  @Event() switchDisplayMode: EventEmitter;
+  switchDisplayModeHandler(linkId?: string) {
+    this.switchDisplayMode.emit({ displayMode: 'question', linkId });
+  }
 
   componentWillLoad() {
     console.log(this.flattenedItems); // TODO remove debug
@@ -44,7 +49,7 @@ export class QuestionnaireTree {
         <d4l-button
           classes="button--block u-margin-vertical--normal"
           text={store.i18n.t('questionnaire.continue')}
-          handleClick={() => store.auth.logout()}
+          handleClick={() => this.switchDisplayModeHandler()}
         />
 
         <stencil-route-link url={ROUTES.DASHBOARD}>

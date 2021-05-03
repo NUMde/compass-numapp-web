@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, Listen, State } from '@stencil/core';
 import store from 'store';
 import services from 'services';
 
@@ -7,6 +7,11 @@ import services from 'services';
 })
 export class Questionnaire {
   @State() displayMode: 'index' | 'question' = 'index';
+  @Listen('switchDisplayMode')
+  onSwitchDisplayMode({ detail }: CustomEvent) {
+    const { displayMode } = detail;
+    this.displayMode = displayMode;
+  }
 
   async componentWillLoad() {
     try {
