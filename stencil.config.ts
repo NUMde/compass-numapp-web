@@ -36,4 +36,8 @@ export const config: Config = {
   devServer: {
     port: parseInt(env.PORT ?? '3434', 10),
   },
+  env: {
+    ENVIRONMENT: env.ENVIRONMENT,
+    API_BASE_URL: env.API_BASE_URL,
+  },
 };
