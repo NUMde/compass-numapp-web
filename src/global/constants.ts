@@ -1,3 +1,4 @@
+import { Env } from '@stencil/core';
 import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
 
 import TRANSLATIONS_DE from '../global/translations/de';
@@ -34,4 +35,5 @@ export const SHOW_LOGOUT = true;
 export const APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppName';
 export const QR_PROP_USER_ID = 'AppID';
-export const API_BASE_URL = 'http://localhost:8080/api';
+
+export const { API_BASE_URL, ENVIRONMENT } = Env;
