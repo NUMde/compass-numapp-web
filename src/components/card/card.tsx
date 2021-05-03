@@ -2,10 +2,11 @@ import { FunctionalComponent, h } from '@stencil/core';
 
 type CardProps = {
   headline: string;
+  wide?: boolean;
 };
 
-export const Card: FunctionalComponent<CardProps> = ({ headline }, children) => (
-  <div class="c-card-wrapper">
+export const Card: FunctionalComponent<CardProps> = ({ headline, wide = false }, children) => (
+  <div class={`c-card-wrapper ${wide ? 'c-card-wrapper--wide' : ''}`}>
     <d4l-card classes="card--text-center card--desktop card--no-padding">
       <div
         slot="card-header"

@@ -1,7 +1,7 @@
 .ease-in-top {
   transform: translateY(-100px);
   opacity: 0;
-  transition: transform 200ms ease-in-out, opacity 250ms ease-in;
+  transition: transform 0.2s ease-in-out, opacity 0.25s ease-in;
 }
 
 .ease-in-top--active {

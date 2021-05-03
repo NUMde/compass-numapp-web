@@ -52,6 +52,8 @@ export default {
     dismiss_button: 'Schließen',
   },
   questionnaire: {
+    back: 'Zurück',
+    continue: 'Fortfahren',
     group: 'Gruppe {{ number }}',
     question: 'Frage {{ number }}',
   },

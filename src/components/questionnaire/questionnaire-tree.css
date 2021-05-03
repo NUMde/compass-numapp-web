@@ -2,4 +2,41 @@
   display: block;
   list-style: none outside;
   text-align: left;
+  border: 1px solid var(--color-neutral-lighter);
+  border-radius: var(--border-radius-xs);
+}
+
+.questionnaire-tree_item {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-neutral-lightest);
+  cursor: default;
+}
+
+.questionnaire-tree_item:last-child {
+  border-bottom: 0 none;
+}
+
+.questionnaire-tree_item--clickable {
+  cursor: pointer;
+  transition: 0.2s background-color ease-out;
+  user-select: none;
+}
+
+.questionnaire-tree_item--clickable:hover,
+.questionnaire-tree_item--clickable:focus {
+  background-color: var(--color-neutral-lightest);
+}
+
+.questionnaire-tree__title {
+  flex: none;
+}
+
+.questionnaire-tree__text {
+  flex: 1;
+  margin-left: 1rem;
+  font-size: var(--font-size-desktop-xs);
+  color: var(--color-neutral);
 }
