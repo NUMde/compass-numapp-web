@@ -1,6 +1,6 @@
-import { IPersistor, PersistableData } from '../persistency/types';
+import { IPersistorService, PersistableData } from './types';
 
-export default class MockPersistor implements IPersistor {
+export default class MockPersistorService implements IPersistorService {
   private cachedData: PersistableData = {};
 
   get(key: string): string | undefined {

@@ -6,7 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { RouterHistory } from "@stencil/router";
-import { NotificationSeverity } from "services/notifications";
+import { NotificationSeverity } from "services/notifier";
+import { NUMQuestionnaire, NUMQuestionnaireFlattenedItem } from "services/questionnaire";
 export namespace Components {
     interface AppRoot {
         "history": RouterHistory;
@@ -14,6 +15,8 @@ export namespace Components {
     interface NumContainerAuthenticate {
     }
     interface NumContainerDashboard {
+    }
+    interface NumContainerQuestionnaire {
     }
     interface NumContainerWelcome {
     }
@@ -26,6 +29,10 @@ export namespace Components {
         "severity": NotificationSeverity;
     }
     interface NumNotifications {
+    }
+    interface NumQuestionnaireTree {
+        "flattenedItems": NUMQuestionnaireFlattenedItem[];
+        "questionnaire": NUMQuestionnaire;
     }
 }
 declare global {
@@ -47,6 +54,12 @@ declare global {
         prototype: HTMLNumContainerDashboardElement;
         new (): HTMLNumContainerDashboardElement;
     };
+    interface HTMLNumContainerQuestionnaireElement extends Components.NumContainerQuestionnaire, HTMLStencilElement {
+    }
+    var HTMLNumContainerQuestionnaireElement: {
+        prototype: HTMLNumContainerQuestionnaireElement;
+        new (): HTMLNumContainerQuestionnaireElement;
+    };
     interface HTMLNumContainerWelcomeElement extends Components.NumContainerWelcome, HTMLStencilElement {
     }
     var HTMLNumContainerWelcomeElement: {
@@ -65,13 +78,21 @@ declare global {
         prototype: HTMLNumNotificationsElement;
         new (): HTMLNumNotificationsElement;
     };
+    interface HTMLNumQuestionnaireTreeElement extends Components.NumQuestionnaireTree, HTMLStencilElement {
+    }
+    var HTMLNumQuestionnaireTreeElement: {
+        prototype: HTMLNumQuestionnaireTreeElement;
+        new (): HTMLNumQuestionnaireTreeElement;
+    };
     interface HTMLElementTagNameMap {
         "app-root": HTMLAppRootElement;
         "num-container-authenticate": HTMLNumContainerAuthenticateElement;
         "num-container-dashboard": HTMLNumContainerDashboardElement;
+        "num-container-questionnaire": HTMLNumContainerQuestionnaireElement;
         "num-container-welcome": HTMLNumContainerWelcomeElement;
         "num-notification": HTMLNumNotificationElement;
         "num-notifications": HTMLNumNotificationsElement;
+        "num-questionnaire-tree": HTMLNumQuestionnaireTreeElement;
     }
 }
 declare namespace LocalJSX {
@@ -81,6 +102,8 @@ declare namespace LocalJSX {
     interface NumContainerAuthenticate {
     }
     interface NumContainerDashboard {
+    }
+    interface NumContainerQuestionnaire {
     }
     interface NumContainerWelcome {
     }
@@ -94,13 +117,20 @@ declare namespace LocalJSX {
     }
     interface NumNotifications {
     }
+    interface NumQuestionnaireTree {
+        "flattenedItems"?: NUMQuestionnaireFlattenedItem[];
+        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
+        "questionnaire"?: NUMQuestionnaire;
+    }
     interface IntrinsicElements {
         "app-root": AppRoot;
         "num-container-authenticate": NumContainerAuthenticate;
         "num-container-dashboard": NumContainerDashboard;
+        "num-container-questionnaire": NumContainerQuestionnaire;
         "num-container-welcome": NumContainerWelcome;
         "num-notification": NumNotification;
         "num-notifications": NumNotifications;
+        "num-questionnaire-tree": NumQuestionnaireTree;
     }
 }
 export { LocalJSX as JSX };
@@ -110,9 +140,11 @@ declare module "@stencil/core" {
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "num-container-authenticate": LocalJSX.NumContainerAuthenticate & JSXBase.HTMLAttributes<HTMLNumContainerAuthenticateElement>;
             "num-container-dashboard": LocalJSX.NumContainerDashboard & JSXBase.HTMLAttributes<HTMLNumContainerDashboardElement>;
+            "num-container-questionnaire": LocalJSX.NumContainerQuestionnaire & JSXBase.HTMLAttributes<HTMLNumContainerQuestionnaireElement>;
             "num-container-welcome": LocalJSX.NumContainerWelcome & JSXBase.HTMLAttributes<HTMLNumContainerWelcomeElement>;
             "num-notification": LocalJSX.NumNotification & JSXBase.HTMLAttributes<HTMLNumNotificationElement>;
             "num-notifications": LocalJSX.NumNotifications & JSXBase.HTMLAttributes<HTMLNumNotificationsElement>;
+            "num-questionnaire-tree": LocalJSX.NumQuestionnaireTree & JSXBase.HTMLAttributes<HTMLNumQuestionnaireTreeElement>;
         }
     }
 }

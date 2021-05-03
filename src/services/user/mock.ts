@@ -1,6 +1,6 @@
-import { IUser } from './types';
+import { IUserService } from './types';
 
-export default class MockUser implements IUser {
+export default class MockUser implements IUserService {
   async fetch(id: string) {
     return {
       additional_iterations_left: 0,

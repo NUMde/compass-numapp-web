@@ -1,5 +1,5 @@
-import { IPersistor } from '../../services/persistency';
-import MockPersistor from '../../services/persistency/mock';
+import { IPersistorService } from 'services/persistor';
+import MockPersistor from 'services/persistor/mock';
 import createPersistedStore from './persisted-store';
 
 interface TestStore {
@@ -9,7 +9,7 @@ interface TestStore {
 }
 
 const namespace = 'test';
-let persistor: IPersistor;
+let persistor: IPersistorService;
 const initialData: TestStore = {
   foo: 'foo',
   bar: 42,

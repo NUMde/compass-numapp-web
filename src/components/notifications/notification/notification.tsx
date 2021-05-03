@@ -1,5 +1,5 @@
 import { Component, h, Prop } from '@stencil/core';
-import { NotificationSeverity } from 'services/notifications';
+import { NotificationSeverity } from 'services/notifier';
 import store from 'store';
 
 const snackBarTypeMap: { [key: string]: string } = {

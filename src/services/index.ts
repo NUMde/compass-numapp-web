@@ -1,6 +1,8 @@
-import Notifier from './notifications';
-import User from './user';
-import StoragePersistor from './persistency';
+import NotifierService from './notifier';
+import UserService from './user';
+import PersistorService from './persistor';
+import QuestionnaireService from './questionnaire';
+
 import { Services } from './types';
 
 let storage: Storage;
@@ -11,9 +13,10 @@ try {
 }
 
 const services: Services = {
-  persistor: new StoragePersistor(storage),
-  notifier: new Notifier(),
-  user: new User(),
+  persistor: new PersistorService(storage),
+  notifier: new NotifierService(),
+  user: new UserService(),
+  questionnaire: new QuestionnaireService(),
 };
 
 export * from './types';

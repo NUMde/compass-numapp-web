@@ -39,7 +39,7 @@ export default {
     },
   },
   general: {
-    footer_copyright_note: '© {{year}} NUM COMPASS',
+    footer_copyright_note: '© {{ year }} NUM COMPASS',
     header_logo: 'NUM COMPASS web app',
     imprint: 'Imprint',
     privacy_policy: 'Privacy policy',
@@ -47,6 +47,12 @@ export default {
   },
   notification_bar: {
     dismiss_button: 'Close',
+  },
+  questionnaire: {
+    back: 'Back',
+    continue: 'Continue',
+    group: 'Group {{ number }}',
+    question: 'Question {{ number }}',
   },
   welcome: {
     continue: 'Proceed',

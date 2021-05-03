@@ -18,7 +18,7 @@ export interface NotificationObserver {
   onNotification(notification: Notification): void;
 }
 
-export interface INotifier {
+export interface INotifierService {
   /**
    * Observe for notification
    * @param observe The NotificationObserver

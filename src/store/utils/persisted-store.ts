@@ -1,8 +1,8 @@
 import { createStore, ObservableMap } from '@stencil/store';
-import { IPersistor } from '../../services/persistency';
+import { IPersistorService } from 'services/persistor';
 
 export default function createPersistedStore<T>(
-  persistor: IPersistor,
+  persistor: IPersistorService,
   namespace: string,
   initialData: T
 ): ObservableMap<T> {

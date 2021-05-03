@@ -1,6 +1,6 @@
 import { createStore } from '@stencil/store';
-import { Services } from '../services';
-import { Notification } from '../services/notifications';
+import { Services } from 'services';
+import { Notification } from 'services/notifier';
 
 interface StateType {
   notifications: Notification[];

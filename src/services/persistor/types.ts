@@ -1,4 +1,4 @@
-export interface IPersistor {
+export interface IPersistorService {
   get(key: string): string | undefined;
   set(key: string, value: string): void;
 }

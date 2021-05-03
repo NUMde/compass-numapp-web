@@ -1,6 +1,6 @@
-import { IPersistor, PersistableData } from './types';
+import { IPersistorService, PersistableData } from './types';
 
-export default class StoragePersistor implements IPersistor {
+export default class PersistorService implements IPersistorService {
   private cachedData: PersistableData = {};
   private storage: Storage;
 

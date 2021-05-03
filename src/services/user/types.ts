@@ -14,7 +14,7 @@ export interface UserResponse {
   study_id: string;
 }
 
-export interface IUser {
+export interface IUserService {
   fetch(id: string): Promise<UserResponse>;
   populateStore(): Promise<void>;
 }

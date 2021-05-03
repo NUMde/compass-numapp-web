@@ -1,13 +1,15 @@
-import MockNotifier from './notifications/mock';
-import MockPersistor from './persistency/mock';
-import MockUser from './user/mock';
+import MockNotifierService from './notifier/mock';
+import MockPersistorService from './persistor/mock';
+import MockUserService from './user/mock';
+import MockQuestionnaireService from './questionnaire/mock';
 
-import { Services } from '../services/types';
+import { Services } from 'services/types';
 
 const buildMockServices: () => Services = () => ({
-  notifier: new MockNotifier(),
-  persistor: new MockPersistor(),
-  user: new MockUser(),
+  notifier: new MockNotifierService(),
+  persistor: new MockPersistorService(),
+  user: new MockUserService(),
+  questionnaire: new MockQuestionnaireService(),
 });
 
 export default buildMockServices;
