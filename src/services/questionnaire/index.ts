@@ -1,4 +1,5 @@
 import { API_BASE_URL } from 'global/constants';
+import { NUMQuestionnaireQuestion } from 'models/questionnaire-question';
 import { get } from 'services/utils/fetch-client';
 import { IQuestionnaireService, NUMQuestionnaire } from './types';
 
@@ -13,7 +14,7 @@ export default class questionnaireService implements IQuestionnaireService {
 
   flattenNestedItems(items, parent, level = 0) {
     return items
-      .map((item) => ({ ...item, parent, level }))
+      .map((item) => new NUMQuestionnaireQuestion(item, parent, level))
       .reduce(
         (questions, item) =>
           questions.concat(item).concat(item.item ? this.flattenNestedItems(item.item, item, level + 1) : []),

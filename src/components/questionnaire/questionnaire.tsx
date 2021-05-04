@@ -5,7 +5,7 @@ import services from 'services';
 @Component({
   tag: 'num-container-questionnaire',
 })
-export class Questionnaire {
+export class QuestionnaireComponent {
   @State() displayMode: 'index' | 'question' = 'index';
   @Listen('switchDisplayMode')
   onSwitchDisplayMode({ detail }: CustomEvent) {
@@ -24,16 +24,10 @@ export class Questionnaire {
   }
 
   render() {
-    const { isPopulated, questionnaire, flattenedItems } = store.questionnaire;
-
-    if (!isPopulated) {
+    if (!store.questionnaire.isPopulated) {
       return false;
     }
 
-    return this.displayMode === 'index' ? (
-      <num-questionnaire-tree flattenedItems={flattenedItems} questionnaire={questionnaire} />
-    ) : (
-      <div>TODO</div>
-    );
+    return this.displayMode === 'index' ? <num-questionnaire-tree /> : <num-questionnaire-question />;
   }
 }

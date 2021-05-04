@@ -1,28 +1,20 @@
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { ROUTES } from 'global/constants';
-import { NUMQuestionnaireFlattenedItem, NUMQuestionnaire } from 'services/questionnaire';
 import store from 'store';
 
 @Component({
   tag: 'num-questionnaire-tree',
   styleUrl: 'questionnaire-tree.css',
 })
-export class QuestionnaireTree {
-  @Prop() questionnaire: NUMQuestionnaire;
-  @Prop() flattenedItems: NUMQuestionnaireFlattenedItem[];
-
+export class QuestionnaireTreeComponent {
   @Event() switchDisplayMode: EventEmitter;
   switchDisplayModeHandler(linkId?: string) {
     this.switchDisplayMode.emit({ displayMode: 'question', linkId });
   }
 
-  componentWillLoad() {
-    console.log(this.flattenedItems); // TODO remove debug
-  }
-
   render() {
-    const { questionnaire, flattenedItems } = this;
+    const { questionnaire, flattenedItems } = store.questionnaire;
 
     return (
       <Card wide headline={questionnaire.title}>
