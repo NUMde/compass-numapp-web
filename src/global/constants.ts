@@ -25,6 +25,9 @@ export const APP_TRANSLATIONS = {
   en: TRANSLATIONS_EN,
 };
 
+export const FHIR_CODE_YES = 'LA33-6';
+export const FHIR_CODE_NO = 'LA32-8';
+
 /**
  * TODO: Get the following values from env or separate config file instead
  */
