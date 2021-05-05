@@ -4,6 +4,8 @@ export class NUMQuestionnaireQuestion {
   readonly parent: fhir.Questionnaire | fhir.QuestionnaireItem;
   readonly level: number;
 
+  linkId: string;
+  type: fhir.QuestionnaireItemType;
   enableWhen?: fhir.QuestionnaireItemEnableWhen[];
 
   constructor(
@@ -21,7 +23,7 @@ export class NUMQuestionnaireQuestion {
   }
 
   get items() {
-    return store.questionnaire.flattenedItems;
+    return store.questionnaire.questions;
   }
 
   get isEnabled() {
@@ -45,6 +47,27 @@ export class NUMQuestionnaireQuestion {
         condition.answerCoding?.code ??
         condition.answerQuantity?.code,
     }));
+  }
+
+  get index() {
+    return this.items.indexOf(this);
+  }
+
+  get next() {
+    return this.items
+      .slice(this.index + 1)
+      .reduce((next, item) => next ?? (item.isEnabled ? item : null), null);
+  }
+
+  get previous() {
+    return this.items
+      .slice(0, this.index)
+      .reverse()
+      .reduce((previous, item) => previous ?? (item.isEnabled ? item : null), null);
+  }
+
+  get progress() {
+    return Math.round((this.index / this.items.length) * 100);
   }
 
   get config() {
