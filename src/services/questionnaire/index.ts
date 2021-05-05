@@ -1,5 +1,5 @@
 import { API_BASE_URL } from 'global/constants';
-import { NUMQuestionnaireQuestion } from 'models/questionnaire-question';
+import { NUMQuestionnaireQuestion } from 'models/question';
 import { get } from 'services/utils/fetch-client';
 import { IQuestionnaireService, NUMQuestionnaire } from './types';
 

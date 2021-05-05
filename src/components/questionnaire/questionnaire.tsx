@@ -19,7 +19,7 @@ export class QuestionnaireComponent {
         await services.questionnaire.fetch(store.user.questionnaireId)
       );
     } catch (e) {
-      services.notifier.onError('questionnaire.error_fetch');
+      services.notifier.onError('questionnaire.error.fetch_failed');
     }
   }
 

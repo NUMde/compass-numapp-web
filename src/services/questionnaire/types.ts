@@ -1,4 +1,4 @@
-import { NUMQuestionnaireQuestion } from 'models/questionnaire-question';
+import { NUMQuestionnaireQuestion } from 'models/question';
 
 export interface NUMQuestionnaire extends fhir.Questionnaire {}
 export interface NUMQuestionnaireFlattenedItem extends fhir.QuestionnaireItem, NUMQuestionnaireQuestion {}

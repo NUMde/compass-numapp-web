@@ -25,7 +25,10 @@ export class NUMQuestionnaireQuestion {
   }
 
   get isEnabled() {
-    return true;
+    return this.dependencies.every(({ value, questionId }) => {
+      const answer = store.questionnaire.answers.get(questionId);
+      return answer?.includes(value) || false;
+    });
   }
 
   get dependencies() {
@@ -42,5 +45,18 @@ export class NUMQuestionnaireQuestion {
         condition.answerCoding?.code ??
         condition.answerQuantity?.code,
     }));
+  }
+
+  get config() {
+    // TODO
+    return {
+      min: 0,
+      max: Infinity,
+    };
+  }
+
+  get availableOptions() {
+    // TODO
+    return [];
   }
 }

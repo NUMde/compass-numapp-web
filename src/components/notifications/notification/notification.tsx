@@ -26,7 +26,7 @@ export class Notification {
     const snackBarType = snackBarTypeMap[this.severity];
 
     return (
-      <d4l-snack-bar type={snackBarType} data-test={`${this.severity}SnackBar`} data-test-context="snackBar">
+      <d4l-snack-bar type={snackBarType}>
         <div slot="snack-bar-icon">
           {(this.severity === 'error' || this.severity === 'warning') && (
             <d4l-icon-error-outline classes="icon--small icon--white" />
@@ -40,16 +40,12 @@ export class Notification {
         <div slot="snack-bar-controls">
           {this.action && (
             <d4l-button
-              data-test="actionButton"
-              data-test-context="snackBar"
               classes="button--text button--uppercase"
               text={i18n.t(this.actionKey)}
               handleClick={this.action}
             />
           )}
           <d4l-button
-            data-test="closeButton"
-            data-test-context="snackBar"
             classes="button--text button--uppercase"
             text={i18n.t('notification_bar.dismiss_button')}
             handleClick={this.close}
