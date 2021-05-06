@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, State } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import store from 'store';
@@ -20,6 +20,11 @@ import {
 export class QuestionnaireQuestionComponent {
   @State() question: NUMQuestionnaireFlattenedItem;
   @State() pendingAnswer: NUMQuestionnaireAnswer = [];
+
+  @Event() switchDisplayMode: EventEmitter;
+  switchDisplayModeHandler() {
+    this.switchDisplayMode.emit({ displayMode: 'index' });
+  }
 
   get storedAnswer() {
     return store.questionnaire.answers.get(this.question?.linkId) ?? [];
@@ -66,7 +71,12 @@ export class QuestionnaireQuestionComponent {
   }
 
   moveToPreviousQuestion() {
-    this.question = this.question.previous;
+    const { previous } = this.question;
+    if (!previous) {
+      return this.switchDisplayModeHandler();
+    }
+
+    this.question = previous;
     this.pendingAnswer = [].concat(this.storedAnswer);
   }
 
@@ -82,6 +92,8 @@ export class QuestionnaireQuestionComponent {
   componentWillLoad() {
     const { questions } = store.questionnaire;
     this.question = questions[0];
+    this.pendingAnswer = [].concat(this.storedAnswer);
+
     console.log(questions); // TODO remove debug
   }
 
@@ -134,7 +146,6 @@ export class QuestionnaireQuestionComponent {
           classes="button--block button--secondary u-margin-top--normal"
           text={store.i18n.t('questionnaire.back')}
           handleClick={() => this.moveToPreviousQuestion()}
-          disabled={!question.previous}
         />
       </Card>
     );

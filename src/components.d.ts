@@ -124,6 +124,7 @@ declare namespace LocalJSX {
     interface NumNotifications {
     }
     interface NumQuestionnaireQuestion {
+        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
     }
     interface NumQuestionnaireTree {
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
