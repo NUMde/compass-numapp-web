@@ -6,7 +6,7 @@ export const StringQuestion = ({ question, answer, onChange }: QuestionnaireQues
     <d4l-input
       name={question.linkId}
       required={question.required}
-      placeholder=""
+      label={null}
       onInput={(event: Event) => onChange(question.linkId, (event.target as HTMLInputElement).value)}
       value={answer[0] as string}
       type="text"

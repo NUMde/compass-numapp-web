@@ -19,22 +19,23 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
 
   return (
     <d4l-date-input
-      label={i18n.t('input.date.label')}
-      errorMessage={i18n.t('input.date.error.text')}
+      label={' '}
+      errorMessage={i18n.t('questionnaire.date_input.error')}
+      hiddenLabels
       fields={{
         day: {
-          label: `${i18n.t('input.date.day.label')}`,
-          placeholder: `${i18n.t('input.date.day.placeholder')}`,
+          label: null,
+          placeholder: i18n.t('questionnaire.date_input.day'),
           value: day,
         },
         month: {
-          label: `${i18n.t('input.date.month.label')}`,
-          placeholder: `${i18n.t('input.date.month.placeholder')}`,
+          label: null,
+          placeholder: i18n.t('questionnaire.date_input.month'),
           value: month,
         },
         year: {
-          label: `${i18n.t('input.date.year.label')}`,
-          placeholder: `${i18n.t('input.date.year.placeholder')}`,
+          label: null,
+          placeholder: i18n.t('questionnaire.date_input.year'),
           value: year,
         },
       }}

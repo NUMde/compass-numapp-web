@@ -12,7 +12,7 @@ export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQues
       name={question.linkId}
       inputmode="numeric"
       required={question.required}
-      placeholder=""
+      label={null}
       onInput={(event: Event) => onChange(question.linkId, (event.target as HTMLInputElement).value)}
       value={answer[0] as string}
       max={max}

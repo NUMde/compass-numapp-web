@@ -1,0 +1,7 @@
+.questionnaire-question__form {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  margin-top: var(--padding-medium);
+  min-height: 150px;
+}

@@ -54,6 +54,12 @@ export default {
   questionnaire: {
     back: 'Zurück',
     continue: 'Fortfahren',
+    date_input: {
+      error: 'Bitte überprüfen Sie das Eingabefeld.',
+      day: 'Tag',
+      month: 'Monat',
+      year: 'Jahr',
+    },
     group: 'Gruppe {{ number }}',
     question: 'Frage {{ number }}',
   },

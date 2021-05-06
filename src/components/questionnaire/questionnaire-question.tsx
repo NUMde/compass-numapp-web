@@ -99,7 +99,16 @@ export class QuestionnaireQuestionComponent {
           </p>
         ))}
 
-        <pre>
+        <pre
+          style={{
+            position: 'absolute',
+            transform: 'translateX(-100%)',
+            marginLeft: '-4rem',
+            textAlign: 'left',
+          }}
+        >
+          <strong>DEBUG</strong>
+          <br />
           Pending answer: {JSON.stringify(pendingAnswer)}
           <br />
           Stored answer: {JSON.stringify(this.storedAnswer)}
@@ -111,11 +120,11 @@ export class QuestionnaireQuestionComponent {
           Progress: {progress}
         </pre>
 
-        <form onSubmit={(event) => handleSubmit(event)}>
+        <form onSubmit={(event) => handleSubmit(event)} class="questionnaire-question__form">
           <QuestionInput question={question} answer={pendingAnswer} onChange={handleChange} />
           <d4l-button
             type="submit"
-            classes="button--block u-margin-vertical--normal"
+            classes="button--block u-margin-top--normal"
             text={store.i18n.t('questionnaire.continue')}
             disabled={!this.canProceed}
           />
