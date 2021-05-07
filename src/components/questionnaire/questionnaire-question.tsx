@@ -38,7 +38,8 @@ export class QuestionnaireQuestionComponent {
     return (
       !this.question?.required ||
       this.question?.type === 'display' ||
-      this.pendingAnswer.filter((value) => typeof value === 'number' || !!value).length
+      this.pendingAnswer.filter((value) => typeof value === 'number' || typeof value === 'boolean' || !!value)
+        .length
     );
   }
 
@@ -88,7 +89,9 @@ export class QuestionnaireQuestionComponent {
 
   handleChange = (linkId: string, value: NUMQuestionnaireAnswer) => {
     if (linkId === this.question.linkId) {
-      this.pendingAnswer = [].concat(value).filter((value) => typeof value === 'number' || !!value);
+      this.pendingAnswer = []
+        .concat(value)
+        .filter((value) => typeof value === 'number' || typeof value === 'boolean' || !!value);
     }
   };
 
