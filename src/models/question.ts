@@ -27,14 +27,19 @@ export class NUMQuestionnaireQuestion {
     return store.questionnaire.questions;
   }
 
+  getItem(linkId: string) {
+    return this.items.find((item) => item.linkId === linkId);
+  }
+
   get isEnabled() {
     return this.dependencies.every(({ value, questionId }) => {
       const answer = store.questionnaire.answers.get(questionId);
-      return answer?.includes(value) || false;
+      return (this.getItem(questionId)?.isEnabled && answer?.includes(value)) || false;
     });
   }
 
   get dependencies() {
+    // TODO support operators and enableBehavior
     return (this.enableWhen ?? []).map((condition) => ({
       questionId: condition.question,
       value:
