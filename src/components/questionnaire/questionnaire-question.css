@@ -5,3 +5,7 @@
   margin-top: var(--padding-medium);
   min-height: 150px;
 }
+
+.questionnaire-question__continue {
+  margin-top: auto;
+}

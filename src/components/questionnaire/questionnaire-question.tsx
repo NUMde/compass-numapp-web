@@ -35,7 +35,11 @@ export class QuestionnaireQuestionComponent {
   }
 
   get canProceed() {
-    return !this.question?.required || this.pendingAnswer.filter(Boolean).length;
+    return (
+      !this.question?.required ||
+      this.question?.type === 'display' ||
+      this.pendingAnswer.filter((value) => typeof value === 'number' || !!value).length
+    );
   }
 
   get progress() {
@@ -59,6 +63,8 @@ export class QuestionnaireQuestionComponent {
         return SingleChoiceQuestion;
       case 'open-choice':
         return MultipleChoiceQuestion;
+      case 'display':
+        return () => false;
       default:
         return UnsupportedQuestion;
     }
@@ -81,7 +87,9 @@ export class QuestionnaireQuestionComponent {
   }
 
   handleChange = (linkId: string, value: NUMQuestionnaireAnswer) => {
-    linkId === this.question.linkId && (this.pendingAnswer = [].concat(value).filter(Boolean));
+    if (linkId === this.question.linkId) {
+      this.pendingAnswer = [].concat(value).filter((value) => typeof value === 'number' || !!value);
+    }
   };
 
   handleSubmit = (event: Event) => {
@@ -132,10 +140,15 @@ export class QuestionnaireQuestionComponent {
           Progress: {progress}
         </pre>
 
-        <form onSubmit={(event) => handleSubmit(event)} class="questionnaire-question__form">
+        <form
+          onSubmit={(event) => handleSubmit(event)}
+          class="questionnaire-question__form"
+          autoComplete="off"
+        >
           <QuestionInput question={question} answer={pendingAnswer} onChange={handleChange} />
           <d4l-button
             type="submit"
+            class="questionnaire-question__continue"
             classes="button--block u-margin-top--normal"
             text={store.i18n.t('questionnaire.continue')}
             disabled={!this.canProceed}

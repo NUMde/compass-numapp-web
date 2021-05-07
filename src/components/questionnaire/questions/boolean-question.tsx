@@ -5,6 +5,10 @@ import { QuestionnaireQuestionComponentProps } from './types';
 export const BooleanQuestion = ({ question, answer, onChange }: QuestionnaireQuestionComponentProps) => {
   const checked = answer[0] === FHIR_CODE_YES;
 
+  if (!answer[0]) {
+    onChange(question.linkId, FHIR_CODE_NO);
+  }
+
   return (
     <d4l-checkbox
       label={question.text}
