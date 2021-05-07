@@ -8,35 +8,33 @@ const getTimelessDate = (date: Date): Date => {
 
 export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuestionComponentProps) => {
   const { i18n } = store;
-
-  const value = answer[0] as string;
-  let year: string, month: string, day: string;
-  const delimiter: string = value && value.includes('.') ? '.' : '-';
-  [year, month, day] = value ? value.split(delimiter) : [null, null, null];
+  const [year, month, day] = String(answer[0])
+    .split(/[^0-9]/)
+    .filter(Boolean);
 
   const minDate = question.config?.min ? getTimelessDate(new Date(question.config.min)) : null;
   const maxDate = question.config?.max ? getTimelessDate(new Date(question.config.max)) : null;
 
   return (
     <d4l-date-input
-      label={' '}
+      label=" "
       errorMessage={i18n.t('questionnaire.date_input.error')}
       hiddenLabels
       fields={{
         day: {
           label: null,
           placeholder: i18n.t('questionnaire.date_input.day'),
-          value: day,
+          value: day ?? null,
         },
         month: {
           label: null,
           placeholder: i18n.t('questionnaire.date_input.month'),
-          value: month,
+          value: month ?? null,
         },
         year: {
           label: null,
           placeholder: i18n.t('questionnaire.date_input.year'),
-          value: year,
+          value: year ?? null,
         },
       }}
       futureAllowed={!!maxDate}
