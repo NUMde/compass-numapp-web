@@ -18,6 +18,9 @@ import {
   styleUrl: 'questionnaire-question.css',
 })
 export class QuestionnaireQuestionComponent {
+  #formRef?: HTMLFormElement;
+  #focusFirstInputTimeout?: number;
+
   @State() question: NUMQuestionnaireFlattenedItem;
   @State() pendingAnswer: NUMQuestionnaireAnswer = [];
 
@@ -75,6 +78,7 @@ export class QuestionnaireQuestionComponent {
     store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
     this.question = this.question.next;
     this.pendingAnswer = [].concat(this.storedAnswer);
+    requestAnimationFrame(() => this.focusFirstInput());
   }
 
   moveToPreviousQuestion() {
@@ -85,6 +89,7 @@ export class QuestionnaireQuestionComponent {
 
     this.question = previous;
     this.pendingAnswer = [].concat(this.storedAnswer);
+    requestAnimationFrame(() => this.focusFirstInput());
   }
 
   handleChange = (linkId: string, value: NUMQuestionnaireAnswer) => {
@@ -100,12 +105,31 @@ export class QuestionnaireQuestionComponent {
     this.canProceed && this.moveToNextQuestion();
   };
 
+  focusFirstInput() {
+    clearTimeout(this.#focusFirstInputTimeout);
+    const inputEl = this.#formRef?.querySelector('input');
+    if (!inputEl) {
+      this.#focusFirstInputTimeout = window.setTimeout(() => this.focusFirstInput(), 100);
+      return;
+    }
+
+    this.#formRef?.querySelector('input')?.focus();
+  }
+
   componentWillLoad() {
     const { questions } = store.questionnaire;
     this.question = questions[0];
     this.pendingAnswer = [].concat(this.storedAnswer);
 
     console.log(questions); // TODO remove debug
+  }
+
+  componentDidLoad() {
+    this.focusFirstInput();
+  }
+
+  disconnectedCallback() {
+    clearTimeout(this.#focusFirstInputTimeout);
   }
 
   render() {
@@ -140,10 +164,11 @@ export class QuestionnaireQuestionComponent {
           <br />
           Index: {question.index}
           <br />
-          Progress: {progress}
+          Progress: {progress}%
         </pre>
 
         <form
+          ref={(el) => (this.#formRef = el)}
           onSubmit={(event) => handleSubmit(event)}
           class="questionnaire-question__form"
           autoComplete="off"
