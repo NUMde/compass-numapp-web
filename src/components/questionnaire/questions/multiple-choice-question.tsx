@@ -7,24 +7,22 @@ export const MultipleChoiceQuestion = ({
   answer,
   onChange,
 }: QuestionnaireQuestionComponentProps) => {
-  const value = answer as string[];
-
   return (
     <Fragment>
       {question.availableOptions.filter(Boolean).map((option, index) => (
-        <p class="questionnaire-choice" key={`${question.linkId}-option${index}`}>
+        <p class="u-margin-bottom--small" key={`${question.linkId}-option${index}`}>
           <d4l-checkbox
             checkboxId={`${question.linkId}-option${index}`}
             classes="o-checkbox--primary"
             name={question.linkId}
-            value={option.value}
-            checked={value.includes(option.value)}
-            label={option.label}
+            value={String(option.value)}
+            checked={answer.includes(option.value)}
+            label={String(option.label)}
             handleChange={(event: Event) => {
               const update = (event.target as HTMLInputElement).value;
-              const newSelection = value.includes(update)
-                ? value.filter((el) => el !== update)
-                : [...value, update];
+              const newSelection = answer.includes(update)
+                ? answer.filter((el) => el !== update)
+                : [...answer, update];
               onChange(question.linkId, newSelection);
             }}
           />

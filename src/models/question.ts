@@ -7,6 +7,7 @@ export class NUMQuestionnaireQuestion {
   linkId: string;
   type: fhir.QuestionnaireItemType;
   enableWhen?: fhir.QuestionnaireItemEnableWhen[];
+  answerOption?: fhir.QuestionnaireResponseItemAnswer[];
 
   constructor(
     item: fhir.QuestionnaireItem,
@@ -79,7 +80,19 @@ export class NUMQuestionnaireQuestion {
   }
 
   get availableOptions() {
-    // TODO
-    return [];
+    return this.answerOption
+      ?.map(
+        (option) =>
+          option.valueBoolean ??
+          option.valueDecimal ??
+          option.valueInteger ??
+          option.valueDate ??
+          option.valueDateTime ??
+          option.valueTime ??
+          option.valueString ??
+          option.valueCoding?.code ??
+          option.valueQuantity?.code
+      )
+      .map((value) => ({ value, label: value }));
   }
 }
