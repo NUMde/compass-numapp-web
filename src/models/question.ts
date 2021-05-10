@@ -9,6 +9,7 @@ export class NUMQuestionnaireQuestion {
   type: fhir.QuestionnaireItemType;
 
   answerOption?: fhir.QuestionnaireResponseItemAnswer[];
+  enableBehavior?: 'all' | 'any';
   enableWhen?: fhir.QuestionnaireItemEnableWhen[];
   extension?: fhir.Extension[];
   item?: fhir.QuestionnaireItem[];
@@ -37,14 +38,14 @@ export class NUMQuestionnaireQuestion {
   }
 
   get isEnabled() {
-    return this.dependencies.every(({ value, questionId }) => {
+    const fn = this.enableBehavior === 'any' ? 'some' : 'every';
+    return this.dependencies[fn](({ value, questionId }) => {
       const answer = store.questionnaire.answers.get(questionId);
       return (this.getItem(questionId)?.isEnabled && answer?.includes(value)) || false;
     });
   }
 
   get dependencies() {
-    // TODO support operators and enableBehavior
     return (this.enableWhen ?? []).map((condition) => ({
       questionId: condition.question,
       value:
