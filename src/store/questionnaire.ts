@@ -1,10 +1,10 @@
 import { createStore } from '@stencil/store';
-import { Services } from 'services';
 import {
   NUMQuestionnaireFlattenedItem,
   NUMQuestionnaire,
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
+import { extractQuestions, flattenNestedItems } from 'services/utils/questionnaire';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
@@ -12,7 +12,7 @@ interface StateType {
   answers: Map<string, NUMQuestionnaireAnswer>;
 }
 
-const storeBuilder = ({ questionnaire: questionnaireService }: Services) => {
+const storeBuilder = () => {
   const store = createStore<StateType>({
     questionnaire: null,
     flattenedItems: [],
@@ -26,7 +26,7 @@ const storeBuilder = ({ questionnaire: questionnaireService }: Services) => {
 
     populateFromRequestResponse(response: NUMQuestionnaire) {
       store.set('questionnaire', response);
-      store.set('flattenedItems', questionnaireService.flattenNestedItems(response.item ?? [], response));
+      store.set('flattenedItems', flattenNestedItems(response.item ?? [], response));
     }
 
     get isPopulated() {
@@ -42,7 +42,7 @@ const storeBuilder = ({ questionnaire: questionnaireService }: Services) => {
     }
 
     get questions() {
-      return questionnaireService.extractQuestions(this.flattenedItems);
+      return extractQuestions(this.flattenedItems);
     }
 
     get answers() {

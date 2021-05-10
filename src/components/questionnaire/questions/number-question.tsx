@@ -2,6 +2,7 @@ import { h } from '@stencil/core';
 import { QuestionnaireQuestionComponentProps } from './types';
 
 export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQuestionComponentProps) => {
+  const { minValue, maxValue } = question.config;
   return (
     <d4l-input
       name={question.linkId}
@@ -13,8 +14,8 @@ export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQues
         onChange(question.linkId, isNaN(value) ? null : value);
       }}
       value={String(answer[0])}
-      max={question.config?.max}
-      min={question.config?.min}
+      max={maxValue}
+      min={minValue}
       step={question.type === 'integer' ? 1 : 'any'}
       type="number"
     />

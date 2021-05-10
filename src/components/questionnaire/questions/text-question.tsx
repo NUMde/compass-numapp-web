@@ -9,6 +9,7 @@ export const TextQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
       onChange={(event: any) => onChange(question.linkId, event.target.value)}
       value={answer[0] as string}
       required={question.required}
+      maxlength={String(question.config.maxLength ?? '')}
     />
   );
 };

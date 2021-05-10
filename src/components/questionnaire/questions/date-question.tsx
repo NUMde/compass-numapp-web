@@ -12,8 +12,9 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
     .split(/[^0-9]/)
     .filter(Boolean);
 
-  const minDate = question.config?.min ? getTimelessDate(new Date(question.config.min)) : null;
-  const maxDate = question.config?.max ? getTimelessDate(new Date(question.config.max)) : null;
+  const { minValue, maxValue } = question.config;
+  const minDate = minValue ? getTimelessDate(new Date(minValue)) : null;
+  const maxDate = maxValue ? getTimelessDate(new Date(maxValue)) : null;
 
   return (
     <d4l-date-input

@@ -1,3 +1,4 @@
+import { parseExtensions } from 'services/utils/questionnaire';
 import store from 'store';
 
 export class NUMQuestionnaireQuestion {
@@ -6,8 +7,12 @@ export class NUMQuestionnaireQuestion {
 
   linkId: string;
   type: fhir.QuestionnaireItemType;
-  enableWhen?: fhir.QuestionnaireItemEnableWhen[];
+
   answerOption?: fhir.QuestionnaireResponseItemAnswer[];
+  enableWhen?: fhir.QuestionnaireItemEnableWhen[];
+  extension?: fhir.Extension[];
+  item?: fhir.QuestionnaireItem[];
+  maxLength?: number;
 
   constructor(
     item: fhir.QuestionnaireItem,
@@ -77,10 +82,16 @@ export class NUMQuestionnaireQuestion {
   }
 
   get config() {
-    // TODO
+    const { minValue, maxValue, minLength, 'questionnaire-itemControl': itemControl } = parseExtensions(
+      this.extension ?? []
+    );
+
     return {
-      min: 0,
-      max: Infinity,
+      minValue,
+      maxValue,
+      minLength,
+      maxLength: this.maxLength,
+      itemControl,
     };
   }
 

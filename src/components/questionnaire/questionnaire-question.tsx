@@ -76,8 +76,16 @@ export class QuestionnaireQuestionComponent {
 
   moveToNextQuestion() {
     store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
+
+    if (!this.question.next) {
+      alert('TODO questionnaire is done - proceed'); // TODO proceed in the flow
+      console.log('Answers:', store.questionnaire.answers); // TODO remove debug
+      return;
+    }
+
     this.question = this.question.next;
     this.pendingAnswer = [].concat(this.storedAnswer);
+
     requestAnimationFrame(() => this.focusFirstInput());
   }
 
@@ -121,7 +129,7 @@ export class QuestionnaireQuestionComponent {
     this.question = questions[0];
     this.pendingAnswer = [].concat(this.storedAnswer);
 
-    console.log(questions); // TODO remove debug
+    console.log('Questions:', questions); // TODO remove debug
   }
 
   componentDidLoad() {
@@ -139,7 +147,7 @@ export class QuestionnaireQuestionComponent {
     }
 
     return (
-      <Card wide headline={question.text}>
+      <Card headline={question.text}>
         {this.description.map((item) => (
           <p class="u-infotext" key={item.linkId}>
             {item.text}
@@ -164,7 +172,8 @@ export class QuestionnaireQuestionComponent {
           <br />
           Index: {question.index}
           <br />
-          Progress: {progress}%
+          Progress: {progress}%<br />
+          Config: {JSON.stringify({ ...question.config, required: question.required, type: question.type })}
         </pre>
 
         <form
