@@ -5,7 +5,13 @@
   --max-width-desktop-wide: 600px;
 
   --color-white: #fff;
+
   --color-primary: #1c2732;
+  --color-primary-light: #343e47;
+  --color-primary-lighter: #676e75;
+  --color-primary-lightest: #aaacaf;
+  --color-primary-extra-lightest: #d1d1d1;
+
   --color-secondary: #eb576a;
   --color-secondary-light: #e27b89;
 
@@ -14,9 +20,14 @@
   --color-border-button-primary-active: var(--color-secondary-light);
   --color-background-button-primary-active: var(--color-secondary-light);
   --color-border-button-secondary-hover: var(--color-secondary);
+  --color-background-button-secondary-hover: var(--color-white);
   --color-text-button-secondary-hover: var(--color-secondary);
+  --color-background-button-secondary-active: var(--color-white);
   --color-border-button-secondary-active: var(--color-secondary-light);
   --color-text-button-secondary-active: var(--color-secondary-light);
+  --color-border-button-secondary-disabled: var(--color-primary-lightest);
+  --color-background-button-secondary-disabled: var(--color-white);
+  --color-text-button-secondary-disabled: var(--color-primary-lightest);
 
   --padding-small: var(--space-xs);
   --padding-normal: var(--space-s);

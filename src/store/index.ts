@@ -11,7 +11,7 @@ const store = {
   notifications: buildNotificationStore(services),
   i18n: buildI18nStore(services),
   user: buildUserStore(),
-  questionnaire: buildQuestionnaireStore(services),
+  questionnaire: buildQuestionnaireStore(),
 };
 
 export type Store = typeof store;

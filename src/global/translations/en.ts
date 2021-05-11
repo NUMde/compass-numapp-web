@@ -51,6 +51,12 @@ export default {
   questionnaire: {
     back: 'Back',
     continue: 'Continue',
+    date_input: {
+      error: 'Please verify your input.',
+      day: 'Day',
+      month: 'Month',
+      year: 'Year',
+    },
     group: 'Group {{ number }}',
     question: 'Question {{ number }}',
   },
