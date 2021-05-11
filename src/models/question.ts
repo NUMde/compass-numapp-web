@@ -92,7 +92,11 @@ export class NUMQuestionnaireQuestion {
       maxValue,
       minLength,
       maxLength: this.maxLength,
-      itemControl,
+      // itemControl, // TODO re-enable
+      itemControl:
+        // @ts-ignore
+        this.extension?.find(({ url }) => url.includes('itemControl'))?.valueCodeableConcept?.CodeableConcept
+          ?.coding?.[0]?.code ?? itemControl, // TODO remove this workaround once example questionnaire is fixed
     };
   }
 
@@ -111,5 +115,10 @@ export class NUMQuestionnaireQuestion {
           option.valueQuantity?.code
       )
       .map((value) => ({ value, label: value }));
+  }
+
+  get isSliderQuestion() {
+    const { itemControl, minValue, maxValue } = this.config;
+    return itemControl === 'slider' && typeof minValue === 'number' && typeof maxValue === 'number';
   }
 }
