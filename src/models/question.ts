@@ -1,4 +1,4 @@
-import { parseExtensions } from 'services/utils/questionnaire';
+import { extractValue, parseExtensions } from 'services/utils/questionnaire';
 import store from 'store';
 
 export class NUMQuestionnaireQuestion {
@@ -83,33 +83,34 @@ export class NUMQuestionnaireQuestion {
   }
 
   get config() {
-    const { minValue, maxValue, minLength, 'questionnaire-itemControl': itemControl } = parseExtensions(
-      this.extension ?? []
-    );
+    const {
+      minValue,
+      maxValue,
+      minLength,
+      'questionnaire-itemControl': itemControl,
+      'questionnaire-sliderStepValue': sliderStepValue,
+    } = parseExtensions(this.extension ?? []);
 
     return {
       minValue,
       maxValue,
       minLength,
       maxLength: this.maxLength,
-      itemControl,
+      sliderStepValue,
+      // itemControl, // TODO re-enable
+      itemControl:
+        // @ts-ignore
+        this.extension?.find(({ url }) => url.includes('itemControl'))?.valueCodeableConcept?.CodeableConcept
+          ?.coding?.[0]?.code ?? itemControl, // TODO remove this workaround once example questionnaire is fixed
     };
   }
 
   get availableOptions() {
-    return this.answerOption
-      ?.map(
-        (option) =>
-          option.valueBoolean ??
-          option.valueDecimal ??
-          option.valueInteger ??
-          option.valueDate ??
-          option.valueDateTime ??
-          option.valueTime ??
-          option.valueString ??
-          option.valueCoding?.code ??
-          option.valueQuantity?.code
-      )
-      .map((value) => ({ value, label: value }));
+    return this.answerOption?.map((option) => extractValue(option)).map((value) => ({ value, label: value }));
+  }
+
+  get isSliderQuestion() {
+    const { itemControl, minValue, maxValue } = this.config;
+    return itemControl === 'slider' && typeof minValue === 'number' && typeof maxValue === 'number';
   }
 }

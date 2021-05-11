@@ -7,6 +7,7 @@ import {
   DateQuestion,
   MultipleChoiceQuestion,
   NumberQuestion,
+  NumberSliderQuestion,
   SingleChoiceQuestion,
   StringQuestion,
   TextQuestion,
@@ -56,7 +57,7 @@ export class QuestionnaireQuestionComponent {
         return BooleanQuestion;
       case 'decimal':
       case 'integer':
-        return NumberQuestion;
+        return this.question?.isSliderQuestion ? NumberSliderQuestion : NumberQuestion;
       case 'date':
         return DateQuestion;
       case 'string':
@@ -147,7 +148,7 @@ export class QuestionnaireQuestionComponent {
     }
 
     return (
-      <Card headline={question.text}>
+      <Card headline={`${question.linkId} ${question.text}`}>
         {this.description.map((item) => (
           <p class="u-infotext" key={item.linkId}>
             {item.text}

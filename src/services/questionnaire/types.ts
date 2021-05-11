@@ -9,6 +9,7 @@ export interface NumQuestionnaireExtensionConfig {
   minLength?: number;
   maxLength?: number;
   'questionnaire-itemControl'?: string;
+  'questionnaire-sliderStepValue'?: number;
 }
 
 export interface IQuestionnaireService {
