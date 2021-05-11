@@ -2,7 +2,7 @@ import { h } from '@stencil/core';
 import { QuestionnaireQuestionComponentProps } from './types';
 
 export const NumberSliderQuestion = ({ question, answer, onChange }: QuestionnaireQuestionComponentProps) => {
-  const { minValue, maxValue } = question.config;
+  const { minValue, maxValue, sliderStepValue = 1 } = question.config;
   const value = parseFloat(answer[0] as string);
 
   return (
@@ -10,7 +10,7 @@ export const NumberSliderQuestion = ({ question, answer, onChange }: Questionnai
       min={minValue}
       max={maxValue}
       value={isNaN(value) ? null : value}
-      step={1}
+      step={sliderStepValue}
       scale
       handleChange={({ target }) => onChange(question.linkId, target.value)}
     />

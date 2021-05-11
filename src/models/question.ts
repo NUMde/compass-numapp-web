@@ -83,15 +83,20 @@ export class NUMQuestionnaireQuestion {
   }
 
   get config() {
-    const { minValue, maxValue, minLength, 'questionnaire-itemControl': itemControl } = parseExtensions(
-      this.extension ?? []
-    );
+    const {
+      minValue,
+      maxValue,
+      minLength,
+      'questionnaire-itemControl': itemControl,
+      'questionnaire-sliderStepValue': sliderStepValue,
+    } = parseExtensions(this.extension ?? []);
 
     return {
       minValue,
       maxValue,
       minLength,
       maxLength: this.maxLength,
+      sliderStepValue,
       // itemControl, // TODO re-enable
       itemControl:
         // @ts-ignore
