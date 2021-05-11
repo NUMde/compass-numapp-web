@@ -23,17 +23,17 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
       hiddenLabels
       fields={{
         day: {
-          label: null,
+          label: i18n.t('questionnaire.date_input.day'),
           placeholder: i18n.t('questionnaire.date_input.day'),
           value: day ?? null,
         },
         month: {
-          label: null,
+          label: i18n.t('questionnaire.date_input.month'),
           placeholder: i18n.t('questionnaire.date_input.month'),
           value: month ?? null,
         },
         year: {
-          label: null,
+          label: i18n.t('questionnaire.date_input.year'),
           placeholder: i18n.t('questionnaire.date_input.year'),
           value: year ?? null,
         },

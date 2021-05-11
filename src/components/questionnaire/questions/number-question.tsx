@@ -8,7 +8,8 @@ export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQues
       name={question.linkId}
       inputmode="numeric"
       required={question.required}
-      label={null}
+      label={question.text}
+      hiddenlabel
       onInput={(event: Event) => {
         const value = parseFloat((event.target as HTMLInputElement).value);
         onChange(question.linkId, isNaN(value) ? null : value);
