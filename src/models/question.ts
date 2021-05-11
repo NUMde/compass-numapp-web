@@ -1,4 +1,4 @@
-import { parseExtensions } from 'services/utils/questionnaire';
+import { extractValue, parseExtensions } from 'services/utils/questionnaire';
 import store from 'store';
 
 export class NUMQuestionnaireQuestion {
@@ -101,20 +101,7 @@ export class NUMQuestionnaireQuestion {
   }
 
   get availableOptions() {
-    return this.answerOption
-      ?.map(
-        (option) =>
-          option.valueBoolean ??
-          option.valueDecimal ??
-          option.valueInteger ??
-          option.valueDate ??
-          option.valueDateTime ??
-          option.valueTime ??
-          option.valueString ??
-          option.valueCoding?.code ??
-          option.valueQuantity?.code
-      )
-      .map((value) => ({ value, label: value }));
+    return this.answerOption?.map((option) => extractValue(option)).map((value) => ({ value, label: value }));
   }
 
   get isSliderQuestion() {
