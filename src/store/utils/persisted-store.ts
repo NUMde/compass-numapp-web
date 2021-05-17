@@ -27,8 +27,7 @@ export default function createPersistedStore<T>(
   });
 
   const store = createStore<T>({ ...initialData, ...persistedData });
-
-  store.use({
+  const actions = {
     set(key: any, value: any) {
       try {
         persistor.set(namespacedKey(key), JSON.stringify(value));
@@ -37,9 +36,11 @@ export default function createPersistedStore<T>(
       }
     },
     reset() {
-      Object.keys(initialData).forEach((key) => store.set(key as keyof T & string, initialData[key]));
+      Object.keys(initialData).forEach((key) => actions.set(key, initialData[key]));
     },
-  });
+  };
+
+  store.use(actions);
 
   return store;
 }
