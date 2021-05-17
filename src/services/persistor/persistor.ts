@@ -17,13 +17,20 @@ export default class PersistorService implements IPersistorService {
   }
 
   set(key: string, value: string): void {
-    if (value === 'null') {
+    if (value === null || value === 'null') {
       delete this.cachedData[key];
       this.removeStoresValue(key);
     } else {
       this.cachedData[key] = value;
       this.setStoresValue(key, value);
     }
+  }
+
+  getKeys(): string[] {
+    try {
+      return Object.keys(this.storage);
+    } catch (e) {}
+    return [];
   }
 
   private getStoresValue(key: string): string | undefined {

@@ -1,4 +1,6 @@
-import { createStore } from '@stencil/store';
+import { createStore, ObservableMap } from '@stencil/store';
+import { Services } from 'services';
+import createPersistedStore from './utils/persisted-store';
 import {
   NUMQuestionnaireFlattenedItem,
   NUMQuestionnaire,
@@ -9,18 +11,23 @@ import { extractQuestions, flattenNestedItems } from 'services/utils/questionnai
 interface StateType {
   questionnaire: NUMQuestionnaire;
   flattenedItems: NUMQuestionnaireFlattenedItem[];
-  answers: Map<string, NUMQuestionnaireAnswer>;
+  answers: ObservableMap<{ [key: string]: NUMQuestionnaireAnswer }>;
 }
 
-const storeBuilder = () => {
+const storeBuilder = ({ persistor }: Services) => {
   const store = createStore<StateType>({
     questionnaire: null,
     flattenedItems: [],
-    answers: new Map<string, NUMQuestionnaireAnswer>(),
+    answers: createPersistedStore<{ [key: string]: NUMQuestionnaireAnswer }>(
+      persistor,
+      'questionnaire::answers',
+      {}
+    ),
   });
 
   class Actions {
     reset() {
+      this.answers.reset();
       store.reset();
     }
 
