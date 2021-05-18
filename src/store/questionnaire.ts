@@ -53,6 +53,8 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     get answers() {
+      // @ts-ignore
+      window.answers = store.get('answers');
       return store.get('answers');
     }
   }
