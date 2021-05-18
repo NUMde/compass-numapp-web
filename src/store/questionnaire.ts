@@ -6,12 +6,17 @@ import {
   NUMQuestionnaire,
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
-import { extractQuestions, flattenNestedItems } from 'services/utils/questionnaire';
+import { extractQuestions, flattenNestedItems, getHash } from 'services/utils/questionnaire';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
   flattenedItems: NUMQuestionnaireFlattenedItem[];
   answers: ObservableMap<{ [key: string]: NUMQuestionnaireAnswer }>;
+  persistedMeta: ObservableMap<PersistedMetaStateType>;
+}
+
+interface PersistedMetaStateType {
+  hash: string;
 }
 
 const storeBuilder = ({ persistor }: Services) => {
@@ -23,6 +28,7 @@ const storeBuilder = ({ persistor }: Services) => {
       'questionnaire::answers',
       {}
     ),
+    persistedMeta: createPersistedStore<PersistedMetaStateType>(persistor, 'questionnaire', { hash: null }),
   });
 
   class Actions {
@@ -34,6 +40,11 @@ const storeBuilder = ({ persistor }: Services) => {
     populateFromRequestResponse(response: NUMQuestionnaire) {
       store.set('questionnaire', response);
       store.set('flattenedItems', flattenNestedItems(response.item ?? [], response));
+
+      const { hash } = this;
+      const persistedMeta = store.get('persistedMeta');
+      persistedMeta.get('hash') !== hash && this.answers.reset();
+      persistedMeta.set('hash', hash);
     }
 
     get isPopulated() {
@@ -53,9 +64,15 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     get answers() {
-      // @ts-ignore
-      window.answers = store.get('answers');
       return store.get('answers');
+    }
+
+    get hash() {
+      return getHash(JSON.stringify(this.questionnaire));
+    }
+
+    get persistedMeta() {
+      return store.get('persistedMeta');
     }
   }
 

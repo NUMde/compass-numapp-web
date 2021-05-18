@@ -45,3 +45,12 @@ export const parseExtensions = (extensions: fhir.Extension[]): NumQuestionnaireE
     {}
   );
 };
+
+export const getHash = (data: string) => {
+  return (
+    data.split('').reduce((hash, character: any) => {
+      hash ^= character;
+      return hash + (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
+    }, 0x811c9dc5) >>> 0
+  ).toString(16);
+};
