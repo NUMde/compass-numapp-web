@@ -7,9 +7,11 @@ import services from 'services';
 })
 export class QuestionnaireComponent {
   @State() displayMode: 'index' | 'question' = 'index';
+  @State() linkId?: string;
   @Listen('switchDisplayMode')
   onSwitchDisplayMode({ detail }: CustomEvent) {
-    const { displayMode } = detail;
+    const { displayMode, linkId } = detail;
+    this.linkId = linkId;
     this.displayMode = displayMode;
   }
 
@@ -28,6 +30,10 @@ export class QuestionnaireComponent {
       return false;
     }
 
-    return this.displayMode === 'index' ? <num-questionnaire-tree /> : <num-questionnaire-question />;
+    return this.displayMode === 'index' ? (
+      <num-questionnaire-tree />
+    ) : (
+      <num-questionnaire-question linkId={this.linkId} />
+    );
   }
 }

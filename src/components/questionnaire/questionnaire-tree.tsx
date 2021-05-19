@@ -20,12 +20,16 @@ export class QuestionnaireTreeComponent {
       <Card wide headline={questionnaire.title}>
         <p class="u-infotext">{questionnaire.purpose ?? store.i18n.t('questionnaire.infotext')}</p>
         <ol class="questionnaire-tree">
-          {flattenedItems.map(({ linkId, text, type, level }, index) => {
+          {flattenedItems.map(({ linkId, text, type, level, isAnswerable, firstChildQuestion }, index) => {
             return (
               <li
-                class="questionnaire-tree_item"
+                class={`questionnaire-tree_item ${isAnswerable ? 'questionnaire-tree_item--clickable' : ''}`}
                 key={linkId ?? index}
                 style={{ paddingLeft: `calc(1rem * (${level + 1}))` }}
+                onClick={() =>
+                  isAnswerable &&
+                  this.switchDisplayModeHandler(firstChildQuestion ? firstChildQuestion.linkId : linkId)
+                }
               >
                 <strong class="questionnaire-tree__title">
                   {store.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
