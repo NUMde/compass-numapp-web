@@ -7,8 +7,8 @@ export const TextQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
       textarea-id="questionnaire_textarea"
       name={question.linkId}
       label={question.text}
-      onChange={(event: any) => onChange(question.linkId, event.target.value)}
-      value={answer[0] as string}
+      onChange={(event: any) => onChange(question.linkId, event.target.value.trim())}
+      value={String(answer[0] ?? '').trim()}
       required={question.required}
       maxlength={String(question.config.maxLength ?? '')}
     />

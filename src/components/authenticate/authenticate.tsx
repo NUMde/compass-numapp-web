@@ -1,7 +1,7 @@
 import { Component, h, State } from '@stencil/core';
 import jsQR from 'jsqr';
 import { Card } from 'components/card/card';
-import { APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID, SUPPORT_QR_CODE } from 'global/constants';
+import { APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID, ROUTES, SUPPORT_QR_CODE } from 'global/constants';
 import services from 'services';
 import store from 'store';
 import { ResponseError } from 'services/utils/response-error';
@@ -34,7 +34,7 @@ export class Authenticate {
   }
 
   async authenticate() {
-    const userId = this.#userId;
+    const userId = this.#userId.replace(/[^\d\w-+*.#]/g, '');
 
     this.isAuthenticating = true;
 
@@ -152,6 +152,10 @@ export class Authenticate {
   }
 
   render() {
+    if (store.auth.isAuthenticated) {
+      return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
+    }
+
     return (
       <Card headline={store.i18n.t('authenticate.headline')}>
         <p class="u-infotext">{store.i18n.t('authenticate.infotext')}</p>

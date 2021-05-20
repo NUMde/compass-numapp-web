@@ -11,10 +11,10 @@ export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQues
       label={question.text}
       hiddenlabel
       onInput={(event: Event) => {
-        const value = parseFloat((event.target as HTMLInputElement).value);
+        const value = parseFloat((event.target as HTMLInputElement).value.trim());
         onChange(question.linkId, isNaN(value) ? null : value);
       }}
-      value={String(answer[0])}
+      value={String(answer[0] ?? '').trim()}
       max={maxValue}
       min={minValue}
       step={question.type === 'integer' ? 1 : 'any'}

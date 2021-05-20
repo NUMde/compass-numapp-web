@@ -1,6 +1,7 @@
 export interface IPersistorService {
   get(key: string): string | undefined;
   set(key: string, value: string): void;
+  getKeys(): string[];
 }
 
 export interface PersistableData {

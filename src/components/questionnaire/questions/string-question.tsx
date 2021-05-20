@@ -9,8 +9,8 @@ export const StringQuestion = ({ question, answer, onChange }: QuestionnaireQues
       required={question.required}
       label={question.text}
       hiddenlabel
-      onInput={(event: Event) => onChange(question.linkId, (event.target as HTMLInputElement).value)}
-      value={answer[0] as string}
+      onInput={(event: Event) => onChange(question.linkId, (event.target as HTMLInputElement).value.trim())}
+      value={String(answer[0] ?? '').trim()}
       minlength={minLength}
       maxlength={maxLength}
       type="text"

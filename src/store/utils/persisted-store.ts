@@ -10,33 +10,43 @@ export default function createPersistedStore<T>(
     return `${namespace}::${key}`;
   }
 
-  const persistedData = {};
+  function getPersistedKeys() {
+    return persistor
+      .getKeys()
+      .filter((key) => key.indexOf(prefix) === 0)
+      .map((key) => key.replace(prefix, ''));
+  }
 
-  Object.keys(initialData).forEach((key) => {
-    let persistedValue = undefined;
+  const prefix = namespacedKey('');
+  const data = getPersistedKeys()
+    .concat(Object.keys(initialData))
+    .filter((key, index, arr) => arr.indexOf(key) === index)
+    .reduce(
+      (data, key) => {
+        try {
+          const value = JSON.parse(persistor.get(namespacedKey(key)));
+          if (value !== null && value !== undefined) {
+            return Object.assign(data, { [key]: value });
+          }
+        } catch (_e) {
+          // ignore errors
+        }
+        return data;
+      },
+      { ...initialData }
+    );
 
-    try {
-      persistedValue = JSON.parse(persistor.get(namespacedKey(key)));
-    } catch (_e) {
-      // Skip this persisted value
-    }
-
-    if (persistedValue !== null && persistedValue !== undefined) {
-      persistedData[key] = persistedValue;
-    }
-  });
-
-  const store = createStore<T>({ ...initialData, ...persistedData });
+  const store = createStore<T>(data);
   const actions = {
     set(key: any, value: any) {
       try {
         persistor.set(namespacedKey(key), JSON.stringify(value));
       } catch (_e) {
-        // Don't persist if it can't be stringified
+        // ignore errors
       }
     },
     reset() {
-      Object.keys(initialData).forEach((key) => actions.set(key, initialData[key]));
+      getPersistedKeys().forEach((key) => store.set(key as keyof T & string, initialData[key] ?? null));
     },
   };
 

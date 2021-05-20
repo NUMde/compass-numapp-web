@@ -1,32 +1,50 @@
-import { createStore } from '@stencil/store';
+import { createStore, ObservableMap } from '@stencil/store';
+import { Services } from 'services';
+import createPersistedStore from './utils/persisted-store';
 import {
   NUMQuestionnaireFlattenedItem,
   NUMQuestionnaire,
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
-import { extractQuestions, flattenNestedItems } from 'services/utils/questionnaire';
+import { extractQuestions, flattenNestedItems, getHash } from 'services/utils/questionnaire';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
   flattenedItems: NUMQuestionnaireFlattenedItem[];
-  answers: Map<string, NUMQuestionnaireAnswer>;
+  answers: ObservableMap<{ [key: string]: NUMQuestionnaireAnswer }>;
+  persistedMeta: ObservableMap<PersistedMetaStateType>;
 }
 
-const storeBuilder = () => {
+interface PersistedMetaStateType {
+  hash: string;
+}
+
+const storeBuilder = ({ persistor }: Services) => {
   const store = createStore<StateType>({
     questionnaire: null,
     flattenedItems: [],
-    answers: new Map<string, NUMQuestionnaireAnswer>(),
+    answers: createPersistedStore<{ [key: string]: NUMQuestionnaireAnswer }>(
+      persistor,
+      'questionnaire::answers',
+      {}
+    ),
+    persistedMeta: createPersistedStore<PersistedMetaStateType>(persistor, 'questionnaire', { hash: null }),
   });
 
   class Actions {
     reset() {
+      this.answers.reset();
       store.reset();
     }
 
     populateFromRequestResponse(response: NUMQuestionnaire) {
       store.set('questionnaire', response);
       store.set('flattenedItems', flattenNestedItems(response.item ?? [], response));
+
+      const { hash } = this;
+      const persistedMeta = store.get('persistedMeta');
+      persistedMeta.get('hash') !== hash && this.answers.reset();
+      persistedMeta.set('hash', hash);
     }
 
     get isPopulated() {
@@ -47,6 +65,14 @@ const storeBuilder = () => {
 
     get answers() {
       return store.get('answers');
+    }
+
+    get hash() {
+      return getHash(JSON.stringify(this.questionnaire));
+    }
+
+    get persistedMeta() {
+      return store.get('persistedMeta');
     }
   }
 

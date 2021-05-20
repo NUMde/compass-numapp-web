@@ -30,6 +30,7 @@ export namespace Components {
     interface NumNotifications {
     }
     interface NumQuestionnaireQuestion {
+        "linkId"?: string;
     }
     interface NumQuestionnaireTree {
     }
@@ -124,6 +125,7 @@ declare namespace LocalJSX {
     interface NumNotifications {
     }
     interface NumQuestionnaireQuestion {
+        "linkId"?: string;
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
     }
     interface NumQuestionnaireTree {

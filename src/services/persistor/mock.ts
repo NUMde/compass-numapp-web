@@ -10,4 +10,8 @@ export default class MockPersistorService implements IPersistorService {
   set(key: string, value: string): void {
     this.cachedData[key] = value;
   }
+
+  getKeys() {
+    return [];
+  }
 }

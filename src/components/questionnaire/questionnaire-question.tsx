@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, State } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import store from 'store';
@@ -22,6 +22,8 @@ export class QuestionnaireQuestionComponent {
   #formRef?: HTMLFormElement;
   #focusFirstInputTimeout?: number;
 
+  @Prop() linkId?: string;
+
   @State() question: NUMQuestionnaireFlattenedItem;
   @State() pendingAnswer: NUMQuestionnaireAnswer = [];
 
@@ -31,7 +33,7 @@ export class QuestionnaireQuestionComponent {
   }
 
   get storedAnswer() {
-    return store.questionnaire.answers.get(this.question?.linkId) ?? [];
+    return this.question?.answer;
   }
 
   get description() {
@@ -81,11 +83,12 @@ export class QuestionnaireQuestionComponent {
     if (!this.question.next) {
       alert('TODO questionnaire is done - proceed'); // TODO proceed in the flow
       console.log('Answers:', store.questionnaire.answers); // TODO remove debug
+      store.questionnaire.answers.reset();
       return;
     }
 
     this.question = this.question.next;
-    this.pendingAnswer = [].concat(this.storedAnswer);
+    this.pendingAnswer = [].concat(this.storedAnswer ?? []);
 
     requestAnimationFrame(() => this.focusFirstInput());
   }
@@ -97,7 +100,7 @@ export class QuestionnaireQuestionComponent {
     }
 
     this.question = previous;
-    this.pendingAnswer = [].concat(this.storedAnswer);
+    this.pendingAnswer = [].concat(this.storedAnswer ?? []);
     requestAnimationFrame(() => this.focusFirstInput());
   }
 
@@ -127,8 +130,11 @@ export class QuestionnaireQuestionComponent {
 
   componentWillLoad() {
     const { questions } = store.questionnaire;
-    this.question = questions[0];
-    this.pendingAnswer = [].concat(this.storedAnswer);
+    const selectedQuestion = questions.find(({ linkId }) => linkId === this.linkId);
+    this.question = selectedQuestion?.isAnswerable
+      ? selectedQuestion
+      : questions.reverse().find(({ isAnswerable }) => isAnswerable);
+    this.pendingAnswer = [].concat(this.storedAnswer ?? []);
 
     console.log('Questions:', questions); // TODO remove debug
   }
