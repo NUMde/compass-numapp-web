@@ -46,6 +46,14 @@ export const parseExtensions = (extensions: fhir.Extension[]): NumQuestionnaireE
   );
 };
 
+/**
+ * Returns an FNV-1a hash to check if
+ * json-stringified questionnaire has
+ * changed in order to drop persisted
+ * answers if necessary
+ * @param data string
+ * @returns string
+ */
 export const getHash = (data: string) => {
   return (
     data.split('').reduce((hash, character: any) => {
