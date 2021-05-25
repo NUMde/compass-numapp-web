@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
+import { buildQuestionnaireResponse } from 'services/utils/questionnaire';
 import store from 'store';
 import {
   BooleanQuestion,
@@ -203,6 +204,18 @@ export class QuestionnaireQuestionComponent {
           classes="button--block button--secondary u-margin-top--normal"
           text={store.i18n.t('questionnaire.back')}
           handleClick={() => this.moveToPreviousQuestion()}
+        />
+        <d4l-button
+          text="debug"
+          handleClick={() =>
+            console.log(
+              buildQuestionnaireResponse(
+                store.auth.accessToken,
+                store.questionnaire.questionnaire,
+                store.questionnaire.answers
+              )
+            )
+          }
         />
       </Card>
     );

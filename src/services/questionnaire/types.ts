@@ -12,6 +12,10 @@ export interface NumQuestionnaireExtensionConfig {
   'questionnaire-sliderStepValue'?: number;
 }
 
+export type NumQuestionnaireResponse = Omit<fhir.QuestionnaireResponse, 'questionnaire'> & {
+  questionnaire: string;
+};
+
 export interface IQuestionnaireService {
   fetch(id: string): Promise<NUMQuestionnaire>;
 }

@@ -1,5 +1,12 @@
+import { ObservableMap } from '@stencil/store';
 import { NUMQuestionnaireQuestion } from 'models/question';
-import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
+import {
+  NUMQuestionnaire,
+  NUMQuestionnaireAnswer,
+  NumQuestionnaireExtensionConfig,
+  NUMQuestionnaireFlattenedItem,
+  NumQuestionnaireResponse,
+} from 'services/questionnaire';
 
 export const flattenNestedItems = (
   items: fhir.QuestionnaireItem[],
@@ -61,4 +68,24 @@ export const getHash = (data: string) => {
       return hash + (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
     }, 0x811c9dc5) >>> 0
   ).toString(16);
+};
+
+export const buildQuestionnaireResponse = (
+  userId: string,
+  questionnaire: NUMQuestionnaire,
+  answers: ObservableMap<{ [key: string]: NUMQuestionnaireAnswer }>
+): NumQuestionnaireResponse => {
+  const date = new Date();
+  return {
+    resourceType: 'QuestionnaireResponse',
+    identifier: {
+      value: `${userId}-${date.getTime()}`,
+    },
+    status: 'completed',
+    authored: date.toISOString(),
+    questionnaire: [questionnaire.url, questionnaire.version]
+      .filter((segment) => typeof segment !== 'undefined')
+      .join('|'),
+    item: [],
+  };
 };
