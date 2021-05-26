@@ -1,12 +1,5 @@
-import { ObservableMap } from '@stencil/store';
 import { NUMQuestionnaireQuestion } from 'models/question';
-import {
-  NUMQuestionnaire,
-  NUMQuestionnaireAnswer,
-  NumQuestionnaireExtensionConfig,
-  NUMQuestionnaireFlattenedItem,
-  NumQuestionnaireResponse,
-} from 'services/questionnaire';
+import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 
 export const flattenNestedItems = (
   items: fhir.QuestionnaireItem[],
@@ -28,6 +21,9 @@ export const extractQuestions = (
   return flattenedItems.filter(({ type }) => type !== 'group');
 };
 
+export const isValidValue = (value: any) =>
+  typeof value === 'number' || typeof value === 'boolean' || !!value;
+
 export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseItemAnswer) => {
   return (
     item.valueBoolean ??
@@ -41,6 +37,34 @@ export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseIt
     item.valueCoding?.code ??
     item.valueQuantity?.code
   );
+};
+
+export const buildFHIRValue = (
+  questionType: fhir.QuestionnaireItemType,
+  value: number | boolean | string
+): fhir.QuestionnaireResponseItemAnswer => {
+  switch (questionType) {
+    case 'group':
+    case 'display':
+      return undefined;
+    case 'boolean':
+      return { valueBoolean: Boolean(value) };
+    case 'decimal':
+      return { valueDecimal: Number(value) };
+    case 'integer':
+      return { valueInteger: Number(value) };
+    case 'date':
+      return { valueDate: String(value) };
+    case 'string':
+    case 'text':
+    case 'url':
+    case 'choice':
+    case 'open-choice':
+      return { valueString: String(value) };
+    default:
+      // type not supported
+      return undefined;
+  }
 };
 
 export const parseExtensions = (extensions: fhir.Extension[]): NumQuestionnaireExtensionConfig => {
@@ -70,22 +94,26 @@ export const getHash = (data: string) => {
   ).toString(16);
 };
 
-export const buildQuestionnaireResponse = (
-  userId: string,
-  questionnaire: NUMQuestionnaire,
-  answers: ObservableMap<{ [key: string]: NUMQuestionnaireAnswer }>
-): NumQuestionnaireResponse => {
-  const date = new Date();
-  return {
-    resourceType: 'QuestionnaireResponse',
-    identifier: {
-      value: `${userId}-${date.getTime()}`,
-    },
-    status: 'completed',
-    authored: date.toISOString(),
-    questionnaire: [questionnaire.url, questionnaire.version]
-      .filter((segment) => typeof segment !== 'undefined')
-      .join('|'),
-    item: [],
-  };
+export const buildQuestionnaireResponseItem = (
+  flattenedItems: NUMQuestionnaireFlattenedItem[],
+  linkId: string
+): fhir.QuestionnaireResponseItem => {
+  const item = flattenedItems.find((item) => item.linkId === linkId);
+  const answer = item.isEnabled && item.isAnswered ? item?.answer?.filter(isValidValue) : [];
+  return item
+    ? {
+        linkId,
+        text: item.text,
+        ...(answer?.length
+          ? { answer: answer.map((value) => buildFHIRValue(item.type, value)).filter(Boolean) }
+          : {}),
+        ...(item.item
+          ? {
+              item: item.item
+                .map((subItem) => buildQuestionnaireResponseItem(flattenedItems, subItem.linkId))
+                .filter(Boolean),
+            }
+          : {}),
+      }
+    : null;
 };
