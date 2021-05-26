@@ -1,6 +1,8 @@
 import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
+import services from 'services';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
+import { isValidValue } from 'services/utils/questionnaire';
 import store from 'store';
 import {
   BooleanQuestion,
@@ -81,9 +83,9 @@ export class QuestionnaireQuestionComponent {
     store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
 
     if (!this.question.next) {
-      alert('TODO questionnaire is done - proceed'); // TODO proceed in the flow
+      requestAnimationFrame(() => alert('TODO questionnaire is done - proceed')); // TODO proceed in the flow
       console.log('Answers:', store.questionnaire.answers); // TODO remove debug
-      store.questionnaire.answers.reset();
+      // store.questionnaire.answers.reset(); TODO continue and do this reset in questionnaire service after having successfully submitted the response
       return;
     }
 
@@ -106,9 +108,7 @@ export class QuestionnaireQuestionComponent {
 
   handleChange = (linkId: string, value: NUMQuestionnaireAnswer) => {
     if (linkId === this.question.linkId) {
-      this.pendingAnswer = []
-        .concat(value)
-        .filter((value) => typeof value === 'number' || typeof value === 'boolean' || !!value);
+      this.pendingAnswer = [].concat(value).filter(isValidValue);
     }
   };
 
@@ -154,7 +154,7 @@ export class QuestionnaireQuestionComponent {
     }
 
     return (
-      <Card headline={`${question.linkId} ${question.text}`}>
+      <Card wide headline={`${question.linkId} ${question.text}`}>
         {this.description.map((item) => (
           <p class="u-infotext" key={item.linkId}>
             {item.text}
@@ -204,6 +204,11 @@ export class QuestionnaireQuestionComponent {
           text={store.i18n.t('questionnaire.back')}
           handleClick={() => this.moveToPreviousQuestion()}
         />
+
+        <h3 class="u-margin-top--large">DEBUG QuestionnaireResponse</h3>
+        <pre class="u-margin-top--small" style={{ textAlign: 'left', height: '300px', overflow: 'auto' }}>
+          {JSON.stringify(services.questionnaire.buildQuestionnaireResponse(), null, 2)}
+        </pre>
       </Card>
     );
   }

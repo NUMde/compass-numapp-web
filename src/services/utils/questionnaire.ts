@@ -21,6 +21,9 @@ export const extractQuestions = (
   return flattenedItems.filter(({ type }) => type !== 'group');
 };
 
+export const isValidValue = (value: any) =>
+  typeof value === 'number' || typeof value === 'boolean' || !!value;
+
 export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseItemAnswer) => {
   return (
     item.valueBoolean ??
@@ -34,6 +37,34 @@ export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseIt
     item.valueCoding?.code ??
     item.valueQuantity?.code
   );
+};
+
+export const buildFHIRValue = (
+  questionType: fhir.QuestionnaireItemType,
+  value: number | boolean | string
+): fhir.QuestionnaireResponseItemAnswer => {
+  switch (questionType) {
+    case 'group':
+    case 'display':
+      return null;
+    case 'boolean':
+      return { valueBoolean: Boolean(value) };
+    case 'decimal':
+      return { valueDecimal: Number(value) };
+    case 'integer':
+      return { valueInteger: Number(value) };
+    case 'date':
+      return { valueDate: String(value) };
+    case 'string':
+    case 'text':
+    case 'url':
+    case 'choice':
+    case 'open-choice':
+      return { valueString: String(value) };
+    default:
+      // type not supported
+      return null;
+  }
 };
 
 export const parseExtensions = (extensions: fhir.Extension[]): NumQuestionnaireExtensionConfig => {
@@ -61,4 +92,30 @@ export const getHash = (data: string) => {
       return hash + (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24);
     }, 0x811c9dc5) >>> 0
   ).toString(16);
+};
+
+export const buildQuestionnaireResponseItem = (
+  flattenedItems: NUMQuestionnaireFlattenedItem[],
+  linkId: string
+): fhir.QuestionnaireResponseItem => {
+  const item = flattenedItems.find((item) => item.linkId === linkId);
+  const answer = item.isEnabled && item.isAnswered ? item?.answer?.filter(isValidValue) : [];
+  if (!item) {
+    return null;
+  }
+
+  return {
+    linkId,
+    text: item.text,
+    ...(answer?.length
+      ? { answer: answer.map((value) => buildFHIRValue(item.type, value)).filter(Boolean) }
+      : {}),
+    ...(item.item
+      ? {
+          item: item.item
+            .map((subItem) => buildQuestionnaireResponseItem(flattenedItems, subItem.linkId))
+            .filter(Boolean),
+        }
+      : {}),
+  };
 };
