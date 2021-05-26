@@ -34,7 +34,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
       status: (isCompleted ? 'completed' : 'in-progress') as fhir.QuestionnaireResponseStatus,
       authored: date.toISOString(),
       questionnaire: [questionnaire.url, questionnaire.version]
-        .filter((segment) => typeof segment !== 'undefined')
+        .filter((segment) => (typeof segment === 'string' && !!segment) || typeof segment === 'number')
         .join('|'),
       item:
         questionnaire.item

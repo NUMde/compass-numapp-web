@@ -46,7 +46,7 @@ export const buildFHIRValue = (
   switch (questionType) {
     case 'group':
     case 'display':
-      return undefined;
+      return null;
     case 'boolean':
       return { valueBoolean: Boolean(value) };
     case 'decimal':
@@ -63,7 +63,7 @@ export const buildFHIRValue = (
       return { valueString: String(value) };
     default:
       // type not supported
-      return undefined;
+      return null;
   }
 };
 
@@ -100,20 +100,22 @@ export const buildQuestionnaireResponseItem = (
 ): fhir.QuestionnaireResponseItem => {
   const item = flattenedItems.find((item) => item.linkId === linkId);
   const answer = item.isEnabled && item.isAnswered ? item?.answer?.filter(isValidValue) : [];
-  return item
-    ? {
-        linkId,
-        text: item.text,
-        ...(answer?.length
-          ? { answer: answer.map((value) => buildFHIRValue(item.type, value)).filter(Boolean) }
-          : {}),
-        ...(item.item
-          ? {
-              item: item.item
-                .map((subItem) => buildQuestionnaireResponseItem(flattenedItems, subItem.linkId))
-                .filter(Boolean),
-            }
-          : {}),
-      }
-    : null;
+  if (!item) {
+    return null;
+  }
+
+  return {
+    linkId,
+    text: item.text,
+    ...(answer?.length
+      ? { answer: answer.map((value) => buildFHIRValue(item.type, value)).filter(Boolean) }
+      : {}),
+    ...(item.item
+      ? {
+          item: item.item
+            .map((subItem) => buildQuestionnaireResponseItem(flattenedItems, subItem.linkId))
+            .filter(Boolean),
+        }
+      : {}),
+  };
 };
