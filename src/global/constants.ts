@@ -38,4 +38,4 @@ export const APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppName';
 export const QR_PROP_USER_ID = 'AppID';
 
-export const { API_BASE_URL, ENVIRONMENT } = Env;
+export const { API_BASE_URL, ENVIRONMENT, FALLBACK_CERTIFICATE } = Env;

@@ -1,5 +1,6 @@
 import { NUMQuestionnaireQuestion } from 'models/question';
 import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
+import forge from 'node-forge';
 
 export const flattenNestedItems = (
   items: fhir.QuestionnaireItem[],
@@ -118,4 +119,22 @@ export const buildQuestionnaireResponseItem = (
         }
       : {}),
   };
+};
+
+/**
+ * see https://github.com/NUMde/compass-numapp/tree/main/docs/encryption
+ */
+export const encrypt = (pem: string, payload: object) => {
+  const p7 = forge.pkcs7.createEnvelopedData();
+  p7.content = forge.util.createBuffer(JSON.stringify(payload));
+  p7.addRecipient(forge.pki.certificateFromPem(pem));
+  p7.encrypt();
+
+  return btoa(
+    forge.util
+      .bytesToHex(forge.asn1.toDer(p7.toAsn1()).data)
+      .match(/\w{2}/g)
+      .map((value) => String.fromCharCode(parseInt(value, 16)))
+      .join('')
+  );
 };
