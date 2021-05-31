@@ -11,4 +11,8 @@ export default class MockQuestionnaireService implements IQuestionnaireService {
       questionnaire: 'http://hl7.org/fhir/Questionnaire/Fragebogen_COMPASS_Beispiel|1.2',
     };
   }
+
+  generateEncryptedPayload() {
+    return '';
+  }
 }

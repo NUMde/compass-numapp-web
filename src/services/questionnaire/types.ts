@@ -19,4 +19,8 @@ export type NumQuestionnaireResponse = Omit<fhir.QuestionnaireResponse, 'questio
 export interface IQuestionnaireService {
   fetch(id: string): Promise<NUMQuestionnaire>;
   buildQuestionnaireResponse(): NumQuestionnaireResponse;
+  generateEncryptedPayload(
+    type: 'report' | 'questionnaire_response',
+    questionnaireResponse?: NumQuestionnaireResponse
+  ): string;
 }

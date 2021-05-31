@@ -124,7 +124,7 @@ export const buildQuestionnaireResponseItem = (
 /**
  * see https://github.com/NUMde/compass-numapp/tree/main/docs/encryption
  */
-export const encrypt = (pem: string, payload: object) => {
+export const encrypt = (pem: string, payload: object): string => {
   const p7 = forge.pkcs7.createEnvelopedData();
   p7.content = forge.util.createBuffer(JSON.stringify(payload));
   p7.addRecipient(forge.pki.certificateFromPem(pem));

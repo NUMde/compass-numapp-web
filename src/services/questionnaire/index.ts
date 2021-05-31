@@ -1,7 +1,7 @@
 import { API_BASE_URL } from 'global/constants';
 import store from 'store';
-import { get } from 'services/utils/fetch-client';
-import { buildQuestionnaireResponseItem } from 'services/utils/questionnaire';
+import { get, post } from 'services/utils/fetch-client';
+import { buildQuestionnaireResponseItem, encrypt } from 'services/utils/questionnaire';
 import { IQuestionnaireService, NUMQuestionnaire } from './types';
 
 export default class QuestionnaireService implements IQuestionnaireService {
@@ -43,6 +43,38 @@ export default class QuestionnaireService implements IQuestionnaireService {
           ?.map((item) => buildQuestionnaireResponseItem(flattenedItems, item.linkId))
           .filter(Boolean) ?? [],
     };
+  }
+
+  generateEncryptedPayload(type, questionnaireResponse) {
+    const payload = {
+      type,
+      data: {
+        appId: store.auth.accessToken,
+        ...(questionnaireResponse ? { body: questionnaireResponse } : {}),
+      },
+    };
+
+    return encrypt(store.auth.certificate, payload);
+  }
+
+  async sendQuestionnaire(triggerMap, surveyId, instanceId) {
+    const userId = store.auth.accessToken;
+    const params = {
+      type: 'questionnaire_response',
+      id: userId,
+      appId: userId,
+      surveyId,
+      instanceId,
+      updateValues: {
+        ...triggerMap,
+      },
+    };
+
+    return post({
+      url: `?${new URLSearchParams(params).toString()}`,
+      authenticated: true,
+      body: this.generateEncryptedPayload('questionnaire_response', this.buildQuestionnaireResponse()),
+    });
   }
 }
 
