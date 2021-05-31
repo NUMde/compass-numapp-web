@@ -25,11 +25,13 @@ export default class QuestionnaireService implements IQuestionnaireService {
       author: {
         identifier: {
           value: userId,
+          system: 'urn:ietf:rfc:3986',
         },
       },
       resourceType: 'QuestionnaireResponse',
       identifier: {
         value: `${userId}-${date.getTime()}`,
+        system: 'urn:ietf:rfc:3986',
       },
       status: (isCompleted ? 'completed' : 'in-progress') as fhir.QuestionnaireResponseStatus,
       authored: date.toISOString(),
