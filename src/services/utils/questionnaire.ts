@@ -118,6 +118,7 @@ export const buildQuestionnaireResponseItem = (
             .filter(Boolean),
         }
       : {}),
+    ...(item.definition ? { definition: item.definition } : {}),
   };
 };
 

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from 'global/constants';
+import { API_BASE_URL, QUESTIONNAIRE_RESPONSE_TRIGGER_RULES } from 'global/constants';
 import store from 'store';
 import { get, post } from 'services/utils/fetch-client';
 import { buildQuestionnaireResponseItem, encrypt } from 'services/utils/questionnaire';
@@ -57,7 +57,20 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return encrypt(store.auth.certificate, payload);
   }
 
-  async sendQuestionnaire(triggerMap, surveyId, instanceId) {
+  buildFlags() {
+    const answers = store.questionnaire.answers;
+    return QUESTIONNAIRE_RESPONSE_TRIGGER_RULES.reduce(
+      (flags, rule) => ({
+        ...flags,
+        [`updateValues[${rule.type}]`]: Object.keys(rule.answers).some((linkId) =>
+          rule.answers[linkId].every((value) => (answers.get(linkId) ?? []).includes(value))
+        ),
+      }),
+      {}
+    );
+  }
+
+  async sendQuestionnaire(surveyId, instanceId) {
     const userId = store.auth.accessToken;
     const params = {
       type: 'questionnaire_response',
@@ -65,9 +78,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
       appId: userId,
       surveyId,
       instanceId,
-      updateValues: {
-        ...triggerMap,
-      },
+      ...this.buildFlags(),
     };
 
     return post({
