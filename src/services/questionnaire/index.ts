@@ -70,14 +70,14 @@ export default class QuestionnaireService implements IQuestionnaireService {
     );
   }
 
-  async sendQuestionnaire(surveyId, instanceId) {
+  submitQuestionnaireResponse() {
     const userId = store.auth.accessToken;
     const params = {
       type: 'questionnaire_response',
       id: userId,
       appId: userId,
-      surveyId,
-      instanceId,
+      surveyId: store.user.questionnaireId,
+      instanceId: store.user.instanceId,
       ...this.buildFlags(),
     };
 

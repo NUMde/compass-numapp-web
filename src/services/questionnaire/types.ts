@@ -23,4 +23,5 @@ export interface IQuestionnaireService {
     type: 'report' | 'questionnaire_response',
     questionnaireResponse?: NumQuestionnaireResponse
   ): string;
+  submitQuestionnaireResponse(): Promise<unknown>; // TODO add response type
 }

@@ -15,4 +15,6 @@ export default class MockQuestionnaireService implements IQuestionnaireService {
   generateEncryptedPayload() {
     return '';
   }
+
+  async submitQuestionnaireResponse() {}
 }
