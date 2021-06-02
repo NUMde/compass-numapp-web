@@ -19,5 +19,5 @@ export interface IQuestionnaireService {
     type: 'report' | 'questionnaire_response',
     questionnaireResponse?: fhir4.QuestionnaireResponse
   ): string;
-  submitQuestionnaireResponse(): Promise<unknown>; // TODO add response type
+  submitQuestionnaireResponse(): Promise<void>;
 }

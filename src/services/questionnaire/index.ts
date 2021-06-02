@@ -54,7 +54,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
       },
     };
 
-    return encrypt(store.auth.certificate, payload);
+    return JSON.stringify({ payload: encrypt(store.auth.certificate, payload) });
   }
 
   buildFlags() {
@@ -62,7 +62,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return QUESTIONNAIRE_RESPONSE_TRIGGER_RULES.reduce(
       (flags, rule) => ({
         ...flags,
-        [`updateValues[${rule.type}]`]: Object.keys(rule.answers).some((linkId) =>
+        [rule.type]: Object.keys(rule.answers).some((linkId) =>
           rule.answers[linkId].every((value) => (answers.get(linkId) ?? []).includes(value))
         ),
       }),
@@ -70,7 +70,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     );
   }
 
-  submitQuestionnaireResponse() {
+  async submitQuestionnaireResponse() {
     const userId = store.auth.accessToken;
     const params = {
       type: 'questionnaire_response',
@@ -81,8 +81,8 @@ export default class QuestionnaireService implements IQuestionnaireService {
       ...this.buildFlags(),
     };
 
-    return post({
-      url: `?${new URLSearchParams(params).toString()}`,
+    await post({
+      url: `${API_BASE_URL}/queue?${new URLSearchParams(params).toString()}`,
       authenticated: true,
       body: this.generateEncryptedPayload('questionnaire_response', this.buildQuestionnaireResponse()),
     });

@@ -86,7 +86,7 @@ export class QuestionnaireQuestionComponent {
       console.log('Answers:', store.questionnaire.answers); // TODO remove debug
 
       try {
-        console.log('debug response', await services.questionnaire.submitQuestionnaireResponse()); // TODO remove debug
+        await services.questionnaire.submitQuestionnaireResponse();
         this.switchDisplayModeHandler('success');
         store.questionnaire.answers.reset();
       } catch (error) {
