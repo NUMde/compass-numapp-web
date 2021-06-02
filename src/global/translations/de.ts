@@ -53,6 +53,12 @@ export default {
   },
   questionnaire: {
     back: 'Zurück',
+    confirm_submit: {
+      error:
+        'Beim Senden Ihrer Antworten ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut. Sie können Ihren Browser schließen und später fortfahren, ohne Ihre Antworten zu verlieren.',
+      headline: 'Fragebogen absenden',
+      infotext: 'Sie haben alle Fragen beantwortet. Indem Sie fortfahren, werden Ihre Angaben übermittelt.',
+    },
     continue: 'Fortfahren',
     date_input: {
       error: 'Bitte überprüfen Sie das Eingabefeld.',
@@ -60,8 +66,13 @@ export default {
       month: 'Monat',
       year: 'Jahr',
     },
+    finish: 'Zur Übersicht zurückkehren',
     group: 'Gruppe {{ number }}',
     question: 'Frage {{ number }}',
+    success: {
+      headline: 'Vielen Dank!',
+      infotext: 'Vielen Dank für Ihren Beitrag!',
+    },
   },
   welcome: {
     continue: 'Weiter',

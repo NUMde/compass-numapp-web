@@ -7,7 +7,7 @@ import { ROUTES } from 'global/constants';
   tag: 'num-container-questionnaire',
 })
 export class QuestionnaireComponent {
-  @State() displayMode: 'index' | 'question' | 'success' = 'index';
+  @State() displayMode: 'index' | 'question' | 'confirm' | 'success' = 'index';
   @State() linkId?: string;
   @Listen('switchDisplayMode')
   onSwitchDisplayMode({ detail }: CustomEvent) {
@@ -36,8 +36,10 @@ export class QuestionnaireComponent {
         return <num-questionnaire-tree />;
       case 'question':
         return <num-questionnaire-question linkId={this.linkId} />;
+      case 'confirm':
+        return <num-questionnaire-confirm />;
       case 'success':
-        return <div>TODO success state</div>;
+        return <num-questionnaire-success />;
       default:
         return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
     }

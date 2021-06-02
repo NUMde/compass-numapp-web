@@ -17,4 +17,5 @@ export interface UserResponse {
 export interface IUserService {
   fetch(id: string): Promise<UserResponse>;
   populateStore(): Promise<void>;
+  refresh(): Promise<void>;
 }

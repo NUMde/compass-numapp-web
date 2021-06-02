@@ -32,6 +32,11 @@ export default class User implements IUserService {
       store.auth.expireSession();
     }
   }
+
+  async refresh() {
+    store.user.reset();
+    await this.populateStore();
+  }
 }
 
 export * from './types';

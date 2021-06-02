@@ -30,7 +30,7 @@ export class QuestionnaireQuestionComponent {
   @State() pendingAnswer: NUMQuestionnaireAnswer = [];
 
   @Event() switchDisplayMode: EventEmitter;
-  switchDisplayModeHandler(displayMode: 'index' | 'success') {
+  switchDisplayModeHandler(displayMode: 'index' | 'confirm') {
     this.switchDisplayMode.emit({ displayMode });
   }
 
@@ -79,20 +79,12 @@ export class QuestionnaireQuestionComponent {
     }
   }
 
-  async moveToNextQuestion() {
+  moveToNextQuestion() {
     store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
 
     if (!this.question.next) {
       console.log('Answers:', store.questionnaire.answers); // TODO remove debug
-
-      try {
-        await services.questionnaire.submitQuestionnaireResponse();
-        this.switchDisplayModeHandler('success');
-        store.questionnaire.answers.reset();
-      } catch (error) {
-        console.error(error);
-        services.notifier.onError('questionnaire.error.submit_failed'); // TODO add key
-      }
+      this.switchDisplayModeHandler('confirm');
       return;
     }
 
@@ -140,10 +132,11 @@ export class QuestionnaireQuestionComponent {
     const selectedQuestion = questions.find(({ linkId }) => linkId === this.linkId);
     this.question = selectedQuestion?.isAnswerable
       ? selectedQuestion
-      : questions.reverse().find(({ isAnswerable }) => isAnswerable);
+      : []
+          .concat(questions)
+          .reverse()
+          .find(({ isAnswerable }) => isAnswerable);
     this.pendingAnswer = [].concat(this.storedAnswer ?? []);
-
-    console.log('Questions:', questions); // TODO remove debug
   }
 
   componentDidLoad() {
