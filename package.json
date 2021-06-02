@@ -23,7 +23,7 @@
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.4.1",
     "@stencil/store": "^1.4.1",
-    "@types/fhir": "^3.0.2",
+    "@types/fhir": "^0.0.32",
     "dotenv": "^8.2.0",
     "i18next": "^20.2.1",
     "i18next-browser-languagedetector": "^6.1.0",

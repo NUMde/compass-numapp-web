@@ -1,7 +1,7 @@
 import { NUMQuestionnaireQuestion } from 'models/question';
 
-export interface NUMQuestionnaire extends fhir.Questionnaire {}
-export interface NUMQuestionnaireFlattenedItem extends fhir.QuestionnaireItem, NUMQuestionnaireQuestion {}
+export interface NUMQuestionnaire extends fhir4.Questionnaire {}
+export interface NUMQuestionnaireFlattenedItem extends fhir4.QuestionnaireItem, NUMQuestionnaireQuestion {}
 export type NUMQuestionnaireAnswer = (boolean | number | string)[];
 export interface NumQuestionnaireExtensionConfig {
   minValue?: number;
@@ -12,16 +12,12 @@ export interface NumQuestionnaireExtensionConfig {
   'questionnaire-sliderStepValue'?: number;
 }
 
-export type NumQuestionnaireResponse = Omit<fhir.QuestionnaireResponse, 'questionnaire'> & {
-  questionnaire: string;
-};
-
 export interface IQuestionnaireService {
   fetch(id: string): Promise<NUMQuestionnaire>;
-  buildQuestionnaireResponse(): NumQuestionnaireResponse;
+  buildQuestionnaireResponse(): fhir4.QuestionnaireResponse;
   generateEncryptedPayload(
     type: 'report' | 'questionnaire_response',
-    questionnaireResponse?: NumQuestionnaireResponse
+    questionnaireResponse?: fhir4.QuestionnaireResponse
   ): string;
   submitQuestionnaireResponse(): Promise<unknown>; // TODO add response type
 }

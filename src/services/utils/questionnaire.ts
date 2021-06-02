@@ -3,8 +3,8 @@ import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from '
 import forge from 'node-forge';
 
 export const flattenNestedItems = (
-  items: fhir.QuestionnaireItem[],
-  parent: fhir.Questionnaire | fhir.QuestionnaireItem,
+  items: fhir4.QuestionnaireItem[],
+  parent: fhir4.Questionnaire | fhir4.QuestionnaireItem,
   level = 0
 ): NUMQuestionnaireFlattenedItem[] => {
   return items
@@ -25,14 +25,14 @@ export const extractQuestions = (
 export const isValidValue = (value: any) =>
   typeof value === 'number' || typeof value === 'boolean' || !!value;
 
-export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseItemAnswer) => {
+export const extractValue = (item: fhir4.Extension | fhir4.QuestionnaireResponseItemAnswer) => {
   return (
     item.valueBoolean ??
     item.valueDecimal ??
     item.valueInteger ??
     item.valueDate ??
     item.valueDateTime ??
-    (item as fhir.Extension).valueInstant ??
+    (item as fhir4.Extension).valueInstant ??
     item.valueTime ??
     item.valueString ??
     item.valueCoding?.code ??
@@ -41,9 +41,9 @@ export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseIt
 };
 
 export const buildFHIRValue = (
-  questionType: fhir.QuestionnaireItemType,
+  questionType: fhir4.QuestionnaireItem['type'],
   value: number | boolean | string
-): fhir.QuestionnaireResponseItemAnswer => {
+): fhir4.QuestionnaireResponseItemAnswer => {
   switch (questionType) {
     case 'group':
     case 'display':
@@ -68,7 +68,7 @@ export const buildFHIRValue = (
   }
 };
 
-export const parseExtensions = (extensions: fhir.Extension[]): NumQuestionnaireExtensionConfig => {
+export const parseExtensions = (extensions: fhir4.Extension[]): NumQuestionnaireExtensionConfig => {
   return extensions.reduce(
     (config, extension) =>
       Object.assign(config, {
@@ -98,7 +98,7 @@ export const getHash = (data: string) => {
 export const buildQuestionnaireResponseItem = (
   flattenedItems: NUMQuestionnaireFlattenedItem[],
   linkId: string
-): fhir.QuestionnaireResponseItem => {
+): fhir4.QuestionnaireResponseItem => {
   const item = flattenedItems.find((item) => item.linkId === linkId);
   const answer = item.isEnabled && item.isAnswered ? item?.answer?.filter(isValidValue) : [];
   if (!item) {

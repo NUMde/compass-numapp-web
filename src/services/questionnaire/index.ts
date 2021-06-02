@@ -13,7 +13,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return data;
   }
 
-  buildQuestionnaireResponse() {
+  buildQuestionnaireResponse(): fhir4.QuestionnaireResponse {
     const date = new Date();
     const userId = store.auth.accessToken;
     const { flattenedItems, questionnaire } = store.questionnaire;
@@ -33,7 +33,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
         value: `${userId}-${date.getTime()}`,
         system: 'urn:ietf:rfc:3986',
       },
-      status: (isCompleted ? 'completed' : 'in-progress') as fhir.QuestionnaireResponseStatus,
+      status: isCompleted ? 'completed' : 'in-progress',
       authored: date.toISOString(),
       questionnaire: [questionnaire.url, questionnaire.version]
         .filter((segment) => (typeof segment === 'string' && !!segment) || typeof segment === 'number')
