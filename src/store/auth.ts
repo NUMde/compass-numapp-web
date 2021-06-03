@@ -1,7 +1,7 @@
 import { FALLBACK_CERTIFICATE } from 'global/constants';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from 'services';
-import { user } from 'store';
+import { user, questionnaire } from 'store';
 
 interface StateType {
   accessToken: string;
@@ -39,6 +39,7 @@ const storeBuilder = ({ persistor }: Services) => {
     logout() {
       store.reset();
       user.reset();
+      questionnaire.reset();
     }
 
     expireSession() {

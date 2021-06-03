@@ -1,4 +1,4 @@
-import { Component, Fragment, h, Listen, Prop } from '@stencil/core';
+import { Component, Fragment, h, Listen, Prop, State } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
 import { APP_LANGUAGES, ROUTES } from 'global/constants';
@@ -10,6 +10,7 @@ import store from 'store';
   styleUrl: 'app-root.css',
 })
 export class AppRoot {
+  @State() isAuthenticated = false;
   @Prop() history: RouterHistory;
   @Listen('changeLanguage', {
     target: 'window',
@@ -38,18 +39,16 @@ export class AppRoot {
   }
 
   get defaultRoute() {
-    return store.auth.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
+    return this.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
   }
 
   async componentWillLoad() {
     await services.user.populateStore();
-  }
 
-  componentDidLoad() {
-    let currentState = store.auth.isAuthenticated;
+    this.isAuthenticated = store.auth.isAuthenticated;
     store.auth.onStateChange((isAuthenticated: boolean) => {
-      if (currentState !== isAuthenticated) {
-        currentState = isAuthenticated;
+      if (this.isAuthenticated !== isAuthenticated) {
+        this.isAuthenticated = isAuthenticated;
         this.history.push(this.defaultRoute, {});
       }
     });
@@ -77,7 +76,7 @@ export class AppRoot {
             <stencil-route-switch scrollTopOffset={0.1}>
               <stencil-route
                 routeRender={() =>
-                  !store.auth.isAuthenticated ? (
+                  !this.isAuthenticated ? (
                     <num-container-welcome />
                   ) : (
                     <stencil-router-redirect url={ROUTES.DASHBOARD} />

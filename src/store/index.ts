@@ -17,4 +17,6 @@ const store = {
 export type Store = typeof store;
 
 export const user = store.user;
+export const questionnaire = store.questionnaire;
+
 export default store;

@@ -34,6 +34,7 @@ const storeBuilder = ({ persistor }: Services) => {
   class Actions {
     reset() {
       this.answers.reset();
+      this.persistedMeta.reset();
       store.reset();
     }
 
