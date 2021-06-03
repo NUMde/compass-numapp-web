@@ -9,7 +9,7 @@ import services from 'services';
 export class QuestionnaireConfirmComponent {
   @State() isBusy = false;
   @Event() switchDisplayMode: EventEmitter;
-  switchDisplayModeHandler(displayMode: 'question' | 'success') {
+  switchDisplayModeHandler(displayMode: 'index' | 'question' | 'success') {
     this.switchDisplayMode.emit({ displayMode });
   }
 
@@ -28,7 +28,15 @@ export class QuestionnaireConfirmComponent {
     }
   }
 
+  componentWillLoad() {
+    !store.questionnaire.isCompleted && this.switchDisplayModeHandler('index');
+  }
+
   render() {
+    if (!store.questionnaire.isCompleted) {
+      return false;
+    }
+
     return (
       <Card headline={store.i18n.t('questionnaire.confirm_submit.headline')}>
         <p class="u-infotext">{store.i18n.t('questionnaire.confirm_submit.infotext')}</p>

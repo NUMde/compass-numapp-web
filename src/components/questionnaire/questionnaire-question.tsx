@@ -155,6 +155,8 @@ export class QuestionnaireQuestionComponent {
 
     return (
       <Card wide headline={`${question.linkId} ${question.text}`}>
+        <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
+
         {this.description.map((item) => (
           <p class="u-infotext" key={item.linkId}>
             {item.text}

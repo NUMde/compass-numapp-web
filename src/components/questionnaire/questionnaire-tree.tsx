@@ -10,7 +10,11 @@ import store from 'store';
 export class QuestionnaireTreeComponent {
   @Event() switchDisplayMode: EventEmitter;
   switchDisplayModeHandler(linkId?: string) {
-    this.switchDisplayMode.emit({ displayMode: 'question', linkId });
+    if (store.questionnaire.isCompleted && !linkId) {
+      this.switchDisplayMode.emit({ displayMode: 'confirm' });
+    } else {
+      this.switchDisplayMode.emit({ displayMode: 'question', linkId });
+    }
   }
 
   render() {
