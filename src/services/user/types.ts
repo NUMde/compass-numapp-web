@@ -16,6 +16,6 @@ export interface UserResponse {
 
 export interface IUserService {
   fetch(id: string): Promise<UserResponse>;
-  populateStore(): Promise<void>;
+  populateStore(refresh?: boolean): Promise<void>;
   refresh(): Promise<void>;
 }
