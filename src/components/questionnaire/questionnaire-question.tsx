@@ -83,7 +83,6 @@ export class QuestionnaireQuestionComponent {
     store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
 
     if (!this.question.next) {
-      console.log('Answers:', store.questionnaire.answers); // TODO remove debug
       this.switchDisplayModeHandler('confirm');
       return;
     }
