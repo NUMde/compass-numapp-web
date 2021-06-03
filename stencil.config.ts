@@ -39,6 +39,6 @@ export const config: Config = {
   env: {
     ENVIRONMENT: env.ENVIRONMENT,
     API_BASE_URL: env.API_BASE_URL,
-    FALLBACK_CERTIFICATE: env.FALLBACK_CERTIFICATE.replace(/\\n/g, '\n'),
+    FALLBACK_CERTIFICATE: env.FALLBACK_CERTIFICATE?.replace(/\\n/g, '\n'),
   },
 };
