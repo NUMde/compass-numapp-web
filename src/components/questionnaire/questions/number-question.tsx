@@ -6,7 +6,7 @@ export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQues
   return (
     <d4l-input
       name={question.linkId}
-      inputmode="numeric"
+      inputmode={question.type === 'decimal' ? 'decimal' : 'numeric'}
       required={question.required}
       label={question.text}
       hiddenlabel
