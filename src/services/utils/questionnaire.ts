@@ -127,7 +127,8 @@ export const buildQuestionnaireResponseItem = (
  */
 export const encrypt = (pem: string, payload: object): string => {
   const p7 = forge.pkcs7.createEnvelopedData();
-  p7.content = forge.util.createBuffer(JSON.stringify(payload));
+  p7.content = forge.util.createBuffer();
+  p7.content.putString(JSON.stringify(payload));
   p7.addRecipient(forge.pki.certificateFromPem(pem));
   p7.encrypt();
 
