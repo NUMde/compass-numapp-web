@@ -1,9 +1,10 @@
 import { NUMQuestionnaireQuestion } from 'models/question';
 import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
+import forge from 'node-forge';
 
 export const flattenNestedItems = (
-  items: fhir.QuestionnaireItem[],
-  parent: fhir.Questionnaire | fhir.QuestionnaireItem,
+  items: fhir4.QuestionnaireItem[],
+  parent: fhir4.Questionnaire | fhir4.QuestionnaireItem,
   level = 0
 ): NUMQuestionnaireFlattenedItem[] => {
   return items
@@ -24,14 +25,14 @@ export const extractQuestions = (
 export const isValidValue = (value: any) =>
   typeof value === 'number' || typeof value === 'boolean' || !!value;
 
-export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseItemAnswer) => {
+export const extractValue = (item: fhir4.Extension | fhir4.QuestionnaireResponseItemAnswer) => {
   return (
     item.valueBoolean ??
     item.valueDecimal ??
     item.valueInteger ??
     item.valueDate ??
     item.valueDateTime ??
-    (item as fhir.Extension).valueInstant ??
+    (item as fhir4.Extension).valueInstant ??
     item.valueTime ??
     item.valueString ??
     item.valueCoding?.code ??
@@ -40,9 +41,9 @@ export const extractValue = (item: fhir.Extension | fhir.QuestionnaireResponseIt
 };
 
 export const buildFHIRValue = (
-  questionType: fhir.QuestionnaireItemType,
+  questionType: fhir4.QuestionnaireItem['type'],
   value: number | boolean | string
-): fhir.QuestionnaireResponseItemAnswer => {
+): fhir4.QuestionnaireResponseItemAnswer => {
   switch (questionType) {
     case 'group':
     case 'display':
@@ -67,7 +68,7 @@ export const buildFHIRValue = (
   }
 };
 
-export const parseExtensions = (extensions: fhir.Extension[]): NumQuestionnaireExtensionConfig => {
+export const parseExtensions = (extensions: fhir4.Extension[]): NumQuestionnaireExtensionConfig => {
   return extensions.reduce(
     (config, extension) =>
       Object.assign(config, {
@@ -97,7 +98,7 @@ export const getHash = (data: string) => {
 export const buildQuestionnaireResponseItem = (
   flattenedItems: NUMQuestionnaireFlattenedItem[],
   linkId: string
-): fhir.QuestionnaireResponseItem => {
+): fhir4.QuestionnaireResponseItem => {
   const item = flattenedItems.find((item) => item.linkId === linkId);
   const answer = item.isEnabled && item.isAnswered ? item?.answer?.filter(isValidValue) : [];
   if (!item) {
@@ -117,5 +118,25 @@ export const buildQuestionnaireResponseItem = (
             .filter(Boolean),
         }
       : {}),
+    ...(item.definition ? { definition: item.definition } : {}),
   };
+};
+
+/**
+ * see https://github.com/NUMde/compass-numapp/tree/main/docs/encryption
+ */
+export const encrypt = (pem: string, payload: object): string => {
+  const p7 = forge.pkcs7.createEnvelopedData();
+  p7.content = forge.util.createBuffer();
+  p7.content.putString(JSON.stringify(payload));
+  p7.addRecipient(forge.pki.certificateFromPem(pem));
+  p7.encrypt();
+
+  return btoa(
+    forge.util
+      .bytesToHex(forge.asn1.toDer(p7.toAsn1()).data)
+      .match(/\w{2}/g)
+      .map((value) => String.fromCharCode(parseInt(value, 16)))
+      .join('')
+  );
 };

@@ -1,6 +1,7 @@
+import { FALLBACK_CERTIFICATE } from 'global/constants';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from 'services';
-import { user } from 'store';
+import { user, questionnaire } from 'store';
 
 interface StateType {
   accessToken: string;
@@ -12,12 +13,23 @@ const storeBuilder = ({ persistor }: Services) => {
   });
 
   class Actions {
+    #certificate?: string;
+
     get accessToken() {
       return store.get('accessToken');
     }
 
     get isAuthenticated() {
       return !!this.accessToken && user.isPopulated;
+    }
+
+    get certificate() {
+      return this.#certificate ?? FALLBACK_CERTIFICATE;
+    }
+    set certificate(certificate: string) {
+      if (certificate && certificate !== 'false') {
+        this.#certificate = certificate;
+      }
     }
 
     login(accessToken: string) {
@@ -27,6 +39,7 @@ const storeBuilder = ({ persistor }: Services) => {
     logout() {
       store.reset();
       user.reset();
+      questionnaire.reset();
     }
 
     expireSession() {

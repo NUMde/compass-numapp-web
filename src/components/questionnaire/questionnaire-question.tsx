@@ -30,8 +30,8 @@ export class QuestionnaireQuestionComponent {
   @State() pendingAnswer: NUMQuestionnaireAnswer = [];
 
   @Event() switchDisplayMode: EventEmitter;
-  switchDisplayModeHandler() {
-    this.switchDisplayMode.emit({ displayMode: 'index' });
+  switchDisplayModeHandler(displayMode: 'index' | 'confirm') {
+    this.switchDisplayMode.emit({ displayMode });
   }
 
   get storedAnswer() {
@@ -83,9 +83,7 @@ export class QuestionnaireQuestionComponent {
     store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
 
     if (!this.question.next) {
-      requestAnimationFrame(() => alert('TODO questionnaire is done - proceed')); // TODO proceed in the flow
-      console.log('Answers:', store.questionnaire.answers); // TODO remove debug
-      // store.questionnaire.answers.reset(); TODO continue and do this reset in questionnaire service after having successfully submitted the response
+      this.switchDisplayModeHandler('confirm');
       return;
     }
 
@@ -98,7 +96,7 @@ export class QuestionnaireQuestionComponent {
   moveToPreviousQuestion() {
     const { previous } = this.question;
     if (!previous) {
-      return this.switchDisplayModeHandler();
+      return this.switchDisplayModeHandler('index');
     }
 
     this.question = previous;
@@ -133,10 +131,11 @@ export class QuestionnaireQuestionComponent {
     const selectedQuestion = questions.find(({ linkId }) => linkId === this.linkId);
     this.question = selectedQuestion?.isAnswerable
       ? selectedQuestion
-      : questions.reverse().find(({ isAnswerable }) => isAnswerable);
+      : []
+          .concat(questions)
+          .reverse()
+          .find(({ isAnswerable }) => isAnswerable);
     this.pendingAnswer = [].concat(this.storedAnswer ?? []);
-
-    console.log('Questions:', questions); // TODO remove debug
   }
 
   componentDidLoad() {
@@ -155,6 +154,8 @@ export class QuestionnaireQuestionComponent {
 
     return (
       <Card wide headline={`${question.linkId} ${question.text}`}>
+        <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
+
         {this.description.map((item) => (
           <p class="u-infotext" key={item.linkId}>
             {item.text}
@@ -208,6 +209,11 @@ export class QuestionnaireQuestionComponent {
         <h3 class="u-margin-top--large">DEBUG QuestionnaireResponse</h3>
         <pre class="u-margin-top--small" style={{ textAlign: 'left', height: '300px', overflow: 'auto' }}>
           {JSON.stringify(services.questionnaire.buildQuestionnaireResponse(), null, 2)}
+        </pre>
+        <h3 class="u-margin-top--medium">DEBUG QuestionnaireResponseFlags</h3>
+        <pre class="u-margin-top--small" style={{ textAlign: 'left' }}>
+          {/* @ts-ignore */}
+          {JSON.stringify(services.questionnaire.buildFlags(), null, 2)}
         </pre>
       </Card>
     );

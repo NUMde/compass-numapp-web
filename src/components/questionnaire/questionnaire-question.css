@@ -1,3 +1,7 @@
+.questionnaire-question__progress {
+  margin: -1px calc(var(--padding-medium) * (-1)) 0;
+}
+
 .questionnaire-question__form {
   display: flex;
   flex-flow: column nowrap;

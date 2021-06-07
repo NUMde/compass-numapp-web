@@ -9,14 +9,14 @@ export default class User implements IUserService {
     return data;
   }
 
-  async populateStore() {
+  async populateStore(refresh = false) {
     const userId = store.auth.accessToken;
     if (!userId) {
       store.user.reset();
       return;
     }
 
-    if (store.user.isPopulated) {
+    if (!refresh && store.user.isPopulated) {
       return;
     }
 
@@ -26,10 +26,15 @@ export default class User implements IUserService {
         throw new Error();
       }
 
+      store.auth.certificate = userResponse.recipient_certificate_pem_string;
       store.user.populateFromUserResponse(userResponse);
     } catch (e) {
       store.auth.expireSession();
     }
+  }
+
+  async refresh() {
+    await this.populateStore(true);
   }
 }
 

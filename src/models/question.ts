@@ -2,23 +2,23 @@ import { extractValue, parseExtensions } from 'services/utils/questionnaire';
 import store from 'store';
 
 export class NUMQuestionnaireQuestion {
-  readonly parent: fhir.Questionnaire | fhir.QuestionnaireItem;
+  readonly parent: fhir4.Questionnaire | fhir4.QuestionnaireItem;
   readonly level: number;
 
   linkId: string;
-  type: fhir.QuestionnaireItemType;
+  type: fhir4.QuestionnaireItem['type'];
 
-  answerOption?: fhir.QuestionnaireResponseItemAnswer[];
+  answerOption?: fhir4.QuestionnaireItemAnswerOption[];
   enableBehavior?: 'all' | 'any';
-  enableWhen?: fhir.QuestionnaireItemEnableWhen[];
-  extension?: fhir.Extension[];
-  item?: fhir.QuestionnaireItem[];
+  enableWhen?: fhir4.QuestionnaireItemEnableWhen[];
+  extension?: fhir4.Extension[];
+  item?: fhir4.QuestionnaireItem[];
   maxLength?: number;
   required?: boolean;
 
   constructor(
-    item: fhir.QuestionnaireItem,
-    parent: fhir.Questionnaire | fhir.QuestionnaireItem,
+    item: fhir4.QuestionnaireItem,
+    parent: fhir4.Questionnaire | fhir4.QuestionnaireItem,
     level: number
   ) {
     Object.assign(this, item);

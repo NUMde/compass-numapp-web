@@ -7,6 +7,7 @@ interface StateType {
   questionnaireId?: string;
   questionnaireStartDate?: Date;
   questionnaireDueDate?: Date;
+  instanceId?: string;
 }
 
 const storeBuilder = () => {
@@ -24,6 +25,7 @@ const storeBuilder = () => {
       store.set('questionnaireId', response.current_questionnaire_id);
       store.set('questionnaireStartDate', response.start_date ? new Date(response.start_date) : null);
       store.set('questionnaireDueDate', response.due_date ? new Date(response.due_date) : null);
+      store.set('instanceId', response.current_instance_id);
       store.set('isPopulated', true);
     }
 
@@ -51,6 +53,10 @@ const storeBuilder = () => {
 
     get questionnaireDueDate() {
       return store.get('questionnaireDueDate');
+    }
+
+    get instanceId() {
+      return store.get('instanceId');
     }
   }
 

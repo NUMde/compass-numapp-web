@@ -46,7 +46,11 @@ export default function createPersistedStore<T>(
       }
     },
     reset() {
-      getPersistedKeys().forEach((key) => store.set(key as keyof T & string, initialData[key] ?? null));
+      getPersistedKeys().forEach((key) => {
+        const resetValue = initialData[key] ?? null;
+        store.set(key as keyof T & string, resetValue);
+        actions.set(key, resetValue);
+      });
     },
   };
 

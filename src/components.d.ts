@@ -29,8 +29,12 @@ export namespace Components {
     }
     interface NumNotifications {
     }
+    interface NumQuestionnaireConfirm {
+    }
     interface NumQuestionnaireQuestion {
         "linkId"?: string;
+    }
+    interface NumQuestionnaireSuccess {
     }
     interface NumQuestionnaireTree {
     }
@@ -78,11 +82,23 @@ declare global {
         prototype: HTMLNumNotificationsElement;
         new (): HTMLNumNotificationsElement;
     };
+    interface HTMLNumQuestionnaireConfirmElement extends Components.NumQuestionnaireConfirm, HTMLStencilElement {
+    }
+    var HTMLNumQuestionnaireConfirmElement: {
+        prototype: HTMLNumQuestionnaireConfirmElement;
+        new (): HTMLNumQuestionnaireConfirmElement;
+    };
     interface HTMLNumQuestionnaireQuestionElement extends Components.NumQuestionnaireQuestion, HTMLStencilElement {
     }
     var HTMLNumQuestionnaireQuestionElement: {
         prototype: HTMLNumQuestionnaireQuestionElement;
         new (): HTMLNumQuestionnaireQuestionElement;
+    };
+    interface HTMLNumQuestionnaireSuccessElement extends Components.NumQuestionnaireSuccess, HTMLStencilElement {
+    }
+    var HTMLNumQuestionnaireSuccessElement: {
+        prototype: HTMLNumQuestionnaireSuccessElement;
+        new (): HTMLNumQuestionnaireSuccessElement;
     };
     interface HTMLNumQuestionnaireTreeElement extends Components.NumQuestionnaireTree, HTMLStencilElement {
     }
@@ -98,7 +114,9 @@ declare global {
         "num-container-welcome": HTMLNumContainerWelcomeElement;
         "num-notification": HTMLNumNotificationElement;
         "num-notifications": HTMLNumNotificationsElement;
+        "num-questionnaire-confirm": HTMLNumQuestionnaireConfirmElement;
         "num-questionnaire-question": HTMLNumQuestionnaireQuestionElement;
+        "num-questionnaire-success": HTMLNumQuestionnaireSuccessElement;
         "num-questionnaire-tree": HTMLNumQuestionnaireTreeElement;
     }
 }
@@ -124,9 +142,14 @@ declare namespace LocalJSX {
     }
     interface NumNotifications {
     }
+    interface NumQuestionnaireConfirm {
+        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
+    }
     interface NumQuestionnaireQuestion {
         "linkId"?: string;
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
+    }
+    interface NumQuestionnaireSuccess {
     }
     interface NumQuestionnaireTree {
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
@@ -139,7 +162,9 @@ declare namespace LocalJSX {
         "num-container-welcome": NumContainerWelcome;
         "num-notification": NumNotification;
         "num-notifications": NumNotifications;
+        "num-questionnaire-confirm": NumQuestionnaireConfirm;
         "num-questionnaire-question": NumQuestionnaireQuestion;
+        "num-questionnaire-success": NumQuestionnaireSuccess;
         "num-questionnaire-tree": NumQuestionnaireTree;
     }
 }
@@ -154,7 +179,9 @@ declare module "@stencil/core" {
             "num-container-welcome": LocalJSX.NumContainerWelcome & JSXBase.HTMLAttributes<HTMLNumContainerWelcomeElement>;
             "num-notification": LocalJSX.NumNotification & JSXBase.HTMLAttributes<HTMLNumNotificationElement>;
             "num-notifications": LocalJSX.NumNotifications & JSXBase.HTMLAttributes<HTMLNumNotificationsElement>;
+            "num-questionnaire-confirm": LocalJSX.NumQuestionnaireConfirm & JSXBase.HTMLAttributes<HTMLNumQuestionnaireConfirmElement>;
             "num-questionnaire-question": LocalJSX.NumQuestionnaireQuestion & JSXBase.HTMLAttributes<HTMLNumQuestionnaireQuestionElement>;
+            "num-questionnaire-success": LocalJSX.NumQuestionnaireSuccess & JSXBase.HTMLAttributes<HTMLNumQuestionnaireSuccessElement>;
             "num-questionnaire-tree": LocalJSX.NumQuestionnaireTree & JSXBase.HTMLAttributes<HTMLNumQuestionnaireTreeElement>;
         }
     }

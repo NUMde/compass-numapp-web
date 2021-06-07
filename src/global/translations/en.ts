@@ -50,15 +50,26 @@ export default {
   },
   questionnaire: {
     back: 'Back',
-    continue: 'Continue',
+    confirm_submit: {
+      error:
+        'An error happened while sending your answers. Please try it again at a later time. You may close your browser and proceed later without losing your answers.',
+      headline: 'Submit questionnaire',
+      infotext: 'You have answered all questions. By proceeding, your data will be submitted.',
+    },
+    continue: 'Proceed',
     date_input: {
       error: 'Please verify your input.',
       day: 'Day',
       month: 'Month',
       year: 'Year',
     },
+    finish: 'Return to overview',
     group: 'Group {{ number }}',
     question: 'Question {{ number }}',
+    success: {
+      headline: 'Success',
+      infotext: 'Thank you for your contribution!',
+    },
   },
   welcome: {
     continue: 'Proceed',

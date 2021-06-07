@@ -1,7 +1,7 @@
-import { API_BASE_URL } from 'global/constants';
+import { API_BASE_URL, QUESTIONNAIRE_RESPONSE_TRIGGER_RULES } from 'global/constants';
 import store from 'store';
-import { get } from 'services/utils/fetch-client';
-import { buildQuestionnaireResponseItem } from 'services/utils/questionnaire';
+import { get, post } from 'services/utils/fetch-client';
+import { buildQuestionnaireResponseItem, encrypt } from 'services/utils/questionnaire';
 import { IQuestionnaireService, NUMQuestionnaire } from './types';
 
 export default class QuestionnaireService implements IQuestionnaireService {
@@ -13,7 +13,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return data;
   }
 
-  buildQuestionnaireResponse() {
+  buildQuestionnaireResponse(): fhir4.QuestionnaireResponse {
     const date = new Date();
     const userId = store.auth.accessToken;
     const { flattenedItems, questionnaire } = store.questionnaire;
@@ -25,13 +25,15 @@ export default class QuestionnaireService implements IQuestionnaireService {
       author: {
         identifier: {
           value: userId,
+          system: 'urn:ietf:rfc:3986',
         },
       },
       resourceType: 'QuestionnaireResponse',
       identifier: {
         value: `${userId}-${date.getTime()}`,
+        system: 'urn:ietf:rfc:3986',
       },
-      status: (isCompleted ? 'completed' : 'in-progress') as fhir.QuestionnaireResponseStatus,
+      status: isCompleted ? 'completed' : 'in-progress',
       authored: date.toISOString(),
       questionnaire: [questionnaire.url, questionnaire.version]
         .filter((segment) => (typeof segment === 'string' && !!segment) || typeof segment === 'number')
@@ -41,6 +43,49 @@ export default class QuestionnaireService implements IQuestionnaireService {
           ?.map((item) => buildQuestionnaireResponseItem(flattenedItems, item.linkId))
           .filter(Boolean) ?? [],
     };
+  }
+
+  generateEncryptedPayload(type, questionnaireResponse) {
+    const payload = {
+      type,
+      data: {
+        appId: store.auth.accessToken,
+        ...(questionnaireResponse ? { body: questionnaireResponse } : {}),
+      },
+    };
+
+    return JSON.stringify({ payload: encrypt(store.auth.certificate, payload) });
+  }
+
+  buildFlags() {
+    const answers = store.questionnaire.answers;
+    return QUESTIONNAIRE_RESPONSE_TRIGGER_RULES.reduce(
+      (flags, rule) => ({
+        ...flags,
+        [rule.type]: Object.keys(rule.answers).some((linkId) =>
+          rule.answers[linkId].every((value) => (answers.get(linkId) ?? []).includes(value))
+        ),
+      }),
+      {}
+    );
+  }
+
+  async submitQuestionnaireResponse() {
+    const userId = store.auth.accessToken;
+    const params = {
+      type: 'questionnaire_response',
+      id: userId,
+      appId: userId,
+      surveyId: store.user.questionnaireId,
+      instanceId: store.user.instanceId,
+      ...this.buildFlags(),
+    };
+
+    await post({
+      url: `${API_BASE_URL}/queue?${new URLSearchParams(params).toString()}`,
+      authenticated: true,
+      body: this.generateEncryptedPayload('questionnaire_response', this.buildQuestionnaireResponse()),
+    });
   }
 }
 
