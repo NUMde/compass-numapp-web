@@ -17,6 +17,8 @@ export namespace Components {
     }
     interface NumContainerQuestionnaire {
     }
+    interface NumContainerReport {
+    }
     interface NumContainerWelcome {
     }
     interface NumNotification {
@@ -63,6 +65,12 @@ declare global {
     var HTMLNumContainerQuestionnaireElement: {
         prototype: HTMLNumContainerQuestionnaireElement;
         new (): HTMLNumContainerQuestionnaireElement;
+    };
+    interface HTMLNumContainerReportElement extends Components.NumContainerReport, HTMLStencilElement {
+    }
+    var HTMLNumContainerReportElement: {
+        prototype: HTMLNumContainerReportElement;
+        new (): HTMLNumContainerReportElement;
     };
     interface HTMLNumContainerWelcomeElement extends Components.NumContainerWelcome, HTMLStencilElement {
     }
@@ -111,6 +119,7 @@ declare global {
         "num-container-authenticate": HTMLNumContainerAuthenticateElement;
         "num-container-dashboard": HTMLNumContainerDashboardElement;
         "num-container-questionnaire": HTMLNumContainerQuestionnaireElement;
+        "num-container-report": HTMLNumContainerReportElement;
         "num-container-welcome": HTMLNumContainerWelcomeElement;
         "num-notification": HTMLNumNotificationElement;
         "num-notifications": HTMLNumNotificationsElement;
@@ -129,6 +138,8 @@ declare namespace LocalJSX {
     interface NumContainerDashboard {
     }
     interface NumContainerQuestionnaire {
+    }
+    interface NumContainerReport {
     }
     interface NumContainerWelcome {
     }
@@ -159,6 +170,7 @@ declare namespace LocalJSX {
         "num-container-authenticate": NumContainerAuthenticate;
         "num-container-dashboard": NumContainerDashboard;
         "num-container-questionnaire": NumContainerQuestionnaire;
+        "num-container-report": NumContainerReport;
         "num-container-welcome": NumContainerWelcome;
         "num-notification": NumNotification;
         "num-notifications": NumNotifications;
@@ -176,6 +188,7 @@ declare module "@stencil/core" {
             "num-container-authenticate": LocalJSX.NumContainerAuthenticate & JSXBase.HTMLAttributes<HTMLNumContainerAuthenticateElement>;
             "num-container-dashboard": LocalJSX.NumContainerDashboard & JSXBase.HTMLAttributes<HTMLNumContainerDashboardElement>;
             "num-container-questionnaire": LocalJSX.NumContainerQuestionnaire & JSXBase.HTMLAttributes<HTMLNumContainerQuestionnaireElement>;
+            "num-container-report": LocalJSX.NumContainerReport & JSXBase.HTMLAttributes<HTMLNumContainerReportElement>;
             "num-container-welcome": LocalJSX.NumContainerWelcome & JSXBase.HTMLAttributes<HTMLNumContainerWelcomeElement>;
             "num-notification": LocalJSX.NumNotification & JSXBase.HTMLAttributes<HTMLNumNotificationElement>;
             "num-notifications": LocalJSX.NumNotifications & JSXBase.HTMLAttributes<HTMLNumNotificationsElement>;
