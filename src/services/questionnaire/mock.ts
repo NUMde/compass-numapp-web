@@ -18,4 +18,5 @@ export default class MockQuestionnaireService implements IQuestionnaireService {
   }
 
   async submitQuestionnaireResponse() {}
+  async submitReport() {}
 }

@@ -28,13 +28,13 @@ export default {
         first_text:
           "This text is rendered in case that there is an unsubmitted questionnaire available. The questionnaire's deadline is",
         second_text:
-          'This additional text is displayed in case that there is an unsubmitted questionnaire available. Symptoms can be reported at any time.',
+          'This additional text is displayed in case that there is an unsubmitted questionnaire available.',
       },
       questionnaire_not_available: {
         first_text:
           'This text is rendered when there is no questionnaire available at the moment. The next questionnaire can be filled out starting at',
         second_text:
-          'This additional text is displayed in case there is no questionnaire available at the moment. Symptoms can be reported at any time.',
+          'This additional text is displayed in case there is no questionnaire available at the moment. Should you have symptoms, you can report this at any time.',
       },
     },
   },
@@ -69,6 +69,21 @@ export default {
     success: {
       headline: 'Success',
       infotext: 'Thank you for your contribution!',
+    },
+  },
+  report: {
+    confirm_submit: {
+      back: 'Back',
+      continue: 'Submit',
+      error: 'Unfortunately an error happened. Please try again later.',
+      headline: 'Report symptoms',
+      infotext: 'You can report that you have symptoms. Click the button below to submit that information.',
+    },
+    success: {
+      finish: 'Return to overview',
+      headline: 'Report symptoms',
+      infotext:
+        'You have successfully reported that you have symptoms. A new questionnaire will be provided to you shortly.',
     },
   },
   welcome: {

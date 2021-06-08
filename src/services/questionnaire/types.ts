@@ -20,4 +20,5 @@ export interface IQuestionnaireService {
     questionnaireResponse?: fhir4.QuestionnaireResponse
   ): string;
   submitQuestionnaireResponse(): Promise<void>;
+  submitReport(): Promise<void>;
 }

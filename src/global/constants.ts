@@ -36,17 +36,20 @@ export const APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppName';
 export const QR_PROP_USER_ID = 'AppID';
 
+export const TRIGGER_KEY_BASIC = 'basicTrigger';
+export const TRIGGER_KEY_SPECIAL = 'specialTrigger';
+
 export const QUESTIONNAIRE_ALLOW_FUTURE_DATES = true;
 export const QUESTIONNAIRE_RESPONSE_TRIGGER_RULES = [
   {
-    type: 'basicTrigger',
+    type: TRIGGER_KEY_BASIC,
     answers: {
       '1.11': ['Option A'],
       '1.10.1': [true],
     },
   },
   {
-    type: 'specialTrigger',
+    type: TRIGGER_KEY_SPECIAL,
     answers: {
       '1.18': ['Special trigger answer'],
     },
