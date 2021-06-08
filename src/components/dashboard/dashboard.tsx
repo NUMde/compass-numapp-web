@@ -53,18 +53,18 @@ export class Dashboard {
           )}
         </p>
 
-        <stencil-route-link url={ROUTES.REPORT}>
-          <d4l-button
-            classes={`button--block u-margin-vertical--normal ${
-              isQuestionnaireAvailable ? 'button--secondary' : ''
-            }`}
-            text={store.i18n.t('dashboard.button.report')}
-          />
-        </stencil-route-link>
+        {!isQuestionnaireAvailable && (
+          <stencil-route-link url={ROUTES.REPORT}>
+            <d4l-button
+              classes="button--block u-margin-vertical--normal"
+              text={store.i18n.t('dashboard.button.report')}
+            />
+          </stencil-route-link>
+        )}
 
         {SHOW_LOGOUT && (
           <d4l-button
-            classes="button--block button--secondary"
+            classes="button--block button--secondary u-margin-top--normal"
             text={store.i18n.t('dashboard.button.logout')}
             handleClick={() => store.auth.logout()}
           />

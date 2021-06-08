@@ -31,13 +31,13 @@ export default {
         first_text:
           'Dieser Text wird angezeigt, falls es einen verfügbaren Fragebogen gibt, der noch nicht beantwortet wurde. Der Fragebogen muss ausgefüllt werden bis zum',
         second_text:
-          'Dieser weitere Text wird angezeigt, falls es einen verfügbaren Fragebogen gibt, der noch nicht beantwortet wurde. Wenn Sie Symptome haben, können Sie diese jederzeit melden.',
+          'Dieser weitere Text wird angezeigt, falls es einen verfügbaren Fragebogen gibt, der noch nicht beantwortet wurde.',
       },
       questionnaire_not_available: {
         first_text:
           'Dieser Text wird angezeigt, wenn derzeit kein Fragebogen zum Ausfüllen zur Verfügung steht. Der nächste Fragebogen kann ausgefüllt werden ab dem',
         second_text:
-          'Dieser weitere Text wird angezeigt, wenn derzeit kein Fragebogen zum Ausfüllen zur Verfügung steht. Wenn Sie Symptome haben, können Sie diese jederzeit melden.',
+          'Dieser weitere Text wird angezeigt, wenn derzeit kein Fragebogen zum Ausfüllen zur Verfügung steht. Wenn Sie Symptome haben, können Sie dies jederzeit melden.',
       },
     },
   },
@@ -72,6 +72,22 @@ export default {
     success: {
       headline: 'Vielen Dank!',
       infotext: 'Vielen Dank für Ihren Beitrag!',
+    },
+  },
+  report: {
+    confirm_submit: {
+      back: 'Zurück',
+      continue: 'Absenden',
+      error: 'Leider ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+      headline: 'Symptome melden',
+      infotext:
+        'Falls Sie Symptome haben, können Sie dies melden. Klicken Sie auf die nachfolgende Schaltfläche, um die Information zu übermitteln.',
+    },
+    success: {
+      finish: 'Zur Übersicht zurückkehren',
+      headline: 'Symptome melden',
+      infotext:
+        'Sie haben erfolgreich gemeldet, dass Sie Symptome haben. Es wird Ihnen zeitnah ein weiterer Fragebogen zur Verfügung gestellt.',
     },
   },
   welcome: {

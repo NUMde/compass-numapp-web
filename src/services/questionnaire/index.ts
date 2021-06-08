@@ -1,4 +1,4 @@
-import { API_BASE_URL, QUESTIONNAIRE_RESPONSE_TRIGGER_RULES } from 'global/constants';
+import { API_BASE_URL, TRIGGER_KEY_BASIC, QUESTIONNAIRE_RESPONSE_TRIGGER_RULES } from 'global/constants';
 import store from 'store';
 import { get, post } from 'services/utils/fetch-client';
 import { buildQuestionnaireResponseItem, encrypt } from 'services/utils/questionnaire';
@@ -62,8 +62,10 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return QUESTIONNAIRE_RESPONSE_TRIGGER_RULES.reduce(
       (flags, rule) => ({
         ...flags,
-        [rule.type]: Object.keys(rule.answers).some((linkId) =>
-          rule.answers[linkId].every((value) => (answers.get(linkId) ?? []).includes(value))
+        [rule.type]: String(
+          Object.keys(rule.answers).some((linkId) =>
+            rule.answers[linkId].every((value) => (answers.get(linkId) ?? []).includes(value))
+          )
         ),
       }),
       {}
@@ -78,13 +80,28 @@ export default class QuestionnaireService implements IQuestionnaireService {
       appId: userId,
       surveyId: store.user.questionnaireId,
       instanceId: store.user.instanceId,
-      ...this.buildFlags(),
+      updateValues: JSON.stringify(this.buildFlags()),
     };
 
     await post({
       url: `${API_BASE_URL}/queue?${new URLSearchParams(params).toString()}`,
       authenticated: true,
       body: this.generateEncryptedPayload('questionnaire_response', this.buildQuestionnaireResponse()),
+    });
+  }
+
+  async submitReport() {
+    const userId = store.auth.accessToken;
+    const params = {
+      type: 'report',
+      appId: userId,
+      updateValues: JSON.stringify({ [TRIGGER_KEY_BASIC]: true }),
+    };
+
+    await post({
+      url: `${API_BASE_URL}/queue?${new URLSearchParams(params).toString()}`,
+      authenticated: true,
+      body: this.generateEncryptedPayload('report', {}),
     });
   }
 }
