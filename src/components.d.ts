@@ -19,8 +19,8 @@ export namespace Components {
     }
     interface NumContainerWelcome {
     }
-    interface NumImprint {
-        "history": RouterHistory;
+    interface NumLegal {
+        "namespace": string;
     }
     interface NumNotification {
         "action": () => void;
@@ -32,16 +32,10 @@ export namespace Components {
     }
     interface NumNotifications {
     }
-    interface NumPrivacyPolicy {
-        "history": RouterHistory;
-    }
     interface NumQuestionnaireQuestion {
         "linkId"?: string;
     }
     interface NumQuestionnaireTree {
-    }
-    interface NumTerms {
-        "history": RouterHistory;
     }
 }
 declare global {
@@ -75,11 +69,11 @@ declare global {
         prototype: HTMLNumContainerWelcomeElement;
         new (): HTMLNumContainerWelcomeElement;
     };
-    interface HTMLNumImprintElement extends Components.NumImprint, HTMLStencilElement {
+    interface HTMLNumLegalElement extends Components.NumLegal, HTMLStencilElement {
     }
-    var HTMLNumImprintElement: {
-        prototype: HTMLNumImprintElement;
-        new (): HTMLNumImprintElement;
+    var HTMLNumLegalElement: {
+        prototype: HTMLNumLegalElement;
+        new (): HTMLNumLegalElement;
     };
     interface HTMLNumNotificationElement extends Components.NumNotification, HTMLStencilElement {
     }
@@ -93,12 +87,6 @@ declare global {
         prototype: HTMLNumNotificationsElement;
         new (): HTMLNumNotificationsElement;
     };
-    interface HTMLNumPrivacyPolicyElement extends Components.NumPrivacyPolicy, HTMLStencilElement {
-    }
-    var HTMLNumPrivacyPolicyElement: {
-        prototype: HTMLNumPrivacyPolicyElement;
-        new (): HTMLNumPrivacyPolicyElement;
-    };
     interface HTMLNumQuestionnaireQuestionElement extends Components.NumQuestionnaireQuestion, HTMLStencilElement {
     }
     var HTMLNumQuestionnaireQuestionElement: {
@@ -111,25 +99,17 @@ declare global {
         prototype: HTMLNumQuestionnaireTreeElement;
         new (): HTMLNumQuestionnaireTreeElement;
     };
-    interface HTMLNumTermsElement extends Components.NumTerms, HTMLStencilElement {
-    }
-    var HTMLNumTermsElement: {
-        prototype: HTMLNumTermsElement;
-        new (): HTMLNumTermsElement;
-    };
     interface HTMLElementTagNameMap {
         "app-root": HTMLAppRootElement;
         "num-container-authenticate": HTMLNumContainerAuthenticateElement;
         "num-container-dashboard": HTMLNumContainerDashboardElement;
         "num-container-questionnaire": HTMLNumContainerQuestionnaireElement;
         "num-container-welcome": HTMLNumContainerWelcomeElement;
-        "num-imprint": HTMLNumImprintElement;
+        "num-legal": HTMLNumLegalElement;
         "num-notification": HTMLNumNotificationElement;
         "num-notifications": HTMLNumNotificationsElement;
-        "num-privacy-policy": HTMLNumPrivacyPolicyElement;
         "num-questionnaire-question": HTMLNumQuestionnaireQuestionElement;
         "num-questionnaire-tree": HTMLNumQuestionnaireTreeElement;
-        "num-terms": HTMLNumTermsElement;
     }
 }
 declare namespace LocalJSX {
@@ -144,8 +124,8 @@ declare namespace LocalJSX {
     }
     interface NumContainerWelcome {
     }
-    interface NumImprint {
-        "history"?: RouterHistory;
+    interface NumLegal {
+        "namespace"?: string;
     }
     interface NumNotification {
         "action"?: () => void;
@@ -157,9 +137,6 @@ declare namespace LocalJSX {
     }
     interface NumNotifications {
     }
-    interface NumPrivacyPolicy {
-        "history"?: RouterHistory;
-    }
     interface NumQuestionnaireQuestion {
         "linkId"?: string;
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
@@ -167,22 +144,17 @@ declare namespace LocalJSX {
     interface NumQuestionnaireTree {
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
     }
-    interface NumTerms {
-        "history"?: RouterHistory;
-    }
     interface IntrinsicElements {
         "app-root": AppRoot;
         "num-container-authenticate": NumContainerAuthenticate;
         "num-container-dashboard": NumContainerDashboard;
         "num-container-questionnaire": NumContainerQuestionnaire;
         "num-container-welcome": NumContainerWelcome;
-        "num-imprint": NumImprint;
+        "num-legal": NumLegal;
         "num-notification": NumNotification;
         "num-notifications": NumNotifications;
-        "num-privacy-policy": NumPrivacyPolicy;
         "num-questionnaire-question": NumQuestionnaireQuestion;
         "num-questionnaire-tree": NumQuestionnaireTree;
-        "num-terms": NumTerms;
     }
 }
 export { LocalJSX as JSX };
@@ -194,13 +166,11 @@ declare module "@stencil/core" {
             "num-container-dashboard": LocalJSX.NumContainerDashboard & JSXBase.HTMLAttributes<HTMLNumContainerDashboardElement>;
             "num-container-questionnaire": LocalJSX.NumContainerQuestionnaire & JSXBase.HTMLAttributes<HTMLNumContainerQuestionnaireElement>;
             "num-container-welcome": LocalJSX.NumContainerWelcome & JSXBase.HTMLAttributes<HTMLNumContainerWelcomeElement>;
-            "num-imprint": LocalJSX.NumImprint & JSXBase.HTMLAttributes<HTMLNumImprintElement>;
+            "num-legal": LocalJSX.NumLegal & JSXBase.HTMLAttributes<HTMLNumLegalElement>;
             "num-notification": LocalJSX.NumNotification & JSXBase.HTMLAttributes<HTMLNumNotificationElement>;
             "num-notifications": LocalJSX.NumNotifications & JSXBase.HTMLAttributes<HTMLNumNotificationsElement>;
-            "num-privacy-policy": LocalJSX.NumPrivacyPolicy & JSXBase.HTMLAttributes<HTMLNumPrivacyPolicyElement>;
             "num-questionnaire-question": LocalJSX.NumQuestionnaireQuestion & JSXBase.HTMLAttributes<HTMLNumQuestionnaireQuestionElement>;
             "num-questionnaire-tree": LocalJSX.NumQuestionnaireTree & JSXBase.HTMLAttributes<HTMLNumQuestionnaireTreeElement>;
-            "num-terms": LocalJSX.NumTerms & JSXBase.HTMLAttributes<HTMLNumTermsElement>;
         }
     }
 }

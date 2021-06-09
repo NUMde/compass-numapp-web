@@ -92,9 +92,21 @@ export class AppRoot {
               <stencil-route component="num-container-authenticate" url={ROUTES.AUTHENTICATE} exact />
               <AuthenticatedRoute component="num-container-dashboard" url={ROUTES.DASHBOARD} />
               <AuthenticatedRoute component="num-container-questionnaire" url={ROUTES.QUESTIONNAIRE} />
-              <stencil-route url={ROUTES.IMPRINT} component="num-imprint" />
-              <stencil-route url={ROUTES.PRIVACY_POLICY} component="num-privacy-policy" />
-              <stencil-route url={ROUTES.TERMS} component="num-terms" />
+              <stencil-route
+                url={ROUTES.IMPRINT}
+                component="num-legal"
+                componentProps={{ namespace: 'imprint' }}
+              />
+              <stencil-route
+                url={ROUTES.PRIVACY_POLICY}
+                component="num-legal"
+                componentProps={{ namespace: 'privacy_policy' }}
+              />
+              <stencil-route
+                url={ROUTES.TERMS}
+                component="num-legal"
+                componentProps={{ namespace: 'terms' }}
+              />
               <stencil-route routeRender={() => <stencil-router-redirect url={this.defaultRoute} />} />
             </stencil-route-switch>
           </stencil-router>

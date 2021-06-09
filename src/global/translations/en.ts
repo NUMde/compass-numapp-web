@@ -66,12 +66,15 @@ export default {
     infotext: 'Here is the place for a short and informative introductory text about the app.',
   },
   imprint: {
-    content: '<h1>Imprint</h1>[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]'
+    headline: 'Imprint',
+    content: '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]'
   },
   terms: {
-    content: '<h1>Terms</h1>[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]'
+    headline: 'Terms',
+    content: '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]'
   },
   privacy_policy: {
-    content: '<h1>Privacy policy</h1>[TRANSLATION/CONTENT needed for translation key: privacy_policy.content in src/global/translations/en.ts]'
+    headline: 'Privacy policy',
+    content: '[TRANSLATION/CONTENT needed for translation key: privacy_policy.content in src/global/translations/en.ts]'
   }
 };
