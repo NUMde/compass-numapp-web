@@ -40,11 +40,28 @@ export const extractValue = (item: fhir4.Extension | fhir4.QuestionnaireResponse
   );
 };
 
-export const buildFHIRValue = (
-  questionType: fhir4.QuestionnaireItem['type'],
+export const extractLabel = (item: fhir4.Extension | fhir4.QuestionnaireResponseItemAnswer) => {
+  return item.valueCoding?.display ?? extractValue(item);
+};
+
+const buildFHIRValueFromOption = (
+  item: fhir4.QuestionnaireItem,
   value: number | boolean | string
 ): fhir4.QuestionnaireResponseItemAnswer => {
-  switch (questionType) {
+  const selectedOption = item.answerOption?.find((option) => extractValue(option) === value);
+  if (!selectedOption) {
+    // open-choice free text answer has been given
+    return { valueString: String(value) };
+  }
+
+  return { ...selectedOption };
+};
+
+export const buildFHIRValue = (
+  item: fhir4.QuestionnaireItem,
+  value: number | boolean | string
+): fhir4.QuestionnaireResponseItemAnswer => {
+  switch (item.type) {
     case 'group':
     case 'display':
       return null;
@@ -59,9 +76,10 @@ export const buildFHIRValue = (
     case 'string':
     case 'text':
     case 'url':
+      return { valueString: String(value) };
     case 'choice':
     case 'open-choice':
-      return { valueString: String(value) };
+      return buildFHIRValueFromOption(item, value);
     default:
       // type not supported
       return null;
@@ -108,9 +126,7 @@ export const buildQuestionnaireResponseItem = (
   return {
     linkId,
     text: item.text,
-    ...(answer?.length
-      ? { answer: answer.map((value) => buildFHIRValue(item.type, value)).filter(Boolean) }
-      : {}),
+    ...(answer?.length ? { answer: answer.map((value) => buildFHIRValue(item, value)).filter(Boolean) } : {}),
     ...(item.item
       ? {
           item: item.item
