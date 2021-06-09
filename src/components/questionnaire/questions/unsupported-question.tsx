@@ -7,7 +7,7 @@ export const UnsupportedQuestion = ({ question }: QuestionnaireQuestionComponent
   return (
     <d4l-notification-bar
       classes="notification-bar--slim notification-bar--bgcolor-red notification-bar--color-white"
-      text={i18n.t('questionnaire.error.question_type_unsupported', { type: question.type })}
+      text={i18n.t('questionnaire.question_type_unsupported', { type: question.type })}
     />
   );
 };

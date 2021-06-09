@@ -69,6 +69,7 @@ export default {
     finish: 'Zur Übersicht zurückkehren',
     group: 'Gruppe {{ number }}',
     question: 'Frage {{ number }}',
+    question_type_unsupported: 'Fragen vom Typ "{{ type }}" werden derzeit leider nicht unterstützt!',
     success: {
       headline: 'Vielen Dank!',
       infotext: 'Vielen Dank für Ihren Beitrag!',

@@ -69,9 +69,7 @@ export class QuestionnaireQuestionComponent {
       case 'text':
         return TextQuestion;
       case 'choice':
-        return SingleChoiceQuestion;
-      case 'open-choice':
-        return MultipleChoiceQuestion;
+        return this.question?.repeats ? MultipleChoiceQuestion : SingleChoiceQuestion;
       case 'display':
         return () => false;
       default:

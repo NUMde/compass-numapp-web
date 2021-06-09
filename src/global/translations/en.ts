@@ -66,6 +66,7 @@ export default {
     finish: 'Return to overview',
     group: 'Group {{ number }}',
     question: 'Question {{ number }}',
+    question_type_unsupported: 'Questions of type "{{ type }}" are not supported at the moment!',
     success: {
       headline: 'Success',
       infotext: 'Thank you for your contribution!',
