@@ -24,13 +24,13 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return {
       author: {
         identifier: {
-          value: userId,
+          value: `urn:uuid:${userId}`,
           system: 'urn:ietf:rfc:3986',
         },
       },
       resourceType: 'QuestionnaireResponse',
       identifier: {
-        value: `${userId}-${date.getTime()}`,
+        value: `urn:uuid:${userId}-response-${date.getTime()}`,
         system: 'urn:ietf:rfc:3986',
       },
       status: isCompleted ? 'completed' : 'in-progress',
