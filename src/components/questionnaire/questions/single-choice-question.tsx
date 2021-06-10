@@ -15,9 +15,7 @@ export const SingleChoiceQuestion = ({ question, answer, onChange }: Questionnai
             checked={answer[0] === option.value}
             required={question.required}
             label={String(option.label)}
-            handleChange={(event: Event) =>
-              onChange(question.linkId, (event.target as HTMLInputElement).value)
-            }
+            handleChange={() => onChange(question.linkId, option.value)}
           />
         </p>
       ))}

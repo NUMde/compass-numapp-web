@@ -18,10 +18,10 @@ export const MultipleChoiceQuestion = ({
             value={String(option.value)}
             checked={answer.includes(option.value)}
             label={String(option.label)}
-            handleChange={(event: Event) => {
-              const update = (event.target as HTMLInputElement).value;
+            handleChange={() => {
+              const update = option.value;
               const newSelection = answer.includes(update)
-                ? answer.filter((el) => el !== update)
+                ? answer.filter((value) => value !== update)
                 : [...answer, update];
               onChange(question.linkId, newSelection);
             }}
