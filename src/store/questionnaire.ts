@@ -77,7 +77,9 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     get isCompleted() {
-      return this.questions.filter(({ isEnabled }) => isEnabled).every(({ isAnswered }) => isAnswered);
+      return this.questions
+        .filter(({ isEnabled }) => isEnabled)
+        .every(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
     }
   }
 
