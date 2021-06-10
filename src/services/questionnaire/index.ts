@@ -16,10 +16,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
   buildQuestionnaireResponse(): fhir4.QuestionnaireResponse {
     const date = new Date();
     const userId = store.auth.accessToken;
-    const { flattenedItems, questionnaire } = store.questionnaire;
-    const isCompleted = flattenedItems
-      .filter(({ isAnswerable }) => isAnswerable)
-      .every(({ isAnswered }) => isAnswered);
+    const { flattenedItems, questionnaire, isCompleted } = store.questionnaire;
 
     return {
       author: {
