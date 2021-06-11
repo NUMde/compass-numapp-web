@@ -66,9 +66,13 @@ export default {
       month: 'Monat',
       year: 'Jahr',
     },
+    fetch_failed:
+      'Der Fragebogen konnte leider nicht abgerufen werden. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.',
+    fetch_retry: 'Erneut versuchen',
     finish: 'Zur Übersicht zurückkehren',
     group: 'Gruppe {{ number }}',
     question: 'Frage {{ number }}',
+    question_type_unsupported: 'Fragen vom Typ "{{ type }}" werden derzeit leider nicht unterstützt!',
     success: {
       headline: 'Vielen Dank!',
       infotext: 'Vielen Dank für Ihren Beitrag!',

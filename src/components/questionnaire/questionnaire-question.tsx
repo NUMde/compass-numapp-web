@@ -56,12 +56,14 @@ export class QuestionnaireQuestionComponent {
   }
 
   get QuestionInput() {
-    switch (this.question?.type) {
+    const { question } = this;
+
+    switch (question?.type) {
       case 'boolean':
         return BooleanQuestion;
       case 'decimal':
       case 'integer':
-        return this.question?.isSliderQuestion ? NumberSliderQuestion : NumberQuestion;
+        return question.isSliderQuestion ? NumberSliderQuestion : NumberQuestion;
       case 'date':
         return DateQuestion;
       case 'string':
@@ -69,9 +71,7 @@ export class QuestionnaireQuestionComponent {
       case 'text':
         return TextQuestion;
       case 'choice':
-        return SingleChoiceQuestion;
-      case 'open-choice':
-        return MultipleChoiceQuestion;
+        return question.repeats ? MultipleChoiceQuestion : SingleChoiceQuestion;
       case 'display':
         return () => false;
       default:

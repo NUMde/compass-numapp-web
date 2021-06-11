@@ -63,9 +63,12 @@ export default {
       month: 'Month',
       year: 'Year',
     },
+    fetch_failed: 'An error happened while retrieving the questionnaire. Please try again later.',
+    fetch_retry: 'Retry',
     finish: 'Return to overview',
     group: 'Group {{ number }}',
     question: 'Question {{ number }}',
+    question_type_unsupported: 'Questions of type "{{ type }}" are not supported at the moment!',
     success: {
       headline: 'Success',
       infotext: 'Thank you for your contribution!',

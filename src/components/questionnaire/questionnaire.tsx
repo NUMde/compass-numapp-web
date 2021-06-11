@@ -22,13 +22,22 @@ export class QuestionnaireComponent {
         await services.questionnaire.fetch(store.user.questionnaireId)
       );
     } catch (e) {
-      services.notifier.onError('questionnaire.error.fetch_failed');
+      services.notifier.onError('questionnaire.fetch_failed');
     }
   }
 
   render() {
     if (!store.questionnaire.isPopulated) {
-      return false;
+      return (
+        <d4l-button
+          classes="button--secondary"
+          text={store.i18n.t('questionnaire.fetch_retry')}
+          handleClick={() => {
+            store.notifications.dismissCurrent();
+            this.componentWillLoad();
+          }}
+        />
+      );
     }
 
     switch (this.displayMode) {
