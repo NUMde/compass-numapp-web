@@ -38,7 +38,7 @@ const formatAndParseInput = (
     .join('.');
 
   const formattedValue =
-    sanitizedRawValue.replace('.', localSeparator ?? '.').replace(/^0+(.)/g, '$1') +
+    sanitizedRawValue.replace('.', localSeparator ?? '.').replace(/^0+(\d)/g, '$1') +
     (allowedSeparators.includes(rawValue.slice(-1)) ? localSeparator : '');
   const parsedValue =
     question.type === 'decimal' ? parseFloat(sanitizedRawValue) : parseInt(sanitizedRawValue, 10);
