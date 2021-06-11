@@ -16,8 +16,8 @@ export const ROUTES = {
 };
 
 export const APP_LANGUAGES: Language[] = [
-  { code: 'en', label: 'English' },
-  { code: 'de', label: 'Deutsch' },
+  { code: 'en', label: 'English', locale: 'en-US' },
+  { code: 'de', label: 'Deutsch', locale: 'de-DE' },
 ];
 
 export const APP_TRANSLATIONS = {
