@@ -10,6 +10,10 @@ const MAX_SAFE_NUMBER_LENGTH = 15;
  * and scientific notations, as well as unintended side effects when using
  * type=number inputs, this is now the custom implementation for parsing
  * and reformatting the input value.
+ *
+ * Known remaining issue: some mobile numeric/decimal input software keyboards
+ * do not allow entering the "-" character, thus it is in that case impossible
+ * to enter negative values.
  */
 const formatAndParseInput = (
   question: QuestionnaireQuestionComponentProps['question'],
