@@ -66,6 +66,9 @@ export default {
       month: 'Monat',
       year: 'Jahr',
     },
+    fetch_failed:
+      'Der Fragebogen konnte leider nicht abgerufen werden. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.',
+    fetch_retry: 'Erneut versuchen',
     finish: 'Zur Übersicht zurückkehren',
     group: 'Gruppe {{ number }}',
     question: 'Frage {{ number }}',

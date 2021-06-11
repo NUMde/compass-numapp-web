@@ -63,6 +63,8 @@ export default {
       month: 'Month',
       year: 'Year',
     },
+    fetch_failed: 'An error happened while retrieving the questionnaire. Please try again later.',
+    fetch_retry: 'Retry',
     finish: 'Return to overview',
     group: 'Group {{ number }}',
     question: 'Question {{ number }}',
