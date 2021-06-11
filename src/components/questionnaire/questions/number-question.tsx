@@ -67,7 +67,7 @@ export const NumberQuestion = ({ question, answer, onChange }: QuestionnaireQues
         onChange(question.linkId, isNaN(value) ? null : value);
       }}
       value={formatAndParseInput(question, String(answer[0] ?? '').trim())[0]}
-      type="tel"
+      type="text"
       maxlength={MAX_SAFE_NUMBER_LENGTH}
     />
   );
