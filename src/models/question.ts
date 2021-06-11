@@ -1,4 +1,4 @@
-import { extractValue, parseExtensions } from 'services/utils/questionnaire';
+import { extractLabel, extractValue, parseExtensions } from 'services/utils/questionnaire';
 import store from 'store';
 
 export class NUMQuestionnaireQuestion {
@@ -119,7 +119,7 @@ export class NUMQuestionnaireQuestion {
   }
 
   get availableOptions() {
-    return this.answerOption?.map((option) => extractValue(option)).map((value) => ({ value, label: value }));
+    return this.answerOption?.map((option) => ({ value: extractValue(option), label: extractLabel(option) }));
   }
 
   get isSliderQuestion() {

@@ -16,21 +16,18 @@ export default class QuestionnaireService implements IQuestionnaireService {
   buildQuestionnaireResponse(): fhir4.QuestionnaireResponse {
     const date = new Date();
     const userId = store.auth.accessToken;
-    const { flattenedItems, questionnaire } = store.questionnaire;
-    const isCompleted = flattenedItems
-      .filter(({ isAnswerable }) => isAnswerable)
-      .every(({ isAnswered }) => isAnswered);
+    const { flattenedItems, questionnaire, isCompleted } = store.questionnaire;
 
     return {
       author: {
         identifier: {
-          value: userId,
+          value: `urn:uuid:${userId}`,
           system: 'urn:ietf:rfc:3986',
         },
       },
       resourceType: 'QuestionnaireResponse',
       identifier: {
-        value: `${userId}-${date.getTime()}`,
+        value: `urn:uuid:${userId}-response-${date.getTime()}`,
         system: 'urn:ietf:rfc:3986',
       },
       status: isCompleted ? 'completed' : 'in-progress',
