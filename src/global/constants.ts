@@ -1,8 +1,8 @@
 import { Env } from '@stencil/core';
-import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
 
 import TRANSLATIONS_DE from '../global/translations/de';
 import TRANSLATIONS_EN from '../global/translations/en';
+import { NUMLanguage } from 'store/i18n';
 
 export const ROUTES = {
   ROOT: '/',
@@ -15,7 +15,7 @@ export const ROUTES = {
   REPORT: '/report',
 };
 
-export const APP_LANGUAGES: Language[] = [
+export const APP_LANGUAGES: NUMLanguage[] = [
   { code: 'en', label: 'English', locale: 'en-US' },
   { code: 'de', label: 'Deutsch', locale: 'de-DE' },
 ];

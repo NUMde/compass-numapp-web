@@ -8,11 +8,15 @@ import { Language } from '@d4l/web-components-library/dist/types/components/Lang
 import { createStore } from '@stencil/store';
 import { APP_LANGUAGES, APP_TRANSLATIONS } from 'global/constants';
 
-interface StateType {
-  language: Language;
+export interface NUMLanguage extends Language {
+  locale?: string;
 }
 
-const getLanguageByCode = (languageCode: Language['code']) => {
+interface StateType {
+  language: NUMLanguage;
+}
+
+const getLanguageByCode = (languageCode: NUMLanguage['code']) => {
   return APP_LANGUAGES.find(({ code }) => code === languageCode);
 };
 
@@ -27,7 +31,7 @@ const storeBuilder = ({ persistor }: Services) => {
     forceUpdate: false,
   });
 
-  store.onChange('language', async (language: Language) => {
+  store.onChange('language', async (language: NUMLanguage) => {
     if (i18n.language !== language.code) {
       await i18n.changeLanguage(language.code);
     }
@@ -80,11 +84,11 @@ const storeBuilder = ({ persistor }: Services) => {
   return {
     t,
 
-    get language(): Language {
+    get language(): NUMLanguage {
       return store.state.language;
     },
 
-    set language(lang: Language) {
+    set language(lang: NUMLanguage) {
       store.state.language = lang;
     },
   };
