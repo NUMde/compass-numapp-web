@@ -26,14 +26,17 @@ export class AppRoot {
       {
         url: ROUTES.TERMS,
         text: store.i18n.t('general.terms_of_use'),
+        target: '_self',
       },
       {
         url: ROUTES.PRIVACY_POLICY,
         text: store.i18n.t('general.privacy_policy'),
+        target: '_self',
       },
       {
         url: ROUTES.IMPRINT,
         text: store.i18n.t('general.imprint'),
+        target: '_self',
       },
     ];
   }
@@ -89,6 +92,21 @@ export class AppRoot {
               <AuthenticatedRoute component="num-container-dashboard" url={ROUTES.DASHBOARD} />
               <AuthenticatedRoute component="num-container-report" url={ROUTES.REPORT} />
               <AuthenticatedRoute component="num-container-questionnaire" url={ROUTES.QUESTIONNAIRE} />
+              <stencil-route
+                url={ROUTES.IMPRINT}
+                component="num-legal"
+                componentProps={{ namespace: 'imprint' }}
+              />
+              <stencil-route
+                url={ROUTES.PRIVACY_POLICY}
+                component="num-legal"
+                componentProps={{ namespace: 'privacy_policy' }}
+              />
+              <stencil-route
+                url={ROUTES.TERMS}
+                component="num-legal"
+                componentProps={{ namespace: 'terms' }}
+              />
               <stencil-route routeRender={() => <stencil-router-redirect url={this.defaultRoute} />} />
             </stencil-route-switch>
           </stencil-router>

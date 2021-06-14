@@ -99,4 +99,16 @@ export default {
     headline: 'Willkommen',
     infotext: 'Hier steht ein kurzer und informativer Einführungstext zur App.',
   },
+  imprint: {
+    headline: 'Impressum',
+    content: '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/de.ts]'
+  },
+  terms: {
+    headline: 'Nutzungsbedingungen',
+    content: '[TRANSLATION/CONTENT needed for translation key: terms.content in src/global/translations/de.ts]'
+  },
+  privacy_policy: {
+    headline: 'Datenschutzerklärung',
+    content: '[TRANSLATION/CONTENT needed for translation key: privacy_policy.content in src/global/translations/de.ts]'
+  }
 };

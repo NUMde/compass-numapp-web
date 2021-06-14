@@ -21,6 +21,9 @@ export namespace Components {
     }
     interface NumContainerWelcome {
     }
+    interface NumLegal {
+        "namespace": string;
+    }
     interface NumNotification {
         "action": () => void;
         "actionKey": string;
@@ -78,6 +81,12 @@ declare global {
         prototype: HTMLNumContainerWelcomeElement;
         new (): HTMLNumContainerWelcomeElement;
     };
+    interface HTMLNumLegalElement extends Components.NumLegal, HTMLStencilElement {
+    }
+    var HTMLNumLegalElement: {
+        prototype: HTMLNumLegalElement;
+        new (): HTMLNumLegalElement;
+    };
     interface HTMLNumNotificationElement extends Components.NumNotification, HTMLStencilElement {
     }
     var HTMLNumNotificationElement: {
@@ -121,6 +130,7 @@ declare global {
         "num-container-questionnaire": HTMLNumContainerQuestionnaireElement;
         "num-container-report": HTMLNumContainerReportElement;
         "num-container-welcome": HTMLNumContainerWelcomeElement;
+        "num-legal": HTMLNumLegalElement;
         "num-notification": HTMLNumNotificationElement;
         "num-notifications": HTMLNumNotificationsElement;
         "num-questionnaire-confirm": HTMLNumQuestionnaireConfirmElement;
@@ -142,6 +152,9 @@ declare namespace LocalJSX {
     interface NumContainerReport {
     }
     interface NumContainerWelcome {
+    }
+    interface NumLegal {
+        "namespace"?: string;
     }
     interface NumNotification {
         "action"?: () => void;
@@ -172,6 +185,7 @@ declare namespace LocalJSX {
         "num-container-questionnaire": NumContainerQuestionnaire;
         "num-container-report": NumContainerReport;
         "num-container-welcome": NumContainerWelcome;
+        "num-legal": NumLegal;
         "num-notification": NumNotification;
         "num-notifications": NumNotifications;
         "num-questionnaire-confirm": NumQuestionnaireConfirm;
@@ -190,6 +204,7 @@ declare module "@stencil/core" {
             "num-container-questionnaire": LocalJSX.NumContainerQuestionnaire & JSXBase.HTMLAttributes<HTMLNumContainerQuestionnaireElement>;
             "num-container-report": LocalJSX.NumContainerReport & JSXBase.HTMLAttributes<HTMLNumContainerReportElement>;
             "num-container-welcome": LocalJSX.NumContainerWelcome & JSXBase.HTMLAttributes<HTMLNumContainerWelcomeElement>;
+            "num-legal": LocalJSX.NumLegal & JSXBase.HTMLAttributes<HTMLNumLegalElement>;
             "num-notification": LocalJSX.NumNotification & JSXBase.HTMLAttributes<HTMLNumNotificationElement>;
             "num-notifications": LocalJSX.NumNotifications & JSXBase.HTMLAttributes<HTMLNumNotificationsElement>;
             "num-questionnaire-confirm": LocalJSX.NumQuestionnaireConfirm & JSXBase.HTMLAttributes<HTMLNumQuestionnaireConfirmElement>;
