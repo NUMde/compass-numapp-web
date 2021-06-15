@@ -44,6 +44,7 @@ export default {
     imprint: 'Imprint',
     privacy_policy: 'Privacy policy',
     terms_of_use: 'Terms of use',
+    contact: 'Contact',
   },
   notification_bar: {
     dismiss_button: 'Close',

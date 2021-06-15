@@ -41,6 +41,36 @@ export class AppRoot {
     ];
   }
 
+  get navigationItems() {
+    return [
+      {
+        text: 'Dashboard',
+        route: '#dashboard',
+        icon: 'explore',
+        iconClasses: 'icon--small',
+      },
+      {
+        text: store.i18n.t('general.contact'),
+        route: '#contact',
+        icon: 'document',
+        iconClasses: 'icon--small',
+      },
+      {
+        text: 'FAQ',
+        route: '#faq',
+        icon: 'questionmark',
+        iconClasses: 'icon--small',
+      },
+      {
+        text: 'Logout',
+        route: '#logout',
+        icon: 'logout',
+        iconClasses: 'icon--small',
+        condition: this.isAuthenticated,
+      },
+    ];
+  }
+
   get defaultRoute() {
     return this.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
   }
@@ -58,7 +88,7 @@ export class AppRoot {
   }
 
   render() {
-    const { footerLinks } = this;
+    const { footerLinks, navigationItems } = this;
 
     return (
       <Fragment>
@@ -72,6 +102,7 @@ export class AppRoot {
           menuFooterLinks={footerLinks}
           supportedLanguages={APP_LANGUAGES}
           selectedLanguage={store.i18n.language}
+          menuNavigationItems={navigationItems}
         />
 
         <main>
