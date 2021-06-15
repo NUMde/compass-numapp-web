@@ -1,6 +1,7 @@
 import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
 import { Services } from 'services';
 import { Store } from 'store';
+
 export interface NUMLanguage extends Language {
   locale?: string;
 }
