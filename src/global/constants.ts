@@ -5,7 +5,7 @@ import TRANSLATIONS_EN from '../global/translations/en';
 
 import { NUMFooterLink, NUMLanguage, NUMNavigationItem } from 'types';
 
-export const ROUTES = {
+export const APP_ROUTES = {
   ROOT: '/',
   TERMS: '/terms',
   PRIVACY_POLICY: '/privacy-policy',
@@ -18,15 +18,15 @@ export const ROUTES = {
 
 export const APP_NAVIGATION_FOOTER_LINKS: NUMFooterLink[] = [
   {
-    route: ROUTES.TERMS,
+    route: APP_ROUTES.TERMS,
     key: 'terms_of_use',
   },
   {
-    route: ROUTES.PRIVACY_POLICY,
+    route: APP_ROUTES.PRIVACY_POLICY,
     key: 'privacy_policy',
   },
   {
-    route: ROUTES.IMPRINT,
+    route: APP_ROUTES.IMPRINT,
     key: 'imprint',
   },
 ];
@@ -34,7 +34,7 @@ export const APP_NAVIGATION_FOOTER_LINKS: NUMFooterLink[] = [
 export const APP_NAVIGATION_ITEMS: NUMNavigationItem[] = [
   {
     key: 'dashboard',
-    route: ROUTES.DASHBOARD,
+    route: APP_ROUTES.DASHBOARD,
     icon: 'explore',
     isAuthenticated: true,
   },
@@ -70,10 +70,10 @@ export const APP_TRANSLATIONS = {
  * TODO: Get the following values from env or separate config file instead
  */
 
-export const SUPPORT_QR_CODE = true;
-export const SHOW_LOGOUT = true;
+export const FEATURES_SUPPORT_QR_CODE = true;
+export const FEATURES_SHOW_LOGOUT = true;
 
-export const APP_NAME = 'COMPASS';
+export const QR_APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppName';
 export const QR_PROP_USER_ID = 'AppID';
 
