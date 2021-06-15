@@ -10,7 +10,7 @@ export const MultipleChoiceQuestion = ({
   return (
     <Fragment>
       {question.availableOptions.filter(Boolean).map((option, index) => (
-        <p class="u-margin-bottom--small" key={`${question.linkId}-option${index}`}>
+        <p class="u-margin-bottom--small u-text-align--left" key={`${question.linkId}-option${index}`}>
           <d4l-checkbox
             checkboxId={`${question.linkId}-option${index}`}
             classes="o-checkbox--primary"
