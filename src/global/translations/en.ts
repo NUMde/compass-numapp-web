@@ -62,6 +62,7 @@ export default {
       error: 'Please verify your input.',
       day: 'Day',
       month: 'Month',
+      open_date_picker: 'Open a date picker',
       year: 'Year',
     },
     fetch_failed: 'An error happened while retrieving the questionnaire. Please try again later.',
