@@ -12,6 +12,7 @@ export const config: Config = {
   globalStyle: 'src/global/app.scss',
   globalScript: 'src/global/app.ts',
   taskQueue: 'async',
+  buildEs5: 'prod',
   outputTargets: [
     {
       type: 'www',

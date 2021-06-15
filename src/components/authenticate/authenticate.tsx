@@ -88,9 +88,9 @@ export class Authenticate {
 
       this.#userId = userId;
       this.authenticate();
-    } catch ({ message }) {
+    } catch (error) {
       services.notifier.onError(
-        message.indexOf('authenticate.') === 0 ? message : 'authenticate.error.qr_format'
+        error.message.indexOf('authenticate.') === 0 ? error.message : 'authenticate.error.qr_format'
       );
     }
   }
