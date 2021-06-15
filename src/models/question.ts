@@ -119,7 +119,10 @@ export class NUMQuestionnaireQuestion {
   }
 
   get availableOptions() {
-    return this.answerOption?.map((option) => ({ value: extractValue(option), label: extractLabel(option) }));
+    return this.answerOption?.map((option) => ({
+      value: extractValue(option),
+      label: String(extractLabel(option)).replace(/^\d+\#\s*/, ''),
+    }));
   }
 
   get isSliderQuestion() {
