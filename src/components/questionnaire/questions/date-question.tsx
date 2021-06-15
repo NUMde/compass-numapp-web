@@ -43,6 +43,8 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
       min={minDate}
       max={maxDate}
       handleChange={(date: string) => onChange(question.linkId, date)}
+      enableDatePicker
+      datePickerText={i18n.t('questionnaire.date_input.open_date_picker')}
     />
   );
 };

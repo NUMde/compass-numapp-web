@@ -64,6 +64,7 @@ export default {
       error: 'Bitte überprüfen Sie das Eingabefeld.',
       day: 'Tag',
       month: 'Monat',
+      open_date_picker: 'Kalender öffnen',
       year: 'Jahr',
     },
     fetch_failed:
