@@ -17,7 +17,7 @@ export class Welcome {
             <stencil-route-link url={ROUTES.TERMS}>
               <d4l-button
                 classes="button--tertiary button--block"
-                text={store.i18n.t('general.terms_of_use')}
+                text={store.i18n.t('navigation.terms_of_use')}
                 is-route-link
               />
             </stencil-route-link>
@@ -26,7 +26,7 @@ export class Welcome {
             <stencil-route-link url={ROUTES.PRIVACY_POLICY}>
               <d4l-button
                 classes="button--tertiary button--block"
-                text={store.i18n.t('general.privacy_policy')}
+                text={store.i18n.t('navigation.privacy_policy')}
                 is-route-link
               />
             </stencil-route-link>

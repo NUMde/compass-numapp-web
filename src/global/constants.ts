@@ -2,7 +2,8 @@ import { Env } from '@stencil/core';
 
 import TRANSLATIONS_DE from '../global/translations/de';
 import TRANSLATIONS_EN from '../global/translations/en';
-import { NUMLanguage } from 'store/i18n';
+
+import { NUMFooterLink, NUMLanguage, NUMNavigationItem } from 'types';
 
 export const ROUTES = {
   ROOT: '/',
@@ -14,6 +15,46 @@ export const ROUTES = {
   QUESTIONNAIRE: '/questionnaire',
   REPORT: '/report',
 };
+
+export const APP_NAVIGATION_FOOTER_LINKS: NUMFooterLink[] = [
+  {
+    route: ROUTES.TERMS,
+    key: 'terms_of_use',
+  },
+  {
+    route: ROUTES.PRIVACY_POLICY,
+    key: 'privacy_policy',
+  },
+  {
+    route: ROUTES.IMPRINT,
+    key: 'imprint',
+  },
+];
+
+export const APP_NAVIGATION_ITEMS: NUMNavigationItem[] = [
+  {
+    key: 'dashboard',
+    route: ROUTES.DASHBOARD,
+    icon: 'explore',
+    isAuthenticated: true,
+  },
+  {
+    key: 'contact',
+    url: 'https://contact.dev',
+    icon: 'document',
+  },
+  {
+    key: 'faq',
+    url: 'https://faq.dev',
+    icon: 'questionmark',
+  },
+  {
+    key: 'logout',
+    fn: (store) => store.auth.logout(),
+    icon: 'logout',
+    isAuthenticated: true,
+  },
+];
 
 export const APP_LANGUAGES: NUMLanguage[] = [
   { code: 'en', label: 'English', locale: 'en-US' },

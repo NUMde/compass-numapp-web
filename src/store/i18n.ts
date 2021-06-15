@@ -4,13 +4,9 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from '../services';
 
-import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
 import { createStore } from '@stencil/store';
 import { APP_LANGUAGES, APP_TRANSLATIONS } from 'global/constants';
-
-export interface NUMLanguage extends Language {
-  locale?: string;
-}
+import { NUMLanguage } from 'types';
 
 interface StateType {
   language: NUMLanguage;

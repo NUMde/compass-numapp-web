@@ -38,13 +38,13 @@ export default {
       },
     },
   },
-  general: {
-    footer_copyright_note: '© {{ year }} NUM COMPASS',
-    header_logo: 'NUM COMPASS web app',
+  navigation: {
+    contact: 'Contact',
+    copyright_note: '© {{ year }} NUM COMPASS',
     imprint: 'Imprint',
+    logo: 'NUM COMPASS web app',
     privacy_policy: 'Privacy policy',
     terms_of_use: 'Terms of use',
-    contact: 'Contact',
   },
   notification_bar: {
     dismiss_button: 'Close',
@@ -98,14 +98,17 @@ export default {
   },
   imprint: {
     headline: 'Imprint',
-    content: '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]'
+    content:
+      '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]',
   },
   terms: {
     headline: 'Terms',
-    content: '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]'
+    content:
+      '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/en.ts]',
   },
   privacy_policy: {
     headline: 'Privacy policy',
-    content: '[TRANSLATION/CONTENT needed for translation key: privacy_policy.content in src/global/translations/en.ts]'
-  }
+    content:
+      '[TRANSLATION/CONTENT needed for translation key: privacy_policy.content in src/global/translations/en.ts]',
+  },
 };
