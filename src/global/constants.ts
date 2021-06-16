@@ -5,7 +5,7 @@ import TRANSLATIONS_EN from '../global/translations/en';
 
 import { NUMFooterLink, NUMLanguage, NUMNavigationItem } from 'types';
 
-export const APP_ROUTES = {
+export const ROUTES = {
   ROOT: '/',
   TERMS: '/terms',
   PRIVACY_POLICY: '/privacy-policy',
@@ -16,25 +16,25 @@ export const APP_ROUTES = {
   REPORT: '/report',
 };
 
-export const APP_NAVIGATION_FOOTER_LINKS: NUMFooterLink[] = [
+export const NAVIGATION_FOOTER_LINKS: NUMFooterLink[] = [
   {
-    route: APP_ROUTES.TERMS,
+    route: ROUTES.TERMS,
     key: 'terms_of_use',
   },
   {
-    route: APP_ROUTES.PRIVACY_POLICY,
+    route: ROUTES.PRIVACY_POLICY,
     key: 'privacy_policy',
   },
   {
-    route: APP_ROUTES.IMPRINT,
+    route: ROUTES.IMPRINT,
     key: 'imprint',
   },
 ];
 
-export const APP_NAVIGATION_ITEMS: NUMNavigationItem[] = [
+export const NAVIGATION_ITEMS: NUMNavigationItem[] = [
   {
     key: 'dashboard',
-    route: APP_ROUTES.DASHBOARD,
+    route: ROUTES.DASHBOARD,
     icon: 'explore',
     isAuthenticated: true,
   },
@@ -56,12 +56,12 @@ export const APP_NAVIGATION_ITEMS: NUMNavigationItem[] = [
   },
 ];
 
-export const APP_LANGUAGES: NUMLanguage[] = [
+export const LANGUAGES: NUMLanguage[] = [
   { code: 'en', label: 'English', locale: 'en-US' },
   { code: 'de', label: 'Deutsch', locale: 'de-DE' },
 ];
 
-export const APP_TRANSLATIONS = {
+export const TRANSLATIONS = {
   de: TRANSLATIONS_DE,
   en: TRANSLATIONS_EN,
 };

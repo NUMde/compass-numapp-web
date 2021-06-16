@@ -5,7 +5,7 @@ import createPersistedStore from './utils/persisted-store';
 import { Services } from '../services';
 
 import { createStore } from '@stencil/store';
-import { APP_LANGUAGES, APP_TRANSLATIONS } from 'global/constants';
+import { LANGUAGES, TRANSLATIONS } from 'global/constants';
 import { NUMLanguage } from 'types';
 
 interface StateType {
@@ -13,7 +13,7 @@ interface StateType {
 }
 
 const getLanguageByCode = (languageCode: NUMLanguage['code']) => {
-  return APP_LANGUAGES.find(({ code }) => code === languageCode);
+  return LANGUAGES.find(({ code }) => code === languageCode);
 };
 
 const storeBuilder = ({ persistor }: Services) => {
@@ -56,11 +56,11 @@ const storeBuilder = ({ persistor }: Services) => {
       detection,
       initImmediate: false,
       fallbackLng: 'de',
-      whitelist: APP_LANGUAGES.map(({ code }) => code),
+      whitelist: LANGUAGES.map(({ code }) => code),
       ns: ['master'],
       defaultNS: 'master',
-      resources: Object.keys(APP_TRANSLATIONS).reduce(
-        (resources, code) => Object.assign(resources, { [code]: { master: APP_TRANSLATIONS[code] } }),
+      resources: Object.keys(TRANSLATIONS).reduce(
+        (resources, code) => Object.assign(resources, { [code]: { master: TRANSLATIONS[code] } }),
         {}
       ),
       nsSeparator: '#', // default is ":", and it doesn't fit well with URLs used as namespaces

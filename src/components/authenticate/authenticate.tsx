@@ -5,7 +5,7 @@ import {
   QR_APP_NAME,
   QR_PROP_APP_NAME,
   QR_PROP_USER_ID,
-  APP_ROUTES,
+  ROUTES,
   FEATURES_SUPPORT_QR_CODE,
 } from 'global/constants';
 import services from 'services';
@@ -159,7 +159,7 @@ export class Authenticate {
 
   render() {
     if (store.auth.isAuthenticated) {
-      return <stencil-router-redirect url={APP_ROUTES.DASHBOARD} />;
+      return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
     }
 
     return (

@@ -1,6 +1,6 @@
 import { Component, h } from '@stencil/core';
 import store from 'store';
-import { APP_ROUTES } from 'global/constants';
+import { ROUTES } from 'global/constants';
 import { Card } from 'components/card/card';
 
 @Component({
@@ -14,7 +14,7 @@ export class Welcome {
 
         <ul class="u-list-reset">
           <li class="u-margin-top--normal">
-            <stencil-route-link url={APP_ROUTES.TERMS}>
+            <stencil-route-link url={ROUTES.TERMS}>
               <d4l-button
                 classes="button--tertiary button--block"
                 text={store.i18n.t('navigation.terms_of_use')}
@@ -23,7 +23,7 @@ export class Welcome {
             </stencil-route-link>
           </li>
           <li class="u-margin-top--small u-margin-bottom--medium">
-            <stencil-route-link url={APP_ROUTES.PRIVACY_POLICY}>
+            <stencil-route-link url={ROUTES.PRIVACY_POLICY}>
               <d4l-button
                 classes="button--tertiary button--block"
                 text={store.i18n.t('navigation.privacy_policy')}
@@ -33,7 +33,7 @@ export class Welcome {
           </li>
         </ul>
 
-        <stencil-route-link url={APP_ROUTES.AUTHENTICATE}>
+        <stencil-route-link url={ROUTES.AUTHENTICATE}>
           <d4l-button classes="button--block" text={store.i18n.t('welcome.continue')} />
         </stencil-route-link>
       </Card>

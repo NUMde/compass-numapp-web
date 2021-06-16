@@ -1,12 +1,7 @@
 import { Component, Fragment, h, Listen, Prop, State } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
-import {
-  APP_LANGUAGES,
-  APP_NAVIGATION_ITEMS,
-  APP_NAVIGATION_FOOTER_LINKS,
-  APP_ROUTES,
-} from 'global/constants';
+import { LANGUAGES, NAVIGATION_ITEMS, NAVIGATION_FOOTER_LINKS, ROUTES } from 'global/constants';
 import services from 'services';
 import store from 'store';
 
@@ -27,7 +22,7 @@ export class AppRoot {
   }
 
   get footerLinks() {
-    return APP_NAVIGATION_FOOTER_LINKS.filter(({ isAuthenticated }) =>
+    return NAVIGATION_FOOTER_LINKS.filter(({ isAuthenticated }) =>
       isAuthenticated ? this.isAuthenticated : true
     ).map(({ key, url, route }) => ({
       text: store.i18n.t(`navigation.${key}`),
@@ -38,7 +33,7 @@ export class AppRoot {
   }
 
   get navigationItems() {
-    return APP_NAVIGATION_ITEMS.map(({ key, icon, url, route, fn, isAuthenticated }) => ({
+    return NAVIGATION_ITEMS.map(({ key, icon, url, route, fn, isAuthenticated }) => ({
       text: store.i18n.t(`navigation.${key}`),
       route: url ?? route,
       target: url ? '_blank' : '_self',
@@ -51,7 +46,7 @@ export class AppRoot {
   }
 
   get defaultRoute() {
-    return this.isAuthenticated ? APP_ROUTES.DASHBOARD : APP_ROUTES.ROOT;
+    return this.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
   }
 
   async componentWillLoad() {
@@ -75,11 +70,11 @@ export class AppRoot {
 
         <d4l-app-header
           customLogo="/assets/logo.svg"
-          logoUrl={APP_ROUTES.ROOT}
+          logoUrl={ROUTES.ROOT}
           logoUrlTitle={store.i18n.t('navigation.logo')}
           logoUrlText={store.i18n.t('navigation.logo')}
           menuFooterLinks={footerLinks}
-          supportedLanguages={APP_LANGUAGES}
+          supportedLanguages={LANGUAGES}
           selectedLanguage={store.i18n.language}
           menuNavigationItems={navigationItems}
         />
@@ -92,28 +87,28 @@ export class AppRoot {
                   !this.isAuthenticated ? (
                     <num-container-welcome />
                   ) : (
-                    <stencil-router-redirect url={APP_ROUTES.DASHBOARD} />
+                    <stencil-router-redirect url={ROUTES.DASHBOARD} />
                   )
                 }
-                url={APP_ROUTES.ROOT}
+                url={ROUTES.ROOT}
                 exact
               />
-              <stencil-route component="num-container-authenticate" url={APP_ROUTES.AUTHENTICATE} exact />
-              <AuthenticatedRoute component="num-container-dashboard" url={APP_ROUTES.DASHBOARD} />
-              <AuthenticatedRoute component="num-container-report" url={APP_ROUTES.REPORT} />
-              <AuthenticatedRoute component="num-container-questionnaire" url={APP_ROUTES.QUESTIONNAIRE} />
+              <stencil-route component="num-container-authenticate" url={ROUTES.AUTHENTICATE} exact />
+              <AuthenticatedRoute component="num-container-dashboard" url={ROUTES.DASHBOARD} />
+              <AuthenticatedRoute component="num-container-report" url={ROUTES.REPORT} />
+              <AuthenticatedRoute component="num-container-questionnaire" url={ROUTES.QUESTIONNAIRE} />
               <stencil-route
-                url={APP_ROUTES.IMPRINT}
+                url={ROUTES.IMPRINT}
                 component="num-legal"
                 componentProps={{ namespace: 'imprint' }}
               />
               <stencil-route
-                url={APP_ROUTES.PRIVACY_POLICY}
+                url={ROUTES.PRIVACY_POLICY}
                 component="num-legal"
                 componentProps={{ namespace: 'privacy_policy' }}
               />
               <stencil-route
-                url={APP_ROUTES.TERMS}
+                url={ROUTES.TERMS}
                 component="num-legal"
                 componentProps={{ namespace: 'terms' }}
               />

@@ -1,7 +1,7 @@
 import { Component, h } from '@stencil/core';
 import store from 'store';
 import { formatDate } from 'services/utils/format-date';
-import { APP_ROUTES, FEATURES_SHOW_LOGOUT } from 'global/constants';
+import { ROUTES, FEATURES_SHOW_LOGOUT } from 'global/constants';
 import { Card } from 'components/card/card';
 
 @Component({
@@ -40,7 +40,7 @@ export class Dashboard {
         </strong>
 
         {isQuestionnaireAvailable && (
-          <stencil-route-link url={APP_ROUTES.QUESTIONNAIRE}>
+          <stencil-route-link url={ROUTES.QUESTIONNAIRE}>
             <d4l-button classes="button--block" text={store.i18n.t('dashboard.button.questionnaire')} />
           </stencil-route-link>
         )}
@@ -54,7 +54,7 @@ export class Dashboard {
         </p>
 
         {!isQuestionnaireAvailable && (
-          <stencil-route-link url={APP_ROUTES.REPORT}>
+          <stencil-route-link url={ROUTES.REPORT}>
             <d4l-button
               classes="button--block u-margin-vertical--normal"
               text={store.i18n.t('dashboard.button.report')}

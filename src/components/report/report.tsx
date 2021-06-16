@@ -1,6 +1,6 @@
 import { Component, Fragment, h, State } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { APP_ROUTES } from 'global/constants';
+import { ROUTES } from 'global/constants';
 import services from 'services';
 import store from 'store';
 
@@ -41,7 +41,7 @@ export class ReportComponent {
               handleClick={() => this.submitReport()}
             />
 
-            <stencil-route-link url={APP_ROUTES.DASHBOARD}>
+            <stencil-route-link url={ROUTES.DASHBOARD}>
               <d4l-button
                 classes="button--block button--secondary u-margin-top--normal"
                 text={store.i18n.t('report.confirm_submit.back')}
@@ -49,7 +49,7 @@ export class ReportComponent {
             </stencil-route-link>
           </Fragment>
         ) : (
-          <stencil-route-link url={APP_ROUTES.DASHBOARD}>
+          <stencil-route-link url={ROUTES.DASHBOARD}>
             <d4l-button
               classes="button--block u-margin-top--large"
               text={store.i18n.t('report.success.finish')}

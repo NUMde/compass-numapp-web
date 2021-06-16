@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { APP_ROUTES } from 'global/constants';
+import { ROUTES } from 'global/constants';
 import store from 'store';
 
 type AuthenticatedRouteProps = {
@@ -21,7 +21,7 @@ export const AuthenticatedRoute = ({ component, ...props }: AuthenticatedRoutePr
           return <Component {...props} {...props.componentProps} />;
         }
 
-        return <stencil-router-redirect url={APP_ROUTES.ROOT} />;
+        return <stencil-router-redirect url={ROUTES.ROOT} />;
       }}
     />
   );

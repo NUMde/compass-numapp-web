@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { APP_ROUTES } from 'global/constants';
+import { ROUTES } from 'global/constants';
 import store from 'store';
 
 @Component({
@@ -52,7 +52,7 @@ export class QuestionnaireTreeComponent {
           handleClick={() => this.switchDisplayModeHandler()}
         />
 
-        <stencil-route-link url={APP_ROUTES.DASHBOARD}>
+        <stencil-route-link url={ROUTES.DASHBOARD}>
           <d4l-button
             classes="button--block button--secondary u-margin-top--normal"
             text={store.i18n.t('questionnaire.back')}

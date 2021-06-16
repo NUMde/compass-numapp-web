@@ -1,7 +1,7 @@
 import { Component, h, Listen, State } from '@stencil/core';
 import store from 'store';
 import services from 'services';
-import { APP_ROUTES } from 'global/constants';
+import { ROUTES } from 'global/constants';
 
 @Component({
   tag: 'num-container-questionnaire',
@@ -50,7 +50,7 @@ export class QuestionnaireComponent {
       case 'success':
         return <num-questionnaire-success />;
       default:
-        return <stencil-router-redirect url={APP_ROUTES.DASHBOARD} />;
+        return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
     }
   }
 }
