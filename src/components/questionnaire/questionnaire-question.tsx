@@ -162,28 +162,6 @@ export class QuestionnaireQuestionComponent {
           </p>
         ))}
 
-        <pre
-          style={{
-            position: 'absolute',
-            transform: 'translateX(-100%)',
-            marginLeft: '-4rem',
-            textAlign: 'left',
-          }}
-        >
-          <strong>DEBUG</strong>
-          <br />
-          Pending answer: {JSON.stringify(pendingAnswer)}
-          <br />
-          Stored answer: {JSON.stringify(this.storedAnswer)}
-          <br />
-          Is enabled: {JSON.stringify(question.isEnabled)}
-          <br />
-          Index: {question.index}
-          <br />
-          Progress: {progress}%<br />
-          Config: {JSON.stringify({ ...question.config, required: question.required, type: question.type })}
-        </pre>
-
         <form
           ref={(el) => (this.#formRef = el)}
           onSubmit={(event) => handleSubmit(event)}
@@ -205,16 +183,6 @@ export class QuestionnaireQuestionComponent {
           text={store.i18n.t('questionnaire.back')}
           handleClick={() => this.moveToPreviousQuestion()}
         />
-
-        <h3 class="u-margin-top--large">DEBUG QuestionnaireResponse</h3>
-        <pre class="u-margin-top--small" style={{ textAlign: 'left', height: '300px', overflow: 'auto' }}>
-          {JSON.stringify(services.questionnaire.buildQuestionnaireResponse(), null, 2)}
-        </pre>
-        <h3 class="u-margin-top--medium">DEBUG QuestionnaireResponseFlags</h3>
-        <pre class="u-margin-top--small" style={{ textAlign: 'left' }}>
-          {/* @ts-ignore */}
-          {JSON.stringify(services.questionnaire.buildFlags(), null, 2)}
-        </pre>
       </Card>
     );
   }
