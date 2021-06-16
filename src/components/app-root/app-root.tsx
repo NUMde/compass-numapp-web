@@ -1,7 +1,7 @@
 import { Component, Fragment, h, Listen, Prop, State } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
-import { LANGUAGES, NAVIGATION_ITEMS, NAVIGATION_FOOTER_LINKS, ROUTES } from 'global/constants';
+import { LANGUAGES, NAVIGATION_ITEMS, FOOTER_LINKS, ROUTES } from 'config';
 import services from 'services';
 import store from 'store';
 
@@ -22,14 +22,14 @@ export class AppRoot {
   }
 
   get footerLinks() {
-    return NAVIGATION_FOOTER_LINKS.filter(({ isAuthenticated }) =>
-      isAuthenticated ? this.isAuthenticated : true
-    ).map(({ key, url, route }) => ({
-      text: store.i18n.t(`navigation.${key}`),
-      url: url ?? route,
-      isStencilRoute: !!route,
-      internal: !!route,
-    }));
+    return FOOTER_LINKS.filter(({ isAuthenticated }) => !isAuthenticated || this.isAuthenticated).map(
+      ({ key, url, route }) => ({
+        text: store.i18n.t(`navigation.${key}`),
+        url: url ?? route,
+        isStencilRoute: !!route,
+        internal: !!route,
+      })
+    );
   }
 
   get navigationItems() {
@@ -40,7 +40,7 @@ export class AppRoot {
       icon,
       iconClasses: 'icon--small',
       internal: !!route,
-      condition: isAuthenticated ? this.isAuthenticated : true,
+      condition: !isAuthenticated || this.isAuthenticated,
       ...(fn ? { fn: () => fn(store, services) } : {}),
     }));
   }

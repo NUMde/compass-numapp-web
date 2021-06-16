@@ -1,7 +1,7 @@
 import { Component, h } from '@stencil/core';
 import store from 'store';
 import { Card } from 'components/card/card';
-import { ROUTES } from 'global/constants';
+import { ROUTES } from 'config';
 
 @Component({
   tag: 'num-questionnaire-success',

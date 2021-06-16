@@ -1,7 +1,7 @@
 import { Component, h, Listen, State } from '@stencil/core';
 import store from 'store';
 import services from 'services';
-import { ROUTES } from 'global/constants';
+import { ROUTES } from 'config';
 
 @Component({
   tag: 'num-container-questionnaire',

@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { ROUTES } from 'global/constants';
+import { ROUTES } from 'config';
 import store from 'store';
 
 type AuthenticatedRouteProps = {

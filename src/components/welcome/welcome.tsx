@@ -1,6 +1,6 @@
 import { Component, h } from '@stencil/core';
 import store from 'store';
-import { ROUTES } from 'global/constants';
+import { ROUTES } from 'config';
 import { Card } from 'components/card/card';
 
 @Component({

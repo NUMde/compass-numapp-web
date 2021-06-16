@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import { QUESTIONNAIRE_ALLOW_FUTURE_DATES } from 'global/constants';
+import { FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES } from 'config';
 import store from 'store';
 import { QuestionnaireQuestionComponentProps } from './types';
 
@@ -39,7 +39,7 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
           value: year ?? null,
         },
       }}
-      futureAllowed={QUESTIONNAIRE_ALLOW_FUTURE_DATES}
+      futureAllowed={FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES}
       min={minDate}
       max={maxDate}
       handleChange={(date: string) => onChange(question.linkId, date)}
