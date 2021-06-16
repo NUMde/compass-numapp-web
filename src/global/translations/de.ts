@@ -41,13 +41,16 @@ export default {
       },
     },
   },
-  general: {
-    footer_copyright_note: '© {{ year }} NUM COMPASS',
-    header_logo: 'NUM COMPASS web app',
+  navigation: {
+    contact: 'Kontakt',
+    copyright_note: '© {{ year }} NUM COMPASS',
+    dashboard: 'Übersicht',
+    faq: 'FAQ',
     imprint: 'Impressum',
+    logo: 'NUM COMPASS web app',
+    logout: 'Abmelden',
     privacy_policy: 'Datenschutzerklärung',
     terms_of_use: 'Nutzungsbedingungen',
-    contact: 'Kontakt',
   },
   notification_bar: {
     dismiss_button: 'Schließen',
@@ -103,14 +106,16 @@ export default {
   },
   imprint: {
     headline: 'Impressum',
-    content: '[TRANSLATION/CONTENT needed for translation key: imprint.content in src/global/translations/de.ts]'
+    content: 'Fügen Sie auf dieser Seite Ihr Impressum ein. Sie können <strong>HTML</strong> verwenden.',
   },
   terms: {
     headline: 'Nutzungsbedingungen',
-    content: '[TRANSLATION/CONTENT needed for translation key: terms.content in src/global/translations/de.ts]'
+    content:
+      'Fügen Sie auf dieser Seite Ihre Nutzungsbedingungen ein. Sie können <strong>HTML</strong> verwenden.',
   },
   privacy_policy: {
     headline: 'Datenschutzerklärung',
-    content: '[TRANSLATION/CONTENT needed for translation key: privacy_policy.content in src/global/translations/de.ts]'
-  }
+    content:
+      'Fügen Sie auf dieser Seite Ihre Datenschutzerklärung ein. Sie können <strong>HTML</strong> verwenden.',
+  },
 };

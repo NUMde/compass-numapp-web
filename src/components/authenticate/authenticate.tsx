@@ -1,7 +1,13 @@
 import { Component, h, State } from '@stencil/core';
 import jsQR from 'jsqr';
 import { Card } from 'components/card/card';
-import { APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID, ROUTES, SUPPORT_QR_CODE } from 'global/constants';
+import {
+  QR_APP_NAME,
+  QR_PROP_APP_NAME,
+  QR_PROP_USER_ID,
+  ROUTES,
+  FEATURES_SUPPORT_QR_CODE,
+} from 'global/constants';
 import services from 'services';
 import store from 'store';
 import { ResponseError } from 'services/utils/response-error';
@@ -27,7 +33,7 @@ export class Authenticate {
 
   get supportsCamera() {
     try {
-      return SUPPORT_QR_CODE && !!navigator.mediaDevices.getUserMedia;
+      return FEATURES_SUPPORT_QR_CODE && !!navigator.mediaDevices.getUserMedia;
     } catch (e) {
       return false;
     }
@@ -82,7 +88,7 @@ export class Authenticate {
         throw new Error('authenticate.error.qr_format');
       }
 
-      if (appName !== APP_NAME) {
+      if (appName !== QR_APP_NAME) {
         throw new Error('authenticate.error.qr_wrong_app');
       }
 

@@ -2,7 +2,8 @@ import { Env } from '@stencil/core';
 
 import TRANSLATIONS_DE from '../global/translations/de';
 import TRANSLATIONS_EN from '../global/translations/en';
-import { NUMLanguage } from 'store/i18n';
+
+import { NUMFooterLink, NUMLanguage, NUMNavigationItem } from 'types';
 
 export const ROUTES = {
   ROOT: '/',
@@ -15,12 +16,52 @@ export const ROUTES = {
   REPORT: '/report',
 };
 
-export const APP_LANGUAGES: NUMLanguage[] = [
+export const NAVIGATION_FOOTER_LINKS: NUMFooterLink[] = [
+  {
+    route: ROUTES.TERMS,
+    key: 'terms_of_use',
+  },
+  {
+    route: ROUTES.PRIVACY_POLICY,
+    key: 'privacy_policy',
+  },
+  {
+    route: ROUTES.IMPRINT,
+    key: 'imprint',
+  },
+];
+
+export const NAVIGATION_ITEMS: NUMNavigationItem[] = [
+  {
+    key: 'dashboard',
+    route: ROUTES.DASHBOARD,
+    icon: 'explore',
+    isAuthenticated: true,
+  },
+  {
+    key: 'contact',
+    url: 'https://contact.dev',
+    icon: 'document',
+  },
+  {
+    key: 'faq',
+    url: 'https://faq.dev',
+    icon: 'questionmark',
+  },
+  {
+    key: 'logout',
+    fn: (store) => store.auth.logout(),
+    icon: 'logout',
+    isAuthenticated: true,
+  },
+];
+
+export const LANGUAGES: NUMLanguage[] = [
   { code: 'en', label: 'English', locale: 'en-US' },
   { code: 'de', label: 'Deutsch', locale: 'de-DE' },
 ];
 
-export const APP_TRANSLATIONS = {
+export const TRANSLATIONS = {
   de: TRANSLATIONS_DE,
   en: TRANSLATIONS_EN,
 };
@@ -29,10 +70,10 @@ export const APP_TRANSLATIONS = {
  * TODO: Get the following values from env or separate config file instead
  */
 
-export const SUPPORT_QR_CODE = true;
-export const SHOW_LOGOUT = true;
+export const FEATURES_SUPPORT_QR_CODE = true;
+export const FEATURES_SHOW_LOGOUT = true;
 
-export const APP_NAME = 'COMPASS';
+export const QR_APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppName';
 export const QR_PROP_USER_ID = 'AppID';
 

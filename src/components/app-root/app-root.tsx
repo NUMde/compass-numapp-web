@@ -1,7 +1,7 @@
 import { Component, Fragment, h, Listen, Prop, State } from '@stencil/core';
 import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
-import { APP_LANGUAGES, ROUTES } from 'global/constants';
+import { LANGUAGES, NAVIGATION_ITEMS, NAVIGATION_FOOTER_LINKS, ROUTES } from 'global/constants';
 import services from 'services';
 import store from 'store';
 
@@ -22,53 +22,27 @@ export class AppRoot {
   }
 
   get footerLinks() {
-    return [
-      {
-        url: ROUTES.TERMS,
-        text: store.i18n.t('general.terms_of_use'),
-        target: '_self',
-      },
-      {
-        url: ROUTES.PRIVACY_POLICY,
-        text: store.i18n.t('general.privacy_policy'),
-        target: '_self',
-      },
-      {
-        url: ROUTES.IMPRINT,
-        text: store.i18n.t('general.imprint'),
-        target: '_self',
-      },
-    ];
+    return NAVIGATION_FOOTER_LINKS.filter(({ isAuthenticated }) =>
+      isAuthenticated ? this.isAuthenticated : true
+    ).map(({ key, url, route }) => ({
+      text: store.i18n.t(`navigation.${key}`),
+      url: url ?? route,
+      isStencilRoute: !!route,
+      internal: !!route,
+    }));
   }
 
   get navigationItems() {
-    return [
-      {
-        text: 'Dashboard',
-        route: '#dashboard',
-        icon: 'explore',
-        iconClasses: 'icon--small',
-      },
-      {
-        text: store.i18n.t('general.contact'),
-        route: '#contact',
-        icon: 'document',
-        iconClasses: 'icon--small',
-      },
-      {
-        text: 'FAQ',
-        route: '#faq',
-        icon: 'questionmark',
-        iconClasses: 'icon--small',
-      },
-      {
-        text: 'Logout',
-        route: '#logout',
-        icon: 'logout',
-        iconClasses: 'icon--small',
-        condition: this.isAuthenticated,
-      },
-    ];
+    return NAVIGATION_ITEMS.map(({ key, icon, url, route, fn, isAuthenticated }) => ({
+      text: store.i18n.t(`navigation.${key}`),
+      route: url ?? route,
+      target: url ? '_blank' : '_self',
+      icon,
+      iconClasses: 'icon--small',
+      internal: !!route,
+      condition: isAuthenticated ? this.isAuthenticated : true,
+      ...(fn ? { fn: () => fn(store, services) } : {}),
+    }));
   }
 
   get defaultRoute() {
@@ -97,10 +71,10 @@ export class AppRoot {
         <d4l-app-header
           customLogo="/assets/logo.svg"
           logoUrl={ROUTES.ROOT}
-          logoUrlTitle={store.i18n.t('general.header_logo')}
-          logoUrlText={store.i18n.t('general.header_logo')}
+          logoUrlTitle={store.i18n.t('navigation.logo')}
+          logoUrlText={store.i18n.t('navigation.logo')}
           menuFooterLinks={footerLinks}
-          supportedLanguages={APP_LANGUAGES}
+          supportedLanguages={LANGUAGES}
           selectedLanguage={store.i18n.language}
           menuNavigationItems={navigationItems}
         />
@@ -145,7 +119,7 @@ export class AppRoot {
 
         <d4l-app-footer footerLinks={footerLinks}>
           <span slot="copyright-info" class="u-display-block u-margin-bottom--normal">
-            {store.i18n.t('general.footer_copyright_note', { year: new Date().getFullYear() })}
+            {store.i18n.t('navigation.copyright_note', { year: new Date().getFullYear() })}
           </span>
         </d4l-app-footer>
       </Fragment>

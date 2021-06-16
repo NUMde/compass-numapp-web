@@ -1,7 +1,7 @@
 import { Component, h } from '@stencil/core';
 import store from 'store';
 import { formatDate } from 'services/utils/format-date';
-import { ROUTES, SHOW_LOGOUT } from 'global/constants';
+import { ROUTES, FEATURES_SHOW_LOGOUT } from 'global/constants';
 import { Card } from 'components/card/card';
 
 @Component({
@@ -62,7 +62,7 @@ export class Dashboard {
           </stencil-route-link>
         )}
 
-        {SHOW_LOGOUT && (
+        {FEATURES_SHOW_LOGOUT && (
           <d4l-button
             classes="button--block button--secondary u-margin-top--normal"
             text={store.i18n.t('dashboard.button.logout')}

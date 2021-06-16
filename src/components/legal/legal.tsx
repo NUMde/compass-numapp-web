@@ -11,7 +11,7 @@ export class NumLegal {
   render() {
     return (
       <Card headline={store.i18n.t(`${this.namespace}.headline`)}>
-        <p innerHTML={store.i18n.t(`${this.namespace}.content`)} />
+        <p class="u-infotext" innerHTML={store.i18n.t(`${this.namespace}.content`)} />
       </Card>
     );
   }
