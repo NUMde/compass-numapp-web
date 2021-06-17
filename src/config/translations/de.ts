@@ -51,6 +51,7 @@ export default {
     logout: 'Abmelden',
     privacy_policy: 'Datenschutzerklärung',
     terms_of_use: 'Nutzungsbedingungen',
+    title: 'Menü',
   },
   notification_bar: {
     dismiss_button: 'Schließen',

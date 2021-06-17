@@ -48,6 +48,7 @@ export default {
     logout: 'Logout',
     privacy_policy: 'Privacy policy',
     terms_of_use: 'Terms of use',
+    title: 'Menu',
   },
   notification_bar: {
     dismiss_button: 'Close',

@@ -73,6 +73,7 @@ export class AppRoot {
           logoUrl={ROUTES.ROOT}
           logoUrlTitle={store.i18n.t('navigation.logo')}
           logoUrlText={store.i18n.t('navigation.logo')}
+          menuCardTitle={store.i18n.t('navigation.title')}
           menuFooterLinks={footerLinks}
           supportedLanguages={LANGUAGES}
           selectedLanguage={store.i18n.language}
