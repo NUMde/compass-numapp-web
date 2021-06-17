@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.authenticate__camera-stream {
+.device--desktop .authenticate__camera-stream {
   transform: scaleX(-1);
 }
 
