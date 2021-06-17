@@ -39,3 +39,21 @@
   --desktop: 960px;
   --widescreen: 1152px;
 }
+
+.device--touch {
+  --color-border-button-primary-hover: var(--color-border-button-primary-default);
+  --color-background-button-primary-hover: var(--color-background-button-primary-default);
+  --color-text-button-primary-hover: var(--color-text-button-primary-default);
+  --color-border-button-primary-active: var(--color-secondary);
+  --color-background-button-primary-active: var(--color-secondary);
+
+  --color-border-button-secondary-hover: var(--color-border-button-secondary-default);
+  --color-background-button-secondary-hover: var(--color-background-button-secondary-default);
+  --color-text-button-secondary-hover: var(--color-text-button-secondary-default);
+  --color-border-button-secondary-active: var(--color-secondary);
+  --color-background-button-secondary-active: var(--color-white);
+
+  --color-border-button-tertiary-hover: var(--color-border-button-tertiary-default);
+  --color-background-button-tertiary-hover: var(--color-background-button-tertiary-default);
+  --color-text-button-tertiary-hover: var(--color-text-button-tertiary-default);
+}
