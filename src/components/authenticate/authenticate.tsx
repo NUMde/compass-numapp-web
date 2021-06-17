@@ -7,7 +7,7 @@ import {
   QR_PROP_USER_ID,
   ROUTES,
   FEATURES_SUPPORT_QR_CODE,
-} from 'global/constants';
+} from 'config';
 import services from 'services';
 import store from 'store';
 import { ResponseError } from 'services/utils/response-error';

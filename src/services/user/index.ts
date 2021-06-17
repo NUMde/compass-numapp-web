@@ -1,4 +1,4 @@
-import { API_BASE_URL } from 'global/constants';
+import { API_BASE_URL } from 'config';
 import store from 'store';
 import { get } from 'services/utils/fetch-client';
 import { IUserService, UserResponse } from './types';

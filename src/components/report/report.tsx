@@ -1,6 +1,6 @@
 import { Component, Fragment, h, State } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { ROUTES } from 'global/constants';
+import { ROUTES } from 'config';
 import services from 'services';
 import store from 'store';
 

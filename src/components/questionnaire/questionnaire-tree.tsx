@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { ROUTES } from 'global/constants';
+import { ROUTES } from 'config';
 import store from 'store';
 
 @Component({

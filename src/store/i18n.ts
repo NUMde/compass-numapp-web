@@ -5,7 +5,7 @@ import createPersistedStore from './utils/persisted-store';
 import { Services } from '../services';
 
 import { createStore } from '@stencil/store';
-import { LANGUAGES, TRANSLATIONS } from 'global/constants';
+import { LANGUAGES, TRANSLATIONS } from 'config';
 import { NUMLanguage } from 'types';
 
 interface StateType {

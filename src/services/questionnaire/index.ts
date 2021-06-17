@@ -1,4 +1,4 @@
-import { API_BASE_URL, TRIGGER_KEY_BASIC, QUESTIONNAIRE_RESPONSE_TRIGGER_RULES } from 'global/constants';
+import { API_BASE_URL, TRIGGER_KEY_BASIC, TRIGGER_RULES } from 'config';
 import store from 'store';
 import { get, post } from 'services/utils/fetch-client';
 import { buildQuestionnaireResponseItem, encrypt } from 'services/utils/questionnaire';
@@ -56,7 +56,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
 
   buildFlags() {
     const answers = store.questionnaire.answers;
-    return QUESTIONNAIRE_RESPONSE_TRIGGER_RULES.reduce(
+    return TRIGGER_RULES.reduce(
       (flags, rule) => ({
         ...flags,
         [rule.type]: String(

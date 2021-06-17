@@ -1,4 +1,4 @@
-import { FALLBACK_CERTIFICATE } from 'global/constants';
+import { FALLBACK_CERTIFICATE } from 'config';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from 'services';
 import { user, questionnaire } from 'store';
