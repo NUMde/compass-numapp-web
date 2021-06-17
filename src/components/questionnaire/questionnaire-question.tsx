@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Fragment, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS } from 'config';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
@@ -38,7 +38,9 @@ export class QuestionnaireQuestionComponent {
   }
 
   get titleItem() {
-    return this.question?.parent ?? this.question;
+    const { question } = this;
+    const parent = question?.parent as fhir4.QuestionnaireItem;
+    return parent.type === 'group' ? parent : question;
   }
 
   get descriptionItem() {
@@ -166,9 +168,7 @@ export class QuestionnaireQuestionComponent {
 
     return (
       <Card
-        headline={`${
-          FEATURES_QUESTIONNAIRE_SHOW_LINKIDS ? `${(titleItem as fhir4.QuestionnaireItem).linkId} ` : ''
-        }${titleItem.text}`}
+        headline={`${FEATURES_QUESTIONNAIRE_SHOW_LINKIDS ? `${titleItem.linkId} – ` : ''}${titleItem.text}`}
       >
         <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
 
@@ -180,7 +180,11 @@ export class QuestionnaireQuestionComponent {
         >
           {descriptionItem && (
             <p class="questionnaire-question__description">
-              {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS && <strong>{descriptionItem.linkId}</strong>}
+              {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS && (
+                <Fragment>
+                  <strong>{descriptionItem.linkId}</strong>&#160;
+                </Fragment>
+              )}
               {descriptionItem.text}
             </p>
           )}
