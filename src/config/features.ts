@@ -9,8 +9,8 @@ export const FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES = true;
  * feature config
  */
 export const QR_APP_NAME = 'COMPASS';
-export const QR_PROP_APP_NAME = 'AppName';
-export const QR_PROP_USER_ID = 'AppID';
+export const QR_PROP_APP_NAME = 'AppIdentifier';
+export const QR_PROP_USER_ID = 'SubjectId';
 
 export const TRIGGER_KEY_BASIC = 'basicTrigger';
 export const TRIGGER_KEY_SPECIAL = 'specialTrigger';
