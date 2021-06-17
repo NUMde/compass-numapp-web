@@ -110,11 +110,7 @@ export class NUMQuestionnaireQuestion {
       minLength,
       maxLength: this.maxLength,
       sliderStepValue,
-      // itemControl, // TODO re-enable
-      itemControl:
-        // @ts-ignore
-        this.extension?.find(({ url }) => url.includes('itemControl'))?.valueCodeableConcept?.CodeableConcept
-          ?.coding?.[0]?.code ?? itemControl, // TODO remove this workaround once example questionnaire is fixed
+      itemControl,
     };
   }
 

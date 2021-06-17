@@ -28,6 +28,8 @@ export const isValidValue = (value: any) =>
 export const extractValue = (item: fhir4.Extension | fhir4.QuestionnaireResponseItemAnswer) => {
   return (
     item.valueBoolean ??
+    (item as fhir4.Extension).valueCodeableConcept?.coding?.[0]?.code ??
+    item.valueCoding?.code ??
     item.valueDecimal ??
     item.valueInteger ??
     item.valueDate ??
@@ -35,7 +37,6 @@ export const extractValue = (item: fhir4.Extension | fhir4.QuestionnaireResponse
     (item as fhir4.Extension).valueInstant ??
     item.valueTime ??
     item.valueString ??
-    item.valueCoding?.code ??
     item.valueQuantity?.code
   );
 };

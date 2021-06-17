@@ -10,6 +10,20 @@
   min-height: 150px;
 }
 
+.questionnaire-question__form .date-input .fieldset__item {
+  margin: var(--padding-small);
+}
+.questionnaire-question__form .date-input .date-input-datepicker {
+  margin: var(--padding-medium) auto;
+  width: 24px;
+}
+
 .questionnaire-question__continue {
   margin-top: auto;
+}
+
+@media screen and (min-width: 400px) {
+  .questionnaire-question__form .date-input .date-input-datepicker {
+    margin: var(--padding-small) 0 var(--padding-small) var(--padding-medium);
+  }
 }
