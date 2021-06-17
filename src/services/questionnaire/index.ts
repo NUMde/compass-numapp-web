@@ -73,8 +73,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     const userId = store.auth.accessToken;
     const params = {
       type: 'questionnaire_response',
-      id: userId,
-      appId: userId,
+      subjectId: userId,
       surveyId: store.user.questionnaireId,
       instanceId: store.user.instanceId,
       updateValues: JSON.stringify(this.buildFlags()),
@@ -91,7 +90,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     const userId = store.auth.accessToken;
     const params = {
       type: 'report',
-      appId: userId,
+      subjectId: userId,
       updateValues: JSON.stringify({ [TRIGGER_KEY_BASIC]: true }),
     };
 

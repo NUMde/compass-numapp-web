@@ -11,7 +11,7 @@ export interface UserResponse {
   pushClientSecret: string;
   recipient_certificate_pem_string: string;
   start_date: UserDateTime;
-  study_id: string;
+  subjectId: string;
 }
 
 export interface IUserService {
