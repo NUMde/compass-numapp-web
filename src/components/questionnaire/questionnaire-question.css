@@ -32,7 +32,7 @@
 }
 
 .questionnaire-question__description {
-  margin: 0 0 calc(var(--padding-medium) - var(--input-label-gap));
+  margin: 0 0 calc(var(--padding-large) - var(--input-label-gap));
 }
 
 .questionnaire-question__continue {
