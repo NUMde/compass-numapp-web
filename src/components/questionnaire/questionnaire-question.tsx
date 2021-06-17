@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
+import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS } from 'config';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import { isValidValue } from 'services/utils/questionnaire';
 import store from 'store';
@@ -36,13 +37,12 @@ export class QuestionnaireQuestionComponent {
     return this.question?.answer;
   }
 
-  get title() {
-    return this.question?.parent?.text ?? this.question?.text;
+  get titleItem() {
+    return this.question?.parent ?? this.question;
   }
 
-  get description() {
-    const description = this.question?.text;
-    return description !== this.title ? description : null;
+  get descriptionItem() {
+    return this.titleItem !== this.question ? this.question : null;
   }
 
   get canProceed() {
@@ -149,13 +149,27 @@ export class QuestionnaireQuestionComponent {
   }
 
   render() {
-    const { question, pendingAnswer, handleChange, handleSubmit, progress, QuestionInput } = this;
+    const {
+      question,
+      pendingAnswer,
+      titleItem,
+      descriptionItem,
+      handleChange,
+      handleSubmit,
+      progress,
+      QuestionInput,
+    } = this;
+
     if (!question) {
       return false;
     }
 
     return (
-      <Card headline={`${this.description ? '' : `${question.linkId} `}${this.title}`}>
+      <Card
+        headline={`${
+          FEATURES_QUESTIONNAIRE_SHOW_LINKIDS ? `${(titleItem as fhir4.QuestionnaireItem).linkId} ` : ''
+        }${titleItem.text}`}
+      >
         <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
 
         <form
@@ -164,9 +178,10 @@ export class QuestionnaireQuestionComponent {
           class="questionnaire-question__form"
           autoComplete="off"
         >
-          {this.description && (
+          {descriptionItem && (
             <p class="questionnaire-question__description">
-              <strong>{question.linkId}</strong> {this.description}
+              {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS && <strong>{descriptionItem.linkId}</strong>}
+              {descriptionItem.text}
             </p>
           )}
 
