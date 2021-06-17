@@ -11,7 +11,6 @@ import {
   NumberSliderQuestion,
   SingleChoiceQuestion,
   StringQuestion,
-  TextQuestion,
   UnsupportedQuestion,
 } from './questions';
 
@@ -37,8 +36,13 @@ export class QuestionnaireQuestionComponent {
     return this.question?.answer;
   }
 
+  get title() {
+    return this.question?.parent?.text ?? this.question?.text;
+  }
+
   get description() {
-    return this.question?.item?.filter((item) => item.type === 'display' && item.text) ?? [];
+    const description = this.question?.text;
+    return description !== this.title ? description : null;
   }
 
   get canProceed() {
@@ -66,9 +70,8 @@ export class QuestionnaireQuestionComponent {
       case 'date':
         return DateQuestion;
       case 'string':
-        return StringQuestion;
       case 'text':
-        return TextQuestion;
+        return StringQuestion;
       case 'choice':
         return question.repeats ? MultipleChoiceQuestion : SingleChoiceQuestion;
       case 'display':
@@ -152,14 +155,8 @@ export class QuestionnaireQuestionComponent {
     }
 
     return (
-      <Card headline={`${question.linkId} ${question.text}`}>
+      <Card headline={String(this.title)}>
         <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
-
-        {this.description.map((item) => (
-          <p class="u-infotext" key={item.linkId}>
-            {item.text}
-          </p>
-        ))}
 
         <form
           ref={(el) => (this.#formRef = el)}
@@ -167,6 +164,12 @@ export class QuestionnaireQuestionComponent {
           class="questionnaire-question__form"
           autoComplete="off"
         >
+          {this.description && (
+            <p class="questionnaire-question__description">
+              <strong>{question.linkId}</strong> {this.description}
+            </p>
+          )}
+
           <QuestionInput question={question} answer={pendingAnswer} onChange={handleChange} />
           <d4l-button
             type="submit"

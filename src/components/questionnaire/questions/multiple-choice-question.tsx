@@ -1,5 +1,4 @@
 import { h } from '@stencil/core';
-import { Fragment } from 'components/fragment/fragment';
 import { QuestionnaireQuestionComponentProps } from './types';
 
 export const MultipleChoiceQuestion = ({
@@ -8,7 +7,7 @@ export const MultipleChoiceQuestion = ({
   onChange,
 }: QuestionnaireQuestionComponentProps) => {
   return (
-    <Fragment>
+    <div class="questionnaire-question__multiple-choice-input">
       {question.availableOptions.filter(Boolean).map((option, index) => (
         <p class="u-margin-bottom--small u-text-align--left" key={`${question.linkId}-option${index}`}>
           <d4l-checkbox
@@ -28,6 +27,6 @@ export const MultipleChoiceQuestion = ({
           />
         </p>
       ))}
-    </Fragment>
+    </div>
   );
 };
