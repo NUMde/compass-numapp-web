@@ -1,16 +1,10 @@
 import { Component, h, State } from '@stencil/core';
 import jsQR from 'jsqr';
 import { Card } from 'components/card/card';
-import {
-  QR_APP_NAME,
-  QR_PROP_APP_NAME,
-  QR_PROP_USER_ID,
-  ROUTES,
-  FEATURES_SUPPORT_QR_CODE,
-} from 'config';
+import { QR_APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID, ROUTES, FEATURES_SUPPORT_QR_CODE } from 'config';
 import services from 'services';
 import store from 'store';
-import { ResponseError } from 'services/utils/response-error';
+import { ResponseError } from 'utils/response-error';
 
 @Component({
   tag: 'num-container-authenticate',

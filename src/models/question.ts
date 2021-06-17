@@ -1,4 +1,4 @@
-import { extractLabel, extractValue, parseExtensions } from 'services/utils/questionnaire';
+import { extractLabel, extractValue, parseExtensions } from 'utils/questionnaire';
 import store from 'store';
 
 export class NUMQuestionnaireQuestion {

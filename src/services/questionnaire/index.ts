@@ -1,7 +1,7 @@
 import { API_BASE_URL, TRIGGER_KEY_BASIC, TRIGGER_RULES } from 'config';
 import store from 'store';
-import { get, post } from 'services/utils/fetch-client';
-import { buildQuestionnaireResponseItem, encrypt } from 'services/utils/questionnaire';
+import { get, post } from 'utils/fetch-client';
+import { buildQuestionnaireResponseItem, encrypt } from 'utils/questionnaire';
 import { IQuestionnaireService, NUMQuestionnaire } from './types';
 
 export default class QuestionnaireService implements IQuestionnaireService {

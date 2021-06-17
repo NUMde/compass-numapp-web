@@ -1,6 +1,6 @@
 import { Component, h } from '@stencil/core';
 import store from 'store';
-import { formatDate } from 'services/utils/format-date';
+import { formatDate } from 'utils/format-date';
 import { ROUTES, FEATURES_SHOW_LOGOUT } from 'config';
 import { Card } from 'components/card/card';
 

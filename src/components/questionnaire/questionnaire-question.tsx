@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
-import { isValidValue } from 'services/utils/questionnaire';
+import { isValidValue } from 'utils/questionnaire';
 import store from 'store';
 import {
   BooleanQuestion,
