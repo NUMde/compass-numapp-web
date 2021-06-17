@@ -1,5 +1,6 @@
-import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
+import { Component, Event, EventEmitter, Fragment, h, Prop, State } from '@stencil/core';
 import { Card } from 'components/card/card';
+import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS } from 'config';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import { isValidValue } from 'services/utils/questionnaire';
 import store from 'store';
@@ -11,7 +12,6 @@ import {
   NumberSliderQuestion,
   SingleChoiceQuestion,
   StringQuestion,
-  TextQuestion,
   UnsupportedQuestion,
 } from './questions';
 
@@ -37,8 +37,14 @@ export class QuestionnaireQuestionComponent {
     return this.question?.answer;
   }
 
-  get description() {
-    return this.question?.item?.filter((item) => item.type === 'display' && item.text) ?? [];
+  get titleItem() {
+    const { question } = this;
+    const parent = question?.parent as fhir4.QuestionnaireItem;
+    return parent.type === 'group' ? parent : question;
+  }
+
+  get descriptionItem() {
+    return this.titleItem !== this.question ? this.question : null;
   }
 
   get canProceed() {
@@ -66,9 +72,8 @@ export class QuestionnaireQuestionComponent {
       case 'date':
         return DateQuestion;
       case 'string':
-        return StringQuestion;
       case 'text':
-        return TextQuestion;
+        return StringQuestion;
       case 'choice':
         return question.repeats ? MultipleChoiceQuestion : SingleChoiceQuestion;
       case 'display':
@@ -146,20 +151,26 @@ export class QuestionnaireQuestionComponent {
   }
 
   render() {
-    const { question, pendingAnswer, handleChange, handleSubmit, progress, QuestionInput } = this;
+    const {
+      question,
+      pendingAnswer,
+      titleItem,
+      descriptionItem,
+      handleChange,
+      handleSubmit,
+      progress,
+      QuestionInput,
+    } = this;
+
     if (!question) {
       return false;
     }
 
     return (
-      <Card headline={`${question.linkId} ${question.text}`}>
+      <Card
+        headline={`${FEATURES_QUESTIONNAIRE_SHOW_LINKIDS ? `${titleItem.linkId} – ` : ''}${titleItem.text}`}
+      >
         <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
-
-        {this.description.map((item) => (
-          <p class="u-infotext" key={item.linkId}>
-            {item.text}
-          </p>
-        ))}
 
         <form
           ref={(el) => (this.#formRef = el)}
@@ -167,6 +178,17 @@ export class QuestionnaireQuestionComponent {
           class="questionnaire-question__form"
           autoComplete="off"
         >
+          {descriptionItem && (
+            <p class="questionnaire-question__description">
+              {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS && (
+                <Fragment>
+                  <strong>{descriptionItem.linkId}</strong>&#160;
+                </Fragment>
+              )}
+              {descriptionItem.text}
+            </p>
+          )}
+
           <QuestionInput question={question} answer={pendingAnswer} onChange={handleChange} />
           <d4l-button
             type="submit"

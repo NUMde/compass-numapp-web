@@ -8,6 +8,7 @@ export const BooleanQuestion = ({ question, answer, onChange }: QuestionnaireQue
 
   return (
     <d4l-checkbox
+      class="questionnaire-question__boolean-input"
       label={question.text}
       onChange={(event: any) => onChange(question.linkId, event.target.checked)}
       classes="o-checkbox--primary"

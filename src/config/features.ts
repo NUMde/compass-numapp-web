@@ -4,6 +4,7 @@
 export const FEATURES_SHOW_LOGOUT = true;
 export const FEATURES_SUPPORT_QR_CODE = true;
 export const FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES = true;
+export const FEATURES_QUESTIONNAIRE_SHOW_LINKIDS = true;
 
 /**
  * feature config

@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { ROUTES } from 'config';
+import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS, ROUTES } from 'config';
 import store from 'store';
 
 @Component({
@@ -36,9 +36,10 @@ export class QuestionnaireTreeComponent {
                 }
               >
                 <strong class="questionnaire-tree__title">
-                  {store.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
-                    number: linkId,
-                  })}
+                  {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS &&
+                    store.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
+                      number: linkId,
+                    })}
                 </strong>
                 <span class="questionnaire-tree__text">{text}</span>
               </li>

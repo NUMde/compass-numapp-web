@@ -7,6 +7,7 @@ export const NumberSliderQuestion = ({ question, answer, onChange }: Questionnai
 
   return (
     <d4l-slider-input
+      class="questionnaire-question__number-slider-input"
       min={minValue}
       max={maxValue}
       value={isNaN(value) ? null : value}

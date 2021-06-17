@@ -19,6 +19,7 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
 
   return (
     <d4l-date-input
+      class="questionnaire-question__date-input"
       label=" "
       errorMessage={i18n.t('questionnaire.date_input.error')}
       hiddenLabels
