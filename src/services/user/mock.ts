@@ -13,7 +13,7 @@ export default class MockUser implements IUserService {
       pushClientSecret: '',
       recipient_certificate_pem_string: 'false',
       start_date: '2099-01-01T04:00:00.000Z',
-      study_id: id,
+      subjectId: id,
     };
   }
 

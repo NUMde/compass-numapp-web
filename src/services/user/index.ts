@@ -5,7 +5,7 @@ import { IUserService, UserResponse } from './types';
 
 export default class User implements IUserService {
   async fetch(id: string) {
-    const [data] = await get<UserResponse>({ url: `${API_BASE_URL}/user/${id}` });
+    const [data] = await get<UserResponse>({ url: `${API_BASE_URL}/participant/${id}` });
     return data;
   }
 
@@ -22,7 +22,7 @@ export default class User implements IUserService {
 
     try {
       const userResponse = await this.fetch(userId);
-      if (userResponse.study_id !== userId) {
+      if (userResponse.subjectId !== userId) {
         throw new Error();
       }
 

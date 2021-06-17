@@ -49,7 +49,7 @@ export class Authenticate {
 
     try {
       const userResponse = await services.user.fetch(userId);
-      if (userResponse.study_id !== userId) {
+      if (userResponse.subjectId !== userId) {
         throw new ResponseError('authenticate.error.user_id_mismatch', 401);
       }
 
