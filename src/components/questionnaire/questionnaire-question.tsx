@@ -155,7 +155,7 @@ export class QuestionnaireQuestionComponent {
     }
 
     return (
-      <Card headline={String(this.title)}>
+      <Card headline={`${this.description ? '' : `${question.linkId} `}${this.title}`}>
         <d4l-linear-progress classes="questionnaire-question__progress" value={progress} />
 
         <form
