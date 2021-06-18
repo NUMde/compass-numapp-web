@@ -28,7 +28,7 @@ export default class User implements IUserService {
 
       store.auth.certificate = userResponse.recipient_certificate_pem_string;
       store.user.populateFromUserResponse(userResponse);
-    } catch (e) {
+    } catch (_) {
       store.auth.expireSession();
     }
   }

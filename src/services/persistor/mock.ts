@@ -1,17 +1,7 @@
-import { IPersistorService, PersistableData } from './types';
+import PersistorService from '.';
 
-export default class MockPersistorService implements IPersistorService {
-  private cachedData: PersistableData = {};
-
-  get(key: string): string | undefined {
-    return this.cachedData[key];
-  }
-
-  set(key: string, value: string): void {
-    this.cachedData[key] = value;
-  }
-
-  getKeys() {
-    return [];
-  }
-}
+/**
+ * No need for a separate mocked service - PersistorService
+ * should be able to handle undefined storage
+ */
+export default PersistorService;

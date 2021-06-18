@@ -7,7 +7,7 @@ import { Services } from 'services/types';
 
 const buildMockServices: () => Services = () => ({
   notifier: new MockNotifierService(),
-  persistor: new MockPersistorService(),
+  persistor: new MockPersistorService(null),
   user: new MockUserService(),
   questionnaire: new MockQuestionnaireService(),
 });

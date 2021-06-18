@@ -28,7 +28,7 @@ export class Authenticate {
   get supportsCamera() {
     try {
       return FEATURES_SUPPORT_QR_CODE && !!navigator.mediaDevices.getUserMedia;
-    } catch (e) {
+    } catch (_) {
       return false;
     }
   }
@@ -68,8 +68,7 @@ export class Authenticate {
       });
 
       return this.#stream;
-    } catch (e) {
-      console.error(e.message);
+    } catch (_) {
       throw new Error('authenticate.error.camera_rejected');
     }
   }
@@ -132,7 +131,7 @@ export class Authenticate {
       this.#videoEl.srcObject = stream;
       this.showCamera = true;
       this.#captureAnimationFrame = requestAnimationFrame(() => this.captureQrCode());
-    } catch (e) {}
+    } catch (_) {}
   }
 
   stopCamera() {

@@ -16,8 +16,8 @@ export default class PersistorService implements IPersistorService {
     return this.getStoreValue(key);
   }
 
-  set(key: string, value: string): void {
-    if (value === null || value === 'null') {
+  set(key: string, value?: string): void {
+    if (value === null || value === undefined || value === 'null') {
       delete this.cachedData[key];
       this.removeStoreValue(key);
     } else {
@@ -32,7 +32,7 @@ export default class PersistorService implements IPersistorService {
         .fill(undefined)
         .map((_, index) => this.storage.key(index))
         .filter(Boolean);
-    } catch (e) {
+    } catch (_) {
       return Object.keys(this.cachedData);
     }
   }
@@ -45,7 +45,7 @@ export default class PersistorService implements IPersistorService {
       }
 
       return value;
-    } catch (e) {
+    } catch (_) {
       return undefined;
     }
   }
@@ -53,13 +53,13 @@ export default class PersistorService implements IPersistorService {
   private setStoreValue(key: string, value: string) {
     try {
       this.storage?.setItem(key, value);
-    } catch (e) {}
+    } catch (_) {}
   }
 
   private removeStoreValue(key: string) {
     try {
       this.storage?.removeItem(key);
-    } catch (e) {}
+    } catch (_) {}
   }
 }
 
