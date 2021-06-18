@@ -1,4 +1,4 @@
-import store from '../../store';
+import store from 'store';
 
 /**
  * Formats a provided date based on the selected language code with the default app * date options

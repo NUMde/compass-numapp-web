@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, Fragment, h, Prop, State } from '@stenc
 import { Card } from 'components/card/card';
 import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS } from 'config';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
-import { isValidValue } from 'services/utils/questionnaire';
+import { isValidValue } from 'utils/questionnaire';
 import store from 'store';
 import {
   BooleanQuestion,

@@ -4,6 +4,7 @@ import AuthenticatedRoute from 'components/authenticated-route/authenticated-rou
 import { LANGUAGES, NAVIGATION_ITEMS, FOOTER_LINKS, ROUTES } from 'config';
 import services from 'services';
 import store from 'store';
+import { IS_MOBILE, IS_TOUCH } from 'utils/device';
 
 @Component({
   tag: 'app-root',
@@ -50,6 +51,10 @@ export class AppRoot {
   }
 
   async componentWillLoad() {
+    const htmlClasses = document.querySelector('html').classList;
+    htmlClasses.add(IS_TOUCH ? 'device--touch' : 'device--pointer');
+    htmlClasses.add(IS_MOBILE ? 'device--mobile' : 'device--desktop');
+
     await services.user.populateStore();
 
     this.isAuthenticated = store.auth.isAuthenticated;

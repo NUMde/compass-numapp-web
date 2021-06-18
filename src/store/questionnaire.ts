@@ -6,7 +6,7 @@ import {
   NUMQuestionnaire,
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
-import { extractQuestions, flattenNestedItems, getHash } from 'services/utils/questionnaire';
+import { extractQuestions, flattenNestedItems, getHash } from 'utils/questionnaire';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
