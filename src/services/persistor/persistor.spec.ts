@@ -35,7 +35,9 @@ describe('local storage store', () => {
 
   it('puts data into storage', () => {
     persistor.set('foo', 'bar');
+    storage.setItem('bar', 'foo');
     expect(storage.getItem('foo')).toEqual('bar');
+    expect(persistor.get('bar')).toEqual('foo');
   });
 
   it('updates storage when data changes', () => {
@@ -56,5 +58,51 @@ describe('local storage store', () => {
     persistor.set('foo', 'null');
     expect(persistor.get('foo')).toEqual(null);
     expect(storage.getItem('foo')).toEqual(null);
+  });
+
+  it('returns keys of persisted storage', () => {
+    persistor.set('foo', 'one');
+    persistor.set('bar', 'two');
+    expect(persistor.getKeys()).toEqual(['foo', 'bar']);
+  });
+
+  it('is resistant to thrown storage errors', () => {
+    const faultyStorage = {
+      key() {
+        throw new Error();
+      },
+      setItem() {
+        throw new Error();
+      },
+      getItem() {
+        throw new Error();
+      },
+      removeItem() {
+        throw new Error();
+      },
+      get length() {
+        return 2;
+      },
+    };
+
+    const persistorWithFaultyStorage = new PersistorService((faultyStorage as unknown) as Storage);
+    persistorWithFaultyStorage.set('foo', 'bar');
+    expect(persistorWithFaultyStorage.get('foo')).toBe('bar');
+    expect(persistorWithFaultyStorage.getKeys()).toEqual(['foo']);
+    persistorWithFaultyStorage.set('foo', null);
+    expect(persistorWithFaultyStorage.get('foo')).toBe(undefined);
+    expect(persistorWithFaultyStorage.getKeys()).toEqual([]);
+  });
+
+  it('is resistant to missing storage', () => {
+    const persistorWithMissingStorage = new PersistorService(undefined);
+    expect(persistorWithMissingStorage.get('foo')).toBe(undefined);
+    expect(persistorWithMissingStorage.getKeys()).toEqual([]);
+    persistorWithMissingStorage.set('foo', 'bar');
+    expect(persistorWithMissingStorage.get('foo')).toBe('bar');
+    expect(persistorWithMissingStorage.getKeys()).toEqual(['foo']);
+    persistorWithMissingStorage.set('foo', null);
+    expect(persistorWithMissingStorage.get('foo')).toBe(undefined);
+    expect(persistorWithMissingStorage.getKeys()).toEqual([]);
   });
 });

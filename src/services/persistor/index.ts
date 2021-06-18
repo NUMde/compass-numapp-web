@@ -13,50 +13,53 @@ export default class PersistorService implements IPersistorService {
       return this.cachedData[key];
     }
 
-    return this.getStoresValue(key);
+    return this.getStoreValue(key);
   }
 
   set(key: string, value: string): void {
     if (value === null || value === 'null') {
       delete this.cachedData[key];
-      this.removeStoresValue(key);
+      this.removeStoreValue(key);
     } else {
       this.cachedData[key] = value;
-      this.setStoresValue(key, value);
+      this.setStoreValue(key, value);
     }
   }
 
   getKeys(): string[] {
     try {
-      return Object.keys(this.storage);
-    } catch (e) {}
-    return [];
+      return new Array(this.storage.length)
+        .fill(undefined)
+        .map((_, index) => this.storage.key(index))
+        .filter(Boolean);
+    } catch (e) {
+      return Object.keys(this.cachedData);
+    }
   }
 
-  private getStoresValue(key: string): string | undefined {
-    if (!this.storage) {
+  private getStoreValue(key: string): string | undefined {
+    try {
+      const value = this.storage?.getItem(key);
+      if (typeof value === 'string') {
+        this.cachedData[key] = value;
+      }
+
+      return value;
+    } catch (e) {
       return undefined;
     }
-
-    const value = this.storage.getItem(key);
-
-    if (value !== null) {
-      this.cachedData[key] = value;
-    }
-
-    return value;
   }
 
-  private setStoresValue(key: string, value: string) {
-    if (this.storage) {
-      this.storage.setItem(key, value);
-    }
+  private setStoreValue(key: string, value: string) {
+    try {
+      this.storage?.setItem(key, value);
+    } catch (e) {}
   }
 
-  private removeStoresValue(key: string) {
-    if (this.storage) {
-      this.storage.removeItem(key);
-    }
+  private removeStoreValue(key: string) {
+    try {
+      this.storage?.removeItem(key);
+    } catch (e) {}
   }
 }
 
