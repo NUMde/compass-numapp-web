@@ -86,6 +86,6 @@ const storeBuilder = ({ persistor }: Services) => {
   return new Actions();
 };
 
-export type UserStore = ReturnType<typeof storeBuilder>;
+export type QuestionnaireStore = ReturnType<typeof storeBuilder>;
 
 export default storeBuilder;
