@@ -1,6 +1,8 @@
 import PersistorService from './';
 
 let storage: Storage;
+let persistor: PersistorService;
+
 const buildMockStorage: () => Storage = () => {
   let store = {};
 
@@ -26,8 +28,7 @@ const buildMockStorage: () => Storage = () => {
   };
 };
 
-let persistor: PersistorService;
-describe('local storage store', () => {
+describe('PersistorService', () => {
   beforeEach(() => {
     storage = buildMockStorage();
     persistor = new PersistorService(storage);

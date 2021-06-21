@@ -50,7 +50,7 @@ export class Authenticate {
       store.user.populateFromUserResponse(userResponse);
       store.auth.login(userId);
     } catch ({ status = 0 }) {
-      services.notifier.onError(`authenticate.error.code_${status}`);
+      services.notifier.showError(`authenticate.error.code_${status}`);
       this.isAuthenticating = false;
       status === 401 && this.startCamera();
     }
@@ -88,7 +88,7 @@ export class Authenticate {
       this.#userId = userId;
       this.authenticate();
     } catch (error) {
-      services.notifier.onError(
+      services.notifier.showError(
         error.message.indexOf('authenticate.') === 0 ? error.message : 'authenticate.error.qr_format'
       );
     }
