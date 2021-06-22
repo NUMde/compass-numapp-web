@@ -1,0 +1,243 @@
+{
+  "resourceType": "Questionnaire",
+  "url": "https://foo.bar/fhir/questionnaire/example_questionnaire",
+  "identifier": [
+    {
+      "use": "official",
+      "system": "urn:UMOID:",
+      "value": "urn:oid:example-questionnaire"
+    }
+  ],
+  "version": "1.0",
+  "title": "Example questionnaire",
+  "status": "draft",
+  "subjectType": ["Patient"],
+  "date": "2021-06-22",
+  "publisher": "D4L Data4Life gGmbH",
+  "purpose": "Unit-testing the NUM compass web app",
+  "item": [
+    {
+      "linkId": "0.1",
+      "text": "Free text question",
+      "type": "string"
+    },
+    {
+      "linkId": "1",
+      "text": "Group 1",
+      "type": "group",
+      "required": true,
+      "item": [
+        {
+          "linkId": "1.1",
+          "text": "Another free text question",
+          "type": "string",
+          "required": true
+        },
+        {
+          "linkId": "1.2",
+          "text": "Date question",
+          "type": "date",
+          "required": true
+        },
+        {
+          "linkId": "1.3",
+          "text": "Decimal question",
+          "type": "decimal"
+        },
+        {
+          "linkId": "1.4",
+          "text": "Boolean question",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "linkId": "1.5",
+          "text": "Informational item",
+          "type": "display"
+        },
+        {
+          "linkId": "1.6",
+          "text": "Slider question",
+          "type": "integer",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+              "valueCodeableConcept": {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/questionnaire-item-control",
+                    "code": "slider"
+                  }
+                ]
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+              "valueInteger": 1
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueInteger": 5
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueInteger": 15
+            }
+          ],
+          "required": true
+        },
+        {
+          "linkId": "1.7",
+          "text": "Multiple-answer question",
+          "type": "choice",
+          "repeats": true,
+          "required": true,
+          "answerOption": [
+            {
+              "valueString": "foo"
+            },
+            {
+              "valueString": "bar"
+            },
+            {
+              "valueString": "baz"
+            }
+          ]
+        },
+        {
+          "linkId": "1.8",
+          "text": "Sub-group",
+          "type": "group",
+          "required": true,
+          "item": [
+            {
+              "linkId": "1.8.1",
+              "text": "foo",
+              "type": "boolean",
+              "required": true
+            },
+            {
+              "linkId": "1.8.2",
+              "text": "bar",
+              "type": "integer",
+              "required": true
+            },
+            {
+              "linkId": "1.8.3",
+              "text": "baz",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "linkId": "1.9",
+          "text": "Single-choice question",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz",
+                "code": "E991C5",
+                "display": "foo"
+              }
+            },
+            {
+              "valueCoding": {
+                "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz",
+                "code": "1C41D9",
+                "display": "bar"
+              }
+            },
+            {
+              "valueCoding": {
+                "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz",
+                "code": "AAC2DD",
+                "display": "baz"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "1.10",
+          "text": "Conditional question I",
+          "type": "string",
+          "required": true,
+          "enableWhen": [
+            {
+              "question": "1.8.1",
+              "operator": "=",
+              "answerBoolean": true
+            },
+            {
+              "question": "1.9",
+              "operator": "=",
+              "answerString": "E991C5"
+            }
+          ],
+          "enableBehavior": "all"
+        },
+        {
+          "linkId": "1.11",
+          "text": "Conditional question II",
+          "type": "string",
+          "required": true,
+          "enableWhen": [
+            {
+              "question": "1.8.1",
+              "operator": "=",
+              "answerBoolean": true
+            },
+            {
+              "question": "1.9",
+              "operator": "=",
+              "answerString": "E991C5"
+            }
+          ],
+          "enableBehavior": "any"
+        },
+        {
+          "linkId": "1.12",
+          "text": "Question with definition",
+          "type": "string",
+          "definition": "http://foo.bar/definition/baz"
+        }
+      ]
+    },
+    {
+      "linkId": "2",
+      "text": "Group 2",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "2.1",
+          "text": "Sub-group 1",
+          "type": "group",
+          "required": true,
+          "item": [
+            {
+              "linkId": "2.1.1",
+              "text": "Sub-sub-group 1",
+              "type": "group",
+              "required": true,
+              "item": [
+                {
+                  "linkId": "2.1.1.1",
+                  "text": "Question of sub-sub-group 1",
+                  "type": "string",
+                  "required": true
+                }
+              ]
+            },
+            {
+              "linkId": "2.1.2",
+              "text": "Question of sub-group 1",
+              "type": "boolean",
+              "required": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
