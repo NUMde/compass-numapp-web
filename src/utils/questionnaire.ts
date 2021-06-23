@@ -221,7 +221,7 @@ export const generateEncryptedPayload = ({
   const payload = {
     type,
     data: {
-      appId: accessToken,
+      subjectId: accessToken,
       ...(questionnaireResponse ? { body: questionnaireResponse } : {}),
     },
   };

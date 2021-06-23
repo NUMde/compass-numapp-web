@@ -159,6 +159,9 @@ describe('questionnaire util', () => {
     const data = JSON.parse(encryptedPayload).payload;
     const p7 = forge.pkcs7.messageFromPem(`-----BEGIN PKCS7-----\n${data}\n-----END PKCS7-----`);
     p7.decrypt(p7.recipients[0], forge.pki.privateKeyFromPem(EXAMPLE_PRIVATE_KEY_PEM));
-    expect(JSON.parse(p7.content.data)).toEqual({ type: 'report', data: { appId: 'unit-test', body: {} } });
+    expect(JSON.parse(p7.content.data)).toEqual({
+      type: 'report',
+      data: { subjectId: 'unit-test', body: {} },
+    });
   });
 });
