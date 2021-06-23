@@ -37,11 +37,25 @@ const USER_ID = 'unit-test';
 global.btoa = (value: string) => Buffer.from(value, 'binary').toString('base64');
 
 describe('questionnaire util', () => {
+  /**
+   * We are removing the parent props in order to reduce the file size of the example.
+   * Outside of this test, the parent prop is a reference to the parent item if exists,
+   * else the questionnaire root.
+   */
   it('flattens the nested questionnaire items', () => {
     const flattenedItems = flattenNestedItems(QUESTIONNAIRE.item, QUESTIONNAIRE);
-    expect(flattenedItems).toEqual(EXAMPLE_QUESTIONNAIRE_FLATTENED_ITEMS);
     expect(flattenedItems.every(({ parent }) => !!parent)).toBe(true);
     expect(flattenedItems.every(({ level }) => typeof level === 'number')).toBe(true);
+    expect(
+      flattenedItems.map((item) => ({
+        ...item,
+        parent: `[... ${
+          typeof (item.parent as NUMQuestionnaireFlattenedItem).level === 'number'
+            ? `item with linkId ${(item.parent as NUMQuestionnaireFlattenedItem).linkId}`
+            : 'questionnaire root'
+        }]`,
+      }))
+    ).toEqual(EXAMPLE_QUESTIONNAIRE_FLATTENED_ITEMS);
   });
 
   it('extracts the questions from the flattened questionnaire items', () => {
