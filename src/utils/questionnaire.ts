@@ -2,7 +2,7 @@ import forge from 'node-forge';
 import { NUMQuestionnaireQuestion } from 'models/question';
 import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import { QuestionnaireStore } from 'store/questionnaire';
-import { TRIGGER_RULES } from 'config';
+import { FHIR_SUPPORTED_EXTENSION_BASE_URLS, TRIGGER_RULES } from 'config';
 
 export const flattenNestedItems = (
   items: fhir4.QuestionnaireItem[],
@@ -93,7 +93,10 @@ export const parseExtensions = (extensions: fhir4.Extension[]): NumQuestionnaire
   return extensions.reduce(
     (config, extension) =>
       Object.assign(config, {
-        [extension.url.replace('http://hl7.org/fhir/StructureDefinition/', '')]: extractValue(extension),
+        [FHIR_SUPPORTED_EXTENSION_BASE_URLS.reduce(
+          (url, baseUrl) => url.replace(`${baseUrl}/`, ''),
+          extension.url
+        )]: extractValue(extension),
       }),
     {}
   );

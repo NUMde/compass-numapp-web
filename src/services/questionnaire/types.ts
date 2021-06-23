@@ -10,6 +10,8 @@ export interface NumQuestionnaireExtensionConfig {
   maxLength?: number;
   'questionnaire-itemControl'?: string;
   'questionnaire-sliderStepValue'?: number;
+  LowRangeLabel?: string;
+  HighRangeLabel?: string;
 }
 
 export interface IQuestionnaireService {
