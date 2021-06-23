@@ -1,5 +1,6 @@
 export default {
   authenticate: {
+    alternatively: '– oder alternativ –',
     continue: 'Fortfahren',
     error: {
       code_0:
@@ -15,6 +16,10 @@ export default {
     infotext:
       'Geben Sie im Textfeld Ihren Teilnahmecode ein, um fortzufahren. Wenn Sie einen QR-Code erhalten haben und Ihr Endgerät über eine Kamera verfügt, können Sie diesen stattdessen einfach einscannen.',
     input_label: 'Ihr Teilnahmecode',
+    stay_logged_in: {
+      checkbox: 'Angemeldet bleiben',
+      infotext: 'Bitte wählen Sie diese Option nicht aus, wenn Sie ein öffentliches Gerät benutzen.',
+    },
   },
   dashboard: {
     button: {

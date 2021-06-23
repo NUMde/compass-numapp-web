@@ -60,3 +60,27 @@
 .authenticate__camera-crosshair--bottom::after {
   border-top-width: 0;
 }
+
+.authenticate__help {
+  margin: var(--space-l) 0;
+}
+
+.authenticate__help {
+  color: var(--color-primary-lighter);
+  font-size: 0.8em;
+  margin: var(--space-m) 0 0;
+}
+
+.authenticate__checkbox {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  text-align: center;
+  margin-top: var(--space-xxl);
+}
+
+.authenticate__checkbox .u-infotext {
+  color: var(--color-primary-lighter);
+  font-size: 0.8em;
+  margin-bottom: 0;
+}

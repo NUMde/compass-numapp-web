@@ -17,8 +17,9 @@ export class Authenticate {
   #canvasEl?: HTMLCanvasElement;
   #userId: string = '';
 
-  @State() showCamera: boolean = false;
-  @State() isAuthenticating: boolean = false;
+  @State() showCamera = false;
+  @State() isAuthenticating = false;
+  @State() isPersistenceDisabled = false;
 
   handleSubmit(event: Event) {
     event.preventDefault();
@@ -173,14 +174,33 @@ export class Authenticate {
           </div>
         )}
 
+        {this.showCamera && <p class="authenticate__help">{store.i18n.t('authenticate.alternatively')}</p>}
+
         <form class="u-margin-top--large" onSubmit={(event) => this.handleSubmit(event)}>
           <d4l-input
             type="text"
             label={store.i18n.t('authenticate.input_label')}
-            onInput={(event: any) => (this.#userId = event.target.value)}
+            onInput={(event: Event) => (this.#userId = (event.target as HTMLInputElement).value)}
             value={this.#userId}
+            focused
             required
           />
+
+          <div class="authenticate__checkbox">
+            <d4l-checkbox
+              label={store.i18n.t('authenticate.stay_logged_in.checkbox')}
+              onChange={(event: Event) =>
+                (this.isPersistenceDisabled = !(event.target as HTMLInputElement).checked)
+              }
+              classes="o-checkbox--primary"
+              value="1"
+              name="stay_logged_in"
+              checkboxId="stay_logged_in"
+              checked={!this.isPersistenceDisabled}
+            />
+            <p class="u-infotext">{store.i18n.t('authenticate.stay_logged_in.infotext')}</p>
+          </div>
+
           <d4l-button
             type="submit"
             classes="button--block u-margin-top--medium"
