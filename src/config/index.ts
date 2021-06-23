@@ -1,6 +1,7 @@
 import { Env } from '@stencil/core';
 
 export * from './features';
+export * from './fhir';
 export * from './localization';
 export * from './navigation';
 
