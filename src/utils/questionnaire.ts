@@ -149,7 +149,7 @@ export const buildQuestionnaireResponse = (
   const { flattenedItems, questionnaire, isCompleted } = questionnaireStore;
 
   return {
-    author: {
+    source: {
       identifier: {
         value: `urn:uuid:${userId}`,
         system: 'urn:ietf:rfc:3986',

@@ -1,5 +1,5 @@
 {
-  "author": { "identifier": { "value": "urn:uuid:unit-test", "system": "urn:ietf:rfc:3986" } },
+  "source": { "identifier": { "value": "urn:uuid:unit-test", "system": "urn:ietf:rfc:3986" } },
   "resourceType": "QuestionnaireResponse",
   "identifier": { "value": "urn:uuid:unit-test-response-{{timestamp}}", "system": "urn:ietf:rfc:3986" },
   "status": "completed",
