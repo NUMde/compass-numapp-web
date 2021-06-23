@@ -24,13 +24,12 @@ export default function createPersistedStore<T>(
     .reduce(
       (data, key) => {
         try {
-          const value = JSON.parse(persistor.get(namespacedKey(key)));
+          const rawValue = persistor.get(namespacedKey(key));
+          const value = typeof rawValue === 'string' ? JSON.parse(rawValue) : rawValue;
           if (value !== null && value !== undefined) {
             return Object.assign(data, { [key]: value });
           }
-        } catch (_e) {
-          // ignore errors
-        }
+        } catch (_) {}
         return data;
       },
       { ...initialData }
@@ -41,13 +40,11 @@ export default function createPersistedStore<T>(
     set(key: any, value: any) {
       try {
         persistor.set(namespacedKey(key), JSON.stringify(value));
-      } catch (_e) {
-        // ignore errors
-      }
+      } catch (_) {}
     },
     reset() {
       getPersistedKeys().forEach((key) => {
-        const resetValue = initialData[key] ?? null;
+        const resetValue = initialData[key];
         store.set(key as keyof T & string, resetValue);
         actions.set(key, resetValue);
       });

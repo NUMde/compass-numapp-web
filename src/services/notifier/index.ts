@@ -1,4 +1,4 @@
-import { INotifierService, NotificationObserver, ActionOptions, NotificationSeverity } from './types';
+import { INotifierService, NotificationObserver, NotificationSeverity } from './types';
 
 export default class NotifierService implements INotifierService {
   private observer: NotificationObserver;
@@ -6,36 +6,32 @@ export default class NotifierService implements INotifierService {
   private notifyObserver(
     severity: NotificationSeverity,
     messageKey: string,
-    messageOptions?: { [key: string]: any },
-    actionOptions?: ActionOptions
+    messageOptions?: { [key: string]: any }
   ) {
-    if (this.observer !== undefined) {
-      this.observer.onNotification({
-        severity,
-        messageKey,
-        messageOptions,
-        actionOptions,
-      });
-    }
+    this.observer?.onNotification({
+      severity,
+      messageKey,
+      messageOptions,
+    });
   }
 
   observe(observer: NotificationObserver) {
     this.observer = observer;
   }
 
-  onError<T extends (...args: any) => any>(error: Error | string, retry?: ActionOptions<T>) {
-    console.error(error);
-    if (typeof error === 'string') {
-      return this.notifyObserver('error', error);
-    }
-    return this.notifyObserver('error', error.message, retry);
+  showError(error: Error | string, options?: { [key: string]: any }) {
+    return this.notifyObserver('error', (error as Error).message ?? (error as string), options);
   }
 
-  onInfo(key: string, options?: { [key: string]: any }) {
+  showWarning(key: string, options?: { [key: string]: any }) {
+    this.notifyObserver('warning', key, options);
+  }
+
+  showInfo(key: string, options?: { [key: string]: any }) {
     this.notifyObserver('notification', key, options);
   }
 
-  onSuccess(key: string, options?: { [key: string]: any }) {
+  showSuccess(key: string, options?: { [key: string]: any }) {
     this.notifyObserver('success', key, options);
   }
 }

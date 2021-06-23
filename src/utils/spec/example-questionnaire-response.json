@@ -1,0 +1,85 @@
+{
+  "source": { "identifier": { "value": "urn:uuid:unit-test", "system": "urn:ietf:rfc:3986" } },
+  "resourceType": "QuestionnaireResponse",
+  "identifier": { "value": "urn:uuid:unit-test-response-{{timestamp}}", "system": "urn:ietf:rfc:3986" },
+  "status": "completed",
+  "authored": "{{datetime}}",
+  "questionnaire": "https://foo.bar/fhir/questionnaire/example_questionnaire|1.0",
+  "item": [
+    { "linkId": "0.1", "text": "Free text question", "answer": [{ "valueString": "foo 1" }] },
+    {
+      "linkId": "1",
+      "text": "Group 1",
+      "item": [
+        { "linkId": "1.1", "text": "Another free text question", "answer": [{ "valueString": "foo 2" }] },
+        { "linkId": "1.2", "text": "Date question", "answer": [{ "valueDate": "2021-06-20" }] },
+        { "linkId": "1.3", "text": "Decimal question", "answer": [{ "valueDecimal": 7.5 }] },
+        { "linkId": "1.4", "text": "Boolean question", "answer": [{ "valueBoolean": true }] },
+        { "linkId": "1.5", "text": "Informational item" },
+        { "linkId": "1.6", "text": "Slider question", "answer": [{ "valueInteger": 11 }] },
+        {
+          "linkId": "1.7",
+          "text": "Multiple-answer question",
+          "answer": [{ "valueString": "foo" }, { "valueString": "baz" }]
+        },
+        {
+          "linkId": "1.8",
+          "text": "Sub-group",
+          "item": [
+            { "linkId": "1.8.1", "text": "foo", "answer": [{ "valueBoolean": false }] },
+            { "linkId": "1.8.2", "text": "bar", "answer": [{ "valueInteger": 5 }] },
+            { "linkId": "1.8.3", "text": "baz" }
+          ]
+        },
+        {
+          "linkId": "1.9",
+          "text": "Single-choice question",
+          "answer": [
+            {
+              "valueCoding": {
+                "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz",
+                "code": "E991C5",
+                "display": "foo"
+              }
+            }
+          ]
+        },
+        { "linkId": "1.10", "text": "Conditional question I" },
+        {
+          "linkId": "1.11",
+          "text": "Conditional question II",
+          "answer": [{ "valueString": "foo-bar-baz-bar-foo" }]
+        },
+        {
+          "linkId": "1.12",
+          "text": "Question with definition",
+          "definition": "http://foo.bar/definition/baz"
+        }
+      ]
+    },
+    {
+      "linkId": "2",
+      "text": "Group 2",
+      "item": [
+        {
+          "linkId": "2.1",
+          "text": "Sub-group 1",
+          "item": [
+            {
+              "linkId": "2.1.1",
+              "text": "Sub-sub-group 1",
+              "item": [
+                {
+                  "linkId": "2.1.1.1",
+                  "text": "Question of sub-sub-group 1",
+                  "answer": [{ "valueString": "sub-sub-bar" }]
+                }
+              ]
+            },
+            { "linkId": "2.1.2", "text": "Question of sub-group 1", "answer": [{ "valueBoolean": true }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

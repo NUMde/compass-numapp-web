@@ -1,5 +1,4 @@
 import { Component, h } from '@stencil/core';
-import { Notification } from 'services/notifier';
 import store from 'store';
 
 @Component({
@@ -11,23 +10,15 @@ export class Notifications {
     store.notifications.dismissCurrent();
   }
 
-  onAction({ actionOptions: action }: Notification) {
-    action.fn.apply(action.scope, action.args);
-    store.notifications.dismissCurrent();
-  }
-
   render() {
     const notification = store.notifications.current;
-    const onAction = notification?.actionOptions ? () => this.onAction(notification) : undefined;
-
-    const actionKey = notification?.actionKey || 'notification_bar.retry_button';
 
     return (
       <div class={`notification-container ease-in-top ${notification ? 'ease-in-top--active' : ''}`}>
         {notification ? (
           <num-notification
-            action={onAction}
-            actionKey={actionKey}
+            action={undefined}
+            actionKey={undefined}
             close={this.onClose}
             messageKey={notification.messageKey}
             messageOptions={notification.messageOptions}

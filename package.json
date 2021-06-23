@@ -9,8 +9,8 @@
     "build": "stencil build",
     "build:dev": "npm run build -- --dev --watch --serve --no-open",
     "analyze": "stencil build",
-    "test": "stencil test --spec",
-    "test:watch": "stencil test --spec --watchAll",
+    "test": "stencil test --spec --runInBand",
+    "test:watch": "npm run test -- --watchAll",
     "code-format": "prettier --write 'src/**/*.{tsx,scss,ts}'"
   },
   "engines": {

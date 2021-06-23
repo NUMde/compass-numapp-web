@@ -24,7 +24,7 @@ export class QuestionnaireConfirmComponent {
     } catch (error) {
       this.isBusy = false;
       console.error(error);
-      services.notifier.onError('questionnaire.confirm_submit.error');
+      services.notifier.showError('questionnaire.confirm_submit.error');
     }
   }
 

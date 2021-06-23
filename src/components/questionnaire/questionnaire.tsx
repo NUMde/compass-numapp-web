@@ -21,8 +21,8 @@ export class QuestionnaireComponent {
       store.questionnaire.populateFromRequestResponse(
         await services.questionnaire.fetch(store.user.questionnaireId)
       );
-    } catch (e) {
-      services.notifier.onError('questionnaire.fetch_failed');
+    } catch (_) {
+      services.notifier.showError('questionnaire.fetch_failed');
     }
   }
 

@@ -1,6 +1,8 @@
+import forge from 'node-forge';
 import { NUMQuestionnaireQuestion } from 'models/question';
 import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
-import forge from 'node-forge';
+import { QuestionnaireStore } from 'store/questionnaire';
+import { TRIGGER_RULES } from 'config';
 
 export const flattenNestedItems = (
   items: fhir4.QuestionnaireItem[],
@@ -139,6 +141,53 @@ export const buildQuestionnaireResponseItem = (
   };
 };
 
+export const buildQuestionnaireResponse = (
+  userId: string,
+  questionnaireStore: QuestionnaireStore
+): fhir4.QuestionnaireResponse => {
+  const date = new Date();
+  const { flattenedItems, questionnaire, isCompleted } = questionnaireStore;
+
+  return {
+    source: {
+      identifier: {
+        value: `urn:uuid:${userId}`,
+        system: 'urn:ietf:rfc:3986',
+      },
+    },
+    resourceType: 'QuestionnaireResponse',
+    identifier: {
+      value: `urn:uuid:${userId}-response-${date.getTime()}`,
+      system: 'urn:ietf:rfc:3986',
+    },
+    status: isCompleted ? 'completed' : 'in-progress',
+    authored: date.toISOString(),
+    questionnaire: [questionnaire.url, questionnaire.version]
+      .filter((segment) => (typeof segment === 'string' && !!segment) || typeof segment === 'number')
+      .join('|'),
+    item:
+      questionnaire.item
+        ?.map((item) => buildQuestionnaireResponseItem(flattenedItems, item.linkId))
+        .filter(Boolean) ?? [],
+  };
+};
+
+export const buildFlags = (questionnaireStore: QuestionnaireStore) => {
+  const answers = questionnaireStore.answers;
+
+  return TRIGGER_RULES.reduce(
+    (flags, rule) => ({
+      ...flags,
+      [rule.type]: String(
+        Object.keys(rule.answers).some((linkId) =>
+          rule.answers[linkId].every((value) => (answers.get(linkId) ?? []).includes(value))
+        )
+      ),
+    }),
+    {}
+  );
+};
+
 /**
  * see https://github.com/NUMde/compass-numapp/tree/main/docs/encryption
  */
@@ -156,4 +205,26 @@ export const encrypt = (pem: string, payload: object): string => {
       .map((value) => String.fromCharCode(parseInt(value, 16)))
       .join('')
   );
+};
+
+export const generateEncryptedPayload = ({
+  type,
+  accessToken,
+  certificatePem,
+  questionnaireResponse,
+}: {
+  type: 'report' | 'questionnaire_response';
+  accessToken: string;
+  certificatePem: string;
+  questionnaireResponse?: fhir4.QuestionnaireResponse;
+}): string => {
+  const payload = {
+    type,
+    data: {
+      subjectId: accessToken,
+      ...(questionnaireResponse ? { body: questionnaireResponse } : {}),
+    },
+  };
+
+  return JSON.stringify({ payload: encrypt(certificatePem, payload) });
 };

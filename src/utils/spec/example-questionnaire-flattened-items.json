@@ -1,0 +1,361 @@
+[
+  {
+    "level": 0,
+    "linkId": "0.1",
+    "parent": "[... questionnaire root]",
+    "text": "Free text question",
+    "type": "string"
+  },
+  {
+    "item": [
+      { "linkId": "1.1", "required": true, "text": "Another free text question", "type": "string" },
+      { "linkId": "1.2", "required": true, "text": "Date question", "type": "date" },
+      { "linkId": "1.3", "text": "Decimal question", "type": "decimal" },
+      { "linkId": "1.4", "required": true, "text": "Boolean question", "type": "boolean" },
+      { "linkId": "1.5", "text": "Informational item", "type": "display" },
+      {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+            "valueCodeableConcept": {
+              "coding": [{ "code": "slider", "system": "http://hl7.org/fhir/questionnaire-item-control" }]
+            }
+          },
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue",
+            "valueInteger": 1
+          },
+          { "url": "http://hl7.org/fhir/StructureDefinition/minValue", "valueInteger": 5 },
+          { "url": "http://hl7.org/fhir/StructureDefinition/maxValue", "valueInteger": 15 }
+        ],
+        "linkId": "1.6",
+        "required": true,
+        "text": "Slider question",
+        "type": "integer"
+      },
+      {
+        "answerOption": [{ "valueString": "foo" }, { "valueString": "bar" }, { "valueString": "baz" }],
+        "linkId": "1.7",
+        "repeats": true,
+        "required": true,
+        "text": "Multiple-answer question",
+        "type": "choice"
+      },
+      {
+        "item": [
+          { "linkId": "1.8.1", "required": true, "text": "foo", "type": "boolean" },
+          { "linkId": "1.8.2", "required": true, "text": "bar", "type": "integer" },
+          { "linkId": "1.8.3", "text": "baz", "type": "string" }
+        ],
+        "linkId": "1.8",
+        "required": true,
+        "text": "Sub-group",
+        "type": "group"
+      },
+      {
+        "answerOption": [
+          {
+            "valueCoding": {
+              "code": "E991C5",
+              "display": "foo",
+              "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz"
+            }
+          },
+          {
+            "valueCoding": {
+              "code": "1C41D9",
+              "display": "bar",
+              "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz"
+            }
+          },
+          {
+            "valueCoding": {
+              "code": "AAC2DD",
+              "display": "baz",
+              "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz"
+            }
+          }
+        ],
+        "linkId": "1.9",
+        "required": true,
+        "text": "Single-choice question",
+        "type": "choice"
+      },
+      {
+        "enableBehavior": "all",
+        "enableWhen": [
+          { "answerBoolean": true, "operator": "=", "question": "1.8.1" },
+          { "answerString": "E991C5", "operator": "=", "question": "1.9" }
+        ],
+        "linkId": "1.10",
+        "required": true,
+        "text": "Conditional question I",
+        "type": "string"
+      },
+      {
+        "enableBehavior": "any",
+        "enableWhen": [
+          { "answerBoolean": true, "operator": "=", "question": "1.8.1" },
+          { "answerString": "E991C5", "operator": "=", "question": "1.9" }
+        ],
+        "linkId": "1.11",
+        "required": true,
+        "text": "Conditional question II",
+        "type": "string"
+      },
+      {
+        "definition": "http://foo.bar/definition/baz",
+        "linkId": "1.12",
+        "text": "Question with definition",
+        "type": "string"
+      }
+    ],
+    "level": 0,
+    "linkId": "1",
+    "parent": "[... questionnaire root]",
+    "required": true,
+    "text": "Group 1",
+    "type": "group"
+  },
+  {
+    "level": 1,
+    "linkId": "1.1",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Another free text question",
+    "type": "string"
+  },
+  {
+    "level": 1,
+    "linkId": "1.2",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Date question",
+    "type": "date"
+  },
+  {
+    "level": 1,
+    "linkId": "1.3",
+    "parent": "[... item with linkId 1]",
+    "text": "Decimal question",
+    "type": "decimal"
+  },
+  {
+    "level": 1,
+    "linkId": "1.4",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Boolean question",
+    "type": "boolean"
+  },
+  {
+    "level": 1,
+    "linkId": "1.5",
+    "parent": "[... item with linkId 1]",
+    "text": "Informational item",
+    "type": "display"
+  },
+  {
+    "extension": [
+      {
+        "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+        "valueCodeableConcept": {
+          "coding": [{ "code": "slider", "system": "http://hl7.org/fhir/questionnaire-item-control" }]
+        }
+      },
+      { "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-sliderStepValue", "valueInteger": 1 },
+      { "url": "http://hl7.org/fhir/StructureDefinition/minValue", "valueInteger": 5 },
+      { "url": "http://hl7.org/fhir/StructureDefinition/maxValue", "valueInteger": 15 }
+    ],
+    "level": 1,
+    "linkId": "1.6",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Slider question",
+    "type": "integer"
+  },
+  {
+    "answerOption": [{ "valueString": "foo" }, { "valueString": "bar" }, { "valueString": "baz" }],
+    "level": 1,
+    "linkId": "1.7",
+    "parent": "[... item with linkId 1]",
+    "repeats": true,
+    "required": true,
+    "text": "Multiple-answer question",
+    "type": "choice"
+  },
+  {
+    "item": [
+      { "linkId": "1.8.1", "required": true, "text": "foo", "type": "boolean" },
+      { "linkId": "1.8.2", "required": true, "text": "bar", "type": "integer" },
+      { "linkId": "1.8.3", "text": "baz", "type": "string" }
+    ],
+    "level": 1,
+    "linkId": "1.8",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Sub-group",
+    "type": "group"
+  },
+  {
+    "level": 2,
+    "linkId": "1.8.1",
+    "parent": "[... item with linkId 1.8]",
+    "required": true,
+    "text": "foo",
+    "type": "boolean"
+  },
+  {
+    "level": 2,
+    "linkId": "1.8.2",
+    "parent": "[... item with linkId 1.8]",
+    "required": true,
+    "text": "bar",
+    "type": "integer"
+  },
+  { "level": 2, "linkId": "1.8.3", "parent": "[... item with linkId 1.8]", "text": "baz", "type": "string" },
+  {
+    "answerOption": [
+      {
+        "valueCoding": {
+          "code": "E991C5",
+          "display": "foo",
+          "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz"
+        }
+      },
+      {
+        "valueCoding": {
+          "code": "1C41D9",
+          "display": "bar",
+          "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz"
+        }
+      },
+      {
+        "valueCoding": {
+          "code": "AAC2DD",
+          "display": "baz",
+          "system": "https://foo.bar/fhir/questionnaire/value-coding/foo-bar-baz"
+        }
+      }
+    ],
+    "level": 1,
+    "linkId": "1.9",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Single-choice question",
+    "type": "choice"
+  },
+  {
+    "enableBehavior": "all",
+    "enableWhen": [
+      { "answerBoolean": true, "operator": "=", "question": "1.8.1" },
+      { "answerString": "E991C5", "operator": "=", "question": "1.9" }
+    ],
+    "level": 1,
+    "linkId": "1.10",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Conditional question I",
+    "type": "string"
+  },
+  {
+    "enableBehavior": "any",
+    "enableWhen": [
+      { "answerBoolean": true, "operator": "=", "question": "1.8.1" },
+      { "answerString": "E991C5", "operator": "=", "question": "1.9" }
+    ],
+    "level": 1,
+    "linkId": "1.11",
+    "parent": "[... item with linkId 1]",
+    "required": true,
+    "text": "Conditional question II",
+    "type": "string"
+  },
+  {
+    "definition": "http://foo.bar/definition/baz",
+    "level": 1,
+    "linkId": "1.12",
+    "parent": "[... item with linkId 1]",
+    "text": "Question with definition",
+    "type": "string"
+  },
+  {
+    "item": [
+      {
+        "item": [
+          {
+            "item": [
+              {
+                "linkId": "2.1.1.1",
+                "required": true,
+                "text": "Question of sub-sub-group 1",
+                "type": "string"
+              }
+            ],
+            "linkId": "2.1.1",
+            "required": true,
+            "text": "Sub-sub-group 1",
+            "type": "group"
+          },
+          { "linkId": "2.1.2", "required": true, "text": "Question of sub-group 1", "type": "boolean" }
+        ],
+        "linkId": "2.1",
+        "required": true,
+        "text": "Sub-group 1",
+        "type": "group"
+      }
+    ],
+    "level": 0,
+    "linkId": "2",
+    "parent": "[... questionnaire root]",
+    "text": "Group 2",
+    "type": "group"
+  },
+  {
+    "item": [
+      {
+        "item": [
+          { "linkId": "2.1.1.1", "required": true, "text": "Question of sub-sub-group 1", "type": "string" }
+        ],
+        "linkId": "2.1.1",
+        "required": true,
+        "text": "Sub-sub-group 1",
+        "type": "group"
+      },
+      { "linkId": "2.1.2", "required": true, "text": "Question of sub-group 1", "type": "boolean" }
+    ],
+    "level": 1,
+    "linkId": "2.1",
+    "parent": "[... item with linkId 2]",
+    "required": true,
+    "text": "Sub-group 1",
+    "type": "group"
+  },
+  {
+    "item": [
+      { "linkId": "2.1.1.1", "required": true, "text": "Question of sub-sub-group 1", "type": "string" }
+    ],
+    "level": 2,
+    "linkId": "2.1.1",
+    "parent": "[... item with linkId 2.1]",
+    "required": true,
+    "text": "Sub-sub-group 1",
+    "type": "group"
+  },
+  {
+    "level": 3,
+    "linkId": "2.1.1.1",
+    "parent": "[... item with linkId 2.1.1]",
+    "required": true,
+    "text": "Question of sub-sub-group 1",
+    "type": "string"
+  },
+  {
+    "level": 2,
+    "linkId": "2.1.2",
+    "parent": "[... item with linkId 2.1]",
+    "required": true,
+    "text": "Question of sub-group 1",
+    "type": "boolean"
+  }
+]

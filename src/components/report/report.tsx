@@ -21,7 +21,7 @@ export class ReportComponent {
     } catch (error) {
       this.isBusy = false;
       console.error(error);
-      services.notifier.onError('report.confirm_submit.error');
+      services.notifier.showError('report.confirm_submit.error');
     }
   }
 

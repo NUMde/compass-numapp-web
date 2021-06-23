@@ -14,7 +14,6 @@ export interface NumQuestionnaireExtensionConfig {
 
 export interface IQuestionnaireService {
   fetch(id: string): Promise<NUMQuestionnaire>;
-  buildQuestionnaireResponse(): fhir4.QuestionnaireResponse;
   generateEncryptedPayload(
     type: 'report' | 'questionnaire_response',
     questionnaireResponse?: fhir4.QuestionnaireResponse
