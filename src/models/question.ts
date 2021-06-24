@@ -102,6 +102,8 @@ export class NUMQuestionnaireQuestion {
       minLength,
       'questionnaire-itemControl': itemControl,
       'questionnaire-sliderStepValue': sliderStepValue,
+      LowRangeLabel: sliderMinLabel,
+      HighRangeLabel: sliderMaxLabel,
     } = parseExtensions(this.extension ?? []);
 
     return {
@@ -109,6 +111,8 @@ export class NUMQuestionnaireQuestion {
       maxValue,
       minLength,
       maxLength: this.maxLength,
+      sliderMinLabel,
+      sliderMaxLabel,
       sliderStepValue,
       itemControl,
     };
