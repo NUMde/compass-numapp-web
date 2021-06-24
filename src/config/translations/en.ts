@@ -73,6 +73,7 @@ export default {
     fetch_retry: 'Retry',
     finish: 'Return to overview',
     group: 'Group {{ number }}',
+    infotext: 'This text is shown when the questionnaire does not contain information on its purpose.',
     question: 'Question {{ number }}',
     question_type_unsupported: 'Questions of type "{{ type }}" are not supported at the moment!',
     success: {

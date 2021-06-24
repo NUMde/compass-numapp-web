@@ -77,6 +77,7 @@ export default {
     fetch_retry: 'Erneut versuchen',
     finish: 'Zur Übersicht zurückkehren',
     group: 'Gruppe {{ number }}',
+    infotext: 'Dieser Text wird angezeigt, wenn der Fragebogen keine Angaben zum Zweck enthält.',
     question: 'Frage {{ number }}',
     question_type_unsupported: 'Fragen vom Typ "{{ type }}" werden derzeit leider nicht unterstützt!',
     success: {
