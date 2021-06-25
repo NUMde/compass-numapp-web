@@ -7,6 +7,7 @@ import {
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
 import { extractQuestions, flattenNestedItems, getHash } from 'utils/questionnaire';
+import { optionalPersistence } from 'store';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
@@ -34,6 +35,13 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
   });
 
   class Actions {
+    constructor() {
+      this.answers.on('set', () =>
+        this.isPristine ? optionalPersistence.removeLeaveGuard() : optionalPersistence.addLeaveGuard()
+      );
+      this.answers.on('reset', () => optionalPersistence.removeLeaveGuard());
+    }
+
     reset() {
       this.answers.reset();
       this.persistedMeta.reset();
@@ -82,6 +90,12 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
       return this.questions
         .filter(({ isEnabled }) => isEnabled)
         .every(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
+    }
+
+    get isPristine() {
+      return !this.questions
+        .filter(({ isEnabled }) => isEnabled)
+        .some(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
     }
   }
 

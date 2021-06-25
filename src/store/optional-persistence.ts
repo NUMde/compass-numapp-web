@@ -5,11 +5,13 @@ import { STORAGE } from 'utils/storage';
 
 interface StateType {
   isEnabled: boolean;
+  hasLeaveGuard: boolean;
 }
 
 const storeBuilder = ({ optionalPersistor }: Services) => {
   const store = createStore<StateType>({
     isEnabled: FEATURES_ENABLE_PERSISTENCE,
+    hasLeaveGuard: false,
   });
 
   return {
@@ -23,6 +25,29 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
     },
     get isEnabled() {
       return store.get('isEnabled');
+    },
+    get hasLeaveGuard() {
+      return store.get('hasLeaveGuard');
+    },
+    leaveGuard(event) {
+      event.preventDefault();
+      event.returnValue = '';
+    },
+    addLeaveGuard() {
+      if (this.isEnabled || this.hasLeaveGuard) {
+        return;
+      }
+
+      window.addEventListener('beforeunload', this.leaveGuard);
+      store.set('hasLeaveGuard', true);
+    },
+    removeLeaveGuard() {
+      if (this.isEnabled || !this.hasLeaveGuard) {
+        return;
+      }
+
+      window.removeEventListener('beforeunload', this.leaveGuard);
+      store.set('hasLeaveGuard', false);
     },
   };
 };
