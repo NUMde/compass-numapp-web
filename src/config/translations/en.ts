@@ -1,5 +1,6 @@
 export default {
   authenticate: {
+    alternatively: '– or alternatively –',
     continue: 'Proceed',
     error: {
       code_0: 'An error happened while establishing a network connection. Please try again later.',
@@ -12,6 +13,10 @@ export default {
     infotext:
       'Enter your participation code to proceed. In case your device is equipped with a camera and you have received a QR code, you can simply scan it instead of entering the code.',
     input_label: 'Your participation code',
+    stay_logged_in: {
+      checkbox: 'Stay logged in',
+      infotext: 'Do not choose this option in case you are using a public device.',
+    },
   },
   dashboard: {
     button: {

@@ -1,4 +1,4 @@
-import { createStore, ObservableMap } from '@stencil/store';
+import { createStore } from '@stencil/store';
 import { Services } from 'services';
 import createPersistedStore from './utils/persisted-store';
 import {
@@ -7,34 +7,46 @@ import {
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
 import { extractQuestions, flattenNestedItems, getHash } from 'utils/questionnaire';
+import { optionalPersistence } from 'store';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
   flattenedItems: NUMQuestionnaireFlattenedItem[];
-  answers: ObservableMap<{ [key: string]: NUMQuestionnaireAnswer }>;
-  persistedMeta: ObservableMap<PersistedMetaStateType>;
 }
 
 interface PersistedMetaStateType {
   hash: string;
 }
 
-const storeBuilder = ({ persistor }: Services) => {
+const storeBuilder = ({ optionalPersistor }: Services) => {
   const store = createStore<StateType>({
     questionnaire: null,
     flattenedItems: [],
-    answers: createPersistedStore<{ [key: string]: NUMQuestionnaireAnswer }>(
-      persistor,
-      'questionnaire::answers',
-      {}
-    ),
-    persistedMeta: createPersistedStore<PersistedMetaStateType>(persistor, 'questionnaire', { hash: null }),
   });
 
+  const answersStore = createPersistedStore<{ [key: string]: NUMQuestionnaireAnswer }>(
+    optionalPersistor,
+    'questionnaire::answers',
+    {}
+  );
+
+  const persistedMetaStore = createPersistedStore<PersistedMetaStateType>(
+    optionalPersistor,
+    'questionnaire::meta',
+    { hash: null }
+  );
+
   class Actions {
+    constructor() {
+      answersStore.on('set', () =>
+        this.isPristine ? optionalPersistence.removeLeaveGuard() : optionalPersistence.addLeaveGuard()
+      );
+      answersStore.on('reset', () => optionalPersistence.removeLeaveGuard());
+    }
+
     reset() {
-      this.answers.reset();
-      this.persistedMeta.reset();
+      answersStore.reset();
+      persistedMetaStore.reset();
       store.reset();
     }
 
@@ -43,9 +55,8 @@ const storeBuilder = ({ persistor }: Services) => {
       store.set('flattenedItems', flattenNestedItems(response.item ?? [], response));
 
       const { hash } = this;
-      const persistedMeta = store.get('persistedMeta');
-      persistedMeta.get('hash') !== hash && this.answers.reset();
-      persistedMeta.set('hash', hash);
+      persistedMetaStore.get('hash') !== hash && answersStore.reset();
+      persistedMetaStore.set('hash', hash);
     }
 
     get isPopulated() {
@@ -65,7 +76,7 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     get answers() {
-      return store.get('answers');
+      return answersStore;
     }
 
     get hash() {
@@ -73,13 +84,19 @@ const storeBuilder = ({ persistor }: Services) => {
     }
 
     get persistedMeta() {
-      return store.get('persistedMeta');
+      return persistedMetaStore;
     }
 
     get isCompleted() {
       return this.questions
         .filter(({ isEnabled }) => isEnabled)
         .every(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
+    }
+
+    get isPristine() {
+      return !this.questions
+        .filter(({ isEnabled }) => isEnabled)
+        .some(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
     }
   }
 

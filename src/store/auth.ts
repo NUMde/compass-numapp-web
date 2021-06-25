@@ -1,14 +1,14 @@
 import { FALLBACK_CERTIFICATE } from 'config';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from 'services';
-import { user, questionnaire } from 'store';
+import { optionalPersistence, questionnaire, user } from 'store';
 
 interface StateType {
   accessToken: string;
 }
 
-const storeBuilder = ({ persistor }: Services) => {
-  const store = createPersistedStore<StateType>(persistor, 'auth', {
+const storeBuilder = ({ optionalPersistor }: Services) => {
+  const store = createPersistedStore<StateType>(optionalPersistor, 'auth', {
     accessToken: null,
   });
 
@@ -40,6 +40,8 @@ const storeBuilder = ({ persistor }: Services) => {
       store.reset();
       user.reset();
       questionnaire.reset();
+
+      optionalPersistence.disable();
     }
 
     expireSession() {

@@ -1,10 +1,18 @@
 import { Component, h, State } from '@stencil/core';
 import jsQR from 'jsqr';
 import { Card } from 'components/card/card';
-import { QR_APP_NAME, QR_PROP_APP_NAME, QR_PROP_USER_ID, ROUTES, FEATURES_SUPPORT_QR_CODE } from 'config';
+import {
+  QR_APP_NAME,
+  QR_PROP_APP_NAME,
+  QR_PROP_USER_ID,
+  ROUTES,
+  FEATURES_SUPPORT_QR_CODE,
+  FEATURES_ENABLE_PERSISTENCE,
+  PERSISTENCE_SHOW_CHOICE,
+} from 'config';
 import services from 'services';
 import store from 'store';
-import { ResponseError } from 'utils/response-error';
+import { ResponseError } from 'models/response-error';
 
 @Component({
   tag: 'num-container-authenticate',
@@ -17,8 +25,9 @@ export class Authenticate {
   #canvasEl?: HTMLCanvasElement;
   #userId: string = '';
 
-  @State() showCamera: boolean = false;
-  @State() isAuthenticating: boolean = false;
+  @State() showCamera = false;
+  @State() isAuthenticating = false;
+  @State() isPersistenceChosen = FEATURES_ENABLE_PERSISTENCE;
 
   handleSubmit(event: Event) {
     event.preventDefault();
@@ -47,6 +56,8 @@ export class Authenticate {
         throw new ResponseError('authenticate.error.user_id_mismatch', 401);
       }
 
+      const persistence = store.optionalPersistence;
+      this.isPersistenceChosen ? persistence.enable() : persistence.disable();
       store.user.populateFromUserResponse(userResponse);
       store.auth.login(userId);
     } catch ({ status = 0 }) {
@@ -173,14 +184,36 @@ export class Authenticate {
           </div>
         )}
 
+        {this.showCamera && <p class="authenticate__help">{store.i18n.t('authenticate.alternatively')}</p>}
+
         <form class="u-margin-top--large" onSubmit={(event) => this.handleSubmit(event)}>
           <d4l-input
+            classes="input--center"
             type="text"
             label={store.i18n.t('authenticate.input_label')}
-            onInput={(event: any) => (this.#userId = event.target.value)}
+            onInput={(event: Event) => (this.#userId = (event.target as HTMLInputElement).value)}
             value={this.#userId}
+            focused
             required
           />
+
+          {FEATURES_ENABLE_PERSISTENCE && PERSISTENCE_SHOW_CHOICE && (
+            <div class="authenticate__checkbox">
+              <d4l-checkbox
+                label={store.i18n.t('authenticate.stay_logged_in.checkbox')}
+                onChange={(event: Event) =>
+                  (this.isPersistenceChosen = (event.target as HTMLInputElement).checked)
+                }
+                classes="o-checkbox--primary"
+                value="1"
+                name="stay_logged_in"
+                checkboxId="stay_logged_in"
+                checked={this.isPersistenceChosen}
+              />
+              <p class="u-infotext">{store.i18n.t('authenticate.stay_logged_in.infotext')}</p>
+            </div>
+          )}
+
           <d4l-button
             type="submit"
             classes="button--block u-margin-top--medium"

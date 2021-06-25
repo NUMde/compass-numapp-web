@@ -1,6 +1,8 @@
 /**
  * feature flags
  */
+
+export const FEATURES_ENABLE_PERSISTENCE = true;
 export const FEATURES_SHOW_LOGOUT = true;
 export const FEATURES_SUPPORT_QR_CODE = true;
 export const FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES = true;
@@ -9,6 +11,9 @@ export const FEATURES_QUESTIONNAIRE_SHOW_LINKIDS = true;
 /**
  * feature config
  */
+
+export const PERSISTENCE_SHOW_CHOICE = true;
+
 export const QR_APP_NAME = 'COMPASS';
 export const QR_PROP_APP_NAME = 'AppIdentifier';
 export const QR_PROP_USER_ID = 'SubjectId';

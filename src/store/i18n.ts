@@ -4,8 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from '../services';
 
-import { createStore } from '@stencil/store';
-import { LANGUAGES, TRANSLATIONS } from 'config';
+import { FALLBACK_LANGUAGE_CODE, LANGUAGES, TRANSLATIONS } from 'config';
 import { NUMLanguage } from 'types';
 
 interface StateType {
@@ -20,11 +19,7 @@ const storeBuilder = ({ persistor }: Services) => {
   const browserLanguage = navigator.language?.split('-')?.shift();
 
   const store = createPersistedStore<StateType>(persistor, 'i18n', {
-    language: getLanguageByCode(browserLanguage) ?? getLanguageByCode('de'),
-  });
-
-  const forceUpdateStore = createStore<{ forceUpdate: boolean }>({
-    forceUpdate: false,
+    language: getLanguageByCode(browserLanguage) ?? getLanguageByCode(FALLBACK_LANGUAGE_CODE),
   });
 
   store.onChange('language', async (language: NUMLanguage) => {
@@ -38,13 +33,13 @@ const storeBuilder = ({ persistor }: Services) => {
     name: 'custom',
     lookup({ lookupQuerystring }) {
       const queryMatch = document.location.href.match(new RegExp(`[?&]${lookupQuerystring}=([a-z]{2})`));
-      return queryMatch?.[1] ?? store.get('language').code;
+      return getLanguageByCode(queryMatch?.[1])?.code ?? store.get('language').code;
     },
     cacheUserLanguage(languageCode) {
       document.documentElement.lang = languageCode;
-      store.state.language = getLanguageByCode(languageCode);
     },
   });
+
   const detection = {
     order: ['custom'],
     caches: ['custom'],
@@ -54,8 +49,6 @@ const storeBuilder = ({ persistor }: Services) => {
     .use(languageDetector)
     .init({
       detection,
-      initImmediate: false,
-      fallbackLng: 'de',
       whitelist: LANGUAGES.map(({ code }) => code),
       ns: ['master'],
       defaultNS: 'master',
@@ -63,17 +56,11 @@ const storeBuilder = ({ persistor }: Services) => {
         (resources, code) => Object.assign(resources, { [code]: { master: TRANSLATIONS[code] } }),
         {}
       ),
-      nsSeparator: '#', // default is ":", and it doesn't fit well with URLs used as namespaces
-      partialBundledLanguages: true,
     })
-    .then(() => (store.state.language = getLanguageByCode(i18n.language)));
-
-  i18n.on('loaded', () => {
-    forceUpdateStore.set('forceUpdate', !forceUpdateStore.get('forceUpdate'));
-  });
+    .then(() => store.set('language', getLanguageByCode(i18n.language)));
 
   const t: TranslateFunction = (key, ...options) => {
-    options.languageCode = store.state.language.code;
+    options.languageCode = store.get('language').code;
     return i18n.t(key, ...options);
   };
 
@@ -81,11 +68,11 @@ const storeBuilder = ({ persistor }: Services) => {
     t,
 
     get language(): NUMLanguage {
-      return store.state.language;
+      return store.get('language');
     },
 
     set language(lang: NUMLanguage) {
-      store.state.language = lang;
+      store.set('language', lang);
     },
   };
 };

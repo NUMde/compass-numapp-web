@@ -12,3 +12,5 @@ export const TRANSLATIONS = {
   de: TRANSLATIONS_DE,
   en: TRANSLATIONS_EN,
 };
+
+export const FALLBACK_LANGUAGE_CODE = 'de';
