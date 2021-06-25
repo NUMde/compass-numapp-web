@@ -18,24 +18,23 @@ export default function createPersistedStore<T>(
   }
 
   const prefix = namespacedKey('');
-  const data = getPersistedKeys()
+  const persistedData = getPersistedKeys()
     .concat(Object.keys(initialData))
     .filter((key, index, arr) => arr.indexOf(key) === index)
-    .reduce(
-      (data, key) => {
-        try {
-          const rawValue = persistor.get(namespacedKey(key));
-          const value = typeof rawValue === 'string' ? JSON.parse(rawValue) : rawValue;
-          if (value !== null && value !== undefined) {
-            return Object.assign(data, { [key]: value });
-          }
-        } catch (_) {}
-        return data;
-      },
-      { ...initialData }
-    );
+    .reduce((data, key) => {
+      try {
+        const rawValue = persistor.get(namespacedKey(key));
+        const value = typeof rawValue === 'string' ? JSON.parse(rawValue) : rawValue;
+        if (value !== null && value !== undefined) {
+          return Object.assign(data, { [key]: value });
+        }
+      } catch (_) {}
+      return data;
+    }, {});
 
-  const store = createStore<T>(data);
+  const store = createStore<T>(initialData);
+  Object.keys(persistedData).forEach((key) => store.set(key as keyof T & string, persistedData[key]));
+
   const actions = {
     set(key: any, value: any) {
       try {
@@ -44,9 +43,7 @@ export default function createPersistedStore<T>(
     },
     reset() {
       getPersistedKeys().forEach((key) => {
-        const resetValue = initialData[key];
-        store.set(key as keyof T & string, resetValue);
-        actions.set(key, resetValue);
+        actions.set(key, initialData[key]);
       });
     },
   };
