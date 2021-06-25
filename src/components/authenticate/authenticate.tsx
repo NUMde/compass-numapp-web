@@ -188,6 +188,7 @@ export class Authenticate {
 
         <form class="u-margin-top--large" onSubmit={(event) => this.handleSubmit(event)}>
           <d4l-input
+            classes="input--center"
             type="text"
             label={store.i18n.t('authenticate.input_label')}
             onInput={(event: Event) => (this.#userId = (event.target as HTMLInputElement).value)}
