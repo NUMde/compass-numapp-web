@@ -19,7 +19,7 @@ const storeBuilder = ({ persistor }: Services) => {
   const browserLanguage = navigator.language?.split('-')?.shift();
 
   const store = createPersistedStore<StateType>(persistor, 'i18n', {
-    language: getLanguageByCode(browserLanguage) ?? getLanguageByCode(FALLBACK_LANGUAGE_CODE),
+    language: getLanguageByCode(browserLanguage) ?? getLanguageByCode(FALLBACK_LANGUAGE_CODE) ?? LANGUAGES[0],
   });
 
   store.onChange('language', async (language: NUMLanguage) => {
@@ -33,7 +33,7 @@ const storeBuilder = ({ persistor }: Services) => {
     name: 'custom',
     lookup({ lookupQuerystring }) {
       const queryMatch = document.location.href.match(new RegExp(`[?&]${lookupQuerystring}=([a-z]{2})`));
-      return getLanguageByCode(queryMatch?.[1])?.code ?? store.get('language').code;
+      return getLanguageByCode(queryMatch?.[1])?.code ?? store.get('language')?.code;
     },
     cacheUserLanguage(languageCode) {
       document.documentElement.lang = languageCode;
@@ -60,7 +60,7 @@ const storeBuilder = ({ persistor }: Services) => {
     .then(() => store.set('language', getLanguageByCode(i18n.language)));
 
   const t: TranslateFunction = (key, ...options) => {
-    options.languageCode = store.get('language').code;
+    options.languageCode = store.get('language')?.code;
     return i18n.t(key, ...options);
   };
 
