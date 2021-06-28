@@ -1,0 +1,32 @@
+/**
+ * You can use the mergeTranslations util to make individual
+ * adaptions to translations instead of copying everything.
+ */
+
+import { NUMCustomAppConfig } from 'types';
+import { mergeTranslations } from 'utils/merge-translations';
+
+import TRANSLATIONS_DE from 'config/translations/de';
+import TRANSLATIONS_EN from 'config/translations/en';
+
+const CUSTOM_CONFIG: NUMCustomAppConfig = {
+  TRANSLATIONS: {
+    de: mergeTranslations(TRANSLATIONS_DE, {
+      welcome: {
+        headline: 'foo',
+      },
+      terms: {
+        content: 'Mein eigener Text',
+      },
+    }),
+    en: mergeTranslations(TRANSLATIONS_EN, {
+      welcome: {
+        headline: 'bar',
+      },
+      terms: {
+        content: 'My custom text',
+      },
+    }),
+  },
+};
+export default CUSTOM_CONFIG;

@@ -1,0 +1,16 @@
+/**
+ * Add your own styles in this file.
+ * The advantage over editing the values directly in the global/styles folder
+ * when working with a forked repository is that the files in the custom folder
+ * will unlikely be touched by the upstream in the future, so it is safe to make
+ * modifications to this file and assume that no merge conflicts will happen.
+ * The most effective way to change colors is to overwrite the variables, e.g. like this:
+ *
+ * :root {
+ *   --color-primary: #abcdef;
+ * }
+ *
+ * To see a list of the css variables that are in place, open the elements inspector
+ * in your DevTools and scroll down the styles until you see the declarations made
+ * on the :root element.
+ */

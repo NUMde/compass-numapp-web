@@ -1,6 +1,7 @@
 import { NUMFooterLink, NUMNavigationItem } from 'types';
+import CUSTOM from 'custom/config';
 
-export const ROUTES = {
+export const ROUTES = CUSTOM.ROUTES ?? {
   ROOT: '/',
   TERMS: '/terms',
   PRIVACY_POLICY: '/privacy-policy',
@@ -11,7 +12,7 @@ export const ROUTES = {
   REPORT: '/report',
 };
 
-export const FOOTER_LINKS: NUMFooterLink[] = [
+export const FOOTER_LINKS: NUMFooterLink[] = CUSTOM.FOOTER_LINKS ?? [
   {
     route: ROUTES.TERMS,
     key: 'terms_of_use',
@@ -26,7 +27,7 @@ export const FOOTER_LINKS: NUMFooterLink[] = [
   },
 ];
 
-export const NAVIGATION_ITEMS: NUMNavigationItem[] = [
+export const NAVIGATION_ITEMS: NUMNavigationItem[] = CUSTOM.NAVIGATION_ITEMS ?? [
   {
     key: 'dashboard',
     route: ROUTES.DASHBOARD,

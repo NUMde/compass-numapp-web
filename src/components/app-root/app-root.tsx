@@ -80,7 +80,7 @@ export class AppRoot {
           logoUrlText={store.i18n.t('navigation.logo')}
           menuCardTitle={store.i18n.t('navigation.title')}
           menuFooterLinks={footerLinks}
-          supportedLanguages={LANGUAGES}
+          supportedLanguages={LANGUAGES.length > 1 ? LANGUAGES : []}
           selectedLanguage={store.i18n.language}
           menuNavigationItems={navigationItems}
         />
