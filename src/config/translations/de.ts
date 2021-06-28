@@ -18,7 +18,7 @@ export default {
     input_label: 'Ihr Teilnahmecode',
     stay_logged_in: {
       checkbox: 'Angemeldet bleiben',
-      infotext: 'Bitte wählen Sie diese Option nicht aus, wenn Sie ein öffentliches Gerät benutzen.',
+      infotext: 'Wählen Sie diese Option nicht aus, wenn Sie ein öffentliches Gerät benutzen.',
     },
   },
   dashboard: {

@@ -15,7 +15,7 @@ export default {
     input_label: 'Your participation code',
     stay_logged_in: {
       checkbox: 'Stay logged in',
-      infotext: 'Please do not choose this option in case you are using a public device.',
+      infotext: 'Do not choose this option in case you are using a public device.',
     },
   },
   dashboard: {

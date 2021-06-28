@@ -8,6 +8,10 @@ export default class PersistorService implements IPersistorService {
     this.storage = storage;
   }
 
+  changeStorage(storage: Storage) {
+    this.storage = storage;
+  }
+
   get(key: string): string | undefined {
     if (key in this.cachedData) {
       return this.cachedData[key];

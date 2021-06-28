@@ -19,16 +19,18 @@ interface PersistedMetaStateType {
   hash: string;
 }
 
-const storeBuilder = ({ persistor }: Services) => {
+const storeBuilder = ({ optionalPersistor }: Services) => {
   const store = createStore<StateType>({
     questionnaire: null,
     flattenedItems: [],
     answers: createPersistedStore<{ [key: string]: NUMQuestionnaireAnswer }>(
-      persistor,
+      optionalPersistor,
       'questionnaire::answers',
       {}
     ),
-    persistedMeta: createPersistedStore<PersistedMetaStateType>(persistor, 'questionnaire', { hash: null }),
+    persistedMeta: createPersistedStore<PersistedMetaStateType>(optionalPersistor, 'questionnaire', {
+      hash: null,
+    }),
   });
 
   class Actions {

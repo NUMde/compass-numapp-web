@@ -5,6 +5,7 @@ import { IUserService } from './user';
 
 export interface Services {
   notifier: INotifierService;
+  optionalPersistor: IPersistorService;
   persistor: IPersistorService;
   user: IUserService;
   questionnaire: IQuestionnaireService;

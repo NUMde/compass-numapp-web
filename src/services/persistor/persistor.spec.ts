@@ -86,7 +86,7 @@ describe('PersistorService', () => {
       },
     };
 
-    const persistorWithFaultyStorage = new PersistorService((faultyStorage as unknown) as Storage);
+    const persistorWithFaultyStorage = new PersistorService(faultyStorage as unknown as Storage);
     persistorWithFaultyStorage.set('foo', 'bar');
     expect(persistorWithFaultyStorage.get('foo')).toBe('bar');
     expect(persistorWithFaultyStorage.getKeys()).toEqual(['foo']);
@@ -105,5 +105,14 @@ describe('PersistorService', () => {
     persistorWithMissingStorage.set('foo', null);
     expect(persistorWithMissingStorage.get('foo')).toBe(undefined);
     expect(persistorWithMissingStorage.getKeys()).toEqual([]);
+  });
+
+  it('can change the storage', () => {
+    persistor.set('foo', 'foo');
+    expect(storage.getItem('foo')).toEqual('foo');
+
+    persistor.changeStorage(null);
+    persistor.set('bar', 'bar');
+    expect(storage.getItem('bar')).toEqual(null);
   });
 });

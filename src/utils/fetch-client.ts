@@ -1,5 +1,5 @@
 import store from 'store';
-import { ResponseError } from './response-error';
+import { ResponseError } from 'models/response-error';
 
 interface FetchClientHeaders {
   [key: string]: string;
