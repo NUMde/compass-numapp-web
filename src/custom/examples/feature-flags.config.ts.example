@@ -1,0 +1,13 @@
+/**
+ * Switch individual features on or off
+ */
+
+import { NUMCustomAppConfig } from 'types';
+
+const CUSTOM_CONFIG: NUMCustomAppConfig = {
+  FEATURES_ENABLE_PERSISTENCE: false, // no use of localStorage, no user settings are locally persisted
+  FEATURES_SHOW_LOGOUT: false, // no logout button
+  FEATURES_SUPPORT_QR_CODE: false, // no QR code for login
+  // [... see src/config/features.ts]
+};
+export default CUSTOM_CONFIG;

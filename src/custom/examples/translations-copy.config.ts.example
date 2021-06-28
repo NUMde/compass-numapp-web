@@ -1,0 +1,18 @@
+/**
+ * Copy the translations folder from src/config to src/custom
+ * and make your adaptions. Then, import the new files and add
+ * the translations to your custom config.
+ */
+
+import { NUMCustomAppConfig } from 'types';
+
+import TRANSLATIONS_DE from './translations/de';
+import TRANSLATIONS_EN from './translations/en';
+
+const CUSTOM_CONFIG: NUMCustomAppConfig = {
+  TRANSLATIONS: {
+    de: TRANSLATIONS_DE,
+    en: TRANSLATIONS_EN,
+  },
+};
+export default CUSTOM_CONFIG;

@@ -1,0 +1,13 @@
+/**
+ * When only one language is available, the language switcher is hidden.
+ */
+
+import { NUMCustomAppConfig } from 'types';
+import TRANSLATIONS from 'config/translations/en';
+
+const CUSTOM_CONFIG: NUMCustomAppConfig = {
+  LANGUAGES: [{ code: 'en', label: 'English', locale: 'en-US' }],
+  TRANSLATIONS: { en: TRANSLATIONS },
+  FALLBACK_LANGUAGE_CODE: 'en',
+};
+export default CUSTOM_CONFIG;

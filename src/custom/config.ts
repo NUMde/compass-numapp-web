@@ -10,9 +10,5 @@
 
 import { NUMCustomAppConfig } from 'types';
 
-const CUSTOM_CONFIG: NUMCustomAppConfig = {
-  TRANSLATIONS: {
-    de: {},
-  },
-};
+const CUSTOM_CONFIG: NUMCustomAppConfig = {};
 export default CUSTOM_CONFIG;
