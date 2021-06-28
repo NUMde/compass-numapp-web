@@ -4,7 +4,7 @@ main {
 }
 
 .app-header .app-header__custom-logo {
-  height: 48px;
+  height: var(--logo-height);
 }
 
 @media screen and (min-width: 768px) {

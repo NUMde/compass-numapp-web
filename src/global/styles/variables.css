@@ -4,6 +4,8 @@
   --max-width-desktop: 360px;
   --max-width-desktop-wide: 600px;
 
+  --logo-height: 48px;
+
   --font-family-primary: -apple-system, Ubuntu, Roboto, Segoe UI, 'Noto Sans', Cantarell, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji';
   --font-family-secondary: var(--font-family-primary);
