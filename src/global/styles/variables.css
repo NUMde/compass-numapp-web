@@ -4,6 +4,9 @@
   --max-width-desktop: 360px;
   --max-width-desktop-wide: 600px;
 
+  --font-family-primary: -apple-system, Ubuntu, Roboto, Segoe UI, 'Noto Sans', Cantarell, Arial, sans-serif;
+  --font-family-secondary: var(--font-family-primary);
+
   --color-white: #fff;
 
   --color-primary: #1c2732;
