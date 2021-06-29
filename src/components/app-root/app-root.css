@@ -4,6 +4,7 @@ main {
 }
 
 .app-header .app-header__custom-logo {
+  display: block;
   height: var(--logo-height);
 }
 
