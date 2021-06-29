@@ -10,7 +10,7 @@ will also likely work with those older versions.
 
 ## Stencil / Web Components
 
-[Stencil](https://stenciljs.com/) is a framework/toolchain to generate reusable standard web components. Read more about web components [here](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+[Stencil](https://stenciljs.com/) is a toolchain to generate reusable standard web components. Read more about web components [here](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
 
 ## Development-related folder structure
 
