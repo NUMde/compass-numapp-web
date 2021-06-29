@@ -40,6 +40,8 @@
   --padding-medium: var(--space-m);
   --padding-large: var(--space-l);
 
+  --shadow-xl: var(--space-xs) var(--space-xs) var(--space-l) rgba(0, 0, 0, 0.15);
+
   /* Min width media queries breakpoints */
   --tablet: 768px;
   --desktop: 960px;
