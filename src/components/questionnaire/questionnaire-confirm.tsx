@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, h, State } from '@stencil/core';
-import store from 'store';
+import stores from 'stores';
 import { Card } from 'components/card/card';
 import services from 'services';
 
@@ -20,7 +20,7 @@ export class QuestionnaireConfirmComponent {
       await services.questionnaire.submitQuestionnaireResponse();
       await services.user.refresh();
       this.switchDisplayModeHandler('success');
-      store.questionnaire.answers.reset();
+      stores.questionnaire.answers.reset();
     } catch (error) {
       this.isBusy = false;
       console.error(error);
@@ -29,26 +29,26 @@ export class QuestionnaireConfirmComponent {
   }
 
   componentWillLoad() {
-    !store.questionnaire.isCompleted && this.switchDisplayModeHandler('index');
+    !stores.questionnaire.isCompleted && this.switchDisplayModeHandler('index');
   }
 
   render() {
-    if (!store.questionnaire.isCompleted) {
+    if (!stores.questionnaire.isCompleted) {
       return false;
     }
 
     return (
-      <Card headline={store.i18n.t('questionnaire.confirm_submit.headline')}>
-        <p class="u-infotext">{store.i18n.t('questionnaire.confirm_submit.infotext')}</p>
+      <Card headline={stores.i18n.t('questionnaire.confirm_submit.headline')}>
+        <p class="u-infotext">{stores.i18n.t('questionnaire.confirm_submit.infotext')}</p>
         <d4l-button
           classes="button--block u-margin-top--large"
-          text={store.i18n.t('questionnaire.continue')}
+          text={stores.i18n.t('questionnaire.continue')}
           isLoading={this.isBusy}
           handleClick={() => this.submitQuestionnaire()}
         />
         <d4l-button
           classes="button--block button--secondary u-margin-top--normal"
-          text={store.i18n.t('questionnaire.back')}
+          text={stores.i18n.t('questionnaire.back')}
           handleClick={() => this.switchDisplayModeHandler('question')}
         />
       </Card>

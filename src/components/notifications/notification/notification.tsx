@@ -1,6 +1,6 @@
 import { Component, h, Prop } from '@stencil/core';
 import { NotificationSeverity } from 'services/notifier';
-import store from 'store';
+import stores from 'stores';
 
 const snackBarTypeMap: { [key: string]: string } = {
   error: 'error',
@@ -22,7 +22,7 @@ export class Notification {
   @Prop() severity!: NotificationSeverity;
 
   render() {
-    const { i18n } = store;
+    const { i18n } = stores;
     const snackBarType = snackBarTypeMap[this.severity];
 
     return (

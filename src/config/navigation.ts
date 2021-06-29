@@ -46,7 +46,7 @@ export const NAVIGATION_ITEMS: NUMNavigationItem[] = CUSTOM.NAVIGATION_ITEMS ?? 
   },
   {
     key: 'logout',
-    fn: (store) => store.auth.logout(),
+    fn: (stores) => stores.auth.logout(),
     icon: 'logout',
     isAuthenticated: true,
   },

@@ -1,5 +1,5 @@
 import { h } from '@stencil/core';
-import store from 'store';
+import stores from 'stores';
 import { QuestionnaireQuestionComponentProps } from './types';
 
 const MAX_SAFE_NUMBER_LENGTH = 15;
@@ -21,7 +21,7 @@ const formatAndParseInput = (
 ): [string, number] => {
   const { minValue, maxValue } = question.config;
 
-  const localSeparator = window.Intl?.NumberFormat?.(store.i18n.language.locale)
+  const localSeparator = window.Intl?.NumberFormat?.(stores.i18n.language.locale)
     .format(0.1)
     .replace(/\d/g, '');
   const allowedSeparators =
@@ -51,7 +51,7 @@ const formatAndParseInput = (
   return [
     isNaN(value) || parsedValue === value
       ? formattedValue
-      : window.Intl?.NumberFormat?.(store.i18n.language.locale).format(value) ?? String(value),
+      : window.Intl?.NumberFormat?.(stores.i18n.language.locale).format(value) ?? String(value),
     value,
   ];
 };

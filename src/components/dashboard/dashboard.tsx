@@ -1,5 +1,5 @@
 import { Component, h } from '@stencil/core';
-import store from 'store';
+import stores from 'stores';
 import { formatDate } from 'utils/format-date';
 import { ROUTES, FEATURES_SHOW_LOGOUT } from 'config';
 import { Card } from 'components/card/card';
@@ -15,7 +15,7 @@ export class Dashboard {
       isQuestionnaireAvailable,
       questionnaireStartDate,
       questionnaireDueDate,
-    } = store.user;
+    } = stores.user;
 
     if (!isPopulated) {
       return false;
@@ -23,12 +23,12 @@ export class Dashboard {
 
     return (
       <Card
-        headline={store.i18n.t(
+        headline={stores.i18n.t(
           isFirstTimeUser ? 'dashboard.headline.new_user' : 'dashboard.headline.returning_user'
         )}
       >
         <p class="u-infotext">
-          {store.i18n.t(
+          {stores.i18n.t(
             isQuestionnaireAvailable
               ? 'dashboard.infotext.questionnaire_available.first_text'
               : 'dashboard.infotext.questionnaire_not_available.first_text'
@@ -41,12 +41,12 @@ export class Dashboard {
 
         {isQuestionnaireAvailable && (
           <stencil-route-link url={ROUTES.QUESTIONNAIRE}>
-            <d4l-button classes="button--block" text={store.i18n.t('dashboard.button.questionnaire')} />
+            <d4l-button classes="button--block" text={stores.i18n.t('dashboard.button.questionnaire')} />
           </stencil-route-link>
         )}
 
         <p class="u-infotext">
-          {store.i18n.t(
+          {stores.i18n.t(
             isQuestionnaireAvailable
               ? 'dashboard.infotext.questionnaire_available.second_text'
               : 'dashboard.infotext.questionnaire_not_available.second_text'
@@ -57,7 +57,7 @@ export class Dashboard {
           <stencil-route-link url={ROUTES.REPORT}>
             <d4l-button
               classes="button--block u-margin-vertical--normal"
-              text={store.i18n.t('dashboard.button.report')}
+              text={stores.i18n.t('dashboard.button.report')}
             />
           </stencil-route-link>
         )}
@@ -65,8 +65,8 @@ export class Dashboard {
         {FEATURES_SHOW_LOGOUT && (
           <d4l-button
             classes="button--block button--secondary u-margin-top--normal"
-            text={store.i18n.t('dashboard.button.logout')}
-            handleClick={() => store.auth.logout()}
+            text={stores.i18n.t('dashboard.button.logout')}
+            handleClick={() => stores.auth.logout()}
           />
         )}
       </Card>

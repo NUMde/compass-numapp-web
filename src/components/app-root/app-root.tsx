@@ -3,7 +3,7 @@ import { injectHistory, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
 import { LANGUAGES, NAVIGATION_ITEMS, FOOTER_LINKS, ROUTES } from 'config';
 import services from 'services';
-import store from 'store';
+import stores from 'stores';
 import { IS_MOBILE, IS_TOUCH } from 'utils/device';
 
 @Component({
@@ -19,13 +19,13 @@ export class AppRoot {
   async changeLanguageHandler(event: CustomEvent) {
     event.stopImmediatePropagation();
     const { detail: language } = event;
-    store.i18n.language = language;
+    stores.i18n.language = language;
   }
 
   get footerLinks() {
     return FOOTER_LINKS.filter(({ isAuthenticated }) => !isAuthenticated || this.isAuthenticated).map(
       ({ key, url, route }) => ({
-        text: store.i18n.t(`navigation.${key}`),
+        text: stores.i18n.t(`navigation.${key}`),
         url: url ?? route,
         isStencilRoute: !!route,
         internal: !!route,
@@ -35,14 +35,14 @@ export class AppRoot {
 
   get navigationItems() {
     return NAVIGATION_ITEMS.map(({ key, icon, url, route, fn, isAuthenticated }) => ({
-      text: store.i18n.t(`navigation.${key}`),
+      text: stores.i18n.t(`navigation.${key}`),
       route: url ?? route,
       target: url ? '_blank' : '_self',
       icon,
       iconClasses: 'icon--small',
       internal: !!route,
       condition: !isAuthenticated || this.isAuthenticated,
-      ...(fn ? { fn: () => fn(store, services) } : {}),
+      ...(fn ? { fn: () => fn(stores, services) } : {}),
     }));
   }
 
@@ -57,8 +57,8 @@ export class AppRoot {
 
     await services.user.populateStore();
 
-    this.isAuthenticated = store.auth.isAuthenticated;
-    store.auth.onStateChange((isAuthenticated: boolean) => {
+    this.isAuthenticated = stores.auth.isAuthenticated;
+    stores.auth.onStateChange((isAuthenticated: boolean) => {
       if (this.isAuthenticated !== isAuthenticated) {
         this.isAuthenticated = isAuthenticated;
         this.history.push(this.defaultRoute, {});
@@ -76,12 +76,12 @@ export class AppRoot {
         <d4l-app-header
           customLogo="/assets/logo.svg"
           logoUrl={ROUTES.ROOT}
-          logoUrlTitle={store.i18n.t('navigation.logo')}
-          logoUrlText={store.i18n.t('navigation.logo')}
-          menuCardTitle={store.i18n.t('navigation.title')}
+          logoUrlTitle={stores.i18n.t('navigation.logo')}
+          logoUrlText={stores.i18n.t('navigation.logo')}
+          menuCardTitle={stores.i18n.t('navigation.title')}
           menuFooterLinks={footerLinks}
           supportedLanguages={LANGUAGES.length > 1 ? LANGUAGES : []}
-          selectedLanguage={store.i18n.language}
+          selectedLanguage={stores.i18n.language}
           menuNavigationItems={navigationItems}
         />
 
@@ -125,7 +125,7 @@ export class AppRoot {
 
         <d4l-app-footer footerLinks={footerLinks}>
           <span slot="copyright-info" class="u-display-block u-margin-bottom--normal">
-            {store.i18n.t('navigation.copyright_note', { year: new Date().getFullYear() })}
+            {stores.i18n.t('navigation.copyright_note', { year: new Date().getFullYear() })}
           </span>
         </d4l-app-footer>
       </Fragment>

@@ -2,7 +2,7 @@ import { Component, Fragment, h, State } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { ROUTES } from 'config';
 import services from 'services';
-import store from 'store';
+import stores from 'stores';
 
 @Component({
   tag: 'num-container-report',
@@ -29,14 +29,14 @@ export class ReportComponent {
     const { display } = this;
 
     return (
-      <Card headline={store.i18n.t(`report.${display}.headline`)}>
-        <p class="u-infotext">{store.i18n.t(`report.${display}.infotext`)}</p>
+      <Card headline={stores.i18n.t(`report.${display}.headline`)}>
+        <p class="u-infotext">{stores.i18n.t(`report.${display}.infotext`)}</p>
 
         {display === 'confirm_submit' ? (
           <Fragment>
             <d4l-button
               classes="button--block u-margin-top--large"
-              text={store.i18n.t('report.confirm_submit.continue')}
+              text={stores.i18n.t('report.confirm_submit.continue')}
               isLoading={this.isBusy}
               handleClick={() => this.submitReport()}
             />
@@ -44,7 +44,7 @@ export class ReportComponent {
             <stencil-route-link url={ROUTES.DASHBOARD}>
               <d4l-button
                 classes="button--block button--secondary u-margin-top--normal"
-                text={store.i18n.t('report.confirm_submit.back')}
+                text={stores.i18n.t('report.confirm_submit.back')}
               />
             </stencil-route-link>
           </Fragment>
@@ -52,7 +52,7 @@ export class ReportComponent {
           <stencil-route-link url={ROUTES.DASHBOARD}>
             <d4l-button
               classes="button--block u-margin-top--large"
-              text={store.i18n.t('report.success.finish')}
+              text={stores.i18n.t('report.success.finish')}
             />
           </stencil-route-link>
         )}

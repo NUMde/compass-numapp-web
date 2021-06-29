@@ -11,7 +11,7 @@ import {
   PERSISTENCE_SHOW_CHOICE,
 } from 'config';
 import services from 'services';
-import store from 'store';
+import stores from 'stores';
 import { ResponseError } from 'models/response-error';
 
 @Component({
@@ -56,10 +56,10 @@ export class Authenticate {
         throw new ResponseError('authenticate.error.user_id_mismatch', 401);
       }
 
-      const persistence = store.optionalPersistence;
+      const persistence = stores.optionalPersistence;
       this.isPersistenceChosen ? persistence.enable() : persistence.disable();
-      store.user.populateFromUserResponse(userResponse);
-      store.auth.login(userId);
+      stores.user.populateFromUserResponse(userResponse);
+      stores.auth.login(userId);
     } catch ({ status = 0 }) {
       services.notifier.showError(`authenticate.error.code_${status}`);
       this.isAuthenticating = false;
@@ -162,13 +162,13 @@ export class Authenticate {
   }
 
   render() {
-    if (store.auth.isAuthenticated) {
+    if (stores.auth.isAuthenticated) {
       return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
     }
 
     return (
-      <Card headline={store.i18n.t('authenticate.headline')}>
-        <p class="u-infotext">{store.i18n.t('authenticate.infotext')}</p>
+      <Card headline={stores.i18n.t('authenticate.headline')}>
+        <p class="u-infotext">{stores.i18n.t('authenticate.infotext')}</p>
 
         {this.supportsCamera && (
           <div class="authenticate__camera-container" style={{ display: this.showCamera ? 'block' : 'none' }}>
@@ -184,13 +184,13 @@ export class Authenticate {
           </div>
         )}
 
-        {this.showCamera && <p class="authenticate__help">{store.i18n.t('authenticate.alternatively')}</p>}
+        {this.showCamera && <p class="authenticate__help">{stores.i18n.t('authenticate.alternatively')}</p>}
 
         <form class="u-margin-top--large" onSubmit={(event) => this.handleSubmit(event)}>
           <d4l-input
             classes="input--center"
             type="text"
-            label={store.i18n.t('authenticate.input_label')}
+            label={stores.i18n.t('authenticate.input_label')}
             onInput={(event: Event) => (this.#userId = (event.target as HTMLInputElement).value)}
             value={this.#userId}
             focused
@@ -200,7 +200,7 @@ export class Authenticate {
           {FEATURES_ENABLE_PERSISTENCE && PERSISTENCE_SHOW_CHOICE && (
             <div class="authenticate__checkbox">
               <d4l-checkbox
-                label={store.i18n.t('authenticate.stay_logged_in.checkbox')}
+                label={stores.i18n.t('authenticate.stay_logged_in.checkbox')}
                 onChange={(event: Event) =>
                   (this.isPersistenceChosen = (event.target as HTMLInputElement).checked)
                 }
@@ -210,7 +210,7 @@ export class Authenticate {
                 checkboxId="stay_logged_in"
                 checked={this.isPersistenceChosen}
               />
-              <p class="u-infotext">{store.i18n.t('authenticate.stay_logged_in.infotext')}</p>
+              <p class="u-infotext">{stores.i18n.t('authenticate.stay_logged_in.infotext')}</p>
             </div>
           )}
 
@@ -218,7 +218,7 @@ export class Authenticate {
             type="submit"
             classes="button--block u-margin-top--medium"
             isLoading={this.isAuthenticating}
-            text={store.i18n.t('authenticate.continue')}
+            text={stores.i18n.t('authenticate.continue')}
           />
         </form>
       </Card>

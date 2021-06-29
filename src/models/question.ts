@@ -1,5 +1,5 @@
 import { extractLabel, extractValue, parseExtensions } from 'utils/questionnaire';
-import store from 'store';
+import stores from 'stores';
 
 export class NUMQuestionnaireQuestion {
   readonly parent: fhir4.Questionnaire | fhir4.QuestionnaireItem;
@@ -27,11 +27,11 @@ export class NUMQuestionnaireQuestion {
   }
 
   get items() {
-    return store.questionnaire.flattenedItems;
+    return stores.questionnaire.flattenedItems;
   }
 
   get answers() {
-    return store.questionnaire.answers;
+    return stores.questionnaire.answers;
   }
 
   get answer() {
@@ -39,7 +39,7 @@ export class NUMQuestionnaireQuestion {
   }
 
   get questions() {
-    return store.questionnaire.questions;
+    return stores.questionnaire.questions;
   }
 
   get children() {

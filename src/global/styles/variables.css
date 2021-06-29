@@ -6,7 +6,7 @@
 
   --logo-height: 48px;
 
-  --font-family-primary: -apple-system, Ubuntu, Roboto, Segoe UI, 'Noto Sans', Cantarell, Arial, sans-serif,
+  --font-family-primary: -apple-system, Ubuntu, Roboto, 'Segoe UI', 'Noto Sans', Cantarell, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji';
   --font-family-secondary: var(--font-family-primary);
 

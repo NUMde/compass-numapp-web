@@ -1,7 +1,7 @@
 import { FALLBACK_CERTIFICATE } from 'config';
 import createPersistedStore from './utils/persisted-store';
 import { Services } from 'services';
-import { optionalPersistence, questionnaire, user } from 'store';
+import { optionalPersistence, questionnaire, user } from 'stores';
 
 interface StateType {
   accessToken: string;

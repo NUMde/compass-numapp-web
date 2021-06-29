@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
 import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS, ROUTES } from 'config';
-import store from 'store';
+import stores from 'stores';
 
 @Component({
   tag: 'num-questionnaire-tree',
@@ -10,7 +10,7 @@ import store from 'store';
 export class QuestionnaireTreeComponent {
   @Event() switchDisplayMode: EventEmitter;
   switchDisplayModeHandler(linkId?: string) {
-    if (store.questionnaire.isCompleted && !linkId) {
+    if (stores.questionnaire.isCompleted && !linkId) {
       this.switchDisplayMode.emit({ displayMode: 'confirm' });
     } else {
       this.switchDisplayMode.emit({ displayMode: 'question', linkId });
@@ -18,11 +18,11 @@ export class QuestionnaireTreeComponent {
   }
 
   render() {
-    const { questionnaire, flattenedItems } = store.questionnaire;
+    const { questionnaire, flattenedItems } = stores.questionnaire;
 
     return (
       <Card wide headline={questionnaire.title}>
-        <p class="u-infotext">{questionnaire.purpose ?? store.i18n.t('questionnaire.infotext')}</p>
+        <p class="u-infotext">{questionnaire.purpose ?? stores.i18n.t('questionnaire.infotext')}</p>
         <ol class="questionnaire-tree">
           {flattenedItems.map(({ linkId, text, type, level, isAnswerable, firstChildQuestion }, index) => {
             return (
@@ -37,7 +37,7 @@ export class QuestionnaireTreeComponent {
               >
                 <strong class="questionnaire-tree__title">
                   {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS &&
-                    store.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
+                    stores.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
                       number: linkId,
                     })}
                 </strong>
@@ -49,14 +49,14 @@ export class QuestionnaireTreeComponent {
 
         <d4l-button
           classes="button--block u-margin-vertical--normal"
-          text={store.i18n.t('questionnaire.continue')}
+          text={stores.i18n.t('questionnaire.continue')}
           handleClick={() => this.switchDisplayModeHandler()}
         />
 
         <stencil-route-link url={ROUTES.DASHBOARD}>
           <d4l-button
             classes="button--block button--secondary u-margin-top--normal"
-            text={store.i18n.t('questionnaire.back')}
+            text={stores.i18n.t('questionnaire.back')}
           />
         </stencil-route-link>
       </Card>

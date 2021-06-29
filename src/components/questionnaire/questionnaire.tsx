@@ -1,5 +1,5 @@
 import { Component, h, Listen, State } from '@stencil/core';
-import store from 'store';
+import stores from 'stores';
 import services from 'services';
 import { ROUTES } from 'config';
 
@@ -18,8 +18,8 @@ export class QuestionnaireComponent {
 
   async componentWillLoad() {
     try {
-      store.questionnaire.populateFromRequestResponse(
-        await services.questionnaire.fetch(store.user.questionnaireId)
+      stores.questionnaire.populateFromRequestResponse(
+        await services.questionnaire.fetch(stores.user.questionnaireId)
       );
     } catch (_) {
       services.notifier.showError('questionnaire.fetch_failed');
@@ -27,13 +27,13 @@ export class QuestionnaireComponent {
   }
 
   render() {
-    if (!store.questionnaire.isPopulated) {
+    if (!stores.questionnaire.isPopulated) {
       return (
         <d4l-button
           classes="button--secondary"
-          text={store.i18n.t('questionnaire.fetch_retry')}
+          text={stores.i18n.t('questionnaire.fetch_retry')}
           handleClick={() => {
-            store.notifications.dismissCurrent();
+            stores.notifications.dismissCurrent();
             this.componentWillLoad();
           }}
         />

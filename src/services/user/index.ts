@@ -1,5 +1,5 @@
 import { API_BASE_URL } from 'config';
-import store from 'store';
+import stores from 'stores';
 import { get } from 'utils/fetch-client';
 import { IUserService, UserResponse } from './types';
 
@@ -10,13 +10,13 @@ export default class User implements IUserService {
   }
 
   async populateStore(refresh = false) {
-    const userId = store.auth.accessToken;
+    const userId = stores.auth.accessToken;
     if (!userId) {
-      store.user.reset();
+      stores.user.reset();
       return;
     }
 
-    if (!refresh && store.user.isPopulated) {
+    if (!refresh && stores.user.isPopulated) {
       return;
     }
 
@@ -26,10 +26,10 @@ export default class User implements IUserService {
         throw new Error();
       }
 
-      store.auth.certificate = userResponse.recipient_certificate_pem_string;
-      store.user.populateFromUserResponse(userResponse);
+      stores.auth.certificate = userResponse.recipient_certificate_pem_string;
+      stores.user.populateFromUserResponse(userResponse);
     } catch (_) {
-      store.auth.expireSession();
+      stores.auth.expireSession();
     }
   }
 

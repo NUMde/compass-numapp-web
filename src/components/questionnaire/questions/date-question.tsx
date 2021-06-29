@@ -1,6 +1,6 @@
 import { h } from '@stencil/core';
 import { FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES } from 'config';
-import store from 'store';
+import stores from 'stores';
 import { QuestionnaireQuestionComponentProps } from './types';
 
 const getTimelessDate = (date: Date): Date => {
@@ -8,7 +8,7 @@ const getTimelessDate = (date: Date): Date => {
 };
 
 export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuestionComponentProps) => {
-  const { i18n } = store;
+  const { i18n } = stores;
   const [year, month, day] = String(answer[0])
     .split(/[^0-9]/)
     .filter(Boolean);

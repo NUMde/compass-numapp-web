@@ -1,6 +1,6 @@
 import { Component, h, Prop } from '@stencil/core';
 import { Card } from 'components/card/card';
-import store from 'store';
+import stores from 'stores';
 
 @Component({
   tag: 'num-legal',
@@ -10,8 +10,8 @@ export class NumLegal {
 
   render() {
     return (
-      <Card headline={store.i18n.t(`${this.namespace}.headline`)}>
-        <p class="u-infotext" innerHTML={store.i18n.t(`${this.namespace}.content`)} />
+      <Card headline={stores.i18n.t(`${this.namespace}.headline`)}>
+        <p class="u-infotext" innerHTML={stores.i18n.t(`${this.namespace}.content`)} />
       </Card>
     );
   }

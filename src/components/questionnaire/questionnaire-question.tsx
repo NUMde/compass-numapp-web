@@ -3,7 +3,7 @@ import { Card } from 'components/card/card';
 import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS } from 'config';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import { isValidValue } from 'utils/questionnaire';
-import store from 'store';
+import stores from 'stores';
 import {
   BooleanQuestion,
   DateQuestion,
@@ -84,7 +84,7 @@ export class QuestionnaireQuestionComponent {
   }
 
   moveToNextQuestion() {
-    store.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
+    stores.questionnaire.answers.set(this.question.linkId, this.pendingAnswer);
 
     if (!this.question.next) {
       this.switchDisplayModeHandler('confirm');
@@ -131,7 +131,7 @@ export class QuestionnaireQuestionComponent {
   }
 
   componentWillLoad() {
-    const { questions } = store.questionnaire;
+    const { questions } = stores.questionnaire;
     const selectedQuestion = questions.find(({ linkId }) => linkId === this.linkId);
     this.question = selectedQuestion?.isAnswerable
       ? selectedQuestion
@@ -194,14 +194,14 @@ export class QuestionnaireQuestionComponent {
             type="submit"
             class="questionnaire-question__continue"
             classes="button--block u-margin-top--normal"
-            text={store.i18n.t('questionnaire.continue')}
+            text={stores.i18n.t('questionnaire.continue')}
             disabled={!this.canProceed}
           />
         </form>
 
         <d4l-button
           classes="button--block button--secondary u-margin-top--normal"
-          text={store.i18n.t('questionnaire.back')}
+          text={stores.i18n.t('questionnaire.back')}
           handleClick={() => this.moveToPreviousQuestion()}
         />
       </Card>
