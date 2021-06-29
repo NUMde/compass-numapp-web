@@ -45,11 +45,11 @@ export default {
   },
   navigation: {
     contact: 'Contact',
-    copyright_note: '© {{ year }} NUM COMPASS',
+    copyright_note: '© {{ year }} NUM compass',
     dashboard: 'Overview',
     faq: 'FAQ',
     imprint: 'Imprint',
-    logo: 'NUM COMPASS web app',
+    logo: 'NUM compass web app',
     logout: 'Logout',
     privacy_policy: 'Privacy policy',
     terms_of_use: 'Terms of use',

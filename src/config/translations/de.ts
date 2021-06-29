@@ -48,11 +48,11 @@ export default {
   },
   navigation: {
     contact: 'Kontakt',
-    copyright_note: '© {{ year }} NUM COMPASS',
+    copyright_note: '© {{ year }} NUM compass',
     dashboard: 'Übersicht',
     faq: 'FAQ',
     imprint: 'Impressum',
-    logo: 'NUM COMPASS web app',
+    logo: 'NUM compass web app',
     logout: 'Abmelden',
     privacy_policy: 'Datenschutzerklärung',
     terms_of_use: 'Nutzungsbedingungen',

@@ -124,7 +124,7 @@ export class AppRoot {
         </main>
 
         <d4l-app-footer footerLinks={footerLinks}>
-          <span slot="copyright-info" class="u-display-block u-margin-bottom--normal">
+          <span slot="copyright-info" class="u-display-block u-uppercase">
             {stores.i18n.t('navigation.copyright_note', { year: new Date().getFullYear() })}
           </span>
         </d4l-app-footer>
