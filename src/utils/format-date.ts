@@ -1,4 +1,4 @@
-import store from 'store';
+import stores from 'stores';
 
 /**
  * Formats a provided date based on the selected language code with the default app * date options
@@ -16,5 +16,5 @@ export const formatDate = (date: Date, formatting?: Intl.DateTimeFormatOptions) 
     day: 'numeric',
   };
 
-  return new Intl.DateTimeFormat(store.i18n.language.code, options).format(date);
+  return new Intl.DateTimeFormat(stores.i18n.language.code, options).format(date);
 };

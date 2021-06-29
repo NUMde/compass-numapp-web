@@ -1,7 +1,7 @@
 import forge from 'node-forge';
 import { NUMQuestionnaireQuestion } from 'models/question';
 import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
-import { QuestionnaireStore } from 'store/questionnaire';
+import { QuestionnaireStore } from 'stores/questionnaire';
 import { FHIR_SUPPORTED_EXTENSION_BASE_URLS, TRIGGER_RULES } from 'config';
 
 export const flattenNestedItems = (

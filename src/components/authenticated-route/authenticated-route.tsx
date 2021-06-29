@@ -1,6 +1,6 @@
 import { h } from '@stencil/core';
 import { ROUTES } from 'config';
-import store from 'store';
+import stores from 'stores';
 
 type AuthenticatedRouteProps = {
   component: string;
@@ -17,7 +17,7 @@ export const AuthenticatedRoute = ({ component, ...props }: AuthenticatedRoutePr
     <stencil-route
       {...props}
       routeRender={(props: { [key: string]: any }) => {
-        if (store.auth.isAuthenticated) {
+        if (stores.auth.isAuthenticated) {
           return <Component {...props} {...props.componentProps} />;
         }
 

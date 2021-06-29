@@ -1,7 +1,7 @@
 import { Language } from '@d4l/web-components-library/dist/types/components/LanguageSwitcher/language-switcher';
 import { Services } from 'services';
 import { NUMQuestionnaireAnswer } from 'services/questionnaire';
-import { Store } from 'store';
+import { Stores } from 'stores';
 
 export interface NUMLanguage extends Language {
   locale?: string;
@@ -19,7 +19,7 @@ export interface NUMNavigationItem {
   icon?: string;
   url?: string;
   route?: string;
-  fn?: (store: Store, services: Services) => void;
+  fn?: (stores: Stores, services: Services) => void;
   isAuthenticated?: boolean;
 }
 

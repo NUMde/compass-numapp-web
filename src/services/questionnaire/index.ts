@@ -1,5 +1,5 @@
 import { API_BASE_URL, TRIGGER_KEY_BASIC } from 'config';
-import store from 'store';
+import stores from 'stores';
 import { get, post } from 'utils/fetch-client';
 import { buildFlags, buildQuestionnaireResponse, generateEncryptedPayload } from 'utils/questionnaire';
 import { IQuestionnaireService, NUMQuestionnaire } from './types';
@@ -17,19 +17,19 @@ export default class QuestionnaireService implements IQuestionnaireService {
     return generateEncryptedPayload({
       type,
       questionnaireResponse,
-      accessToken: store.auth.accessToken,
-      certificatePem: store.auth.certificate,
+      accessToken: stores.auth.accessToken,
+      certificatePem: stores.auth.certificate,
     });
   }
 
   async submitQuestionnaireResponse() {
-    const userId = store.auth.accessToken;
+    const userId = stores.auth.accessToken;
     const params = {
       type: 'questionnaire_response',
       subjectId: userId,
-      surveyId: store.user.questionnaireId,
-      instanceId: store.user.instanceId,
-      updateValues: JSON.stringify(buildFlags(store.questionnaire)),
+      surveyId: stores.user.questionnaireId,
+      instanceId: stores.user.instanceId,
+      updateValues: JSON.stringify(buildFlags(stores.questionnaire)),
     };
 
     await post({
@@ -37,13 +37,13 @@ export default class QuestionnaireService implements IQuestionnaireService {
       authenticated: true,
       body: this.generateEncryptedPayload(
         'questionnaire_response',
-        buildQuestionnaireResponse(store.auth.accessToken, store.questionnaire)
+        buildQuestionnaireResponse(stores.auth.accessToken, stores.questionnaire)
       ),
     });
   }
 
   async submitReport() {
-    const userId = store.auth.accessToken;
+    const userId = stores.auth.accessToken;
     const params = {
       type: 'report',
       subjectId: userId,

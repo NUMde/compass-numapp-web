@@ -1,4 +1,4 @@
-import store from 'store';
+import stores from 'stores';
 import { ResponseError } from 'models/response-error';
 
 interface FetchClientHeaders {
@@ -37,12 +37,12 @@ export const request = async <T = unknown>(args: FetchClientArguments): Promise<
         'Content-Type': contentType,
         ...(authenticated
           ? {
-              Authorization: `Bearer ${store.auth.accessToken}`,
+              Authorization: `Bearer ${stores.auth.accessToken}`,
             }
           : {}),
         ...(sendLanguage
           ? {
-              'X-User-Language': store.i18n?.language?.code,
+              'X-User-Language': stores.i18n?.language?.code,
             }
           : {}),
         ...headers,
@@ -57,7 +57,7 @@ export const request = async <T = unknown>(args: FetchClientArguments): Promise<
   }
 
   if (response.status === 401) {
-    await store.auth.expireSession();
+    await stores.auth.expireSession();
   }
 
   if (response.status === 204) {

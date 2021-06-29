@@ -28,7 +28,7 @@ const QUESTIONNAIRE = EXAMPLE_QUESTIONNAIRE as fhir4.Questionnaire;
 const QUESTIONNAIRE_ANSWERS = createObservableMap(EXAMPLE_QUESTIONNAIRE_ANSWERS as unknown) as ObservableMap<{
   [key: string]: NUMQuestionnaireAnswer;
 }>;
-const FLATTENED_ITEMS = (EXAMPLE_QUESTIONNAIRE_FLATTENED_ITEMS as unknown) as NUMQuestionnaireFlattenedItem[];
+const FLATTENED_ITEMS = EXAMPLE_QUESTIONNAIRE_FLATTENED_ITEMS as unknown as NUMQuestionnaireFlattenedItem[];
 const QUESTIONNAIRE_RESPONSE = EXAMPLE_QUESTIONNAIRE_RESPONSE as fhir4.QuestionnaireResponse;
 
 const USER_ID = 'unit-test';

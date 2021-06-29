@@ -1,5 +1,5 @@
 import { Component, h } from '@stencil/core';
-import store from 'store';
+import stores from 'stores';
 
 @Component({
   tag: 'num-notifications',
@@ -7,11 +7,11 @@ import store from 'store';
 })
 export class Notifications {
   onClose() {
-    store.notifications.dismissCurrent();
+    stores.notifications.dismissCurrent();
   }
 
   render() {
-    const notification = store.notifications.current;
+    const notification = stores.notifications.current;
 
     return (
       <div class={`notification-container ease-in-top ${notification ? 'ease-in-top--active' : ''}`}>

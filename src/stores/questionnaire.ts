@@ -7,7 +7,7 @@ import {
   NUMQuestionnaireAnswer,
 } from 'services/questionnaire';
 import { extractQuestions, flattenNestedItems, getHash } from 'utils/questionnaire';
-import { optionalPersistence } from 'store';
+import { optionalPersistence } from 'stores';
 
 interface StateType {
   questionnaire: NUMQuestionnaire;
