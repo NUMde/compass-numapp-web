@@ -2,8 +2,9 @@ import { NUMQuestionnaireQuestion } from 'models/question';
 
 export interface NUMQuestionnaire extends fhir4.Questionnaire {}
 export interface NUMQuestionnaireFlattenedItem extends fhir4.QuestionnaireItem, NUMQuestionnaireQuestion {}
-export type NUMQuestionnaireAnswer = (boolean | number | string)[];
-export interface NumQuestionnaireExtensionConfig {
+export type NUMQuestionnaireSimpleValue = string | number | boolean;
+export type NUMQuestionnaireAnswer = NUMQuestionnaireSimpleValue[];
+export interface NUMQuestionnaireExtensionConfig {
   minValue?: number;
   maxValue?: number;
   minLength?: number;

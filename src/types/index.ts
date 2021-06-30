@@ -43,6 +43,7 @@ export interface NUMCustomAppConfig {
   TRIGGER_KEY_SPECIAL?: string;
   TRIGGER_RULES?: NUMTriggerRule[];
   FHIR_SUPPORTED_EXTENSION_BASE_URLS?: string[];
+  FHIR_RESPONSE_TRANSFERRED_EXTENSION_KEYS?: string[];
   LANGUAGES?: NUMLanguage[];
   TRANSLATIONS?: {
     [languageCode: string]: object;

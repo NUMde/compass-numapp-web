@@ -148,3 +148,8 @@ Name of the special trigger flag submitted to the backend. Only change this when
 ### `FHIR_SUPPORTED_EXTENSION_BASE_URLS`
 
 An array of allowed FHIR extension base urls to be used in questionnaires
+
+### `FHIR_RESPONSE_TRANSFERRED_EXTENSION_KEYS`
+
+An array of questionnaire item extension keys to be transferred over from the questionnaire item to the corresponding questionnaire response item.
+This provides a way to attach meta information to questionnaire (response) items. For more information, visit [the implementation guide](https://github.com/NUMde/compass-implementation-guide).
