@@ -50,7 +50,15 @@ export class NUMQuestionnaireQuestion {
     return this.questions.find((item) => item.linkId === linkId);
   }
 
+  get isHidden() {
+    return !!this.config.hidden || !!(this.parent as NUMQuestionnaireQuestion).isHidden;
+  }
+
   get isEnabled() {
+    if (this.isHidden) {
+      return false;
+    }
+
     const fn = this.enableBehavior === 'any' ? 'some' : 'every';
     return this.dependencies[fn](({ value, questionId }) => {
       const answer = this.answers.get(questionId);
@@ -100,6 +108,7 @@ export class NUMQuestionnaireQuestion {
       minValue,
       maxValue,
       minLength,
+      'questionnaire-hidden': hidden,
       'questionnaire-itemControl': itemControl,
       'questionnaire-sliderStepValue': sliderStepValue,
       LowRangeLabel: sliderMinLabel,
@@ -111,6 +120,7 @@ export class NUMQuestionnaireQuestion {
       maxValue,
       minLength,
       maxLength: this.maxLength,
+      hidden,
       sliderMinLabel,
       sliderMaxLabel,
       sliderStepValue,
