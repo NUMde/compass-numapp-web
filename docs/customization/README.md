@@ -39,9 +39,17 @@ Enable persisting the user language, session, unsubmitted questionnaire answers 
 
 Renders a logout button
 
+### `FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES`
+
+Allows user to select dates that are in the future in questionnaires with date questions
+
 ### `FEATURES_QUESTIONNAIRE_SHOW_LINKIDS`
 
 Renders question numbers in the questionnaire
+
+### `FEATURES_QUESTIONNAIRE_SHOW_TREE`
+
+Shows the question overview (tree view) when opening the questionnaire
 
 ### `FEATURES_SUPPORT_QR_CODE`
 
@@ -54,10 +62,6 @@ Enables an option to scan a QR code to log in. The QA code needs to resolve to a
 ```
 
 The individual expected QR props can be modified by changing other configuration settings (`QR_APP_NAME`, `QR_PROP_APP_NAME` and `QR_PROP_USER_ID`). More below.
-
-### `FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES`
-
-Allows user to select dates that are in the future in questionnaires with date questions
 
 ### `PERSISTENCE_SHOW_CHOICE`
 

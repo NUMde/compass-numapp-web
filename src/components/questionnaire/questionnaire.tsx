@@ -1,13 +1,15 @@
 import { Component, h, Listen, State } from '@stencil/core';
 import stores from 'stores';
 import services from 'services';
-import { ROUTES } from 'config';
+import { FEATURES_QUESTIONNAIRE_SHOW_TREE, ROUTES } from 'config';
 
 @Component({
   tag: 'num-container-questionnaire',
 })
 export class QuestionnaireComponent {
-  @State() displayMode: 'index' | 'question' | 'confirm' | 'success' = 'index';
+  @State() displayMode: 'index' | 'question' | 'confirm' | 'success' = FEATURES_QUESTIONNAIRE_SHOW_TREE
+    ? 'index'
+    : 'question';
   @State() linkId?: string;
   @Listen('switchDisplayMode')
   onSwitchDisplayMode({ detail }: CustomEvent) {

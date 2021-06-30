@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Fragment, h, Prop, State } from '@stencil/core';
+import { injectHistory, RouterHistory } from '@stencil/router';
 import { Card } from 'components/card/card';
-import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS } from 'config';
+import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS, FEATURES_QUESTIONNAIRE_SHOW_TREE, ROUTES } from 'config';
 import { NUMQuestionnaireAnswer, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
 import { isValidValue } from 'utils/questionnaire';
 import stores from 'stores';
@@ -25,13 +26,18 @@ export class QuestionnaireQuestionComponent {
   #focusFirstInputTimeout?: number;
 
   @Prop() linkId?: string;
+  @Prop() history: RouterHistory;
 
   @State() question: NUMQuestionnaireFlattenedItem;
   @State() pendingAnswer: NUMQuestionnaireAnswer = [];
 
   @Event() switchDisplayMode: EventEmitter;
   switchDisplayModeHandler(displayMode: 'index' | 'confirm') {
-    this.switchDisplayMode.emit({ displayMode });
+    if (!FEATURES_QUESTIONNAIRE_SHOW_TREE && displayMode === 'index') {
+      this.history.push(ROUTES.DASHBOARD, {});
+    } else {
+      this.switchDisplayMode.emit({ displayMode });
+    }
   }
 
   get storedAnswer() {
@@ -213,3 +219,5 @@ export class QuestionnaireQuestionComponent {
     );
   }
 }
+
+injectHistory(QuestionnaireQuestionComponent);
