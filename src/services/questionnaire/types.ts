@@ -9,6 +9,7 @@ export interface NUMQuestionnaireExtensionConfig {
   maxValue?: number;
   minLength?: number;
   maxLength?: number;
+  'questionnaire-hidden'?: boolean;
   'questionnaire-itemControl'?: string;
   'questionnaire-sliderStepValue'?: number;
   LowRangeLabel?: string;
