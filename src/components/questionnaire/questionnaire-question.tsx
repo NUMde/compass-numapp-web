@@ -10,6 +10,7 @@ import {
   MultipleChoiceQuestion,
   NumberQuestion,
   NumberSliderQuestion,
+  SingleChoiceDropdownQuestion,
   SingleChoiceQuestion,
   StringQuestion,
   UnsupportedQuestion,
@@ -75,7 +76,11 @@ export class QuestionnaireQuestionComponent {
       case 'text':
         return StringQuestion;
       case 'choice':
-        return question.repeats ? MultipleChoiceQuestion : SingleChoiceQuestion;
+        return question.repeats
+          ? MultipleChoiceQuestion
+          : question.isDropdownQuestion
+          ? SingleChoiceDropdownQuestion
+          : SingleChoiceQuestion;
       case 'display':
         return () => false;
       default:

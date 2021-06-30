@@ -130,6 +130,10 @@ export class NUMQuestionnaireQuestion {
     return itemControl === 'slider' && typeof minValue === 'number' && typeof maxValue === 'number';
   }
 
+  get isDropdownQuestion() {
+    return this.config.itemControl === 'drop-down';
+  }
+
   get isAnswered() {
     if (this.type === 'group') {
       return this.firstChildQuestion?.isAnswered || false;
