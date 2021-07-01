@@ -1,5 +1,5 @@
-import { Component, Fragment, h, Listen, Prop, State } from '@stencil/core';
-import { injectHistory, RouterHistory } from '@stencil/router';
+import { Component, Fragment, h, Listen, Prop, State, Watch } from '@stencil/core';
+import { injectHistory, LocationSegments, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
 import { LANGUAGES, NAVIGATION_ITEMS, FOOTER_LINKS, ROUTES } from 'config';
 import services from 'services';
@@ -11,8 +11,11 @@ import { IS_MOBILE, IS_TOUCH } from 'utils/device';
   styleUrl: 'app-root.css',
 })
 export class AppRoot {
-  @State() isAuthenticated = false;
   @Prop() history: RouterHistory;
+  @Prop() location: LocationSegments;
+
+  @State() isAuthenticated = false;
+
   @Listen('changeLanguage', {
     target: 'window',
   })
@@ -20,6 +23,16 @@ export class AppRoot {
     event.stopImmediatePropagation();
     const { detail: language } = event;
     stores.i18n.language = language;
+  }
+
+  @Watch('location')
+  onLocationChange(newLocation, oldLocation) {
+    const oldPath = oldLocation?.pathname;
+    const newPath = newLocation?.pathname;
+
+    if (this.isAuthenticated && oldPath && newPath && oldPath !== newPath) {
+      stores.notifications.dismissAll();
+    }
   }
 
   get footerLinks() {
