@@ -74,11 +74,15 @@ When the embedded app name in the QR code does not match the expectation, an err
 
 ### `QR_PROP_APP_NAME`
 
-Name of the property holding the app name.
+Name of the property holding the app name
 
 ### `QR_PROP_USER_ID`
 
-Name of the property holding the user ID (participation code).
+Name of the property holding the user ID (participation code)
+
+### `QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS`
+
+Show disabled questions in the questionnaire overview (tree view). Disabled questions are items whose dependencies (expected answers to other questions) are not fulfilled at the current time.
 
 ### `LANGUAGES`
 
