@@ -15,6 +15,7 @@ export class QuestionnaireSuccessComponent {
           <d4l-button
             classes="button--block u-margin-top--large"
             text={stores.i18n.t('questionnaire.finish')}
+            isRouteLink
           />
         </stencil-route-link>
       </Card>

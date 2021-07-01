@@ -18,7 +18,7 @@ export class Welcome {
               <d4l-button
                 classes="button--tertiary button--block"
                 text={stores.i18n.t('navigation.terms_of_use')}
-                is-route-link
+                isRouteLink
               />
             </stencil-route-link>
           </li>
@@ -27,14 +27,14 @@ export class Welcome {
               <d4l-button
                 classes="button--tertiary button--block"
                 text={stores.i18n.t('navigation.privacy_policy')}
-                is-route-link
+                isRouteLink
               />
             </stencil-route-link>
           </li>
         </ul>
 
         <stencil-route-link url={ROUTES.AUTHENTICATE}>
-          <d4l-button classes="button--block" text={stores.i18n.t('welcome.continue')} />
+          <d4l-button classes="button--block" text={stores.i18n.t('welcome.continue')} isRouteLink />
         </stencil-route-link>
       </Card>
     );

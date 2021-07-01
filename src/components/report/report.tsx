@@ -45,6 +45,7 @@ export class ReportComponent {
               <d4l-button
                 classes="button--block button--secondary u-margin-top--normal"
                 text={stores.i18n.t('report.confirm_submit.back')}
+                isRouteLink
               />
             </stencil-route-link>
           </Fragment>
@@ -53,6 +54,7 @@ export class ReportComponent {
             <d4l-button
               classes="button--block u-margin-top--large"
               text={stores.i18n.t('report.success.finish')}
+              isRouteLink
             />
           </stencil-route-link>
         )}

@@ -63,6 +63,7 @@ export class QuestionnaireTreeComponent {
           <d4l-button
             classes="button--block button--secondary u-margin-top--normal"
             text={stores.i18n.t('questionnaire.back')}
+            isRouteLink
           />
         </stencil-route-link>
       </Card>

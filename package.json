@@ -18,7 +18,7 @@
     "node": ">14.0.0"
   },
   "dependencies": {
-    "@d4l/web-components-library": "^2.22.10",
+    "@d4l/web-components-library": "^2.22.11",
     "@stencil/core": "^2.6.0",
     "@stencil/eslint-plugin": "^0.3.1",
     "@stencil/router": "^1.0.1",

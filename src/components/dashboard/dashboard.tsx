@@ -41,7 +41,11 @@ export class Dashboard {
 
         {isQuestionnaireAvailable && (
           <stencil-route-link url={ROUTES.QUESTIONNAIRE}>
-            <d4l-button classes="button--block" text={stores.i18n.t('dashboard.button.questionnaire')} />
+            <d4l-button
+              classes="button--block"
+              text={stores.i18n.t('dashboard.button.questionnaire')}
+              isRouteLink
+            />
           </stencil-route-link>
         )}
 
@@ -58,6 +62,7 @@ export class Dashboard {
             <d4l-button
               classes="button--block u-margin-vertical--normal"
               text={stores.i18n.t('dashboard.button.report')}
+              isRouteLink
             />
           </stencil-route-link>
         )}
