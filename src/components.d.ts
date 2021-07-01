@@ -37,6 +37,7 @@ export namespace Components {
     interface NumQuestionnaireConfirm {
     }
     interface NumQuestionnaireQuestion {
+        "history": RouterHistory;
         "linkId"?: string;
     }
     interface NumQuestionnaireSuccess {
@@ -170,6 +171,7 @@ declare namespace LocalJSX {
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
     }
     interface NumQuestionnaireQuestion {
+        "history"?: RouterHistory;
         "linkId"?: string;
         "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
     }

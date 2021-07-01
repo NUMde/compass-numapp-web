@@ -33,15 +33,23 @@ Here you can find configuration examples.
 
 ### `FEATURES_ENABLE_PERSISTENCE`
 
-Enable persisting the user language, session, unsubmitted questionnaire answers and more in localStorage
+Enables persisting the user language, session, unsubmitted questionnaire answers and more in localStorage
 
 ### `FEATURES_SHOW_LOGOUT`
 
 Renders a logout button
 
+### `FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES`
+
+Allows user to select dates that are in the future in questionnaires with date questions
+
 ### `FEATURES_QUESTIONNAIRE_SHOW_LINKIDS`
 
 Renders question numbers in the questionnaire
+
+### `FEATURES_QUESTIONNAIRE_SHOW_TREE`
+
+Shows the question overview (tree view) when opening the questionnaire
 
 ### `FEATURES_SUPPORT_QR_CODE`
 
@@ -55,10 +63,6 @@ Enables an option to scan a QR code to log in. The QA code needs to resolve to a
 
 The individual expected QR props can be modified by changing other configuration settings (`QR_APP_NAME`, `QR_PROP_APP_NAME` and `QR_PROP_USER_ID`). More below.
 
-### `FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES`
-
-Allows user to select dates that are in the future in questionnaires with date questions
-
 ### `PERSISTENCE_SHOW_CHOICE`
 
 Renders the "remember me" checkbox
@@ -70,11 +74,15 @@ When the embedded app name in the QR code does not match the expectation, an err
 
 ### `QR_PROP_APP_NAME`
 
-Name of the property holding the app name.
+Name of the property holding the app name
 
 ### `QR_PROP_USER_ID`
 
-Name of the property holding the user ID (participation code).
+Name of the property holding the user ID (participation code)
+
+### `QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS`
+
+Shows disabled questions in the questionnaire overview (tree view). Disabled questions are items whose dependencies (expected answers to other questions) are not fulfilled at the current time.
 
 ### `LANGUAGES`
 

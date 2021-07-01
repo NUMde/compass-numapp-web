@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS, ROUTES } from 'config';
+import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS, QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS, ROUTES } from 'config';
 import stores from 'stores';
 
 @Component({
@@ -25,7 +25,9 @@ export class QuestionnaireTreeComponent {
         <p class="u-infotext">{questionnaire.purpose ?? stores.i18n.t('questionnaire.infotext')}</p>
         <ol class="questionnaire-tree">
           {flattenedItems
-            .filter(({ isHidden }) => !isHidden)
+            .filter(
+              ({ isHidden, isEnabled }) => !isHidden && (QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS || isEnabled)
+            )
             .map(({ linkId, text, type, level, isAnswerable, firstChildQuestion }, index) => {
               return (
                 <li
