@@ -77,6 +77,7 @@ export default {
       open_date_picker: 'Kalender öffnen',
       year: 'Jahr',
     },
+    dropdown_no_results: 'Keine Ergebnisse',
     fetch_failed:
       'Der Fragebogen konnte leider nicht abgerufen werden. Bitte versuchen Sie es zu einem späteren Zeitpunkt erneut.',
     fetch_retry: 'Erneut versuchen',

@@ -31,6 +31,12 @@
   width: 24px;
 }
 
+.questionnaire-question__form
+  .questionnaire-question__single-choice-dropdown-input
+  [id^='autocomplete-option-'] {
+  cursor: pointer;
+}
+
 .questionnaire-question__description {
   margin: 0 0 calc(var(--padding-large) - var(--input-label-gap));
 }

@@ -24,27 +24,31 @@ export class QuestionnaireTreeComponent {
       <Card wide headline={questionnaire.title}>
         <p class="u-infotext">{questionnaire.purpose ?? stores.i18n.t('questionnaire.infotext')}</p>
         <ol class="questionnaire-tree">
-          {flattenedItems.map(({ linkId, text, type, level, isAnswerable, firstChildQuestion }, index) => {
-            return (
-              <li
-                class={`questionnaire-tree_item ${isAnswerable ? 'questionnaire-tree_item--clickable' : ''}`}
-                key={linkId ?? index}
-                style={{ paddingLeft: `calc(1rem * (${level + 1}))` }}
-                onClick={() =>
-                  isAnswerable &&
-                  this.switchDisplayModeHandler(firstChildQuestion ? firstChildQuestion.linkId : linkId)
-                }
-              >
-                <strong class="questionnaire-tree__title">
-                  {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS &&
-                    stores.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
-                      number: linkId,
-                    })}
-                </strong>
-                <span class="questionnaire-tree__text">{text}</span>
-              </li>
-            );
-          })}
+          {flattenedItems
+            .filter(({ isHidden }) => !isHidden)
+            .map(({ linkId, text, type, level, isAnswerable, firstChildQuestion }, index) => {
+              return (
+                <li
+                  class={`questionnaire-tree_item ${
+                    isAnswerable ? 'questionnaire-tree_item--clickable' : ''
+                  }`}
+                  key={linkId ?? index}
+                  style={{ paddingLeft: `calc(1rem * (${level + 1}))` }}
+                  onClick={() =>
+                    isAnswerable &&
+                    this.switchDisplayModeHandler(firstChildQuestion ? firstChildQuestion.linkId : linkId)
+                  }
+                >
+                  <strong class="questionnaire-tree__title">
+                    {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS &&
+                      stores.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
+                        number: linkId,
+                      })}
+                  </strong>
+                  <span class="questionnaire-tree__text">{text}</span>
+                </li>
+              );
+            })}
         </ol>
 
         <d4l-button

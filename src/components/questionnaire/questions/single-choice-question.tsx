@@ -7,7 +7,7 @@ export const SingleChoiceQuestion = ({ question, answer, onChange }: Questionnai
       {question.availableOptions.filter(Boolean).map((option, index) => (
         <p class="u-margin-bottom--small u-text-align--left" key={`${question.linkId}-option${index}`}>
           <d4l-radio
-            radio-id={`${question.linkId}-option${index}`}
+            radio-id={`question${question.linkId}-option${index}`}
             classes="o-radio--primary"
             name={question.linkId}
             value={String(option.value)}

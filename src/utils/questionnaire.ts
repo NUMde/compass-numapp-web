@@ -1,8 +1,16 @@
 import forge from 'node-forge';
 import { NUMQuestionnaireQuestion } from 'models/question';
-import { NumQuestionnaireExtensionConfig, NUMQuestionnaireFlattenedItem } from 'services/questionnaire';
+import {
+  NUMQuestionnaireSimpleValue,
+  NUMQuestionnaireExtensionConfig,
+  NUMQuestionnaireFlattenedItem,
+} from 'services/questionnaire';
 import { QuestionnaireStore } from 'stores/questionnaire';
-import { FHIR_SUPPORTED_EXTENSION_BASE_URLS, TRIGGER_RULES } from 'config';
+import {
+  FHIR_RESPONSE_TRANSFERRED_EXTENSION_KEYS,
+  FHIR_SUPPORTED_EXTENSION_BASE_URLS,
+  TRIGGER_RULES,
+} from 'config';
 
 export const flattenNestedItems = (
   items: fhir4.QuestionnaireItem[],
@@ -89,17 +97,25 @@ export const buildFHIRValue = (
   }
 };
 
-export const parseExtensions = (extensions: fhir4.Extension[]): NumQuestionnaireExtensionConfig => {
-  return extensions.reduce(
-    (config, extension) =>
-      Object.assign(config, {
-        [FHIR_SUPPORTED_EXTENSION_BASE_URLS.reduce(
-          (url, baseUrl) => url.replace(`${baseUrl}/`, ''),
-          extension.url
-        )]: extractValue(extension),
-      }),
-    {}
-  );
+export const parseExtension = (extension: fhir4.Extension): [string, NUMQuestionnaireSimpleValue] => [
+  FHIR_SUPPORTED_EXTENSION_BASE_URLS.reduce((url, baseUrl) => url.replace(`${baseUrl}/`, ''), extension.url),
+  extractValue(extension),
+];
+
+export const parseExtensions = (extensions: fhir4.Extension[]): NUMQuestionnaireExtensionConfig => {
+  return extensions.reduce((config, extension) => {
+    const [key, value] = parseExtension(extension);
+    return Object.assign(config, {
+      [key]: value,
+    });
+  }, {});
+};
+
+export const getTransferableExtensions = (item: NUMQuestionnaireFlattenedItem) => {
+  return (item.extension ?? []).filter((extension) => {
+    const [key] = parseExtension(extension);
+    return FHIR_RESPONSE_TRANSFERRED_EXTENSION_KEYS.includes(key);
+  });
 };
 
 /**
@@ -129,6 +145,8 @@ export const buildQuestionnaireResponseItem = (
     return null;
   }
 
+  const transferableExtensions = getTransferableExtensions(item);
+
   return {
     linkId,
     text: item.text,
@@ -141,6 +159,7 @@ export const buildQuestionnaireResponseItem = (
         }
       : {}),
     ...(item.definition ? { definition: item.definition } : {}),
+    ...(transferableExtensions.length ? { extension: transferableExtensions } : {}),
   };
 };
 

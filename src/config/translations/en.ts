@@ -74,6 +74,7 @@ export default {
       open_date_picker: 'Open a date picker',
       year: 'Year',
     },
+    dropdown_no_results: 'No results',
     fetch_failed: 'An error happened while retrieving the questionnaire. Please try again later.',
     fetch_retry: 'Retry',
     finish: 'Return to overview',

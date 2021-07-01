@@ -15,13 +15,13 @@ Web app built with Stencil
 - [WebComponents](https://www.webcomponents.org/)
 - [D4L Web Components](https://github.com/gesundheitscloud/hc-ui-storybook#readme)
 
-## Install
+## Installation
 
 ```sh
 npm ci
 ```
 
-🔧 Run `cp .env.example .env` and adjust the parameters in the `.env` file.
+🔧 Either run `cp .env.example .env` and adjust the parameters in the `.env` file or set/export the environment variables.
 
 ## Usage
 
