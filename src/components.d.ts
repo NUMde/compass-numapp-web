@@ -5,11 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { RouterHistory } from "@stencil/router";
+import { LocationSegments, RouterHistory } from "@stencil/router";
 import { NotificationSeverity } from "services/notifier";
 export namespace Components {
     interface AppRoot {
         "history": RouterHistory;
+        "location": LocationSegments;
     }
     interface NumContainerAuthenticate {
     }
@@ -143,6 +144,7 @@ declare global {
 declare namespace LocalJSX {
     interface AppRoot {
         "history"?: RouterHistory;
+        "location"?: LocationSegments;
     }
     interface NumContainerAuthenticate {
     }

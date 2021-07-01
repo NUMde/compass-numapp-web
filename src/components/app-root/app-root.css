@@ -4,7 +4,24 @@ main {
 }
 
 .app-header .app-header__custom-logo {
+  display: block;
   height: var(--logo-height);
+}
+
+.app-header .navigation-menu__card .card {
+  box-shadow: var(--shadow-xl);
+}
+
+.app-header .navigation-menu__footer {
+  display: block;
+}
+
+.app-header .navigation-menu__footer li:not(:first-of-type) {
+  margin-top: var(--padding-small);
+}
+
+.app-header .navigation-menu__footer li:not(:first-of-type) .navigation-menu__footer__link::before {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {

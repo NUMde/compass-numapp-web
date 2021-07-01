@@ -13,11 +13,11 @@ const storeBuilder = ({ notifier }: Services) => {
 
   notifier.observe({
     onNotification(notification: Notification) {
-      if ([...store.get('notifications')].pop()?.messageKey === notification.messageKey) {
+      if ([...store.get('notifications')].shift()?.messageKey === notification.messageKey) {
         return; // no need to show the same notification twice in a row
       }
 
-      store.set('notifications', [...store.get('notifications'), notification]);
+      store.set('notifications', [notification, ...store.get('notifications')]);
     },
   });
 
@@ -27,6 +27,9 @@ const storeBuilder = ({ notifier }: Services) => {
     },
     dismissCurrent() {
       store.set('notifications', store.get('notifications').slice(1));
+    },
+    dismissAll() {
+      this.current && store.set('notifications', []);
     },
   };
 };

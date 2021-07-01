@@ -4,7 +4,34 @@
 }
 
 .c-card__header--segmented {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
   border-bottom: 1px solid var(--color-neutral-lightest);
+  overflow: hidden;
+}
+
+.c-card__header-title {
+  flex: 1;
+}
+
+.c-card__header-title--arrowed {
+  padding: 0 calc((var(--space-s) * 2) + var(--space-xs) + 24px);
+  margin-left: calc(((var(--space-s) * 2) + var(--space-xs) + 24px) * (-1));
+  order: 1;
+}
+
+.c-card__header-back {
+  position: relative;
+  display: block;
+  padding: var(--space-xs);
+  margin: calc(var(--space-xs) * (-1));
+  margin-right: var(--space-s);
+  order: 0;
+}
+
+.c-card__header-back .icon {
+  color: var(--color-neutral);
 }
 
 @media screen and (min-width: 768px) {
