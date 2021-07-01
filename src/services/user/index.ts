@@ -1,11 +1,21 @@
-import { API_BASE_URL } from 'config';
+import { API_BASE_URL, API_USER_URI } from 'config';
 import stores from 'stores';
 import { get } from 'utils/fetch-client';
 import { IUserService, UserResponse } from './types';
 
 export default class User implements IUserService {
-  async fetch(id: string) {
-    const [data] = await get<UserResponse>({ url: `${API_BASE_URL}/participant/${id}` });
+  async fetch(id: string, retry = false) {
+    const [data] = await get<UserResponse>({ url: `${API_BASE_URL}/${API_USER_URI.replace(':id', id)}` });
+
+    if (data.subjectId !== id) {
+      throw new Error();
+    }
+
+    if (!retry && !data.current_questionnaire_id) {
+      // circumvent backend bug happening when new users are fetched for the first time
+      return await this.fetch(id, true);
+    }
+
     return data;
   }
 
@@ -22,10 +32,6 @@ export default class User implements IUserService {
 
     try {
       const userResponse = await this.fetch(userId);
-      if (userResponse.subjectId !== userId) {
-        throw new Error();
-      }
-
       stores.auth.certificate = userResponse.recipient_certificate_pem_string;
       stores.user.populateFromUserResponse(userResponse);
     } catch (_) {

@@ -161,3 +161,7 @@ An array of allowed FHIR extension base urls to be used in questionnaires
 
 An array of questionnaire item extension keys to be transferred over from the questionnaire item to the corresponding questionnaire response item.
 This provides a way to attach meta information to questionnaire (response) items. For more information, visit [the implementation guide](https://github.com/NUMde/compass-implementation-guide).
+
+### `API_QUESTIONNAIRE_URI`, `API_QUEUE_URI`, `API_USER_URI`
+
+Adaptable API endpoint uris

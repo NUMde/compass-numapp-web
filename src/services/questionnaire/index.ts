@@ -1,4 +1,4 @@
-import { API_BASE_URL, TRIGGER_KEY_BASIC } from 'config';
+import { API_BASE_URL, API_QUESTIONNAIRE_URI, API_QUEUE_URI, TRIGGER_KEY_BASIC } from 'config';
 import stores from 'stores';
 import { get, post } from 'utils/fetch-client';
 import { buildFlags, buildQuestionnaireResponse, generateEncryptedPayload } from 'utils/questionnaire';
@@ -7,7 +7,7 @@ import { IQuestionnaireService, NUMQuestionnaire } from './types';
 export default class QuestionnaireService implements IQuestionnaireService {
   async fetch(id: string) {
     const [data] = await get<NUMQuestionnaire>({
-      url: `${API_BASE_URL}/questionnaire/${id}`,
+      url: `${API_BASE_URL}/${API_QUESTIONNAIRE_URI.replace(':id', id)}`,
       authenticated: true,
     });
     return data;
@@ -33,7 +33,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     };
 
     await post({
-      url: `${API_BASE_URL}/queue?${new URLSearchParams(params).toString()}`,
+      url: `${API_BASE_URL}/${API_QUEUE_URI}?${new URLSearchParams(params).toString()}`,
       authenticated: true,
       body: this.generateEncryptedPayload(
         'questionnaire_response',
@@ -51,7 +51,7 @@ export default class QuestionnaireService implements IQuestionnaireService {
     };
 
     await post({
-      url: `${API_BASE_URL}/queue?${new URLSearchParams(params).toString()}`,
+      url: `${API_BASE_URL}/${API_QUEUE_URI}?${new URLSearchParams(params).toString()}`,
       authenticated: true,
       body: this.generateEncryptedPayload('report', {}),
     });

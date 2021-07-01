@@ -54,4 +54,7 @@ export interface NUMCustomAppConfig {
   ROUTES?: { [key: string]: string };
   FOOTER_LINKS?: NUMFooterLink[];
   NAVIGATION_ITEMS?: NUMNavigationItem[];
+  API_QUESTIONNAIRE_URI?: string;
+  API_QUEUE_URI?: string;
+  API_USER_URI?: string;
 }
