@@ -33,7 +33,7 @@ Here you can find configuration examples.
 
 ### `FEATURES_ENABLE_PERSISTENCE`
 
-Enable persisting the user language, session, unsubmitted questionnaire answers and more in localStorage
+Enables persisting the user language, session, unsubmitted questionnaire answers and more in localStorage
 
 ### `FEATURES_SHOW_LOGOUT`
 
@@ -82,7 +82,7 @@ Name of the property holding the user ID (participation code)
 
 ### `QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS`
 
-Show disabled questions in the questionnaire overview (tree view). Disabled questions are items whose dependencies (expected answers to other questions) are not fulfilled at the current time.
+Shows disabled questions in the questionnaire overview (tree view). Disabled questions are items whose dependencies (expected answers to other questions) are not fulfilled at the current time.
 
 ### `LANGUAGES`
 
