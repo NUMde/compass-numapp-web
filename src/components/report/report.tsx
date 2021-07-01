@@ -28,6 +28,10 @@ export class ReportComponent {
   render() {
     const { display } = this;
 
+    if (stores.user.isQuestionnaireAvailable) {
+      return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
+    }
+
     return (
       <Card headline={stores.i18n.t(`report.${display}.headline`)}>
         <p class="u-infotext">{stores.i18n.t(`report.${display}.infotext`)}</p>

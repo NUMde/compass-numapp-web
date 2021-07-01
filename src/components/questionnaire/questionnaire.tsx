@@ -20,15 +20,20 @@ export class QuestionnaireComponent {
 
   async componentWillLoad() {
     try {
-      stores.questionnaire.populateFromRequestResponse(
-        await services.questionnaire.fetch(stores.user.questionnaireId)
-      );
+      stores.user.isQuestionnaireAvailable &&
+        stores.questionnaire.populateFromRequestResponse(
+          await services.questionnaire.fetch(stores.user.questionnaireId)
+        );
     } catch (_) {
       services.notifier.showError('questionnaire.fetch_failed');
     }
   }
 
   render() {
+    if (!stores.user.isQuestionnaireAvailable) {
+      return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
+    }
+
     if (!stores.questionnaire.isPopulated) {
       return (
         <d4l-button
