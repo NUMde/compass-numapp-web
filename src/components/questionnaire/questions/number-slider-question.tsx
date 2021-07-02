@@ -14,7 +14,7 @@ export const NumberSliderQuestion = ({ question, answer, onChange }: Questionnai
       maxLabel={sliderMaxLabel}
       value={isNaN(value) ? null : value}
       step={sliderStepValue}
-      scale
+      scale={!sliderMinLabel && !sliderMaxLabel}
       handleChange={({ target }) => onChange(question.linkId, target.value)}
     />
   );
