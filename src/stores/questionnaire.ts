@@ -88,15 +88,11 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
     }
 
     get isCompleted() {
-      return this.questions
-        .filter(({ isEnabled }) => isEnabled)
-        .every(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
+      return this.questions.filter(({ isEnabled }) => isEnabled).every(({ isAnswered }) => isAnswered);
     }
 
     get isPristine() {
-      return !this.questions
-        .filter(({ isEnabled }) => isEnabled)
-        .some(({ isAnswered, answer }) => isAnswered && Array.isArray(answer));
+      return !this.questions.filter(({ isEnabled }) => isEnabled).some(({ isAnswered }) => isAnswered);
     }
   }
 
