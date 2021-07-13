@@ -13,6 +13,7 @@
 
 .c-card__header-title {
   flex: 1;
+  word-wrap: break-word;
 }
 
 .c-card__header-title--arrowed {

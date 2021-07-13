@@ -10,6 +10,7 @@
   justify-content: space-between;
   margin-top: var(--padding-medium);
   min-height: 200px;
+  overflow-x: hidden;
 }
 
 .questionnaire-question__form .questionnaire-question__number-slider-input,
@@ -39,6 +40,7 @@
 
 .questionnaire-question__description {
   margin: 0 0 calc(var(--padding-large) - var(--input-label-gap));
+  word-wrap: break-word;
 }
 
 .questionnaire-question__continue {
