@@ -1,18 +1,15 @@
 # Architecture
 
-The NUM Compass web app is part of the NUM Compass services architecture. For a high-level overview of the NUM Compass components, see the NUM Compass [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). In the architecture diagram, the NUM Compass web app has the same role as component `C200 (Mobile App)`. The web app and mobile app are interchangeable depending on your use case.
+The NUM Compass web app is part of the NUM COMPASS services architecture. For a high-level overview of the NUM COMPASS components, see the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). In the architecture diagram, the web app has the same role as component `C200 (Mobile App)`. The web app and mobile app are interchangeable depending on your use case.
 
 
 ## Stencil and web components
 
 The web app was built using [Stencil](https://stenciljs.com/). Stencil is a toolchain that generates reusable standard web components. For more about web components, see the [Mozilla developer documentation](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
 
-## Folder structure
+## Development-related folder structure
 
-The root folder contains:
-- Configuration files for installing and building the app
-- Linting configurations
-- The environment file
+The root folder contains configuration files for installing, developing, and building the app.
 
 ### `src`
 
@@ -40,11 +37,11 @@ For more about customization, see the [customization documentation](../customiza
 
 #### `src/global`
 
-Initializes the reusable [Data4Life](https://www.data4life.care) web components and the global styles and assets. You can override or extend both in the `src/custom` folder. For more about Data4Life web components, see the [src/components](#components) heading.
+Initializes the reusable [Data4Life](https://www.data4life.care) web components and the global styles and assets. You can override or extend those in the `src/custom` folder. For more about Data4Life web components, see the [src/components](#components) section.
 
 #### `src/models`
 
-Contains highly reusable code to make working with questionnaire questions easier.
+Contains models that make working with questionnaire questions easier.
 
 #### `src/services`
 

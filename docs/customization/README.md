@@ -10,44 +10,44 @@ This structure helps you fork the project and customize it while staying up to d
 
 ### `src/custom/config.ts`
 
-Add your config modifications in this file. For all available config values and their effects, see the [Configuration settings](#configuration) heading.
+Add your config modifications in this file. For all available config values and their effects, see the [Configuration settings](#configuration) section.
 
 ### `src/custom/styles.css`
 
-Add your css modifications in this file. If you overwrite a css property but your change isn’t applied, increase the selector specificity before using `!important`.
+Add your css modifications in this file. If you overwrite a css property but your change isn’t applied, increase the selector specificity rather than using `!important`.
 
 ⚠️ You can modify colors, spacings, font sizes, and so on, by changing the value of the underlying css variable. See the custom `styles.css` file for an example.
 
 
 ### `src/custom/assets`
 
-Add your own assets, like your logo, to this folder. To overwrite the core logo, [PWA manifest](https://web.dev/progressive-web-apps) or favicon, the asset file names must exactly match the directory structure in `src/global/assets`.
+Add your own assets, like your logo, to this folder. To overwrite the core logo, [PWA manifest](https://web.dev/progressive-web-apps) or favicon, the asset file names must exactly match the structure in `src/global/assets`.
 
 ### `src/custom/examples`
 
-Contains configuration examples.
+Contains configuration examples
 
 ##  <a name="configuration"></a>Configuration settings
 
 ### `FEATURES_ENABLE_PERSISTENCE`
 
-Enables persisting the user language, session, unsubmitted questionnaire answers, and more in localStorage.
+Enables persisting the user language, session, unsubmitted questionnaire answers, and more in localStorage
 
 ### `FEATURES_SHOW_LOGOUT`
 
-Renders a logout button.
+Renders a logout button
 
 ### `FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES`
 
-Allows you to select future dates in questionnaires with date questions.
+Allows the user to select future dates in questionnaires with date questions
 
 ### `FEATURES_QUESTIONNAIRE_SHOW_LINKIDS`
 
-Renders question numbers in the questionnaire.
+Renders question numbers in the questionnaire
 
 ### `FEATURES_QUESTIONNAIRE_SHOW_TREE`
 
-Shows the question overview (tree view) when opening the questionnaire.
+Shows the question overview (tree view) when opening the questionnaire
 
 ### `FEATURES_SUPPORT_QR_CODE`
 
@@ -63,7 +63,7 @@ You can modify the individual expected QR props by changing other configuration 
 
 ### `PERSISTENCE_SHOW_CHOICE`
 
-Renders the "remember me" checkbox.
+Renders the "remember me" checkbox
 
 ### `QR_APP_NAME`
 
@@ -72,11 +72,11 @@ When the embedded web app name in the QR code doesn't match the expectation, an 
 
 ### `QR_PROP_APP_NAME`
 
-The name of the property holding the app name.
+The name of the property holding the app name
 
 ### `QR_PROP_USER_ID`
 
-The name of the property holding the user ID (participation code).
+The name of the property holding the user ID (participation code)
 
 ### `QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS`
 
@@ -107,7 +107,7 @@ The `FALLBACK_LANGUAGE_CODE` is the app language that's set if conditions 1 to 3
 ### `TRIGGER_RULES`
 
 A set of triggers are sent to the backend next to the questionnaire response. These triggers determine which questionnaire to send the user next and when.
-We send the triggers next to the questionnaire response because the questionnaire response is encrypted, meaning the backend can’t read it. However, the backend needs some information to correctly select the next questionnaire.
+We send the triggers next to the questionnaire response because the questionnaire response is encrypted, meaning the backend can't read it. However, the backend needs some information to correctly select the next questionnaire.
 
 An example trigger rule:
 
@@ -127,7 +127,7 @@ This rule means: Set the `TRIGGER_KEY_BASIC` flag to `true` if one of the follow
 - or questionnaire item with `linkId` `1.10.1` is answered with boolean value `true`
 
 If none of the above criteria are met, the flag is submitted as `false`.
-For checkbox questions that have multiple answers, you can define multiple answers that must be selected to fulfill the trigger criteria (logical AND). To define multiple answers, add more values to the array.
+For checkbox questions that have multiple answers, you can define multiple answers that must be selected to fulfill the trigger criteria (logical AND). To do that, add more values to the array.
 
 ### `ROUTES`
 
@@ -141,7 +141,7 @@ An array of links rendered in the footer and navigation menu footer. See `src/co
 
 An array of items rendered in the navigation menu. See `src/config/navigation.ts` for usage examples.
 
-⚠️ For a list of available icons, see the [Data4Life icon library](https://storybook.d4l.io/?path=/story/components-icon).
+⚠️ For a list of available icons, visit the [Data4Life components library](https://storybook.d4l.io/?path=/story/components-icon).
 
 ### `TRIGGER_KEY_BASIC`
 
@@ -153,13 +153,13 @@ Name of the special trigger flag submitted to the backend. Change this only when
 
 ### `FHIR_SUPPORTED_EXTENSION_BASE_URLS`
 
-An array of permitted FHIR extension base URLs you can use in questionnaires.
+An array of parsed FHIR extension base URLs to be used in questionnaires
 
 ### `FHIR_RESPONSE_TRANSFERRED_EXTENSION_KEYS`
 
 An array of questionnaire item extension keys to be transferred from the questionnaire item to its corresponding questionnaire response item.
-This provides a way to attach meta information to questionnaire (response) items. For more information, see the [NUM Compass implementation guide](https://github.com/NUMde/compass-implementation-guide).
+This provides a way to attach meta information to questionnaire (response) items. For more information, visit the [NUM Compass implementation guide](https://github.com/NUMde/compass-implementation-guide).
 
 ### `API_QUESTIONNAIRE_URI`, `API_QUEUE_URI`, `API_USER_URI`
 
-Adaptable API endpoint URIs.
+Adaptable API endpoint URIs

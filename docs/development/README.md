@@ -7,13 +7,13 @@ The following guide explains how to install and build NUM Compass web app.
 Recent versions of the following available in your environment:
 - Node.js
 - npm
-- git version
+- git
 
-For minimum versions, see the engines section in [`package.json`](https://github.com/gesundheitscloud/compass-numapp-web/blob/main/package.json).
+For minimum versions, see the engines section in `package.json`.
 
-## Forking the compass-numapp-web repository
+## Forking the repository
 
-To develop your custom version of the app, we recommend that you fork the [COMPASS-NumApp-Web repository](https://github.com/gesundheitscloud/compass-numapp-web). If you fork the repository, you can create pull requests to contribute to the NUM Compass web app development.
+To develop your custom version of the app, we recommend that you fork the compass-numapp-web repository. By forking the repository, you can create pull requests to contribute to the NUM Compass web app development.
 
 ## Code formatting
 
@@ -21,7 +21,7 @@ We format our code using [Prettier](https://prettier.io/). You can find the code
 
 To check and automatically fix potential code formatting issues, use the `npm run code-format` command or add a prettier extension to your IDE.
 
-## Installing NUM Compass web app
+## Installation
 
 Run the following commands:
 
@@ -72,4 +72,4 @@ npm run code-format
 ```
 
 ## Customization
-After you’ve created your first NUM Compass web app build, see the [customization options documentation](./CUSTOMIZATION.md) for help customizing the app.
+After you create your first NUM Compass web app build, see the [customization options documentation](./CUSTOMIZATION.md) for help customizing the app.
