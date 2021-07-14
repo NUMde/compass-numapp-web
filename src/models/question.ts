@@ -146,14 +146,11 @@ export class NUMQuestionnaireQuestion {
 
   get isAnswered() {
     if (this.type === 'group') {
-      return this.firstChildQuestion?.isAnswered || false;
+      return this.children.filter(({ isEnabled }) => isEnabled).every(({ isAnswered }) => isAnswered);
     }
 
     const { previous } = this;
-    return (
-      (!previous || previous.isAnswered) &&
-      (!!this.answer || !this.required || !this.isEnabled || this.type === 'display')
-    );
+    return (!previous || previous.isAnswered) && !!this.answer;
   }
 
   get isAnswerable() {
