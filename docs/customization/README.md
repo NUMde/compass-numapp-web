@@ -1,6 +1,6 @@
-# Customizing NUM Compass web app
+# Customization
 
-The `src/custom` folder provides all you need to start customizing the web app. The folder contains an interface to modify the core configuration and styles, as well as assets. The folder also includes configuration examples.
+The `src/custom` folder provides all you need to start customizing the NUM Compass web app. The folder contains an interface to modify the core configuration and styles, as well as assets. The folder also includes configuration examples.
 
 ## Core versus custom config
 
