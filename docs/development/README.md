@@ -58,16 +58,16 @@ If `npm run build` runs without errors, the `www` directory includes a deployabl
 For advanced development, use the following commands:
 
 ```sh
-# Run the unit tests once.
+# Run the unit tests once
 npm test
 
-# Run a production build and analyze the generated bundle. This creates a stats.html file in the root directory.
+# Run a production build and analyze the generated bundle. This creates a stats.html file in the root directory
 npm run analyze
 
-# Run the unit tests and monitor file changes during development.
+# Run the unit tests and monitor file changes to automatically re-run the tests during development
 npm run test:watch
 
-# Automatically fix potential code formatting issues.
+# Automatically fix potential code formatting issues
 npm run code-format
 ```
 
