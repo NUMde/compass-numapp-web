@@ -1,9 +1,9 @@
-# NUM COMPASS Web App - Documentation
+# Documentation
 
-[Main Repository](https://github.com/NUMde/compass-numapp)
+Here you can find documentation for the following topics:
 
-The following documentation topics are available:
+- [Architecture](./architecture/README.md)
+- [Installation and development](./development/README.md)
+- [Customization](./customization/README.md)
 
-- [Architecture overview](./architecture/README.md)
-- [First steps and development commands](./development/README.md)
-- [Customization and theming](./customization/README.md)
+Go here for the main [NUM-App repository](https://github.com/NUMde/compass-numapp).

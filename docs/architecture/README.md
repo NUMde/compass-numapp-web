@@ -1,69 +1,66 @@
 # Architecture
 
-See the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture) for a high-level overview of the different components of NUM Compass.
-In the architecture diagram, this web client has the same role as component `C200 (Mobile App)`.
+The NUM COMPASS web app is part of the NUM COMPASS services architecture. For a high-level overview of the NUM COMPASS components, see the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). In the architecture diagram, the web app has the same role as component `C200 (Mobile App)`. The web app and mobile app are interchangeable depending on your use case.
 
-The mobile app and this web app are interchangeable depending on your use case. The web app supports all recent mobile and desktop browsers and
-devices. Officially, the most recent two major versions of Chrome, Firefox, Safari, Edge and Opera along with their mobile derivatives are supported.
-The underlying framework Stencil is also compatible with [older browser versions](https://stenciljs.com/docs/browser-support), so while not officially supported, the web client
-will also likely work with those older versions.
 
-## Stencil / Web Components
+## Stencil and web components
 
-[Stencil](https://stenciljs.com/) is a toolchain to generate reusable standard web components. Read more about web components [here](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+The web app was built using [Stencil](https://stenciljs.com/). Stencil is a toolchain that generates reusable standard web components. For more about web components, see the [Mozilla developer documentation](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
 
 ## Development-related folder structure
 
-The root folder contains configuration files required for installation and building of the application, along with linting configurations and the environment file.
+The root folder contains configuration files for installing, developing, and building the app.
 
 ### `src`
 
-All files relevant for development are in this folder.
+Contains all files relevant for development.
 
-#### `src/components`
+#### <a name="components"></a> `src/components`
 
-Holds all web components along with their displaying logic. The main component is `app-root`, which contains the wrapper and routing logic for all view components. It also renders the outer layout and initializes the authentication logic.
+Contains all web components and their displaying logic. The main component is `app-root`, which contains the wrapper and routing logic for all view components. `app-root` also renders the outer layout and initializes the authentication logic.
 
-⚠️ Additionally to these components, there are also references to components starting with a `d4l-` prefix. These come from [Data4Life](https://www.data4life.care)'s core components library, a collection of reusable components that are used across all Data4Life-developed apps.
-For more information, visit the module's [npm page](https://www.npmjs.com/package/@d4l/web-components-library) and the [storybook site](https://storybook.d4l.io) which contains a list of all components and their properties / configuration options.
+⚠️ As well as NUM COMPASS components, `src/components` includes references to components starting with a d4l- prefix. Components with a d4l- prefix come from [Data4Life](https://www.data4life.care)'s core components library, a collection of reusable components that all Data4Life-developed apps use.
+For more information, visit the module's [npm page](https://www.npmjs.com/package/@d4l/web-components-library) and the [storybook site](https://storybook.d4l.io). The storybook site contains a complete list of components and their properties and configuration options.
 
 #### `src/config`
 
-Holds the core configuration and translations. The configuration provides an easy way to
-change the behavior of the app, e.g. by switching on or off certain features.
-Individual values can be overridden in the `src/custom` folder. See the [customization documentation](../customization/README.md) for more information.
+Contains the core configuration and translations. Use the configuration to change the behavior of the app. You can override individual values in the `src/custom` folder.
 
 #### `src/custom`
 
-Provides a fork-friendly way to overwrite individual configuration options, theme the app (change assets like the logo or change colors and much more) or change the translations.
-For more information, see the [customization documentation](../customization/README.md).
+Allows you to:
+- Overwrite individual configuration options
+- Theme the app, including changing assets like the logo or colors
+- Change the translations
+
+For more about customization, see the [customization documentation](../customization/README.md).
 
 #### `src/global`
 
-Initializes the reusable [Data4Life](https://www.data4life.care) web components (see note above in the `src/components` documentation) as well as the global styles and assets (both can be easily overridden or extended in the `src/custom` folder).
+Initializes the reusable [Data4Life](https://www.data4life.care) web components and the global styles and assets. You can override or extend those in the `src/custom` folder. For more about Data4Life web components, see the [src/components](#components) section.
 
 #### `src/models`
 
-Contains the models which allow an easy way to work e.g. with questionnaire questions.
+Contains models that make working with questionnaire questions easier.
 
 #### `src/services`
 
-Contains services to be called by the views and stores. This is also where the calls to the backend are made.
+Contains services to be called by the views and stores. Calls to the backend are also made in `src/services`.
 
 #### `src/stores`
 
-Contains stores for the state that is reused across multiple components or persisted. There are temporary and persisted (localStorage) stores.
-Components also have their own local state which is used when it's not relevant for other components.
-Persisted stores can also be temporary when persistence is disabled in the config.
+Contains stores for the state, which is reused or persisted across multiple components. There are temporary and persisted (localStorage) stores.
+Components also have their own local state, which is used when the state isn't relevant for other components.
+If persistence is disabled in the config, persisted stores act like temporary stores. This means the stores keep the state in the runtime memory instead of persisting it.
 
 #### `src/types`
 
-Holds TypeScript types that are used in multiple places. The individual services, stores etc. can also contain and export their own local types.
+Contains TypeScript types that are used in multiple places. The individual services, stores, and so on, can also contain and export their own local types.
 
 #### `src/utils`
 
-Contains utility functions such as the questionnaire utils to build the questionnaire response or encrypt it.
+Contains utility functions, such as the questionnaire utils, to build or encrypt the questionnaire response.
 
 ### `www`
 
-Contains the build output. This contents of this folder can be uploaded when deploying the application.
+Contains the build output. The `www` folder's content can be uploaded when deploying the application.
