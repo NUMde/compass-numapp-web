@@ -1,6 +1,7 @@
 # Customization
 
-The `src/custom` folder provides all you need to start customizing the NUM Compass web app. The folder contains an interface to modify the core configuration and styles, as well as assets. The folder also includes configuration examples.
+The `src/custom` folder provides all you need to start customizing the NUM COMPASS
+web app. The folder contains an interface to modify the core configuration and styles, as well as assets. The folder also includes configuration examples.
 
 ## Core versus custom config
 
@@ -158,7 +159,7 @@ An array of parsed FHIR extension base URLs to be used in questionnaires
 ### `FHIR_RESPONSE_TRANSFERRED_EXTENSION_KEYS`
 
 An array of questionnaire item extension keys to be transferred from the questionnaire item to its corresponding questionnaire response item.
-This provides a way to attach meta information to questionnaire (response) items. For more information, visit the [NUM Compass implementation guide](https://github.com/NUMde/compass-implementation-guide).
+This provides a way to attach meta information to questionnaire (response) items. For more information, visit the [NUM COMPASS implementation guide](https://github.com/NUMde/compass-implementation-guide).
 
 ### `API_QUESTIONNAIRE_URI`, `API_QUEUE_URI`, `API_USER_URI`
 

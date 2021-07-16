@@ -1,6 +1,6 @@
-# NUM Compass web app
+# NUM COMPASS web app
 
-NUM Compass web app is an open source app that allows users to answer digital questionnaires for studies. The app is part of the [COMPASS](https://num-compass.science/en/compass/profile/) (Coordination on mobile pandemic apps best practice and solution sharing) project, which aims to improve how apps are used to cope with pandemics.
+NUM COMPASS web app is an open source app that allows users to answer digital questionnaires for studies. The app is part of the [COMPASS](https://num-compass.science/en/compass/profile/) (Coordination on mobile pandemic apps best practice and solution sharing) project, which aims to improve how apps are used to cope with pandemics.
 
 The app displays questionnaires based on [FHIR resources](https://www.hl7.org/fhir/questionnaire.html). Questionnaire responses are end-to-end encrypted, which makes them useful for research, as the respondents' identities are protected.
 

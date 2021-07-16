@@ -1,6 +1,6 @@
 # Architecture
 
-The NUM Compass web app is part of the NUM COMPASS services architecture. For a high-level overview of the NUM COMPASS components, see the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). In the architecture diagram, the web app has the same role as component `C200 (Mobile App)`. The web app and mobile app are interchangeable depending on your use case.
+The NUM COMPASS web app is part of the NUM COMPASS services architecture. For a high-level overview of the NUM COMPASS components, see the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). In the architecture diagram, the web app has the same role as component `C200 (Mobile App)`. The web app and mobile app are interchangeable depending on your use case.
 
 
 ## Stencil and web components
@@ -19,7 +19,7 @@ Contains all files relevant for development.
 
 Contains all web components and their displaying logic. The main component is `app-root`, which contains the wrapper and routing logic for all view components. `app-root` also renders the outer layout and initializes the authentication logic.
 
-⚠️ As well as NUM Compass components, `src/components` includes references to components starting with a d4l- prefix. Components with a d4l- prefix come from [Data4Life](https://www.data4life.care)'s core components library, a collection of reusable components that all Data4Life-developed apps use.
+⚠️ As well as NUM COMPASS components, `src/components` includes references to components starting with a d4l- prefix. Components with a d4l- prefix come from [Data4Life](https://www.data4life.care)'s core components library, a collection of reusable components that all Data4Life-developed apps use.
 For more information, visit the module's [npm page](https://www.npmjs.com/package/@d4l/web-components-library) and the [storybook site](https://storybook.d4l.io). The storybook site contains a complete list of components and their properties and configuration options.
 
 #### `src/config`

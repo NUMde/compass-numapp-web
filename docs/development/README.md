@@ -1,6 +1,6 @@
 # Installation and development
 
-The following guide explains how to install and build NUM Compass web app.
+The following guide explains how to install and build NUM COMPASS web app.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ For minimum versions, see the engines section in `package.json`.
 
 ## Forking the repository
 
-To develop your custom version of the app, we recommend that you fork the compass-numapp-web repository. By forking the repository, you can create pull requests to contribute to the NUM Compass web app development.
+To develop your custom version of the app, we recommend that you fork the compass-numapp-web repository. By forking the repository, you can create pull requests to contribute to the NUM COMPASS web app development.
 
 ## Code formatting
 
@@ -72,4 +72,4 @@ npm run code-format
 ```
 
 ## Customization
-After you create your first NUM Compass web app build, see the [customization options documentation](./CUSTOMIZATION.md) for help customizing the app.
+After you create your first NUM COMPASS web app build, see the [customization options documentation](./CUSTOMIZATION.md) for help customizing the app.
