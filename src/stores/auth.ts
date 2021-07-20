@@ -15,6 +15,10 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
   class Actions {
     #certificate?: string;
 
+    constructor() {
+      this.expireSession = this.expireSession.bind(this);
+    }
+
     get accessToken() {
       return store.get('accessToken');
     }

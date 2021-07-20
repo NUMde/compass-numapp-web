@@ -1,7 +1,14 @@
-import { Component, Fragment, h, Listen, Prop, State, Watch } from '@stencil/core';
+import { Component, h, Host, Listen, Prop, State, Watch } from '@stencil/core';
 import { injectHistory, LocationSegments, RouterHistory } from '@stencil/router';
 import AuthenticatedRoute from 'components/authenticated-route/authenticated-route';
-import { LANGUAGES, NAVIGATION_ITEMS, FOOTER_LINKS, ROUTES } from 'config';
+import {
+  LANGUAGES,
+  NAVIGATION_ITEMS,
+  FOOTER_LINKS,
+  ROUTES,
+  FEATURES_AUTO_LOGOUT,
+  AUTO_LOGOUT_COUNTDOWN,
+} from 'config';
 import services from 'services';
 import stores from 'stores';
 import { IS_MOBILE, IS_TOUCH } from 'utils/device';
@@ -63,6 +70,20 @@ export class AppRoot {
     return this.isAuthenticated ? ROUTES.DASHBOARD : ROUTES.ROOT;
   }
 
+  resetInactivityTimers() {
+    services.inactivity.resetAllInactivityTimers();
+  }
+
+  updateInactivityTimers() {
+    if (!FEATURES_AUTO_LOGOUT) {
+      return;
+    }
+
+    this.isAuthenticated &&
+      services.inactivity.startInactivityTimer(AUTO_LOGOUT_COUNTDOWN, stores.auth.expireSession);
+    !this.isAuthenticated && services.inactivity.stopInactivityTimer(stores.auth.expireSession);
+  }
+
   async componentWillLoad() {
     const htmlClasses = document.querySelector('html').classList;
     htmlClasses.add(IS_TOUCH ? 'device--touch' : 'device--pointer');
@@ -72,18 +93,25 @@ export class AppRoot {
 
     this.isAuthenticated = stores.auth.isAuthenticated;
     stores.auth.onStateChange((isAuthenticated: boolean) => {
-      if (this.isAuthenticated !== isAuthenticated) {
-        this.isAuthenticated = isAuthenticated;
-        this.history.push(this.defaultRoute, {});
+      if (this.isAuthenticated === isAuthenticated) {
+        return;
       }
+
+      this.isAuthenticated = isAuthenticated;
+      this.history.push(this.defaultRoute, {});
+      this.updateInactivityTimers();
     });
   }
 
   render() {
-    const { footerLinks, navigationItems } = this;
+    const { footerLinks, navigationItems, resetInactivityTimers } = this;
 
     return (
-      <Fragment>
+      <Host
+        onMouseDown={resetInactivityTimers}
+        onTouchStart={resetInactivityTimers}
+        onKeyDown={resetInactivityTimers}
+      >
         <num-notifications />
 
         <d4l-app-header
@@ -141,7 +169,7 @@ export class AppRoot {
             {stores.i18n.t('navigation.copyright_note', { year: new Date().getFullYear() })}
           </span>
         </d4l-app-footer>
-      </Fragment>
+      </Host>
     );
   }
 }
