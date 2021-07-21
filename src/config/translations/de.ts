@@ -55,6 +55,7 @@ export default {
     logo: 'NUM compass web app',
     logout: 'Abmelden',
     privacy_policy: 'Datenschutzerklärung',
+    session_expired: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an, um fortzufahren.',
     terms_of_use: 'Nutzungsbedingungen',
     title: 'Menü',
   },

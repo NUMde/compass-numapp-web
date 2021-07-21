@@ -52,6 +52,7 @@ export default {
     logo: 'NUM compass web app',
     logout: 'Logout',
     privacy_policy: 'Privacy policy',
+    session_expired: 'Your session expired. Please log in again to proceed.',
     terms_of_use: 'Terms of use',
     title: 'Menu',
   },
