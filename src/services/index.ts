@@ -1,3 +1,4 @@
+import InactivityService from './inactivity';
 import NotifierService from './notifier';
 import PersistorService from './persistor';
 import QuestionnaireService from './questionnaire';
@@ -18,6 +19,7 @@ import { STORAGE } from 'utils/storage';
  */
 
 const services: Services = {
+  inactivity: new InactivityService(),
   notifier: new NotifierService(),
   optionalPersistor: new PersistorService(STORAGE),
   persistor: new PersistorService(STORAGE),

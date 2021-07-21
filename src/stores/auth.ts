@@ -7,13 +7,17 @@ interface StateType {
   accessToken: string;
 }
 
-const storeBuilder = ({ optionalPersistor }: Services) => {
+const storeBuilder = ({ optionalPersistor, notifier }: Services) => {
   const store = createPersistedStore<StateType>(optionalPersistor, 'auth', {
     accessToken: null,
   });
 
   class Actions {
     #certificate?: string;
+
+    constructor() {
+      this.expireSession = this.expireSession.bind(this);
+    }
 
     get accessToken() {
       return store.get('accessToken');
@@ -45,6 +49,7 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
     }
 
     expireSession() {
+      this.isAuthenticated && notifier.showWarning('navigation.session_expired');
       this.logout();
     }
 

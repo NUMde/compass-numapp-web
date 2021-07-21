@@ -57,7 +57,7 @@ export const request = async <T = unknown>(args: FetchClientArguments): Promise<
   }
 
   if (response.status === 401) {
-    await stores.auth.expireSession();
+    stores.auth.expireSession();
   }
 
   if (response.status === 204) {

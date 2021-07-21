@@ -19,7 +19,6 @@ Add your css modifications in this file. If you overwrite a css property but you
 
 ⚠️ You can modify colors, spacings, font sizes, and so on, by changing the value of the underlying css variable. See the custom `styles.css` file for an example.
 
-
 ### `src/custom/assets`
 
 Add your own assets, like your logo, to this folder. To overwrite the core logo, [PWA manifest](https://web.dev/progressive-web-apps) or favicon, the asset file names must exactly match the structure in `src/global/assets`.
@@ -28,11 +27,16 @@ Add your own assets, like your logo, to this folder. To overwrite the core logo,
 
 Contains configuration examples
 
-##  <a name="configuration"></a>Configuration settings
+## <a name="configuration"></a>Configuration settings
 
 ### `FEATURES_ENABLE_PERSISTENCE`
 
 Enables persisting the user language, session, unsubmitted questionnaire answers, and more in localStorage
+
+### `FEATURES_AUTO_LOGOUT`
+
+Expires the session automatically after a period of inactivity defined with the [`AUTO_LOGOUT_COUNTDOWN`](#autologoutcountdown) configuration setting.
+The countdown is reset every time the user interacts with the page (clicks, taps or types).
 
 ### `FEATURES_SHOW_LOGOUT`
 
@@ -60,28 +64,45 @@ Enables an option for scanning a QR code to log in. The QA code must resolve to 
 { "AppIdentifier": "COMPASS", "SubjectId": "my-participation-code" }
 ```
 
-You can modify the individual expected QR props by changing other configuration settings, like [`QR_APP_NAME`](#qrappname), [`QR_PROP_APP_NAME`](#qrpropappname), and [`QR_PROP_USER_ID`](#qrpropuserid).
+You can modify the individual expected QR props by changing other configuration settings:
+[`QR_APP_NAME`](#qrappname), [`QR_PROP_APP_NAME`](#qrpropappname), and [`QR_PROP_USER_ID`](#qrpropuserid).
 
 ### `PERSISTENCE_SHOW_CHOICE`
 
 Renders the "remember me" checkbox
+
+ℹ️ Depends on [`FEATURES_ENABLE_PERSISTENCE`](#featuresenablepersistence)
+
+### `AUTO_LOGOUT_COUNTDOWN`
+
+The period of inactivity in milliseconds after which the user is automatically logged out
+
+ℹ️ Depends on [`FEATURES_AUTO_LOGOUT`](#featuresautologout)
 
 ### `QR_APP_NAME`
 
 The name of the web app as it's expected to be embedded into the QR code. This helps avoid collisions with other app QR codes.
 When the embedded web app name in the QR code doesn't match the expectation, an error is displayed stating that the scanned QR code belongs to another app.
 
+ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#featuressupportqrcode)
+
 ### `QR_PROP_APP_NAME`
 
 The name of the property holding the app name
+
+ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#featuressupportqrcode)
 
 ### `QR_PROP_USER_ID`
 
 The name of the property holding the user ID (participation code)
 
+ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#featuressupportqrcode)
+
 ### `QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS`
 
 Shows disabled questions in the questionnaire overview (tree view). Disabled questions are items whose dependencies, which are expected answers to other questions, aren't fulfilled at the current time.
+
+ℹ️ Depends on [`FEATURES_QUESTIONNAIRE_SHOW_TREE`](#featuresquestionnaireshowtree)
 
 ### `LANGUAGES`
 
@@ -103,7 +124,6 @@ When the app is opened, the app language is determined by the following conditio
 5. `else` the first available language is chosen.
 
 The `FALLBACK_LANGUAGE_CODE` is the app language that's set if conditions 1 to 3 aren't met. For example, the fallback language is chosen for the first time visitor whose browser language isn't available as the app language.
-
 
 ### `TRIGGER_RULES`
 

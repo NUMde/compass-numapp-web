@@ -32,11 +32,13 @@ export interface NUMTriggerRule {
 export interface NUMCustomAppConfig {
   FEATURES_ENABLE_PERSISTENCE?: boolean;
   FEATURES_SHOW_LOGOUT?: boolean;
+  FEATURES_AUTO_LOGOUT?: boolean;
   FEATURES_SUPPORT_QR_CODE?: boolean;
   FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES?: boolean;
   FEATURES_QUESTIONNAIRE_SHOW_LINKIDS?: boolean;
   FEATURES_QUESTIONNAIRE_SHOW_TREE?: boolean;
   PERSISTENCE_SHOW_CHOICE?: boolean;
+  AUTO_LOGOUT_COUNTDOWN?: number;
   QR_APP_NAME?: string;
   QR_PROP_APP_NAME?: string;
   QR_PROP_USER_ID?: string;
