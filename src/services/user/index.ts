@@ -11,8 +11,9 @@ export default class User implements IUserService {
       throw new Error();
     }
 
-    if (!retry && !data.current_questionnaire_id) {
+    if (!retry && (!data.current_questionnaire_id || new Date() > new Date(data.due_date))) {
       // circumvent backend bug happening when new users are fetched for the first time
+      // and another one happening when the backend serves an obsolete questionnaire
       return await this.fetch(id, true);
     }
 
