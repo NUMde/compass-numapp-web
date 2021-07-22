@@ -1,6 +1,6 @@
 # Architecture
 
-The NUM COMPASS web app is part of the NUM COMPASS services architecture. For a high-level overview of the NUM COMPASS components, see the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). In the architecture diagram, the web app has the same role as component `C200 (Mobile App)`. The web app and mobile app are interchangeable depending on your use case.
+The NUM COMPASS web app is part of the NUM COMPASS services architecture. For a high-level overview of the NUM COMPASS components, see the project's [architecture documentation](https://github.com/NUMde/compass-numapp/tree/main/docs/architecture). The web app and mobile app are interchangeable depending on your use case.
 
 
 ## Stencil and web components

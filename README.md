@@ -1,27 +1,23 @@
 # NUM COMPASS web app
 
+[![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat)](https://gitmoji.dev)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Open issues](https://img.shields.io/github/issues/NUMde/compass-numapp-web?style=flat)](https://github.com/NUMde/compass-numapp-web/issues)
+
 NUM COMPASS web app is an open source app that allows users to answer digital questionnaires for studies. The app is part of the [COMPASS](https://num-compass.science/en/compass/profile/) (Coordination on mobile pandemic apps best practice and solution sharing) project, which aims to improve how apps are used to cope with pandemics.
 
 The app displays questionnaires based on [FHIR resources](https://www.hl7.org/fhir/questionnaire.html). Questionnaire responses are end-to-end encrypted, which makes them useful for research, as the respondents' identities are protected.
 
 This repository includes everything you need to set up the app and customize it to suit your needs. Get started with the guide below or see the `docs` folder for detailed setup and development instructions.
 
-## Quick start guide
-
-<p>
-  <a href="https://gitmoji.dev">
-    <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
-  </a>
-</p>
-
 ## Technologies
 
 - [Stencil](https://stenciljs.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [WebComponents](https://www.webcomponents.org/)
-- [D4L Web Components](https://github.com/gesundheitscloud/hc-ui-storybook#readme)
 
-## Requirements
+## Browser support
 
 The app supports recent mobile and desktop devices, and the two latest major versions of the following browsers:
 
@@ -32,6 +28,16 @@ The app supports recent mobile and desktop devices, and the two latest major ver
 - Opera
 
 Stencil, the toolchain the web app uses, is compatible with [older browser versions](https://stenciljs.com/docs/browser-support). The web app may work with older browser versions, though they aren't officially supported.
+
+## Development requirements
+
+Recent versions of the following available in your environment:
+
+- Node.js
+- npm
+- git
+
+For minimum versions, see the engines section in `package.json`.
 
 ## Code formatting
 
