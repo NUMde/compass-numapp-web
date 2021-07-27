@@ -75,4 +75,4 @@ npm run code-format
 
 ## Customization
 
-After you create your first NUM COMPASS web app build, see the [customization options documentation](./customization/README.md) for help customizing the app.
+After you create your first NUM COMPASS web app build, see the [customization options documentation](../customization/README.md) for help customizing the app.
