@@ -35,7 +35,7 @@ Enables persisting the user language, session, unsubmitted questionnaire answers
 
 ### `FEATURES_AUTO_LOGOUT`
 
-Expires the session automatically after a period of inactivity defined with the [`AUTO_LOGOUT_COUNTDOWN`](#autologoutcountdown) configuration setting.
+Expires the session automatically after a period of inactivity defined with the [`AUTO_LOGOUT_COUNTDOWN`](#auto_logout_countdown) configuration setting.
 The countdown is reset every time the user interacts with the page (clicks, taps or types).
 
 ### `FEATURES_SHOW_LOGOUT`
@@ -65,44 +65,44 @@ Enables an option for scanning a QR code to log in. The QA code must resolve to 
 ```
 
 You can modify the individual expected QR props by changing other configuration settings:
-[`QR_APP_NAME`](#qrappname), [`QR_PROP_APP_NAME`](#qrpropappname), and [`QR_PROP_USER_ID`](#qrpropuserid).
+[`QR_APP_NAME`](#qr_app_name), [`QR_PROP_APP_NAME`](#qr_prop_app_name), and [`QR_PROP_USER_ID`](#qr_prop_user_id).
 
 ### `PERSISTENCE_SHOW_CHOICE`
 
 Renders the "remember me" checkbox
 
-ℹ️ Depends on [`FEATURES_ENABLE_PERSISTENCE`](#featuresenablepersistence)
+ℹ️ Depends on [`FEATURES_ENABLE_PERSISTENCE`](#features_enable_persistence)
 
 ### `AUTO_LOGOUT_COUNTDOWN`
 
 The period of inactivity in milliseconds after which the user is automatically logged out
 
-ℹ️ Depends on [`FEATURES_AUTO_LOGOUT`](#featuresautologout)
+ℹ️ Depends on [`FEATURES_AUTO_LOGOUT`](#features_auto_logout)
 
 ### `QR_APP_NAME`
 
 The name of the web app as it's expected to be embedded into the QR code. This helps avoid collisions with other app QR codes.
 When the embedded web app name in the QR code doesn't match the expectation, an error is displayed stating that the scanned QR code belongs to another app.
 
-ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#featuressupportqrcode)
+ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#features_support_qr_code)
 
 ### `QR_PROP_APP_NAME`
 
 The name of the property holding the app name
 
-ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#featuressupportqrcode)
+ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#features_support_qr_code)
 
 ### `QR_PROP_USER_ID`
 
 The name of the property holding the user ID (participation code)
 
-ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#featuressupportqrcode)
+ℹ️ Depends on [`FEATURES_SUPPORT_QR_CODE`](#features_support_qr_code)
 
 ### `QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS`
 
 Shows disabled questions in the questionnaire overview (tree view). Disabled questions are items whose dependencies, which are expected answers to other questions, aren't fulfilled at the current time.
 
-ℹ️ Depends on [`FEATURES_QUESTIONNAIRE_SHOW_TREE`](#featuresquestionnaireshowtree)
+ℹ️ Depends on [`FEATURES_QUESTIONNAIRE_SHOW_TREE`](#features_questionnaire_show_tree)
 
 ### `LANGUAGES`
 

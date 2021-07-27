@@ -5,6 +5,7 @@ The following guide explains how to install and build NUM COMPASS web app.
 ## Requirements
 
 Recent versions of the following available in your environment:
+
 - Node.js
 - npm
 - git
@@ -29,6 +30,7 @@ Run the following commands:
 npm ci
 cp .env.example .env
 ```
+
 Adjust the parameters in the newly copied `.env` file to suit your needs.
 
 ⚠️ In a non-local environment, you can skip this step and directly declare the environment variables instead of creating the `.env` file.
@@ -72,4 +74,5 @@ npm run code-format
 ```
 
 ## Customization
-After you create your first NUM COMPASS web app build, see the [customization options documentation](./CUSTOMIZATION.md) for help customizing the app.
+
+After you create your first NUM COMPASS web app build, see the [customization options documentation](./customization/README.md) for help customizing the app.
