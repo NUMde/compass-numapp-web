@@ -4,6 +4,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Open issues](https://img.shields.io/github/issues/NUMde/compass-numapp-web?style=flat)](https://github.com/NUMde/compass-numapp-web/issues)
+[![Code quality: js/ts](https://img.shields.io/lgtm/grade/javascript/g/NUMde/compass-numapp-web.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/NUMde/compass-numapp-web/context:javascript)
 
 NUM COMPASS web app is an open source app that allows users to answer digital questionnaires for studies. The app is part of the [COMPASS](https://num-compass.science/en/compass/profile/) (Coordination on mobile pandemic apps best practice and solution sharing) project, which aims to improve how apps are used to cope with pandemics.
 
