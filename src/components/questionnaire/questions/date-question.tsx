@@ -43,6 +43,7 @@ export const DateQuestion = ({ question, answer, onChange }: QuestionnaireQuesti
       futureAllowed={FEATURES_QUESTIONNAIRE_ALLOW_FUTURE_DATES}
       min={minDate}
       max={maxDate}
+      required={question.required ?? false}
       handleChange={(date: string) => onChange(question.linkId, date)}
       enableDatePicker
       datePickerText={i18n.t('questionnaire.date_input.open_date_picker')}
