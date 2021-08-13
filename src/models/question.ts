@@ -61,6 +61,11 @@ export class NUMQuestionnaireQuestion {
       return false;
     }
 
+    const isParentEnabled = (this.parent as NUMQuestionnaireQuestion).isEnabled;
+    if (typeof isParentEnabled === 'boolean' && !isParentEnabled) {
+      return false;
+    }
+
     const fn = this.enableBehavior === 'any' ? 'some' : 'every';
     return this.dependencies[fn](({ value, questionId }) => {
       const answer = this.answers.get(questionId);
