@@ -8,7 +8,9 @@
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
-  margin-top: var(--padding-medium);
+  margin: calc(var(--padding-small) * (-1));
+  margin-top: calc(var(--padding-medium) - var(--padding-small));
+  padding: var(--padding-small);
   min-height: 200px;
   overflow-x: hidden;
 }
