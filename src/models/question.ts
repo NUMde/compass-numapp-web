@@ -5,6 +5,8 @@ export class NUMQuestionnaireQuestion {
   readonly parent: fhir4.Questionnaire | fhir4.QuestionnaireItem;
   readonly level: number;
 
+  #isAnsweredCache?: boolean = null;
+
   linkId: string;
   type: fhir4.QuestionnaireItem['type'];
 
@@ -144,13 +146,23 @@ export class NUMQuestionnaireQuestion {
     return this.config.itemControl === 'drop-down';
   }
 
+  resetIsAnsweredCache() {
+    this.#isAnsweredCache = null;
+  }
+
   get isAnswered() {
     if (this.type === 'group') {
       return this.children.filter(({ isEnabled }) => isEnabled).every(({ isAnswered }) => isAnswered);
     }
 
+    if (typeof this.#isAnsweredCache === 'boolean') {
+      return this.#isAnsweredCache;
+    }
+
     const { previous } = this;
-    return (!previous || previous.isAnswered) && !!this.answer;
+    const isAnswered = (!previous || previous.isAnswered) && !!this.answer;
+    this.#isAnsweredCache = isAnswered;
+    return isAnswered;
   }
 
   get isAnswerable() {

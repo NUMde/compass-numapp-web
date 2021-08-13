@@ -38,9 +38,10 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
 
   class Actions {
     constructor() {
-      answersStore.on('set', () =>
-        this.isPristine ? optionalPersistence.removeLeaveGuard() : optionalPersistence.addLeaveGuard()
-      );
+      answersStore.on('set', () => {
+        this.isPristine ? optionalPersistence.removeLeaveGuard() : optionalPersistence.addLeaveGuard();
+        this.resetIsAnsweredCache();
+      });
       answersStore.on('reset', () => optionalPersistence.removeLeaveGuard());
     }
 
@@ -48,6 +49,10 @@ const storeBuilder = ({ optionalPersistor }: Services) => {
       answersStore.reset();
       persistedMetaStore.reset();
       store.reset();
+    }
+
+    resetIsAnsweredCache() {
+      this.flattenedItems?.forEach((item) => item.resetIsAnsweredCache());
     }
 
     populateFromRequestResponse(response: NUMQuestionnaire) {
