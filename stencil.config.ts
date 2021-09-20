@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import visualizer from 'rollup-plugin-visualizer';
 import { sass } from '@stencil/sass';
 import dotenv from 'dotenv';
@@ -25,14 +26,17 @@ export const config: Config = {
       ],
     },
   ],
-  nodeResolve: {
-    preferBuiltins: false,
-    browser: true,
-    jsnext: true,
-    main: false,
-    module: true,
-  },
   plugins: [sass(), env.npm_lifecycle_event === 'analyze' ? visualizer() : null],
+  rollupPlugins: {
+    before: [
+      nodeResolve({
+        preferBuiltins: false,
+        browser: true,
+        modulesOnly: true,
+        mainFields: [],
+      }),
+    ],
+  },
   testing: {
     browserArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
     moduleDirectories: ['node_modules', 'src'],
