@@ -5,7 +5,7 @@ import buildOptionalPersistenceStore from './optional-persistence';
 import buildUserStore from './user';
 import buildQuestionnaireStore from './questionnaire';
 
-import services from '../services';
+import services from 'services';
 
 const stores = {
   auth: buildAuthStore(services),
