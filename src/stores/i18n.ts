@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import createPersistedStore from './utils/persisted-store';
-import { Services } from '../services';
+import { Services } from 'services';
 
 import { FALLBACK_LANGUAGE_CODE, LANGUAGES, TRANSLATIONS } from 'config';
 import { NUMLanguage } from 'types';
