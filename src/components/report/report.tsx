@@ -28,7 +28,7 @@ export class ReportComponent {
   render() {
     const { display } = this;
 
-    if (stores.user.isQuestionnaireAvailable) {
+    if (stores.user.isQuestionnaireAvailable && display !== 'success') {
       return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
     }
 

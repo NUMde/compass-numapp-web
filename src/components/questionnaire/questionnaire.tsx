@@ -30,7 +30,7 @@ export class QuestionnaireComponent {
   }
 
   render() {
-    if (!stores.user.isQuestionnaireAvailable) {
+    if (!stores.user.isQuestionnaireAvailable && this.displayMode !== 'success') {
       return <stencil-router-redirect url={ROUTES.DASHBOARD} />;
     }
 
