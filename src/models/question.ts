@@ -85,6 +85,8 @@ export class NUMQuestionnaireQuestion {
         condition.answerTime ??
         condition.answerString ??
         condition.answerCoding?.code ??
+        condition.answerCoding?.display ??
+        condition.answerQuantity?.value ??
         condition.answerQuantity?.code,
     }));
   }
