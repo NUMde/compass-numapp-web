@@ -1,3 +1,6 @@
+// define window location as for some reason it is not set when mocked by stencil
+window.location.href = 'http://localhost:3000';
+
 import { createObservableMap, ObservableMap } from '@stencil/store';
 import forge from 'node-forge';
 import {
