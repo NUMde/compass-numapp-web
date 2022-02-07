@@ -29,7 +29,7 @@
     "i18next": "^20.3.2",
     "i18next-browser-languagedetector": "^6.1.2",
     "jsqr": "^1.4.0",
-    "node-forge": "^0.10.0"
+    "node-forge": "^1.0.0"
   },
   "devDependencies": {
     "@types/fhir": "^0.0.32",
