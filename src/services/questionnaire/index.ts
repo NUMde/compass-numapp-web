@@ -7,7 +7,7 @@ import { IQuestionnaireService, NUMQuestionnaire } from './types';
 export default class QuestionnaireService implements IQuestionnaireService {
   async fetch(id: string) {
     const [data] = await get<NUMQuestionnaire>({
-      url: `${API_BASE_URL}/${API_QUESTIONNAIRE_URI.replace(':id', id)}`,
+      url: `${API_BASE_URL}/${API_QUESTIONNAIRE_URI.replace(':id', encodeURIComponent(id))}`,
       authenticated: true,
     });
     return data;
