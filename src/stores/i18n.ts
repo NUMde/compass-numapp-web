@@ -49,7 +49,7 @@ const storeBuilder = ({ persistor }: Services) => {
     .use(languageDetector)
     .init({
       detection,
-      whitelist: LANGUAGES.map(({ code }) => code),
+      supportedLngs: LANGUAGES.map(({ code }) => code),
       ns: ['master'],
       defaultNS: 'master',
       resources: Object.keys(TRANSLATIONS).reduce(
