@@ -60,6 +60,7 @@ export class Authenticate {
       this.isPersistenceChosen ? persistence.enable() : persistence.disable();
       stores.user.populateFromUserResponse(userResponse);
       stores.auth.login(userId);
+      services.user.refresh()
     } catch ({ status = 0 }) {
       services.notifier.showError(`authenticate.error.code_${status}`);
       this.isAuthenticating = false;
