@@ -49,6 +49,4 @@ export const config: Config = {
     API_BASE_URL: env.API_BASE_URL,
     FALLBACK_CERTIFICATE: env.FALLBACK_CERTIFICATE?.replace(/\\n/g, '\n'),
   },
-  sourceMap: true,
-  minifyJs: false,
 };
