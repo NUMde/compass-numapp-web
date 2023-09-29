@@ -1,6 +1,11 @@
 import { Component, Event, EventEmitter, h } from '@stencil/core';
 import { Card } from 'components/card/card';
-import { FEATURES_QUESTIONNAIRE_SHOW_LINKIDS, QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS, ROUTES } from 'config';
+import {
+  FEATURES_QUESTIONNAIRE_SHOW_LINKIDS,
+  QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS,
+  ROUTES,
+  FEATURES_QUESTIONNAIRE_SHOW_INDICATOR,
+} from 'config';
 import stores from 'stores';
 
 @Component({
@@ -28,29 +33,40 @@ export class QuestionnaireTreeComponent {
             .filter(
               ({ isHidden, isEnabled }) => !isHidden && (QUESTIONNAIRE_TREE_SHOW_DISABLED_ITEMS || isEnabled)
             )
-            .map(({ linkId, text, type, level, isAnswerable, firstChildQuestion }, index) => {
-              return (
-                <li
-                  class={`questionnaire-tree_item ${
-                    isAnswerable ? 'questionnaire-tree_item--clickable' : ''
-                  }`}
-                  key={linkId ?? index}
-                  style={{ paddingLeft: `calc(1rem * (${level + 1}))` }}
-                  onClick={() =>
-                    isAnswerable &&
-                    this.switchDisplayModeHandler(firstChildQuestion ? firstChildQuestion.linkId : linkId)
-                  }
-                >
-                  <strong class="questionnaire-tree__title">
-                    {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS &&
-                      stores.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
-                        number: linkId,
-                      })}
-                  </strong>
-                  <span class="questionnaire-tree__text">{text}</span>
-                </li>
-              );
-            })}
+            .map(
+              (
+                { linkId, text, type, level, isAnswerable, isAnswered, firstChildQuestion, required },
+                index
+              ) => {
+                return (
+                  <li
+                    class={`questionnaire-tree_item ${
+                      isAnswerable ? 'questionnaire-tree_item--clickable' : ''
+                    }`}
+                    key={linkId ?? index}
+                    style={{ paddingLeft: `calc(1rem * (${level + 1}))` }}
+                    onClick={() =>
+                      isAnswerable &&
+                      this.switchDisplayModeHandler(firstChildQuestion ? firstChildQuestion.linkId : linkId)
+                    }
+                  >
+                    <strong class="questionnaire-tree__title">
+                      {FEATURES_QUESTIONNAIRE_SHOW_LINKIDS &&
+                        stores.i18n.t(type === 'group' ? 'questionnaire.group' : 'questionnaire.question', {
+                          number: linkId,
+                        })}
+                    </strong>
+                    <div class="questionnaire-tree__text">{text}</div>
+                    {FEATURES_QUESTIONNAIRE_SHOW_INDICATOR && isAnswered && (
+                      <d4l-icon iconName="check" iconClasses="questionnaire-tree__icon icon--small success" />
+                    )}
+                    {FEATURES_QUESTIONNAIRE_SHOW_INDICATOR && !isAnswered && required && (
+                      <d4l-icon-error-outline classes="questionnaire-tree__icon icon--small alert" />
+                    )}
+                  </li>
+                );
+              }
+            )}
         </ol>
 
         <d4l-button
