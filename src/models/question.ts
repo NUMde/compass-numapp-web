@@ -167,7 +167,7 @@ export class NUMQuestionnaireQuestion {
     }
 
     const { previous } = this;
-    const isAnswered = (!previous || previous.isAnswered) && !!this.answer;
+    const isAnswered = (!previous || previous.isAnswered || !previous.required) && !!this.answer;
     this.#isAnsweredCache = isAnswered;
     return isAnswered;
   }
