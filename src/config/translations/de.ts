@@ -87,6 +87,8 @@ export default {
     infotext: 'Dieser Text wird angezeigt, wenn der Fragebogen keine Angaben zum Zweck enthält.',
     question: 'Frage {{ number }}',
     question_type_unsupported: 'Fragen vom Typ "{{ type }}" werden derzeit leider nicht unterstützt!',
+    maxAnswersReached:
+      'Maximale Anzahl Antworten erreicht. Andere Antwort abwählen, um diese Antwort auszuwählen.',
     success: {
       headline: 'Vielen Dank!',
       infotext: 'Vielen Dank für Ihren Beitrag!',

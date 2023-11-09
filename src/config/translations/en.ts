@@ -83,6 +83,8 @@ export default {
     infotext: 'This text is shown when the questionnaire does not contain information on its purpose.',
     question: 'Question {{ number }}',
     question_type_unsupported: 'Questions of type "{{ type }}" are not supported at the moment!',
+    maxAnswersReached:
+      'Maximum number of answers reached. Please deselect other choice to select this choice.',
     success: {
       headline: 'Success',
       infotext: 'Thank you for your contribution!',
