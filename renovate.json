@@ -7,5 +7,6 @@
       "automerge": true
     }
   ],
-  "schedule": ["after 6pm every weekday", "before 5am every weekday", "every weekend"]
+  "schedule": ["after 6pm every weekday", "before 5am every weekday", "every weekend"],
+  "ignoreDeps": ["jest", "jest-cli", "@types/jest"]
 }
