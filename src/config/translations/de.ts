@@ -44,6 +44,7 @@ export default {
         second_text:
           'Dieser weitere Text wird angezeigt, wenn derzeit kein Fragebogen zum Ausfüllen zur Verfügung steht. Wenn Sie Symptome haben, können Sie dies jederzeit melden.',
       },
+      off_study: 'Die Studie ist beendet. Sie können sich jetzt ausloggen. Vielen Dank für ihre Teilnahme.',
     },
   },
   navigation: {

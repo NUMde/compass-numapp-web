@@ -46,6 +46,18 @@ export namespace Components {
     interface NumQuestionnaireTree {
     }
 }
+export interface NumQuestionnaireConfirmCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNumQuestionnaireConfirmElement;
+}
+export interface NumQuestionnaireQuestionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNumQuestionnaireQuestionElement;
+}
+export interface NumQuestionnaireTreeCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNumQuestionnaireTreeElement;
+}
 declare global {
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -170,17 +182,17 @@ declare namespace LocalJSX {
     interface NumNotifications {
     }
     interface NumQuestionnaireConfirm {
-        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
+        "onSwitchDisplayMode"?: (event: NumQuestionnaireConfirmCustomEvent<any>) => void;
     }
     interface NumQuestionnaireQuestion {
         "history"?: RouterHistory;
         "linkId"?: string;
-        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
+        "onSwitchDisplayMode"?: (event: NumQuestionnaireQuestionCustomEvent<any>) => void;
     }
     interface NumQuestionnaireSuccess {
     }
     interface NumQuestionnaireTree {
-        "onSwitchDisplayMode"?: (event: CustomEvent<any>) => void;
+        "onSwitchDisplayMode"?: (event: NumQuestionnaireTreeCustomEvent<any>) => void;
     }
     interface IntrinsicElements {
         "app-root": AppRoot;

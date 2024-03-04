@@ -13,6 +13,7 @@ export class Dashboard {
       isPopulated,
       isFirstTimeUser,
       isQuestionnaireAvailable,
+      isOnStudy,
       questionnaireStartDate,
       questionnaireDueDate,
     } = stores.user;
@@ -28,16 +29,20 @@ export class Dashboard {
         )}
       >
         <p class="u-infotext">
-          {stores.i18n.t(
-            isQuestionnaireAvailable
-              ? 'dashboard.infotext.questionnaire_available.first_text'
-              : 'dashboard.infotext.questionnaire_not_available.first_text'
-          )}
+          {isOnStudy
+            ? stores.i18n.t(
+                isQuestionnaireAvailable
+                  ? 'dashboard.infotext.questionnaire_available.first_text'
+                  : 'dashboard.infotext.questionnaire_not_available.first_text'
+              )
+            : stores.i18n.t('dashboard.infotext.off_study')}
         </p>
 
-        <strong class="u-display-block u-margin-vertical--normal u-text-highlight">
-          {formatDate(isQuestionnaireAvailable ? questionnaireDueDate : questionnaireStartDate)}
-        </strong>
+        {isOnStudy && (
+          <strong class="u-display-block u-margin-vertical--normal u-text-highlight">
+            {formatDate(isQuestionnaireAvailable ? questionnaireDueDate : questionnaireStartDate)}
+          </strong>
+        )}
 
         {isQuestionnaireAvailable && (
           <stencil-route-link url={ROUTES.QUESTIONNAIRE}>
@@ -49,15 +54,17 @@ export class Dashboard {
           </stencil-route-link>
         )}
 
-        <p class="u-infotext">
-          {stores.i18n.t(
-            isQuestionnaireAvailable
-              ? 'dashboard.infotext.questionnaire_available.second_text'
-              : 'dashboard.infotext.questionnaire_not_available.second_text'
-          )}
-        </p>
+        {isOnStudy && (
+          <p class="u-infotext">
+            {stores.i18n.t(
+              isQuestionnaireAvailable
+                ? 'dashboard.infotext.questionnaire_available.second_text'
+                : 'dashboard.infotext.questionnaire_not_available.second_text'
+            )}
+          </p>
+        )}
 
-        {!isQuestionnaireAvailable && (
+        {isOnStudy && !isQuestionnaireAvailable && (
           <stencil-route-link url={ROUTES.REPORT}>
             <d4l-button
               classes="button--block u-margin-vertical--normal"

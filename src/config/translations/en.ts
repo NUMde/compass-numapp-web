@@ -41,6 +41,7 @@ export default {
         second_text:
           'This additional text is displayed in case there is no questionnaire available at the moment. Should you have symptoms, you can report this at any time.',
       },
+      off_study_info: 'The study has ended. You can now logout. Thank your for your participation.',
     },
   },
   navigation: {
