@@ -14,8 +14,8 @@ export default class MockUser implements IUserService {
       recipient_certificate_pem_string: 'false',
       start_date: '2099-01-01T04:00:00.000Z',
       subjectId: id,
-      personal_study_end_date: new Date(),
-      general_study_end_date: new Date(),
+      personal_study_end_date: '9999-12-31',
+      general_study_end_date: '9999-12-31',
       status: 'on-study' as 'on-study',
     };
   }

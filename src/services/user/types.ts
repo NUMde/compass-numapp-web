@@ -12,8 +12,8 @@ export interface UserResponse {
   recipient_certificate_pem_string: string;
   start_date: UserDateTime;
   subjectId: string;
-  personal_study_end_date: Date;
-  general_study_end_date: Date;
+  personal_study_end_date: string;
+  general_study_end_date: string;
   status: 'on-study' | 'off-study';
 }
 

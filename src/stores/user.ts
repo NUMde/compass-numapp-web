@@ -29,8 +29,8 @@ const storeBuilder = () => {
       store.set('questionnaireStartDate', response.start_date ? new Date(response.start_date) : null);
       store.set('questionnaireDueDate', response.due_date ? new Date(response.due_date) : null);
       store.set('instanceId', response.current_instance_id);
-      store.set('personalEndDate', response.personal_study_end_date);
-      store.set('generalEndDate', response.general_study_end_date);
+      store.set('personalEndDate', new Date(response.personal_study_end_date));
+      store.set('generalEndDate', new Date(response.general_study_end_date));
       store.set('isPopulated', true);
       store.set('status', response.status);
     }
@@ -48,7 +48,7 @@ const storeBuilder = () => {
     get isOnStudy() {
       const now = new Date();
       const { personalEndDate, generalEndDate, status } = this;
-      return now >= personalEndDate || now >= generalEndDate || status === 'off-study';
+      return (now <= personalEndDate || now <= generalEndDate) && status === 'on-study';
     }
 
     get isFirstTimeUser() {
